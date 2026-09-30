@@ -1,5 +1,10 @@
 # PAL boot paired-FPR wall: measured boundary and exact missing channel
 
+**Continuation:** checkpoint 36 implemented the separate read-only export and
+measured both lanes/GQRs. See `HIDDEN_BOOT_STATE_36.md` for the new evidence and
+bounded C++ projection. The connected stop still precedes sync; this earlier
+note retains the original observation gap and experiment design for provenance.
+
 **Scope:** SHA-256 pinned PAL `main.dol` `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`, wrapper `0x80371730..0x80371764`, and FPR routine `0x80370CDC..0x80370E00`. This note adds a fresh same-run HLE observation and an executable PS1 capture design. It does **not** extend the connected native boot checkpoint or establish physical Gekko parity.
 
 ## What the original bytes actually require

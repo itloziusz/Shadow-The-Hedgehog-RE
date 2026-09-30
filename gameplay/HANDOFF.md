@@ -4,6 +4,20 @@
 
 ---
 
+## Checkpoint 27 — 2026-09-30 (boot hidden-state capture and FPR projection)
+
+- Continue boot work from `reverse/boot/PROGRESS.md` checkpoint 36. The
+  connected probe still stops before sync at `0x80371730`; the new read-only
+  reference export measures cache reset/refill, GQRs, HID2 and both FPR lanes.
+- A bounded native 74-word FPR projection matches 4,896 raw fields from six
+  HLE experiments. It is not connected across the unresolved barrier.
+  A reserved FPSCR bit bug and debugger E-prefixed-data/EOF issues were
+  reproduced, fixed and regression-tested. Full Release CTest is **48/48**.
+- Gameplay behavior and exact mission routes are unchanged. Retail handoff,
+  physical bus/cache ordering, exceptional FP and first-frame parity remain
+  UNKNOWN. Next: prove the native immutable-code completion contract, then
+  connect GQR/FPR state and compare downstream consumers.
+
 ## Checkpoint 26 — 2026-09-30 (six-agent boot wall audit)
 
 - Six independent boot workstreams checked the `sync`/GQR tail, HID0 ICFI

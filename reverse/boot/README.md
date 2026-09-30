@@ -19,6 +19,14 @@ exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
 boot remain UNKNOWN or incomplete.** These fixture-backed components do not
 make a playable game.
 
+Checkpoint 36 adds a read-only reference export for PS1/GQR/HID2/cache state
+and an **unconnected** native projection of `0x80370CDC..0x80370E00`.
+Six controlled HLE runs match 4,896 raw fields; all 74 words have mutation
+gates. A genuine FPSCR reserved-bit bug was reproduced and fixed in both
+implementations. See `research/HIDDEN_BOOT_STATE_36.md`. The connected stop
+remains before sync: the reference interpreter ignores that barrier and
+cannot prove physical ordering. The complete Release CTest gate is **48/48**.
+
 The original boot handoff below was written for a static recompiler. This
 public repository keeps its authored evidence and portable C++ slice. Raw
 `sys/` inputs, generated manifests and disassembly dumps named by the older
@@ -76,6 +84,13 @@ operations may be replaced only after their producers and consumers are traced.
   records the fixed supervisor-privilege divergence.
 - `tools/capture_dolphin_rsp.py` — hash-pinned external PPC checkpoint capture
   for validation only; the native executable does not depend on Dolphin.
+- `tools/make_boot_oracle_disc.py`, `build_readonly_boot_oracle.py`,
+  `capture_boot_machine_state.py`, `validate_fpr_capture.py` — reproduce the
+  synthetic SYS-only fixture, build a separate read-only debugger export,
+  capture hidden state and compare the bounded native FPR projection.
+- `include/shadow/boot/FprSeedProjection.hpp`, `src/FprSeedProjection.cpp` —
+  explicit-input paired/scalar state projection with fail-closed unsupported
+  paths; not connected through the unresolved barrier.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
   register startup, wrapper/stack prefix with applied BE32 bytes, explicit-input HID2 read and
   issued HID2 and HID0 SPR write requests, plus a conditional, unconnected
@@ -94,7 +109,7 @@ operations may be replaced only after their producers and consumers are traced.
   its generated recompiler dependencies are not in this repository.
 
 Build with the root CMake project. Supply
-`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable fifteen content-backed
+`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable the content-backed
 CTest cases. This path stays in the ignored build cache and is never committed.
 The PAL fixture also enables `boot_pal_semantic_recognizer`, which checks the
 raw frontier words and adversarial detector/data-flow mutations.

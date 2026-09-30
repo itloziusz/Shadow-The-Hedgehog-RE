@@ -2,6 +2,14 @@
   "binary_sha256": "fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af",
   "regions": [
     {
+      "id": "fpr_seed_projection",
+      "start": "80370CDC",
+      "end": "80370E04",
+      "family": "paired_then_scalar_fpr_seed",
+      "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/HIDDEN_BOOT_STATE_36.md: exact 74 words; bounded finite/zero HLE two-lane projection only; unconnected across sync", "reverse/boot/tests/test_fpr_seed_projection.cpp: all-word mutations and explicit exceptional-state declines; retail and skipped paired edge UNKNOWN"]
+    },
+    {
       "id": "register_helper",
       "start": "800032B0",
       "end": "80003340",

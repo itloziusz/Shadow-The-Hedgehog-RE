@@ -5,6 +5,17 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 36: hidden state measured; native FPR projection
+
+| Field | Result |
+|---|---|
+| Last fully validated connected checkpoint | The native Release prefix reran from `0x80003154` with the explicit synthetic/HLE MSR/HID2/HID0 inputs and still stops before `sync` at `0x80371730`. No barrier acknowledgment is invented. |
+| New observations | A separately built read-only GDB export exposed all PS1 lanes, GQRs, HID2, composed live XER and cache metadata. Single-stepping the HID0 command showed cache validity/replacement bytes cleared at `0x80372600` and later refilled by fetches; HID0 readback stayed distinct from r3. All GQRs read zero at `0x80371758` and the first paired consumer. Distinct live-BSS inputs demonstrated paired lane copies and PS1 retention through scalar loads/moves. Original shared fields cross-checked against the unchanged executable. |
+| Native reconstruction and validation | `PredictFprSeed()` fingerprints all 74 words at `0x80370CDC..0x80370E00` and projects eight states with explicit input provenance and exceptional-state declines. Six independent zero/finite/signed-zero/FPSCR captures match **4,896 raw state fields**. It remains unconnected across sync. Full Release CTest passed **48/48**, including all-word mutations and the new RSP regression gate. |
+| Genuine bugs fixed | `E0030000` was misread as an RSP error; the client now distinguishes three-character errors, verifies lengths and handles EOF/fragmented checksums. An adversarial scalar low word `0x800` exposed a native FPSCR reserved-bit bug at `mtfsf`; both implementations now mask that bit and have focused regression cases. The exact before/after capture validates the fix. |
+| Remaining blocker | The HLE interpreter ignores sync and invalidates on ICFI even without ICE; this observation cannot establish physical ordering or generalize to ICE=0. The native immutable-code completion contract, retail handoff and exceptional/physical FPR behavior remain UNKNOWN. |
+| Feedback and next step | Recognizer full scan: 276 regions, 2 bounded VALIDATED, 7 STRONGLY_SUPPORTED, 267 UNKNOWN; no frontier advance. See `research/HIDDEN_BOOT_STATE_36.md`. Prove the native instruction-visibility/completion consequence for a bounded ICE=1/ABE=0 path, then connect the GQR/FPR state from entry and compare downstream consumers. |
+
 ## 2026-09-30 — checkpoint 35: conditional post-sync GQR tail
 
 | Field | Result |

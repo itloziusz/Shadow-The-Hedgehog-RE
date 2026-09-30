@@ -1,4 +1,4 @@
-add_library(shadow_boot_foundation STATIC src/BootFoundation.cpp src/ApplicationLoop.cpp
+add_library(shadow_boot_foundation STATIC src/BootFoundation.cpp src/ApplicationLoop.cpp src/FprSeedProjection.cpp
     src/ConstructorTableProjection.cpp)
 target_compile_features(shadow_boot_foundation PUBLIC cxx_std_17)
 target_include_directories(shadow_boot_foundation PUBLIC include)
@@ -8,6 +8,11 @@ target_link_libraries(shadow_boot_probe PRIVATE shadow_boot_foundation)
 
 add_executable(shadow_boot_tests tests/test_boot.cpp)
 target_link_libraries(shadow_boot_tests PRIVATE shadow_boot_foundation)
+
+add_executable(shadow_boot_fpr_projection tools/fpr_projection_probe.cpp)
+target_link_libraries(shadow_boot_fpr_projection PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_fpr_seed_tests tests/test_fpr_seed_projection.cpp)
+target_link_libraries(shadow_boot_fpr_seed_tests PRIVATE shadow_boot_foundation)
 
 add_executable(shadow_boot_application_loop_tests tests/test_application_loop.cpp)
 target_link_libraries(shadow_boot_application_loop_tests PRIVATE shadow_boot_foundation)
@@ -32,6 +37,8 @@ set(SHADOW_BOOT_DOL_PATH "${PROJECT_SOURCE_DIR}/sys/main.dol" CACHE FILEPATH
 if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
     find_package(Python3 QUIET COMPONENTS Interpreter)
     if(Python3_Interpreter_FOUND)
+        add_test(NAME boot_rsp_packet_regression
+            COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_rsp.py")
         add_test(NAME boot_pal_semantic_recognizer
             COMMAND "${Python3_EXECUTABLE}" -B
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_recognizer.py"
@@ -113,6 +120,12 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             "-DDOL=${SHADOW_BOOT_DOL_PATH}"
             "-DPROGRAM=$<TARGET_FILE:shadow_boot_tests>"
             -DMODE=regression
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
+    add_test(NAME boot_pal_fpr_seed_projection
+        COMMAND ${CMAKE_COMMAND}
+            "-DDOL=${SHADOW_BOOT_DOL_PATH}"
+            "-DPROGRAM=$<TARGET_FILE:shadow_boot_fpr_seed_tests>"
+            -DMODE=fpr_seed
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
     add_test(NAME boot_pal_user_mode_decline
         COMMAND ${CMAKE_COMMAND}

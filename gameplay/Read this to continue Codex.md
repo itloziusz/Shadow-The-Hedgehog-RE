@@ -11,7 +11,18 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint 26, 2026-09-30)
+## Current continuation (checkpoint 27, 2026-09-30)
+
+Read `reverse/boot/PROGRESS.md` checkpoint 36 first for current boot work.
+The connected native prefix remains stopped before sync at `0x80371730`.
+New read-only HLE observations now expose PS1/GQR/HID2/cache state; a bounded
+unconnected 74-word FPR projection matches six runs and 4,896 raw fields.
+The discovered FPSCR reserved-bit bug and RSP data/error/EOF handling were
+fixed with regressions; full Release CTest is **48/48**. Physical sync/cache
+ordering and retail handoff remain unresolved. See
+`reverse/boot/research/HIDDEN_BOOT_STATE_36.md` and `HANDOFF.md` checkpoint 27.
+
+### Earlier boot continuation (checkpoint 26)
 
 The canonical public repository builds the C++17 boot-entry foundation under
 `reverse/boot/`. Its default PAL fixture gate stops at `0x80003400`; with

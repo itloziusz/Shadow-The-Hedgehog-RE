@@ -1,5 +1,9 @@
 # FPR lane provenance at the PAL boot seed
 
+**Continuation:** `HIDDEN_BOOT_STATE_36.md` now measures both HLE lanes with
+distinct controlled inputs and validates a bounded unconnected C++ projection.
+The physical-format/exceptional/retail questions below remain unresolved.
+
 Scope: `0x80370CDC..0x80370E00` in the read-only PAL GUPP8P `main.dol` (SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`). **PROVEN** below means original bytes plus the [IBM Gekko User's Manual v1.2](https://doc.kodewerx.org/documents/gekko_user_manual.pdf). **OBSERVED-HLE** means the pinned synthetic-disc Dolphin interpreter run; it is neither retail IPL state nor physical Gekko measurement. **UNKNOWN** is a gate, not a default value.
 
 ## Independent binary decode

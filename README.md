@@ -32,6 +32,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   memory/ISA evidence. The bounded recurring event/exit loop at
   `0x800511E0..0x80051218` remains separate. Full hardware, CRT, constructor
   effects and game boot remain unresolved.
+  A separate 74-word FPR projection now matches both lanes and status fields
+  in six controlled HLE experiments; it remains unconnected across sync.
 - **Evidence and tools:** `gameplay/` contains the address-backed subsystem
   documents, curated symbols, SET catalog and Python query tools. `reverse/`
   keeps the conservative GX FIFO prototype, boot foundation and named streaming
@@ -39,8 +41,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **44/44 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime, fifteen boot).
+The full public-tree MSVC Release gate passed **48/48 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, nineteen boot).
 `reverse/boot/PROGRESS.md` records the last
 connected boot checkpoint and first fail-closed stop.
 Some suites require the read-only PAL fixture. The scripted stg0100 Dark

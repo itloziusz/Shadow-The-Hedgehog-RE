@@ -58,6 +58,12 @@ report retains symbolic state and suggests the smallest reference capture it
 needs. Full dynamic execution, Gekko cache behavior, paired-single PS1,
 retail IPL state, and later constructors are not inferred from a match.
 
+Checkpoint 36 adds a `STRONGLY_SUPPORTED` FPR-region seed with explicit
+finite/zero HLE projection scope. Both lanes are now measured by separate
+read-only validation tooling; the generic symbolic analyzer still keeps
+unproven scalar PS1 effects UNKNOWN. The full scan has 276 regions and retains
+the connected `0x80371730` stop. See `../research/HIDDEN_BOOT_STATE_36.md`.
+
 Regression:
 
 ```powershell

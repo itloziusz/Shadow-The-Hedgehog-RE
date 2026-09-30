@@ -1,5 +1,11 @@
 # HID0 invalidate request → `sync`: independent boundary audit
 
+**Continuation:** checkpoint 36 (`HIDDEN_BOOT_STATE_36.md`) captures cache
+validity/replacement bytes immediately after the command and at later fetches.
+It also confirms that the HLE interpreter ignores sync and has an ICE=0
+invalidation rule differing from the manual. Physical/native completion is
+still a gate; the connected probe remains stopped at `0x80371730`.
+
 **Scope:** PAL GUPP8P `main.dol` at `0x8037172C..0x80371764`, its HID0 leaf `0x803725F4..0x80372600`, and the first connected HID0 branch consumers at `0x80372854..0x80372880`. The connected native probe currently stops **before** `sync` at `0x80371730`. This is an instruction/cache-state audit, not a C++ implementation or a retail-console trace. Original read-only DOL SHA-256: `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
 Confidence labels: **PROVEN-BINARY** means independently re-read DOL bytes and decoded fields; **PROVEN-MANUAL** means the [IBM Gekko User's Manual v1.2](https://doc.kodewerx.org/documents/gekko_user_manual.pdf) specifies the effect; **OBSERVED-HLE** means the archived startup-only Dolphin interpreter capture, not retail IPL or silicon; **UNKNOWN** means no equivalent evidence exists for the live input or hardware effect.

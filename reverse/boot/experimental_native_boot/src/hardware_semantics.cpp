@@ -40,7 +40,8 @@ bool FprSemanticsConsumed() {
 GuestWord32 DeriveGekkoFPSCR(std::uint64_t source_fpr_bits) {
     // IBM Gekko User Manual v1.2, mtfsf: FEX and VX are derived after fields
     // are written. PPC bit numbers below count from the most significant bit.
-    GuestWord32 word = static_cast<GuestWord32>(source_fpr_bits) & ~0x60000000u;
+    // FPSCR bit 20 is reserved and reads as zero (numeric mask 0x800).
+    GuestWord32 word = static_cast<GuestWord32>(source_fpr_bits) & ~0x60000800u;
     constexpr GuestWord32 invalid_flags = 0x01F80700u; // bits 7..12, 21..23
     if ((word & invalid_flags) != 0) {
         word |= 0x20000000u; // VX, bit 2

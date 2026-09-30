@@ -20,6 +20,7 @@ int main() {
         {0x3FF0000001000080ull, 0x61000080u}, // VX+VE derives FEX
         {0x3FF0000010000040ull, 0x50000040u}, // OX+OE derives FEX
         {0x3FF0000080000000ull, 0x80000000u}, // FX copied
+        {0x3FF0000000000800ull, 0x00000000u}, // reserved bit 20 ignores a write
     };
     for (const Case& item : cases) {
         if (DeriveGekkoFPSCR(item.fpr) != item.fpscr) {
