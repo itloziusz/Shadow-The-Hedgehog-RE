@@ -19,8 +19,9 @@
   stub enemies. Remaining stubs across the ten routes are BK WingLarge,
   Egg Pierrot, BK Giant, GUN Bigfoot, BK Chaos and BK Ninja.
 - Next: recover those remaining families and, more importantly, the missing
-  movement, collision, path and world engine services. Sync this checkpoint
-  to the public repository and re-run its full multi-module gate.
+  movement, collision, path and world engine services. Public commit
+  `f5b7f05` contains this checkpoint; its full multi-module gate passed
+  **29/29 CTest** against read-only game data.
 
 ---
 
