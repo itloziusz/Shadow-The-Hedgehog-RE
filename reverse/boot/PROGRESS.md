@@ -5,6 +5,16 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 31: stack writes become addressable guest bytes
+
+| Field | Result |
+|---|---|
+| Last validated connected boundary | Unchanged: with explicit synthetic/HLE MSR/HID2/HID0 inputs, the probe starts at `0x80003154` and stops **before** `sync` at `0x80371730`. Default and partial-input paths still stop earlier. |
+| First unmodeled dependency addressed | The `0x80371718/1C` stores were previously only ordered write events. The later `lwz r0,12(r1)` at `0x80371758` must read actual guest bytes; using a remembered LR would be invalid if the saved word changed. `PairedSetupStackMemory` now applies the two BE32 stores to a validity-tracked 16-byte stack window and carries it through the HID2/HID0 boundaries. |
+| Independent evidence and adversarial check | Raw words and the same-run synthetic stack window at `0x80371724` agree on `80 00 34 14` at `0x8060C5F4` and `80 60 C5 F0` at `0x8060C5E8`. Tests reject unwritten, unaligned and out-of-window reads/writes; a changed saved word reads back changed rather than a fixed return. `research/PAIRED_STACK_MEMORY.md` records scope and limits. An independent sync audit confirmed the next GQR tail is straight-line but the barrier still needs a completed ICFI/ordering contract. |
+| Rerun | The native probe was run from `0x80003154` before the change and again after the memory application; it still stops at `0x80371730`. After the final alignment refinement, the complete MSVC Release build and root CTest passed **44/44**. The original DOL remained read-only. |
+| Next proof obligation | Establish a stateful ICFI/`sync` completion and separately derived HID0 readback for a bounded ICE=1/ABE=0 path, then compare the eight ordered GQR writes and state at `0x80371758` to a same-run oracle. ICE=0, ABE=1, interrupts and retail inputs remain UNKNOWN and must decline. |
+
 ## 2026-09-30 — checkpoint 30: six-agent wall audit and privilege correction
 
 | Field | Result |

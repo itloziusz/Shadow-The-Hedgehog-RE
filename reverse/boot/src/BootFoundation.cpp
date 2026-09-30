@@ -116,6 +116,38 @@ BootImage LoadValidatedFixture(std::vector<std::uint8_t> dol) {
     return BootImage(std::move(dol));
 }
 
+void PairedSetupStackMemory::StoreBE32(std::uint32_t address, std::uint32_t value) {
+    if ((address & 3u) != 0u) {
+        throw std::runtime_error("unaligned paired setup stack store");
+    }
+    if (address < base || std::uint64_t(address) + 4 > std::uint64_t(base) + bytes.size()) {
+        throw std::runtime_error("paired setup stack store outside modeled window");
+    }
+    const std::size_t offset = address - base;
+    for (std::size_t i = 0; i < 4; ++i) {
+        bytes[offset + i] = static_cast<std::uint8_t>(value >> (24u - 8u * i));
+        valid[offset + i] = true;
+    }
+}
+
+std::uint32_t PairedSetupStackMemory::LoadBE32(std::uint32_t address) const {
+    if ((address & 3u) != 0u) {
+        throw std::runtime_error("unaligned paired setup stack load");
+    }
+    if (address < base || std::uint64_t(address) + 4 > std::uint64_t(base) + bytes.size()) {
+        throw std::runtime_error("paired setup stack load outside modeled window");
+    }
+    const std::size_t offset = address - base;
+    std::uint32_t result = 0;
+    for (std::size_t i = 0; i < 4; ++i) {
+        if (!valid[offset + i]) {
+            throw std::runtime_error("paired setup stack load from unwritten byte");
+        }
+        result = (result << 8) | bytes[offset + i];
+    }
+    return result;
+}
+
 StartupState EnterRegisterStartup(const BootImage& image) {
     // 0x80003154 bl 0x800032B0; return target at 0x80003158 is
     // 0x80003400 (hardware/runtime helper), deliberately not entered.
@@ -208,6 +240,10 @@ PairedSetupStackPrefix EnterHid2ReadCall(const BootImage& image,
     next.machine.cpu.gpr[0] = state.cpu.lr;
     next.ordered_writes[0] = {old_sp + 4u, next.machine.cpu.gpr[0]};
     next.ordered_writes[1] = {old_sp - 8u, old_sp};
+    next.stack_memory.base = old_sp - 8u;
+    for (const MemoryWrite32& write : next.ordered_writes) {
+        next.stack_memory.StoreBE32(write.address, write.value);
+    }
     next.machine.cpu.gpr[1] = old_sp - 8u;
     next.machine.cpu.lr = 0x80371724u;
     next.machine.cpu.pc = 0x80370BA8u;

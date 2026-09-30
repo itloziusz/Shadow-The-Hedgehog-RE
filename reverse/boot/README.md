@@ -11,6 +11,8 @@ then issues the HID2 OR/write request and stops at `0x8037172C`. A third
 explicit HID0 input runs the ICFI request leaf and stops at `0x80371730`,
 before `sync`. It does not execute GQR, FPR or cache effects, or equate an
 issued SPR request with a later hardware readback.
+The paired-setup stack stores are applied as bounded, validity-tracked
+big-endian guest bytes; the later saved-LR load remains behind the `sync` stop.
 The separate `RunApplicationRecurringPhase` translates the static event and
 exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
 **PROVEN for these bounded slices; full hardware, CRT, constructors and game
@@ -61,14 +63,14 @@ operations may be replaced only after their producers and consumers are traced.
   constructor and application-loop audits with exact address evidence, including assembly CFG/data-flow and
   a synthetic Dolphin/HLE checkpoint study. The latter is not retail IPL proof.
 - `research/ICFI_SYNC_BOUNDARY.md`, `SYNC_GQR_CHAIN.md`,
-  `PAIRED_FPR_BREAKTHROUGH.md`, `L2_STATUS_ORACLE.md` and
+  `PAIRED_STACK_MEMORY.md`, `PAIRED_FPR_BREAKTHROUGH.md`, `L2_STATUS_ORACLE.md` and
   `OS_ENTRY_NEXT_BOUNDARY.md` — new bounded hardware, FPR and OS proof
   obligations beyond the connected stop. `NATIVE_PREFIX_ADVERSARIAL_29.md`
   records the fixed supervisor-privilege divergence.
 - `tools/capture_dolphin_rsp.py` — hash-pinned external PPC checkpoint capture
   for validation only; the native executable does not depend on Dolphin.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
-  register startup, wrapper/stack prefix, explicit-input HID2 read and
+  register startup, wrapper/stack prefix with applied BE32 bytes, explicit-input HID2 read and
   issued HID2 and HID0 SPR write requests,
   recurring event loop and command-line probe.
 - `tests/` — exact DOL SHA-256 gate, expected stop state and mutations of all

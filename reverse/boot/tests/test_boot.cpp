@@ -116,6 +116,36 @@ int main(int argc, char** argv) {
                     hid2_entry.ordered_writes[1].address == 0x8060C5E8u &&
                     hid2_entry.ordered_writes[1].value == 0x8060C5F0u,
                 "paired setup stack stores differ from fresh PPC capture");
+        Require(hid2_entry.stack_memory.base == 0x8060C5E8u &&
+                    hid2_entry.stack_memory.LoadBE32(0x8060C5E8u) == 0x8060C5F0u &&
+                    hid2_entry.stack_memory.LoadBE32(0x8060C5F4u) == 0x80003414u,
+                "paired setup stores were not applied as big-endian guest bytes");
+        Require(hid2_entry.stack_memory.bytes[0] == 0x80u &&
+                    hid2_entry.stack_memory.bytes[1] == 0x60u &&
+                    hid2_entry.stack_memory.bytes[2] == 0xC5u &&
+                    hid2_entry.stack_memory.bytes[3] == 0xF0u &&
+                    hid2_entry.stack_memory.bytes[12] == 0x80u &&
+                    hid2_entry.stack_memory.bytes[13] == 0x00u &&
+                    hid2_entry.stack_memory.bytes[14] == 0x34u &&
+                    hid2_entry.stack_memory.bytes[15] == 0x14u,
+                "paired setup guest-byte order differs");
+        MustReject([&] { (void)hid2_entry.stack_memory.LoadBE32(0x8060C5ECu); },
+                   "unwritten stack bytes were treated as initialized");
+        MustReject([&] { (void)hid2_entry.stack_memory.LoadBE32(0x8060C5F0u); },
+                   "unwritten aligned stack word was accepted");
+        MustReject([&] { (void)hid2_entry.stack_memory.LoadBE32(0x8060C5F2u); },
+                   "unaligned stack word was accepted");
+        MustReject([&] { (void)hid2_entry.stack_memory.LoadBE32(0x8060C5F8u); },
+                   "out-of-window stack read was accepted");
+        auto altered_stack = hid2_entry.stack_memory;
+        altered_stack.StoreBE32(0x8060C5F4u, 0x12345678u);
+        Require(altered_stack.LoadBE32(0x8060C5F4u) == 0x12345678u &&
+                    hid2_entry.stack_memory.LoadBE32(0x8060C5F4u) == 0x80003414u,
+                "later saved-LR read was replaced by a hard-coded return value");
+        MustReject([&] { altered_stack.StoreBE32(0x8060C5F6u, 0u); },
+                   "unaligned stack store was accepted");
+        MustReject([&] { altered_stack.StoreBE32(0x8060C5F8u, 0u); },
+                   "out-of-window stack store was accepted");
         for (std::size_t i = 2; i < 32; ++i) {
             Require(hid2_entry.machine.cpu.gpr[i] == paired_entry.cpu.gpr[i],
                     "stack prefix changed an unrelated GPR");
@@ -166,6 +196,11 @@ int main(int argc, char** argv) {
                     icfi.prefix.prefix.machine.cpu.gpr[1] == 0x8060C5E8u &&
                     icfi.prefix.prefix.machine.msr == 0x2032u,
                 "HID0 ICFI request differs from the synthetic PPC checkpoint");
+        Require(icfi.prefix.prefix.stack_memory.LoadBE32(0x8060C5E8u) ==
+                    0x8060C5F0u &&
+                    icfi.prefix.prefix.stack_memory.LoadBE32(0x8060C5F4u) ==
+                    0x80003414u,
+                "applied stack writes were lost before the sync boundary");
         const auto alternate_icfi = shadow::boot::IssueHid0IcfiRequest(
             image, hid2_write, 0x40000000u);
         Require(alternate_icfi.request.value == 0x40000800u &&

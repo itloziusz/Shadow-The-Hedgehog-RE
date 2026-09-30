@@ -27,11 +27,24 @@ struct MemoryWrite32 {
     std::uint32_t value = 0;  // written in guest big-endian byte order
 };
 
+// Bounded guest stack bytes touched by the paired-setup prologue. A validity
+// bit is kept for each byte: an unwritten stack slot is not assumed zero.
+// The two reached stores cover [base, base+3] and [base+12, base+15].
+struct PairedSetupStackMemory {
+    std::uint32_t base = 0;
+    std::array<std::uint8_t, 16> bytes{};
+    std::array<bool, 16> valid{};
+
+    void StoreBE32(std::uint32_t address, std::uint32_t value);
+    std::uint32_t LoadBE32(std::uint32_t address) const;
+};
+
 // First four words of the paired setup callee. Stops at the HID2 read leaf,
 // before any hardware register is read. Writes are in original program order.
 struct PairedSetupStackPrefix {
     HardwareCallPrefix machine;
     std::array<MemoryWrite32, 2> ordered_writes{};
+    PairedSetupStackMemory stack_memory;
 };
 
 struct SprWriteRequest {
