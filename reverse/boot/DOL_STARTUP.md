@@ -32,7 +32,7 @@ At `0x80003154` the startup sequence immediately calls the standard-style CRT he
 3. `0x80003340` — process copy and zero tables.
 4. debug/TRK/OS/runtime initialization branches.
 5. user/runtime constructors.
-6. call into the game's main path; current structural target candidate: `0x800510C0` (**INFERRED symbol name, address confirmed as call target**).
+6. call `0x800510C0`, the **PROVEN static application event-loop wrapper**: its recurring `0x800511E4..0x800511FC` path dispatches event `0x12`, calls `0x8032D444`, and checks exit word `0x80576DBC`. See `research/APPLICATION_LOOP.md`; live reachability and display output remain UNKNOWN.
 7. exit path candidate: `0x803A3B04` (**INFERRED symbol name, address confirmed as branch target**).
 
 The strings in the startup area include `Metrowerks Target Resident Kernel for PowerPC`, consistent with the CodeWarrior-era CRT/debug path.

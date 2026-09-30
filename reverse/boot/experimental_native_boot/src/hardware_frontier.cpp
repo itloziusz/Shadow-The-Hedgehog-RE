@@ -200,7 +200,7 @@ void IsolateHardwareFrontier(const BootImage& image, const PreEntryOracle& oracl
         << "  consumed=0x805F1F30 via lfd f0,0x5A30(r13); address is outside the fixture\n"
         << "  consumed=0x805F1F38 via psq_l; secondary lane survives the later lfd/fmr block\n"
         << "  report_stub=0x80370C8C discards its stack frame and returns; no guest write pinned\n"
-        << "  partial_store=0x803733C0 writes 0x803726D8 to 0x80580000; r3 is the constant 1\n"
+        << "  partial_store=0x803733C0 writes 0x803726D8 to 0x80586CB4; r3 is the constant 1\n"
         << "  vector_writer=skipped because 1 != 0x10; epilogue has no further guest store\n"
         << "  hid_and_l2_branches=both sides traced; guest stores are stack spills only\n"
         << "  crt_copy_entries=10 identity; crt_zero_ranges=3; tables pinned\n"

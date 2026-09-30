@@ -24,8 +24,9 @@ not a playable port or a replacement for a legally obtained copy of the game.
   choices are distinct from confirmed game behavior.
 - **Boot entry:** `reverse/boot/` now builds a C++17 library and diagnostic
   executable for the exact PAL DOL entry branch and register helper
-  (`0x80003154` → `0x800032B0` → stop at `0x80003158`). The original
-  hardware/CRT path and complete game boot are not yet implemented.
+  (`0x80003154` → `0x800032B0` → stop at `0x80003158`), plus the bounded
+  recurring event/exit loop at `0x800511E0..0x80051218`. Original hardware,
+  CRT, constructor effects and a complete game boot remain unresolved.
 - **Evidence and tools:** `gameplay/` contains the address-backed subsystem
   documents, curated symbols, SET catalog and Python query tools. `reverse/`
   keeps the conservative GX FIFO prototype, boot foundation and named streaming
@@ -33,8 +34,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **31/31 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime, two boot).
+The full public-tree MSVC Release gate passed **32/32 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, three boot).
 Without game data, **11/11** content-independent suites pass. The scripted stg0100 Dark
 mission reached 35/35 and routed to stage index 6. The simulator deliberately
 supplies labelled engine and player hooks, so a passing route is an integration

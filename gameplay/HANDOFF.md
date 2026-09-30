@@ -4,6 +4,38 @@
 
 ---
 
+## Checkpoint 22 — 2026-09-30 (boot frontiers and application loop)
+
+- Three independent PAL DOL/disc audits now live in `reverse/boot/research/`:
+  `PREENTRY_STATE.md`, `HARDWARE_PATH.md`, and `CRT_TO_GAME.md`. The original
+  apploader requires IPL low-memory inputs; header word `[0x430]=0x803E74E0`
+  overlaps loaded DOL code and is **not** a proven final FST base. Hardware
+  path `0x80003400` reads bytes `0x805F1F38` then `0x805F1F30` **before** CRT
+  zeroes that region; the DOL does not supply them. The constructor table has
+  282 nonzero in-text targets, but their runtime effects remain UNKNOWN.
+- Independently confirmed that `0x800510C0` is the static application event
+  loop. Its recurring `0x800511E0..0x80051218` phase is now native C++17 with
+  explicit event dispatcher, service, and exit-word hooks.
+  `reverse/boot/research/APPLICATION_LOOP.md` records the exact source path through event `0x12`,
+  `Game_FrameStep` and the conditional exit setter. Initialization, actual
+  callback state, displayed frames and pixel parity are still UNKNOWN.
+- Corrected a real diagnostic error in archived `experimental_native_boot`:
+  handler store `0x803733C0` targets `0x80586CB4`, not `0x80580000`. A fixture
+  regression now pins the caller selector and store-address instructions.
+  Corrected stale FST-address and event-loop wording in the boot documents.
+- Public MSVC Release build and **32/32 CTest** passed against the exact
+  read-only PAL DOL and game data (27 gameplay, asset, runtime, three boot).
+  The added loop fixture pins source instruction words and tests zero, one,
+  three and dispatch-triggered exit passes. Gameplay route and pixel-gate
+  requirements are preserved; no pixel parity is claimed.
+- Next: obtain an independent original-path preentry snapshot and branch trace
+  described in the research notes. Without the 16 pre-CRT FPR source bytes and
+  IPL/low-memory branch inputs, extending past `0x80003400` as an exact native
+  boot would invent state. Continue bounded boot and gameplay recovery while
+  retaining that explicit decline.
+
+---
+
 ## Checkpoint 21 — 2026-09-30 (public native boot entry foundation)
 
 - The canonical public repository now builds `reverse/boot/shadow_boot_foundation`

@@ -16,9 +16,9 @@
 
 ### Note on header offsets 0x430..0x438
 
-Older GameCube notes label these last three words ambiguously. For this extracted image, `0x430 = 0x803E74E0` is plainly a RAM address, while `0x434 = 0x005C0000` exactly matches the first FST user-file disc offset. The modern GCM layout documentation therefore matches the bytes: `0x430` = FST memory address, `0x434` = user position, `0x438` = user length.
+Older GameCube notes label these last three words ambiguously. For this extracted image, `0x430 = 0x803E74E0` has the shape of a RAM address, while `0x434 = 0x005C0000` matches the first FST user-file disc offset. **PROVEN:** `0x803E74E0` is inside the loaded DOL text1 range `0x80008D40..0x804AAC60`; it cannot safely be used as the final FST placement without overwriting code. The apploader calculates its own placement from IPL-provided low memory. See `research/PREENTRY_STATE.md`; the final value is UNKNOWN without an original boot trace.
 
-The boot header itself says DOL=`0x00020300`, FST=`0x005A1A00`, FST size=`0x00018B19`, FST RAM address=`0x803E74E0`, first user-data position=`0x005C0000`.
+The boot header bytes give DOL=`0x00020300`, FST disc offset=`0x005A1A00`, FST size=`0x00018B19`, word `[0x430]=0x803E74E0` (purpose unresolved), and first user-data position=`0x005C0000`.
 
 ## 2. Console boot chain vs. what the recompiler needs
 

@@ -247,7 +247,7 @@ int main(int argc, char** argv) {
                        "none inside 0x80003400",
                        "MATCH",
                    });
-        std::cout << "EXPLAINED store 0x80580000=0x803726D8 has no reader before CRT fill;"
+        std::cout << "EXPLAINED store 0x80586CB4=0x803726D8 has no reader before CRT fill;"
                      " not installed\n";
 
         const CrtSemantics crt = InitializeNativeCrt(image, hardware);

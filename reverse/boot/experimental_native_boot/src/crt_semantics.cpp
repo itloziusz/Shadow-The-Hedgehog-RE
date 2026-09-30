@@ -94,7 +94,7 @@ CrtSemantics InitializeNativeCrt(const BootImage& image, const HardwareSemantics
         return HostByteCount64{address} >= begin && HostByteCount64{address} < end;
     };
     if (!contains(expected[1].address, expected[1].size, NativeBootManifest::fpr_source) ||
-        !contains(expected[0].address, expected[0].size, 0x80580000u)) {
+        !contains(expected[0].address, expected[0].size, 0x80586CB4u)) {
         throw BootError("CRT zero ranges do not cover the M3 addresses");
     }
 

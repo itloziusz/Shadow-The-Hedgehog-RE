@@ -22,7 +22,7 @@ GameCube IPL / boot service (external to this package)
                   ├─ 0x80003400 low-level initialization calls
                   ├─ 0x80003340 CRT copy/zero-table processing
                   ├─ debug, OS, constructors, callbacks, game setup
-                  └─ call target 0x800510C0 (role as game main provisional)
+                  └─ call target 0x800510C0 (application event-loop wrapper)
                            ↓
                     game initialization (extent unresolved)
                            ↓
@@ -44,7 +44,7 @@ The supplied disassembly proves apploader callback addresses and a 13-entry swit
 | DOL header → BSS envelope | `0x8056FE00+0x8C7EC`, ending `0x805FC5EC`; **CONFIRMED** as header data | The envelope overlaps initialized `data6`/`data7`; it is **not** a post-load blanket zero operation. Determine true pre-entry writes before lowering. |
 | CRT table → zeroed ranges | `0x800055C8` lists three ranges; `evidence/main_text0_disasm.txt` offset `0x240..0x2FC`; **CONFIRMED** | `MemoryInitManifest` reproduces timing and bytes; remaining four-byte gap before `data7` is not silently zeroed by CRT lowering. |
 | CRT copy table → copies | Ten entries at `0x80005544` all have source=destination; loop skips equal addresses; **CONFIRMED** | No copy work for these entries in this image; retain table facts until any address-taking/read dependence is ruled out. |
-| DOL entry → main target | branch at text0 offset `0x1A8` targets `0x800510C0`; **CONFIRMED** target, **PROVISIONAL** role | Keep all intervening startup paths and side effects until traced; no direct jump to candidate main yet. |
+| DOL entry → application wrapper | branch at text0 offset `0x1A8` targets `0x800510C0`; recurring `0x800511E4..0x800511FC` dispatches event `0x12`, calls `0x8032D444` and tests `0x80576DBC`; **PROVEN static role** | Keep all intervening startup paths and side effects until traced. The bounded recurring phase is native C++17; no direct jump from entry to it or live-frame claim. See `research/APPLICATION_LOOP.md`. |
 | FST → game assets | 3,615 entries, 3,480 files, 135 directories; **CONFIRMED** | External assets through a native index/provider. Game-visible DVD ABI behavior remains until every caller is lifted or adapted. |
 
 ## Responsibility cut points

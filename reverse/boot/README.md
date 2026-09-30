@@ -1,12 +1,14 @@
-# Shadow the Hedgehog (PAL GUPP8P) — SYS boot reverse map v1
+# Shadow the Hedgehog (PAL GUPP8P) — SYS boot reverse map
 
-This directory holds the PAL GUPP8P boot evidence and the first buildable native
-startup slice. `shadow_boot_probe` translates the DOL entry branch at
+This directory holds PAL GUPP8P boot evidence and bounded native C++17 slices.
+`shadow_boot_probe` translates the DOL entry branch at
 `0x80003154` and the complete register helper at `0x800032B0..0x8000333C`,
 then stops at `0x80003158` before the hardware helper at `0x80003400`.
-**PROVEN for this bounded slice; full CRT, constructors and game boot remain
-UNKNOWN or incomplete.** It is a fixture-backed research executable, not a
-playable game.
+The separate `RunApplicationRecurringPhase` translates the static event and
+exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
+**PROVEN for these bounded slices; full hardware, CRT, constructors and game
+boot remain UNKNOWN or incomplete.** These fixture-backed components do not
+make a playable game.
 
 The original boot handoff below was written for a static recompiler. This
 public repository keeps its authored evidence and portable C++ slice. Raw
@@ -37,21 +39,24 @@ The core rule is: **preserve semantics, not the GameCube boot machinery.**
 
 ## Files in this public directory
 
-- `BOOT_PROCESS.md` — complete boot-chain reconstruction and what can be deleted.
+- `BOOT_PROCESS.md` — boot-chain dependency map and proposed native cuts.
 - `APPLOADER_STATE_MACHINE.md` — loader callback/state-machine map.
 - `DOL_STARTUP.md` — DOL/CRT initialization path and memory tables.
 - `MINIMAL_BOOT_FOUNDATION.md` — precise boundary and original evidence.
 - `REFINED_BOOT_GRAPH.md` — original boot dependencies and proposed native cuts.
 - `OPEN_QUESTIONS.md` — prioritized barriers to a real native game boot.
+- `research/` — independent pre-entry, hardware, CRT and application-loop
+  audits with exact address evidence and original-path oracle requirements.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
-  register-startup slice and command-line probe.
+  register-startup slice, recurring event loop and command-line probe.
 - `tests/` — exact DOL SHA-256 gate, expected stop state and mutations of all
-  36 helper instructions, entry words, descriptors and invalid reads.
+  36 helper instructions, entry words, descriptors, invalid reads and the
+  recurring event/exit order.
 - `experimental_native_boot/` — reference-only older authored experiments;
   its generated recompiler dependencies are not in this repository.
 
 Build with the root CMake project. Supply
-`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable the two content-backed
+`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable the three content-backed
 CTest cases. This path stays in the ignored build cache and is never committed.
 
 ## Confidence convention

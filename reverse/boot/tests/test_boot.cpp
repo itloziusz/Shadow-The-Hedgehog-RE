@@ -49,6 +49,16 @@ int main(int argc, char** argv) {
         }
         Require(image.ReadWord(0x805E4500u) == 0x804AB134u,
                 "initialized data6 address mapping differs");
+        // PROVEN 0x80372900 passes selector 1 to 0x80373378. The store at
+        // 0x803733C0 uses 0x80586CB0 + (selector << 2), not 0x80580000.
+        Require(image.ReadWord(0x80372900u) == 0x38600001u &&
+                image.ReadWord(0x803733A0u) == 0x3C808058u &&
+                image.ReadWord(0x803733A4u) == 0x57A513BAu &&
+                image.ReadWord(0x803733A8u) == 0x38046CB0u &&
+                image.ReadWord(0x803733B0u) == 0x7C802A14u &&
+                image.ReadWord(0x803733C0u) == 0x93840000u &&
+                0x80586CB0u + (1u << 2) == 0x80586CB4u,
+                "handler-table slot evidence differs");
         MustReject([&] { (void)image.ReadWord(0x8056FE00u); },
                    "uninitialized BSS must remain unavailable");
         MustReject([&] { (void)image.ReadWord(0x80003155u); },
