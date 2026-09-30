@@ -42,9 +42,20 @@ class RecognizerTests(unittest.TestCase):
         region = analyze(image, image.start, image.start + 24)
         call = next(e for e in region["effects"] if e["kind"] == "call")
         self.assertTrue(call["indirect"])
-        self.assertEqual(call["target"], "MEM32:K:8051EB48")
+        self.assertEqual(call["target"], "ALIGN4(MEM32:K:8051EB48)")
         self.assertEqual(region["instructions"][2]["raw"], "80830000")
         self.assertIn("indirect_dispatch", [d["id"] for d in detectors(region)])
+
+    def test_bclr_uses_aligned_lr_target_but_preserves_lr_word(self):
+        # lis/ori materialize an odd target, then mtlr and blr. The Gekko
+        # branch PC ignores LR low bits; mflr would still read the odd word.
+        image = FakeImage(0x80001000, [0x3C608000, 0x60631003,
+                                       0x7C6803A6, 0x4E800020])
+        region = analyze(image, image.start, image.start + 16)
+        ret = next(e for e in region["effects"] if e["kind"] == "return")
+        self.assertEqual(ret["target"], "K:80001000")
+        self.assertEqual(region["exit_states"]["0x80001010"]["LR"],
+                         "K:80001003")
 
     def test_cr1_branch_does_not_inherit_cr0(self):
         image = FakeImage(0x80001000, [0x38800000, 0x2C840000,

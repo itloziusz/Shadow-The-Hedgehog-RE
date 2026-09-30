@@ -84,6 +84,12 @@ def add(value: str, delta: int) -> str:
         value if delta == 0 else f"({value}{delta:+#x})")
 
 
+def aligned_branch_target(value: str) -> str:
+    """bclr/bcctr use register bits 0..29 followed by two zero bits."""
+    known = literal(value)
+    return f"K:{known & ~3:08X}" if known is not None else f"ALIGN4({value})"
+
+
 def role(reg: int, names: dict[int, str]) -> str:
     fixed = {0: "R0", 1: "SP", 2: "SDA2", 13: "SDA"}
     return fixed[reg] if reg in fixed else names.setdefault(reg, f"t{len(names)}")
@@ -264,7 +270,8 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
         effects.append({"pc": hx(ins.addr), "kind": "fpscr_write", "value": s["FPSCR"],
                         "status": "exception_flags_unresolved"})
     elif ins.kind == "call":
-        target = hx(ins.target) if ins.target is not None else s["CTR" if "ctr" in m else "LR"]
+        target = (hx(ins.target) if ins.target is not None else
+                  aligned_branch_target(s["CTR" if "ctr" in m else "LR"]))
         effects.append({"pc": hx(ins.addr), "kind": "call", "target": target,
                         "indirect": ins.target is None,
                         "return_address": hx(ins.addr + 4),
@@ -278,7 +285,8 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
         effects.append({"pc": hx(ins.addr), "kind": "barrier",
                         "status": "unresolved_hardware"})
     elif ins.kind == "ret":
-        effects.append({"pc": hx(ins.addr), "kind": "return", "target": s["LR"]})
+        effects.append({"pc": hx(ins.addr), "kind": "return",
+                        "target": aligned_branch_target(s["LR"])})
     elif ins.kind == "branch":
         # The BO field can combine CTR and CR tests. Do not reduce a compound
         # predicate to one of its inputs without decoding the full BO semantics.
@@ -288,7 +296,7 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
                      else "ALWAYS" if ins.bo == 20 else "UNKNOWN")
         effects.append({"pc": hx(ins.addr), "kind": "branch",
                         "target": hx(ins.target) if ins.target is not None else
-                        s["LR" if "lr" in m else "CTR"],
+                        aligned_branch_target(s["LR" if "lr" in m else "CTR"]),
                         "condition": condition})
     elif m == "nop":
         pass

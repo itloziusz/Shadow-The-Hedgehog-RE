@@ -330,4 +330,60 @@ Hid0IcfiBoundary IssueHid0IcfiRequest(const BootImage& image,
     return next;
 }
 
+PostSyncGqrTailPrediction PredictPostSyncGqrTail(const BootImage& image,
+                                                const Hid0IcfiBoundary& state) {
+    const auto& incoming = state.prefix.prefix.machine;
+    if (incoming.cpu.pc != 0x80371730u || incoming.cpu.lr != 0x80371730u) {
+        throw std::runtime_error("post-sync GQR tail entry state mismatch");
+    }
+    if (state.request.spr != 1008u ||
+        (state.request.value & 0x800u) == 0u ||
+        state.request.value != incoming.cpu.gpr[3] ||
+        image.ReadWord(0x80371730u) != 0x7C0004ACu) {
+        throw std::runtime_error("post-sync GQR tail has no matching ICFI/sync predecessor");
+    }
+    if ((incoming.msr & 0x4000u) != 0u) {
+        throw std::runtime_error("post-sync GQR writes require supervisor state");
+    }
+    // The sync itself remains unexecuted. Check every projected word from
+    // the original PAL DOL before predicting anything beyond the barrier.
+    constexpr std::array<std::uint32_t, 13> words{{
+        0x38600000u, // li r3,0
+        0x7C70E3A6u, 0x7C71E3A6u, 0x7C72E3A6u, 0x7C73E3A6u,
+        0x7C74E3A6u, 0x7C75E3A6u, 0x7C76E3A6u, 0x7C77E3A6u,
+        0x8001000Cu, // lwz r0,12(r1)
+        0x38210008u, // addi r1,r1,8
+        0x7C0803A6u, // mtlr r0
+        0x4E800020u, // blr
+    }};
+    for (std::size_t i = 0; i < words.size(); ++i) {
+        if (image.ReadWord(0x80371734u + static_cast<std::uint32_t>(4u * i)) != words[i]) {
+            throw std::runtime_error("post-sync GQR tail instruction fingerprint mismatch");
+        }
+    }
+
+    PostSyncGqrTailPrediction prediction{};
+    prediction.before_saved_lr_load = incoming;
+    prediction.before_saved_lr_load.cpu.gpr[3] = 0u;
+    prediction.before_saved_lr_load.cpu.pc = 0x80371758u;
+    for (std::size_t i = 0; i < prediction.ordered_gqr_writes.size(); ++i) {
+        prediction.ordered_gqr_writes[i] = {static_cast<std::uint32_t>(912u + i), 0u};
+    }
+
+    prediction.after_return = prediction.before_saved_lr_load;
+    const auto sp = prediction.after_return.cpu.gpr[1];
+    const std::uint64_t saved_lr_address = std::uint64_t(sp) + 12u;
+    if (saved_lr_address > 0xFFFFFFFFull) {
+        throw std::runtime_error("post-sync saved LR address overflow");
+    }
+    const auto restored_lr = state.prefix.prefix.stack_memory.LoadBE32(
+        static_cast<std::uint32_t>(saved_lr_address));
+    prediction.after_return.cpu.gpr[0] = restored_lr;
+    prediction.after_return.cpu.gpr[1] = sp + 8u;
+    prediction.after_return.cpu.lr = restored_lr;
+    // bclr/blr forms NIA from LR[0:29] || 0b00; LR retains the full word.
+    prediction.after_return.cpu.pc = restored_lr & ~3u;
+    return prediction;
+}
+
 }  // namespace shadow::boot

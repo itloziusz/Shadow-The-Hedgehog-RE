@@ -201,6 +201,56 @@ int main(int argc, char** argv) {
                     icfi.prefix.prefix.stack_memory.LoadBE32(0x8060C5F4u) ==
                     0x80003414u,
                 "applied stack writes were lost before the sync boundary");
+        const auto tail = shadow::boot::PredictPostSyncGqrTail(image, icfi);
+        Require(tail.before_saved_lr_load.cpu.pc == 0x80371758u &&
+                    tail.before_saved_lr_load.cpu.gpr[0] == 0x80003414u &&
+                    tail.before_saved_lr_load.cpu.gpr[1] == 0x8060C5E8u &&
+                    tail.before_saved_lr_load.cpu.gpr[3] == 0u &&
+                    tail.before_saved_lr_load.cpu.lr == 0x80371730u,
+                "conditional GQR-tail projection differs from HLE pre-load state");
+        for (std::size_t i = 0; i < tail.ordered_gqr_writes.size(); ++i) {
+            Require(tail.ordered_gqr_writes[i].spr == 912u + i &&
+                        tail.ordered_gqr_writes[i].value == 0u,
+                    "conditional GQR-tail projection lost an ordered SPR write");
+        }
+        Require(tail.after_return.cpu.pc == 0x80003414u &&
+                    tail.after_return.cpu.lr == 0x80003414u &&
+                    tail.after_return.cpu.gpr[0] == 0x80003414u &&
+                    tail.after_return.cpu.gpr[1] == 0x8060C5F0u &&
+                    tail.after_return.cpu.gpr[3] == 0u,
+                "conditional GQR-tail return differs from observed PPC state");
+        for (std::size_t i = 2; i < 32; ++i) {
+            if (i != 3) {
+                Require(tail.after_return.cpu.gpr[i] == icfi.prefix.prefix.machine.cpu.gpr[i],
+                        "conditional GQR tail changed an unrelated GPR");
+            }
+        }
+        auto changed_saved_lr = icfi;
+        changed_saved_lr.prefix.prefix.stack_memory.StoreBE32(0x8060C5F4u, 0x8000315Cu);
+        const auto changed_return = shadow::boot::PredictPostSyncGqrTail(
+            image, changed_saved_lr);
+        Require(changed_return.after_return.cpu.pc == 0x8000315Cu &&
+                    changed_return.after_return.cpu.gpr[0] == 0x8000315Cu,
+                "GQR tail hard-coded the saved return address");
+        changed_saved_lr.prefix.prefix.stack_memory.StoreBE32(0x8060C5F4u,
+                                                              0x8000315Fu);
+        const auto unaligned_lr = shadow::boot::PredictPostSyncGqrTail(
+            image, changed_saved_lr);
+        Require(unaligned_lr.after_return.cpu.gpr[0] == 0x8000315Fu &&
+                    unaligned_lr.after_return.cpu.lr == 0x8000315Fu &&
+                    unaligned_lr.after_return.cpu.pc == 0x8000315Cu,
+                "blr failed to clear only the next-PC low bits");
+        auto changed_r3 = icfi;
+        changed_r3.prefix.prefix.machine.cpu.gpr[3] = 0xDEADBEEFu;
+        changed_r3.request.value = 0xDEADBEEFu;
+        Require(shadow::boot::PredictPostSyncGqrTail(image, changed_r3)
+                    .before_saved_lr_load.cpu.gpr[3] == 0u,
+                "GQR tail failed to overwrite arbitrary incoming r3");
+        auto missing_saved_lr = icfi;
+        missing_saved_lr.prefix.prefix.stack_memory.valid[12] = false;
+        MustReject([&] { (void)shadow::boot::PredictPostSyncGqrTail(
+                   image, missing_saved_lr); },
+                   "GQR tail accepted an unwritten saved return byte");
         const auto alternate_icfi = shadow::boot::IssueHid0IcfiRequest(
             image, hid2_write, 0x40000000u);
         Require(alternate_icfi.request.value == 0x40000800u &&
@@ -255,6 +305,28 @@ int main(int argc, char** argv) {
         MustReject([&] { (void)shadow::boot::IssueHid0IcfiRequest(image,
                    user_mode_icfi, 0x0011C464u); },
                    "HID0 ICFI accepted a user-mode SPR access");
+        auto wrong_tail_entry = icfi;
+        wrong_tail_entry.prefix.prefix.machine.cpu.pc += 4u;
+        MustReject([&] { (void)shadow::boot::PredictPostSyncGqrTail(
+                   image, wrong_tail_entry); },
+                   "GQR-tail projection accepted an incorrect source PC");
+        auto altered_icfi_request = icfi;
+        altered_icfi_request.request.value ^= 1u;
+        MustReject([&] { (void)shadow::boot::PredictPostSyncGqrTail(
+                   image, altered_icfi_request); },
+                   "GQR-tail projection accepted a mismatched ICFI operand");
+        altered_icfi_request = icfi;
+        altered_icfi_request.request.value &= ~0x800u;
+        altered_icfi_request.prefix.prefix.machine.cpu.gpr[3] =
+            altered_icfi_request.request.value;
+        MustReject([&] { (void)shadow::boot::PredictPostSyncGqrTail(
+                   image, altered_icfi_request); },
+                   "GQR-tail projection accepted a missing ICFI command bit");
+        auto user_mode_tail = icfi;
+        user_mode_tail.prefix.prefix.machine.msr |= 0x4000u;
+        MustReject([&] { (void)shadow::boot::PredictPostSyncGqrTail(
+                   image, user_mode_tail); },
+                   "GQR-tail projection accepted user-mode GQR writes");
         Require(image.ReadWord(0x805E4500u) == 0x804AB134u,
                 "initialized data6 address mapping differs");
         // PROVEN 0x80372900 passes selector 1 to 0x80373378. The store at
@@ -354,6 +426,18 @@ int main(int argc, char** argv) {
                        0x0011C464u); },
                        "changed HID0 ICFI word accepted");
         }
+        for (std::size_t i = 0; i < 13; ++i) {
+            mutated = original;
+            ChangeWord(mutated, 0x36AFF4u + 4u * i);
+            MustReject([&] { (void)shadow::boot::PredictPostSyncGqrTail(
+                       shadow::boot::LoadValidatedFixture(mutated), icfi); },
+                       "changed post-sync GQR-tail word accepted");
+        }
+        mutated = original;
+        ChangeWord(mutated, 0x36AFF0u); // sync predecessor itself.
+        MustReject([&] { (void)shadow::boot::PredictPostSyncGqrTail(
+                   shadow::boot::LoadValidatedFixture(mutated), icfi); },
+                   "changed sync predecessor accepted by tail projection");
 
         // Independently mutate every instruction at 0x800032B0..0x8000333C.
         // This catches a regression to checking only the helper's endpoints.

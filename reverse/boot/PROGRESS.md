@@ -5,6 +5,16 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 35: conditional post-sync GQR tail
+
+| Field | Result |
+|---|---|
+| Last fully validated connected checkpoint | Unchanged: the Release native probe reran from `0x80003154` with explicit synthetic/HLE MSR/HID2/HID0 inputs and stops before `sync` at `0x80371730`. After the branch-target semantic fix, the hash-pinned recognizer cache was rebuilt to 275 regions and independently kept the frontier at `0x80371730` (`sync_gqr_zero_chain`, structural only). No ICFI completion is fabricated. |
+| New assembly-backed section | `0x80371734..0x80371764` is thirteen exact PAL words: `li r3,0`, eight ordered GQR0–7 writes, live BE32 saved-LR load, SP restoration, `mtlr`, `blr`. `PredictPostSyncGqrTail()` projects the exposed register states and SPR write operands *conditional on successful sync*; it is not called by the connected probe. |
+| Validation / falsification | Every projected word and the `sync` predecessor are fingerprinted and mutation-rejected. An independent raw-DOL decoder confirms all fourteen mnemonics. The projection matches exposed same-run HLE r0/r1/r3/LR at `0x80371758` and the return path; changing saved stack bytes changes the return PC, arbitrary incoming r3 is overwritten, and unwritten bytes, mismatched ICFI operand, wrong PC and user mode decline. Adversarial review found and fixed a low-bit `blr` target bug: LR retains the loaded word while PC clears its low two bits. The recognizer now applies the same rule to indirect LR/CTR targets, with a new focused test (**17/17**). The full Release CTest gate passed **46/46**. GQR readback and cache tags were not exposed by the oracle. See `research/POST_SYNC_GQR_PROJECTION_35.md`. |
+| First divergence and root cause | The native run cannot yet advance past `0x80371730`: it has an HID0 ICFI *request operand*, but no completed cache/barrier consequence or independently established post-command HID0 state. A GPR-only tail projection does not resolve that hardware state. |
+| Next proof obligation | Obtain a stateful ICFI/`sync` completion and live HID0 readback for the selected start, then connect the projected tail from entry and compare the first GQR-dependent `psq_l` at `0x80370CFC`. ICE=0, ABE=1, interrupts and retail inputs remain explicit UNKNOWN paths. |
+
 ## 2026-09-30 — checkpoint 34: eight NPC motion table copy graphs
 
 | Field | Result |

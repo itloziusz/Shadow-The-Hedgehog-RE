@@ -69,6 +69,7 @@ operations may be replaced only after their producers and consumers are traced.
   constructor and application-loop audits with exact address evidence, including assembly CFG/data-flow and
   a synthetic Dolphin/HLE checkpoint study. The latter is not retail IPL proof.
 - `research/ICFI_SYNC_BOUNDARY.md`, `SYNC_GQR_CHAIN.md`,
+  `POST_SYNC_GQR_PROJECTION_35.md`,
   `PAIRED_STACK_MEMORY.md`, `PAIRED_FPR_BREAKTHROUGH.md`, `L2_STATUS_ORACLE.md` and
   `OS_ENTRY_NEXT_BOUNDARY.md` — new bounded hardware, FPR and OS proof
   obligations beyond the connected stop. `NATIVE_PREFIX_ADVERSARIAL_29.md`
@@ -77,7 +78,8 @@ operations may be replaced only after their producers and consumers are traced.
   for validation only; the native executable does not depend on Dolphin.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
   register startup, wrapper/stack prefix with applied BE32 bytes, explicit-input HID2 read and
-  issued HID2 and HID0 SPR write requests,
+  issued HID2 and HID0 SPR write requests, plus a conditional, unconnected
+  projection of the thirteen post-sync GQR/stack-return words,
   recurring event loop and command-line probe. A separate
   `ConstructorTableProjection.hpp`/`.cpp` applies only the proven global
   three-word copy graph for eight NPC MotionImpl static initializer bodies;
