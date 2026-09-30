@@ -23,10 +23,13 @@ not a playable port or a replacement for a legally obtained copy of the game.
   layer with null, Direct3D 12 and optional Vulkan backends. Its modern design
   choices are distinct from confirmed game behavior.
 - **Boot entry:** `reverse/boot/` now builds a C++17 library and diagnostic
-  executable for the exact PAL DOL entry branch and register helper
-  (`0x80003154` → `0x800032B0` → stop at `0x80003158`), plus the bounded
-  recurring event/exit loop at `0x800511E0..0x80051218`. Original hardware,
-  CRT, constructor effects and a complete game boot remain unresolved.
+  executable for the exact PAL DOL entry, register helper and direct hardware
+  call (`0x80003154` → `0x800032B0` → `0x80003400`). With a caller-supplied
+  measured MSR, the first five hardware words reach `0x80371714`. The
+  binary-first archaeology index links raw bytes, decoded fields, CFG and
+  memory/ISA evidence. The bounded recurring event/exit loop at
+  `0x800511E0..0x80051218` remains separate. Full hardware, CRT, constructor
+  effects and game boot remain unresolved.
 - **Evidence and tools:** `gameplay/` contains the address-backed subsystem
   documents, curated symbols, SET catalog and Python query tools. `reverse/`
   keeps the conservative GX FIFO prototype, boot foundation and named streaming
@@ -34,11 +37,11 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **33/33 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime, four boot).
+The full public-tree MSVC Release gate passed **38/38 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, nine boot).
 `reverse/boot/PROGRESS.md` records the last
 connected boot checkpoint and first fail-closed stop.
-Without game data, **11/11** content-independent suites pass. The scripted stg0100 Dark
+Some suites require the read-only PAL fixture. The scripted stg0100 Dark
 mission reached 35/35 and routed to stage index 6. The simulator deliberately
 supplies labelled engine and player hooks, so a passing route is an integration
 check, not full game parity.
@@ -77,7 +80,10 @@ Do not commit those inputs. On Windows, `gameplay/build_and_run.ps1` runs the
 full gameplay regression and stg0100 simulator when `files/` is present.
 For the boot entry tests, set `SHADOW_BOOT_DOL_PATH` to the read-only PAL
 `main.dol`; CTest verifies its exact SHA-256 before executing the probe and
-mutation regression. The probe stops before hardware initialization.
+mutation regression.
+The default probe stops at `0x80003400`; the optional measured-MSR path stops
+at `0x80371714`. Synthetic Dolphin startup evidence is clearly separated
+from unknown retail IPL state in `reverse/boot/ARCHAEOLOGY_INDEX.md`.
 
 ## Provenance and limits
 

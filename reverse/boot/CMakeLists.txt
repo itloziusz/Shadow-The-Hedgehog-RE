@@ -25,6 +25,34 @@ add_test(NAME boot_fpscr_arithmetic COMMAND shadow_boot_fpscr_tests)
 set(SHADOW_BOOT_DOL_PATH "${PROJECT_SOURCE_DIR}/sys/main.dol" CACHE FILEPATH
     "Path to the user's PAL GUPP8P main.dol fixture (never committed)")
 if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
+    find_package(Python3 QUIET COMPONENTS Interpreter)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME boot_pal_raw_prefix
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/verify_binary_note.py"
+                "${SHADOW_BOOT_DOL_PATH}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/research/BINARY_BOOT_PREFIX.md"
+                --expected-words 78 --expected-branches 8 --expected-sprs 17)
+        add_test(NAME boot_pal_raw_fpr_prefix
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/verify_binary_note.py"
+                "${SHADOW_BOOT_DOL_PATH}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/research/BINARY_FPR_PREFIX.md"
+                --expected-words 74 --expected-branches 1 --expected-sprs 1)
+        add_test(NAME boot_pal_raw_cache_handler
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/verify_binary_note.py"
+                "${SHADOW_BOOT_DOL_PATH}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/research/BINARY_CACHE_HANDLER.md"
+                --expected-words 305 --expected-branches 56 --expected-sprs 14)
+        add_test(NAME boot_pal_raw_crt_prefix
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/verify_binary_note.py"
+                "${SHADOW_BOOT_DOL_PATH}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/research/BINARY_CRT_PREFIX.md"
+                --expected-words 111 --expected-branches 25 --expected-sprs 0
+                --expected-data-words 41)
+    endif()
     add_test(NAME boot_pal_fixture
         COMMAND ${CMAKE_COMMAND}
             "-DDOL=${SHADOW_BOOT_DOL_PATH}"
@@ -36,6 +64,12 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             "-DDOL=${SHADOW_BOOT_DOL_PATH}"
             "-DPROGRAM=$<TARGET_FILE:shadow_boot_tests>"
             -DMODE=regression
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
+    add_test(NAME boot_pal_synthetic_hle_prefix
+        COMMAND ${CMAKE_COMMAND}
+            "-DDOL=${SHADOW_BOOT_DOL_PATH}"
+            "-DPROGRAM=$<TARGET_FILE:shadow_boot_probe>"
+            -DMODE=hle_prefix
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
     add_test(NAME boot_pal_application_loop
         COMMAND ${CMAKE_COMMAND}

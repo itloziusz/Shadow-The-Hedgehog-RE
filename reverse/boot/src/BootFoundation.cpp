@@ -142,4 +142,43 @@ StartupState EnterRegisterStartup(const BootImage& image) {
     return state;
 }
 
+StartupState EnterHardwareCall(const BootImage& image, const StartupState& state) {
+    if (state.pc != kStopBeforeHardware ||
+        image.ReadWord(kStopBeforeHardware) != 0x480002A9u) {
+        throw std::runtime_error("hardware-call entry or instruction mismatch");
+    }
+    StartupState next = state;
+    // 0x80003158: bl 0x80003400. This direct PPC branch updates LR and PC;
+    // it does not read memory or change GPRs, CR, XER, CTR, FPRs, or SPRs.
+    next.lr = kStopBeforeHardware + 4u;
+    next.pc = 0x80003400u;
+    return next;
+}
+
+HardwareCallPrefix EnterPairedSetupCall(const BootImage& image,
+                                        const StartupState& state,
+                                        std::uint32_t observed_msr) {
+    if (state.pc != 0x80003400u || state.lr != 0x8000315Cu) {
+        throw std::runtime_error("hardware helper entry state mismatch");
+    }
+    constexpr std::array<std::uint32_t, 5> words{{
+        0x7C0000A6u, // mfmsr r0
+        0x60002000u, // ori r0,r0,0x2000
+        0x7C000124u, // mtmsr r0
+        0x7FE802A6u, // mflr r31
+        0x4836E305u, // bl 0x80371714
+    }};
+    for (std::size_t i = 0; i < words.size(); ++i) {
+        if (image.ReadWord(0x80003400u + static_cast<std::uint32_t>(i * 4)) != words[i]) {
+            throw std::runtime_error("hardware helper prefix instruction mismatch");
+        }
+    }
+    HardwareCallPrefix next{state, observed_msr | 0x2000u};
+    next.cpu.gpr[0] = next.msr;
+    next.cpu.gpr[31] = state.lr;
+    next.cpu.lr = 0x80003414u;
+    next.cpu.pc = 0x80371714u;
+    return next;
+}
+
 }  // namespace shadow::boot
