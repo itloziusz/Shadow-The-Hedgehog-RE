@@ -62,7 +62,8 @@ operations may be replaced only after their producers and consumers are traced.
 - `recognizer/` — hash-pinned raw-word semantic recognizer with bounded CFG,
   symbolic state, structural detectors, SQLite evidence DB, unknown-region
   clustering, and fail-closed boot-frontier analysis. See its `README.md` and
-  `research/SEMANTIC_RECOGNIZER_32.md` for the first scan and limitations.
+  `research/SEMANTIC_RECOGNIZER_32.md` and `SEMANTIC_RECOGNIZER_33.md` for
+  the scans, recovered multiword effects, and validation limits.
 - `research/` — independent pre-entry, HID2/HID0, FPR-lane, L2, CRT-memory,
   constructor and application-loop audits with exact address evidence, including assembly CFG/data-flow and
   a synthetic Dolphin/HLE checkpoint study. The latter is not retail IPL proof.

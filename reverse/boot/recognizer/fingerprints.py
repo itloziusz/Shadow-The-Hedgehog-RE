@@ -110,6 +110,21 @@ def detectors(region: dict) -> list[dict]:
                                          "input memory and prior writes not observed"],
                       "validation_needed": ["compare ordered memory delta at entry/return",
                                             "resolve caller/owner before naming constructor"]})
+    concrete_stores = sorted({e["address"] for e in effects
+                              if e["kind"] == "store" and e["address"].startswith("K:")})
+    if ("stmw" in ms and "lmw" in ms and ms[-1:] == ["blr"] and
+            len(concrete_stores) >= 16 and not any(e["kind"] == "call" for e in effects) and
+            not region["unknown_instructions"] and not region["unsupported_semantics"] and
+            not region["external_exits"] and not region["unresolved_edges"]):
+        found.append({"id": "bulk_table_propagation", "status": "STRUCTURAL_MATCH",
+                      "hypothesis": "multiword register save/restore around global-table field propagation",
+                      "evidence": [f"{len(concrete_stores)} distinct concrete store addresses",
+                                   "decoded stmw and lmw effects; return terminator; no decoded call"],
+                      "contradictions": ["live source values and table target are unobserved",
+                                         "matching layout does not prove object type or runtime reachability"],
+                      "validation_needed": ["capture live constructor-table pointer",
+                                            "compare every ordered read/write at entry and return",
+                                            "check destination aliases and later consumers"]})
     if (any(e["kind"] == "branch" and e["target"].startswith("0x") and
             int(e["target"], 16) < int(e["pc"], 16) for e in effects) and
             any(e["kind"] == "load" for e in effects)):

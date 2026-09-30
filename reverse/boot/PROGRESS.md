@@ -5,6 +5,17 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 33: full constructor scan and multiword semantics
+
+| Field | Result |
+|---|---|
+| Connected boot | The Release native C++ probe reran from `0x80003154` with explicit synthetic/HLE MSR/HID2/HID0 inputs and again stopped **before** `sync` at `0x80371730`. The recognizer did not advance its connected frontier. |
+| New finding | A raw-DOL scan of constructor-table indices 16–281 found eight distinct 58-word bodies (indices 135, 141, 143, 145, 147, 149, 151, 155) with one identical normalized sequence, shared direct source reads `0x80514CB8..C0` and 24 distinct concrete destination addresses per body. Their raw bytes differ; their static source bytes are zero in the DOL but live values remain unknown. `research/SEMANTIC_RECOGNIZER_33.md` gives exact addresses and validation limits. |
+| Root-cause fixes | The first pass treated decoded `stmw`/`lmw` as opaque and erased later address provenance. They now produce ordered BE32 memory effects and load results. An adversarial test caught lexical effect sorting that could reorder r9/r10; effects now retain instruction order. The broad detector found one related but differently shaped candidate (index 36), kept separate from the exact eight-body family. |
+| Evidence status | Database: 273 regions (2 bounded `VALIDATED` seeds, 4 static `STRONGLY_SUPPORTED` seeds, 267 `UNKNOWN` candidates); 28 multi-member structural clusters. The eight-body family passes raw decode, structural and symbolic address checks, but lacks live memory-delta and chain validation. No new native C++ constructor implementation or status promotion was made. |
+| Verification | Focused recognizer tests passed **14/14** against the pinned DOL and adversarial synthetic words. Full Release CTest passed **45/45** after the final scan; the same scan reran the native probe and reported `0x80371730` before and after. |
+| Next proof obligation | Capture one live constructor-table pointer, source triplet, and ordered destination delta at entry/return. The earlier ICFI/`sync` hardware contract remains the first connected boot blocker. |
+
 ## 2026-09-30 — checkpoint 32: binary-first semantic recognizer batch
 
 | Field | Result |

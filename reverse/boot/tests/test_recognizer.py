@@ -84,10 +84,10 @@ class RecognizerTests(unittest.TestCase):
                           0x80001000, 0x80001018)
         self.assertTrue(escaped["external_exits"])
         self.assertNotIn("store_initializer", [d["id"] for d in detectors(escaped)])
-        # A decoded but unsupported store cannot leave earlier constants or
-        # a three-store initializer claim intact.
+        # A decoded but unsupported arithmetic operation cannot leave earlier
+        # constants or a three-store initializer claim intact.
         opaque = analyze(FakeImage(0x80001000, [0x38600000, 0x906D0000,
-                                                0xBC030000, 0x906D0004,
+                                                0x1C630002, 0x906D0004,
                                                 0x906D0008, 0x4E800020]),
                          0x80001000, 0x80001018)
         self.assertTrue(opaque["unsupported_semantics"])
@@ -122,6 +122,27 @@ class RecognizerTests(unittest.TestCase):
         state = region["exit_states"]["0x80001008"]
         self.assertIn("MEM32:", state["f1.ps0"])
         self.assertEqual(state["f1.ps1"], "UNKNOWN:scalar_fp_lane")
+
+    def test_stmw_lmw_expand_all_registers_and_reject_base_overlap(self):
+        image = FakeImage(0x80001000, [0x3B600007, 0xBF610008,
+                                       0xBB610008, 0x4E800020])
+        region = analyze(image, image.start, image.start + 16)
+        stores = [e for e in region["effects"] if e["kind"] == "store"]
+        loads = [e for e in region["effects"] if e["kind"] == "load"]
+        self.assertEqual([e["register"] for e in stores],
+                         [f"r{i}" for i in range(27, 32)])
+        self.assertEqual([e["register"] for e in loads],
+                         [f"r{i}" for i in range(27, 32)])
+        self.assertEqual(stores[0]["value"], "K:00000007")
+        self.assertEqual(stores[-1]["address"], "((IN:SP+0x8)+0x10)")
+        self.assertEqual(region["unsupported_semantics"], [])
+        bad = analyze(FakeImage(image.start, [0xBB7B0000, 0x4E800020]),
+                      image.start, image.start + 8)
+        self.assertTrue(bad["unsupported_semantics"])
+        long = analyze(FakeImage(image.start, [0xBD010000, 0x4E800020]),
+                       image.start, image.start + 8)
+        ordered = [e["register"] for e in long["effects"] if e["kind"] == "store"]
+        self.assertEqual(ordered, [f"r{i}" for i in range(8, 32)])
 
     def test_structural_score_is_not_confidence(self):
         a = fingerprint(analyze(FakeImage(0x80001000, [0x38600000, 0x906D0000,
@@ -180,6 +201,49 @@ class PalFixtureTests(unittest.TestCase):
         self.assertEqual(len([e for e in region["effects"] if e["kind"] == "spr_write"]), 8)
         self.assertIn("sync_gqr_zero_chain", [d["id"] for d in detectors(region)])
         self.assertEqual(region["effects"][0]["status"], "unresolved_hardware")
+
+    def test_repeated_constructor_keeps_concrete_write_addresses(self):
+        if self.dol_path is None:
+            self.skipTest("optional PAL DOL argument")
+        image = DolImage(Path(self.dol_path))
+        region = analyze(image, 0x8020E1E4, 0x8020E2CC)
+        self.assertEqual(region["unknown_instructions"], [])
+        self.assertEqual(region["unsupported_semantics"], [])
+        stores = {e["address"] for e in region["effects"] if e["kind"] == "store"}
+        self.assertIn("K:80545424", stores)
+        self.assertIn("K:80545498", stores)
+        self.assertIn("bulk_table_propagation", [d["id"] for d in detectors(region)])
+        words = [image.word(pc, text=True) for pc in range(0x8020E1E4, 0x8020E2CC, 4)]
+        words[3] = 0x1C630002  # replace saved-register sequence with unsupported arithmetic
+        altered = analyze(FakeImage(0x8020E1E4, words), 0x8020E1E4, 0x8020E2CC)
+        self.assertNotIn("bulk_table_propagation", [d["id"] for d in detectors(altered)])
+
+    def test_eight_distinct_raw_bodies_share_one_normalized_structure(self):
+        if self.dol_path is None:
+            self.skipTest("optional PAL DOL argument")
+        image = DolImage(Path(self.dol_path))
+        starts = {135: 0x8020E1E4, 141: 0x802128C8, 143: 0x80213D60,
+                  145: 0x80215058, 147: 0x802163F0, 149: 0x80217788,
+                  151: 0x80218A80, 155: 0x8021AFD8}
+        self.assertEqual(image.read(0x80514CB8, 12, text=False), b"\x00" * 12)
+        raw, normalized, destinations = set(), set(), set()
+        for index, start in starts.items():
+            self.assertEqual(image.word(0x804AAC60 + 4 * index, text=False), start)
+            region = analyze(image, start, start + 0xE8)
+            fp = fingerprint(region)
+            raw.add(fp["raw_sha256"])
+            normalized.add(fp["normalized_sha256"])
+            self.assertEqual(region["unsupported_semantics"], [])
+            self.assertIn("bulk_table_propagation", [d["id"] for d in detectors(region)])
+            loads = {e["address"] for e in region["effects"] if e["kind"] == "load"}
+            self.assertTrue({"K:80514CB8", "K:80514CBC", "K:80514CC0"} <= loads)
+            stores = {e["address"] for e in region["effects"]
+                      if e["kind"] == "store" and e["address"].startswith("K:")}
+            self.assertEqual(len(stores), 24)
+            destinations.add(min(stores))
+        self.assertEqual(len(raw), 8)
+        self.assertEqual(len(normalized), 1)
+        self.assertEqual(len(destinations), 8)
 
 
 if __name__ == "__main__":

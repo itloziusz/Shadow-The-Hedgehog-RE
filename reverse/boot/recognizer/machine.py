@@ -196,6 +196,29 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
     elif m == "mtspr":
         effects.append({"pc": hx(ins.addr), "kind": "spr_write", "spr": ins.imm,
                         "value": src})
+    elif m in ("stmw", "lmw"):
+        disp, base_reg = ins.ops[1][1:]
+        base = "K:00000000" if base_reg == 0 else s[f"r{base_reg}"]
+        address = add(base, disp)
+        if m == "lmw" and base_reg >= rd and base_reg != 0:
+            # A destination register used as the address base is not modeled
+            # as a sequential source of later effective addresses.
+            for key in s:
+                s[key] = "UNKNOWN:ambiguous_lmw_base"
+            effects.append({"pc": hx(ins.addr), "kind": "unsupported",
+                            "mnemonic": m, "reason": "base overlaps loaded register range"})
+        else:
+            for reg in range(rd, 32):
+                ea = add(address, 4 * (reg - rd))
+                if m == "stmw":
+                    effects.append({"pc": hx(ins.addr), "kind": "store", "address": ea,
+                                    "width": 4, "value": s[f"r{reg}"], "register": f"r{reg}",
+                                    "fp": False})
+                else:
+                    effects.append({"pc": hx(ins.addr), "kind": "load", "address": ea,
+                                    "width": 4, "value": None, "register": f"r{reg}",
+                                    "fp": False})
+                    s[f"r{reg}"] = f"MEM32:{ea}"
     elif m in ("lwz", "lbz", "lhz", "lha", "lfs", "lfd", "stw", "stwu", "stb", "sth", "stfs", "stfd",
                "psq_l", "psq_lu", "psq_st", "psq_stu"):
         disp, base_reg = ins.ops[1][1:]
@@ -334,8 +357,8 @@ def analyze(image: DolImage, start: int, end: int) -> dict:
         for pc in range(lo, block["end"], 4):
             local = []
             transfer(insns[(pc - start) // 4], state, local)
-            for effect in local:
-                effects_by_pc[(effect["pc"], effect["kind"])] = effect
+            for slot, effect in enumerate(local):
+                effects_by_pc[(effect["pc"], effect["kind"], slot)] = effect
         for successor in block["successors"]:
             merged, changed = join(entries.get(successor), state)
             if changed:
@@ -343,7 +366,10 @@ def analyze(image: DolImage, start: int, end: int) -> dict:
                 pending.append(successor)
         if not block["successors"]:
             exit_states[block["end"]] = state.copy()
-    effects = sorted(effects_by_pc.values(), key=lambda e: (e["pc"], e["kind"]))
+    # Keep within-instruction ordering: lexical register sorting would put
+    # r10 before r9 and silently falsify ordered stmw/lmw memory effects.
+    effects = [effect for (_, _, _), effect in sorted(
+        effects_by_pc.items(), key=lambda item: (int(item[0][0], 16), item[0][2]))]
     return {"start": hx(start), "end": hx(end), "sha256": image.sha256,
             "boundary_status": "caller_supplied_range", "instructions": rows,
             "cfg": [{"start": hx(b["start"]), "end": hx(b["end"]),

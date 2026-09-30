@@ -22,6 +22,7 @@ again after evidence changes; the learned structural patterns and matches are
 recomputed from current records. `inspect ctor_16` or
 `inspect frontier_sync_gqr` emits a detailed JSON report. `scan`, `frontier`,
 `rescan`, `bootstrap`, and `report-db` support narrower automated workflows.
+For the full initial constructor table, use `scan --constructors 16:282`.
 
 Pipeline:
 
@@ -29,7 +30,8 @@ Pipeline:
    the project's Gekko decoder, and emits precise and coarse normalized forms.
 2. Its bounded CFG and symbolic transfer track GPRs, CR fields, LR/CTR,
    XER/MSR/FPSCR, FPR lanes, SDA and stack address expressions, calls, and
-   ordered memory/SPR effects. Unsupported words or semantics poison abstract
+   ordered memory/SPR effects, including `stmw`/`lmw` register ranges.
+   Unsupported words or semantics poison abstract
    state. A call without a traced callee poisons its return state.
 3. `fingerprints.py` records opcode and normalized n-grams, CFG shape,
    access/effect signatures, and a disclosed weighted structural score.
