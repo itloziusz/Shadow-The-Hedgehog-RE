@@ -229,7 +229,7 @@ int main(int argc, char** argv) {
 
         const HardwareSemantics hardware = InitializeNativeHardwareSemantics(oracle);
         clock.Mark("hardware_semantics");
-        if (hardware.pc != 0x8000315Cu || hardware.fpscr != static_cast<GuestWord32>(hardware.fpr_binary64) ||
+        if (hardware.pc != 0x8000315Cu || hardware.fpscr != DeriveGekkoFPSCR(hardware.fpr_binary64) ||
             !hardware.paired_temporary_survives || hardware.r1 != state.gpr[1]) {
             throw BootError("native hardware semantics diverged from the helper's surviving state");
         }

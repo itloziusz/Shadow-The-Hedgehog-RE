@@ -45,13 +45,16 @@ The core rule is: **preserve semantics, not the GameCube boot machinery.**
 - `MINIMAL_BOOT_FOUNDATION.md` — precise boundary and original evidence.
 - `REFINED_BOOT_GRAPH.md` — original boot dependencies and proposed native cuts.
 - `OPEN_QUESTIONS.md` — prioritized barriers to a real native game boot.
+- `PROGRESS.md` — connected native prefix, first fail-closed stop and next
+  original-state comparison required by the run/trace/fix workflow.
 - `research/` — independent pre-entry, hardware, CRT and application-loop
   audits with exact address evidence and original-path oracle requirements.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
   register-startup slice, recurring event loop and command-line probe.
 - `tests/` — exact DOL SHA-256 gate, expected stop state and mutations of all
   36 helper instructions, entry words, descriptors, invalid reads and the
-  recurring event/exit order.
+  recurring event/exit order. A separate executable unit gate checks Gekko
+  `mtfsf` summary arithmetic; it does not advance the connected boot prefix.
 - `experimental_native_boot/` — reference-only older authored experiments;
   its generated recompiler dependencies are not in this repository.
 

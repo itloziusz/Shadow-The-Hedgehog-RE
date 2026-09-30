@@ -4,6 +4,44 @@
 
 ---
 
+## Checkpoint 23 — 2026-09-30 (strict boot execution frontier)
+
+- Ran the connected native `shadow_boot_probe` again from PAL DOL entry. It
+  still stops correctly at PC/LR `0x80003158`, with r1 `0x8060C5F0`, r2
+  `0x805FA780`, r13 `0x805EC500`. This is the **last fully validated connected
+  checkpoint**, not a newly booted game. `reverse/boot/PROGRESS.md` records
+  the first stop, root cause, evidence and next comparison in the requested
+  run → trace → fix → rerun workflow. A structurally translated pre-clock
+  event candidate was withdrawn because no original-state and end-to-end
+  gates could validate it across the hardware/CRT gap.
+- New `reverse/boot/research/APPLOADER_PATH.md` proves normal completed
+  apploader state 6 calls zero-fill on the DOL BSS envelope at `0x81200DA0`
+  **before** loading sections. This initially zeroes the FPR source
+  `0x805F1F30..3F`. A later IPL-dependent FST read can overlap that gap, so
+  the final pre-entry bytes remain UNKNOWN. `OS_STARTUP.md` maps the later
+  first unresolved time-base/MSR/low-memory call at `0x80370EA4` and device
+  waits; no OS success stub was introduced.
+- Fixed a genuine arithmetic bug in the archived hardware helper:
+  `mtfsf 0xFF,f0` at `0x80370DFC` derives FEX/VX summary bits instead of
+  copying them from the source low word. IBM Gekko/NXP manuals and a focused
+  executable `boot_fpscr_arithmetic` regression cover a finite counterexample.
+  Exceptional PS1 encodings now decline rather than silently preserving raw
+  source bits. This helper remains disconnected from the validated entry prefix.
+- Automatic approval review rejected an agent's proposed
+  `reverse/boot/research/FPR_SEMANTICS.md` write under an earlier
+  gameplay-only path restriction. The agent did not retry it. The essential
+  findings are in this checkpoint, existing boot code comments and the
+  in-thread report. The full MSVC Release build and **33/33 CTest** passed
+  after integration; the direct boot probe was rerun and stopped at the same
+  validated `0x80003158` boundary.
+- Next connected boot gate requires a same-run original entry snapshot of
+  MSR/HID0/HID2/L2CR, IPL word `[0x80000028]`, final FPR source bytes, and
+  `0x80003400` branch/write effects. No value is installed from a static
+  candidate merely to advance the PC. Later OS, constructor, event, runtime
+  and pixel gates remain required.
+
+---
+
 ## Checkpoint 22 — 2026-09-30 (boot frontiers and application loop)
 
 - Three independent PAL DOL/disc audits now live in `reverse/boot/research/`:

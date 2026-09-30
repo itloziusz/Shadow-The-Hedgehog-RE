@@ -60,7 +60,7 @@ const char* kOneOracle = R"({
 "applied_by_native_boot": false,
 "pc": "0x80003154",
 "memory_0x805F1F30": "0000000000000001",
-"memory_0x805F1F38": "ffffffffffffffff"
+"memory_0x805F1F38": "000000003f800000"
 })";
 
 }  // namespace
@@ -164,7 +164,7 @@ void RunFixtureContractTests(const std::vector<std::uint8_t>& dol) {
         const HardwareSemantics one =
             InitializeNativeHardwareSemantics(ParsePreEntryOracle(kOneOracle));
         if (one.fpr_binary64 != 1u || one.fpscr != 1u || !one.paired_temporary_survives ||
-            one.paired_lane1_binary32 != 0xFFFFFFFFu) {
+            one.paired_lane1_binary32 != 0x3F800000u) {
             throw BootError("FPR semantic image was not derived from the oracle bytes");
         }
     }

@@ -11,6 +11,15 @@ target_link_libraries(shadow_boot_tests PRIVATE shadow_boot_foundation)
 add_executable(shadow_boot_application_loop_tests tests/test_application_loop.cpp)
 target_link_libraries(shadow_boot_application_loop_tests PRIVATE shadow_boot_foundation)
 
+# Correct a reference-only hardware arithmetic bug with a focused executable
+# check. This target does not connect the hardware path to the native entry.
+add_executable(shadow_boot_fpscr_tests
+    tests/test_fpscr.cpp
+    experimental_native_boot/src/hardware_semantics.cpp)
+target_compile_features(shadow_boot_fpscr_tests PRIVATE cxx_std_17)
+target_include_directories(shadow_boot_fpscr_tests PRIVATE experimental_native_boot/src)
+add_test(NAME boot_fpscr_arithmetic COMMAND shadow_boot_fpscr_tests)
+
 # An exact PAL input is optional and read-only. The tests cover bounded entry
 # and recurring-loop slices; neither establishes game boot or CRT parity.
 set(SHADOW_BOOT_DOL_PATH "${PROJECT_SOURCE_DIR}/sys/main.dol" CACHE FILEPATH

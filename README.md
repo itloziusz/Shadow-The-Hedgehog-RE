@@ -34,8 +34,10 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **32/32 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime, three boot).
+The full public-tree MSVC Release gate passed **33/33 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, four boot).
+`reverse/boot/PROGRESS.md` records the last
+connected boot checkpoint and first fail-closed stop.
 Without game data, **11/11** content-independent suites pass. The scripted stg0100 Dark
 mission reached 35/35 and routed to stage index 6. The simulator deliberately
 supplies labelled engine and player hooks, so a passing route is an integration

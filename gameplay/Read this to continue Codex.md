@@ -11,7 +11,7 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint 22, 2026-09-30)
+## Current continuation (checkpoint 23, 2026-09-30)
 
 The canonical public repository builds the C++17 boot-entry foundation under
 `reverse/boot/`. Its exact PAL fixture gate stops at `0x80003158` after the
@@ -21,8 +21,11 @@ native slice reproduces application-loop event/exit order at
 CRT, constructor and initialization state. Independent `reverse/boot/research/`
 notes map the preentry, hardware and CRT frontiers, including unknown pre-CRT
 FPR bytes at `0x805F1F30..3F` and IPL-dependent FST placement. The public
-Release gate is **32/32 CTest** with read-only content. See `HANDOFF.md`
-checkpoint 22 and `reverse/boot/OPEN_QUESTIONS.md`. Gameplay state below
+Release gate is **33/33 CTest** including the FPSCR arithmetic test.
+`reverse/boot/PROGRESS.md` now tracks
+the strict connected-prefix execution stop at `0x80003158`. Apploader state 6
+clears the FPR source gap but later FST placement remains IPL-dependent.
+See `HANDOFF.md` checkpoint 23 and `reverse/boot/OPEN_QUESTIONS.md`. Gameplay state below
 remains unchanged.
 
 ### Gameplay continuation from checkpoint 20
