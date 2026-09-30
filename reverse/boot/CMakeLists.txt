@@ -117,6 +117,12 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             "-DPROGRAM=$<TARGET_FILE:shadow_boot_probe>"
             -DMODE=hle_hid2_read
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
+    add_test(NAME boot_pal_synthetic_hle_hid0_request
+        COMMAND ${CMAKE_COMMAND}
+            "-DDOL=${SHADOW_BOOT_DOL_PATH}"
+            "-DPROGRAM=$<TARGET_FILE:shadow_boot_probe>"
+            -DMODE=hle_hid0_request
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
     add_test(NAME boot_pal_application_loop
         COMMAND ${CMAKE_COMMAND}
             "-DDOL=${SHADOW_BOOT_DOL_PATH}"

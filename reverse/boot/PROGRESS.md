@@ -5,6 +5,15 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 29: HID0 ICFI request and full rerun
+
+| Field | Result |
+|---|---|
+| Last connected boundary | From `0x80003154`, with explicit synthetic/HLE MSR `0x00002032`, HID2 `0xE0000000` and HID0 `0x0011C464`, the native probe reaches PC/LR `0x80371730` and stops **before** `sync`. It reports an HID0 SPR1008 write request `0x0011CC64`; it does not equate this with the hardware-cleared readback `0x0011C464`. Earlier default and two-input stops remain supported. |
+| Root-cause trace | The prior stop `0x8037172C` was a deliberate missing live-HID0 input. DOL `bl 0x803725F4` enters `mfspr HID0; ori 0x0800; mtspr HID0; blr`, producing the request operand and return LR. The synthetic interpreter capture confirms the exposed r3/PC/LR at `0x80371730` while separately showing the self-cleared HID0 register. The binary and Gekko manual distinguish command write from readback. |
+| Adversarial validation | All five executed words and the next `sync` boundary are fingerprinted and individually mutated in the negative test. A distinct HID0 input proves the OR retains unrelated bits; user-mode SPR access and invalid entry PC decline. The full native prefix reran from entry; MSVC Release CTest passed **43/43**. |
+| First remaining divergence/unknown | `0x80371730` is `sync`, and subsequent GQR writes plus FPR/paired, L1/L2 and CRT effects are not connected. In particular ICFI completion/cache-tag state, retail HID0/ICE input and actual HID2 readback remain unknown. Do not replace the request event with a persistent HID0 flag or skip the barrier. |
+
 ## 2026-09-30 — checkpoint 28: HID2 write request and six independent slices
 
 | Field | Result |

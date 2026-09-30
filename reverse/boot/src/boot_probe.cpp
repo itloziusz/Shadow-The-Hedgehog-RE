@@ -13,8 +13,8 @@
 
 int main(int argc, char** argv) {
     try {
-        if (argc != 2 && argc != 4 && argc != 6) {
-            throw std::runtime_error("usage: shadow_boot_probe <main.dol> [--observed-msr <8-hex-digits> [--observed-hid2 <8-hex-digits>]]");
+        if (argc != 2 && argc != 4 && argc != 6 && argc != 8) {
+            throw std::runtime_error("usage: shadow_boot_probe <main.dol> [--observed-msr <8-hex-digits> [--observed-hid2 <8-hex-digits> [--observed-hid0 <8-hex-digits>]]]");
         }
         const auto parse_hex_word = [](const char* word) {
             const std::string value = word;
@@ -31,17 +31,24 @@ int main(int argc, char** argv) {
         };
         std::uint32_t observed_msr = 0;
         std::uint32_t observed_hid2 = 0;
+        std::uint32_t observed_hid0 = 0;
         if (argc >= 4) {
             if (std::string(argv[2]) != "--observed-msr") {
                 throw std::runtime_error("missing --observed-msr");
             }
             observed_msr = parse_hex_word(argv[3]);
         }
-        if (argc == 6) {
+        if (argc >= 6) {
             if (std::string(argv[4]) != "--observed-hid2") {
                 throw std::runtime_error("missing --observed-hid2");
             }
             observed_hid2 = parse_hex_word(argv[5]);
+        }
+        if (argc == 8) {
+            if (std::string(argv[6]) != "--observed-hid0") {
+                throw std::runtime_error("missing --observed-hid0");
+            }
+            observed_hid0 = parse_hex_word(argv[7]);
         }
         std::ifstream file(argv[1], std::ios::binary);
         if (!file) throw std::runtime_error("cannot open main.dol fixture");
@@ -69,14 +76,14 @@ int main(int argc, char** argv) {
                           << " value=0x" << std::setw(8) << write.value
                           << " width=4 endian=BE" << '\n';
             }
-            std::cout << (argc == 6 ? "CHECKPOINT pc=0x" : "STOP pc=0x")
+            std::cout << (argc >= 6 ? "CHECKPOINT pc=0x" : "STOP pc=0x")
                       << std::setw(8) << hid2.machine.cpu.pc
                       << " lr=0x" << std::setw(8) << hid2.machine.cpu.lr
                       << " r0=0x" << std::setw(8) << hid2.machine.cpu.gpr[0]
                       << " r1=0x" << std::setw(8) << hid2.machine.cpu.gpr[1]
                       << " r31=0x" << std::setw(8) << hid2.machine.cpu.gpr[31]
                       << " msr=0x" << std::setw(8) << hid2.machine.msr << '\n';
-            if (argc == 6) {
+            if (argc >= 6) {
                 const auto readback = shadow::boot::ReturnFromHid2Read(image, hid2, observed_hid2);
                 const auto hid2_write = shadow::boot::IssueHid2Write(image, readback);
                 std::cout << "INPUT hid2=0x" << std::setw(8) << observed_hid2
@@ -90,12 +97,28 @@ int main(int argc, char** argv) {
                           << "SPR_WRITE_REQUEST spr=" << std::dec << hid2_write.request.spr
                           << std::hex << " value=0x" << std::setw(8) << hid2_write.request.value
                           << '\n'
-                          << "STOP pc=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.pc
+                          << (argc == 8 ? "CHECKPOINT pc=0x" : "STOP pc=0x")
+                          << std::setw(8) << hid2_write.prefix.machine.cpu.pc
                           << " lr=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.lr
                           << " r0=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.gpr[0]
                           << " r1=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.gpr[1]
                           << " r3=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.gpr[3]
                           << " msr=0x" << std::setw(8) << hid2_write.prefix.machine.msr << '\n';
+                if (argc == 8) {
+                    const auto icfi = shadow::boot::IssueHid0IcfiRequest(image, hid2_write,
+                                                                          observed_hid0);
+                    std::cout << "INPUT hid0=0x" << std::setw(8) << observed_hid0
+                              << " provenance=CALLER_SUPPLIED" << '\n'
+                              << "SPR_WRITE_REQUEST spr=" << std::dec << icfi.request.spr
+                              << std::hex << " value=0x" << std::setw(8) << icfi.request.value
+                              << '\n'
+                              << "STOP pc=0x" << std::setw(8) << icfi.prefix.prefix.machine.cpu.pc
+                              << " lr=0x" << std::setw(8) << icfi.prefix.prefix.machine.cpu.lr
+                              << " r0=0x" << std::setw(8) << icfi.prefix.prefix.machine.cpu.gpr[0]
+                              << " r1=0x" << std::setw(8) << icfi.prefix.prefix.machine.cpu.gpr[1]
+                              << " r3=0x" << std::setw(8) << icfi.prefix.prefix.machine.cpu.gpr[3]
+                              << " msr=0x" << std::setw(8) << icfi.prefix.prefix.machine.msr << '\n';
+                }
             }
             return 0;
         }

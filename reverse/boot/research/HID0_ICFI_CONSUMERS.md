@@ -152,4 +152,6 @@ disc does not establish retail IPL HID0 state.
 cache tags, completion and fetch visibility; exact ICE=0 readback; whether
 an asynchronous exception intervenes; and connected native parity through
 these hardware effects. There is no established portable C++ replacement
-for ICFI or a validated connected native path through this region yet.
+for ICFI. The native probe now reaches the issued request at `0x80371730`
+with caller-supplied HID0, but stops before `sync` and any cache-effect
+consumer; that does not validate a portable hardware replacement.

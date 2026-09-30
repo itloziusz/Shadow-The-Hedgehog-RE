@@ -46,6 +46,13 @@ struct Hid2WriteBoundary {
     SprWriteRequest request;
 };
 
+// HID0[ICFI] is a command bit. The issued operand is not a persistent
+// readback value; stop before the following sync and later cache consumers.
+struct Hid0IcfiBoundary {
+    Hid2WriteBoundary prefix;
+    SprWriteRequest request;
+};
+
 
 class BootImage {
 public:
@@ -76,5 +83,8 @@ PairedSetupStackPrefix ReturnFromHid2Read(const BootImage& image,
                                           std::uint32_t measured_hid2);
 Hid2WriteBoundary IssueHid2Write(const BootImage& image,
                                  const PairedSetupStackPrefix& state);
+Hid0IcfiBoundary IssueHid0IcfiRequest(const BootImage& image,
+                                      const Hid2WriteBoundary& state,
+                                      std::uint32_t measured_hid0);
 
 }  // namespace shadow::boot

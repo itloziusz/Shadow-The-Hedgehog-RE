@@ -156,6 +156,27 @@ int main(int argc, char** argv) {
                         "HID2 writer changed an unrelated GPR");
             }
         }
+        const auto icfi = shadow::boot::IssueHid0IcfiRequest(image, hid2_write,
+                                                               0x0011C464u);
+        Require(icfi.request.spr == 1008u &&
+                    icfi.request.value == 0x0011CC64u &&
+                    icfi.prefix.prefix.machine.cpu.pc == 0x80371730u &&
+                    icfi.prefix.prefix.machine.cpu.lr == 0x80371730u &&
+                    icfi.prefix.prefix.machine.cpu.gpr[3] == 0x0011CC64u &&
+                    icfi.prefix.prefix.machine.cpu.gpr[1] == 0x8060C5E8u &&
+                    icfi.prefix.prefix.machine.msr == 0x2032u,
+                "HID0 ICFI request differs from the synthetic PPC checkpoint");
+        const auto alternate_icfi = shadow::boot::IssueHid0IcfiRequest(
+            image, hid2_write, 0x40000000u);
+        Require(alternate_icfi.request.value == 0x40000800u &&
+                    alternate_icfi.prefix.prefix.machine.cpu.gpr[3] == 0x40000800u,
+                "HID0 ICFI request was hard-coded to HLE state");
+        for (std::size_t i = 0; i < 32; ++i) {
+            if (i != 3) {
+                Require(icfi.prefix.prefix.machine.cpu.gpr[i] == hid2_write.prefix.machine.cpu.gpr[i],
+                        "HID0 ICFI leaf changed an unrelated GPR");
+            }
+        }
         for (std::size_t i = 1; i < 31; ++i) {
             Require(paired_entry.cpu.gpr[i] == call.gpr[i],
                     "hardware prefix changed an unrelated GPR");
@@ -182,6 +203,14 @@ int main(int argc, char** argv) {
         user_mode_hid2.machine.msr |= 0x4000u;
         MustReject([&] { (void)shadow::boot::IssueHid2Write(image, user_mode_hid2); },
                    "HID2 writer accepted a user-mode SPR access");
+        MustReject([&] { (void)shadow::boot::IssueHid0IcfiRequest(image,
+                   shadow::boot::Hid2WriteBoundary{}, 0x0011C464u); },
+                   "HID0 ICFI accepted an incorrect entry PC");
+        auto user_mode_icfi = hid2_write;
+        user_mode_icfi.prefix.machine.msr |= 0x4000u;
+        MustReject([&] { (void)shadow::boot::IssueHid0IcfiRequest(image,
+                   user_mode_icfi, 0x0011C464u); },
+                   "HID0 ICFI accepted a user-mode SPR access");
         Require(image.ReadWord(0x805E4500u) == 0x804AB134u,
                 "initialized data6 address mapping differs");
         // PROVEN 0x80372900 passes selector 1 to 0x80373378. The store at
@@ -271,6 +300,15 @@ int main(int argc, char** argv) {
             MustReject([&] { (void)shadow::boot::IssueHid2Write(
                        shadow::boot::LoadValidatedFixture(mutated), hid2_return); },
                        "changed HID2 write word accepted");
+        }
+        for (const std::size_t offset : {0x36AFECu, 0x36BEB4u, 0x36BEB8u,
+                                         0x36BEBCu, 0x36BEC0u, 0x36AFF0u}) {
+            mutated = original;
+            ChangeWord(mutated, offset);
+            MustReject([&] { (void)shadow::boot::IssueHid0IcfiRequest(
+                       shadow::boot::LoadValidatedFixture(mutated), hid2_write,
+                       0x0011C464u); },
+                       "changed HID0 ICFI word accepted");
         }
 
         // Independently mutate every instruction at 0x800032B0..0x8000333C.

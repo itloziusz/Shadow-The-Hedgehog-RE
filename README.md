@@ -26,8 +26,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   executable for the exact PAL DOL entry, register helper and direct hardware
   call (`0x80003154` → `0x800032B0` → `0x80003400`). With a caller-supplied
   measured MSR, the next stack prefix reaches the HID2 accessor at
-  `0x80370BA8`. Supplying a measured HID2 word issues the byte-derived HID2
-  write request and reaches `0x8037172C`, before the HID0 call.
+  `0x80370BA8`. Supplying measured HID2 and HID0 words issues the two
+  byte-derived SPR write requests and reaches `0x80371730`, before `sync`.
   The binary-first archaeology index links raw bytes, decoded fields, CFG and
   memory/ISA evidence. The bounded recurring event/exit loop at
   `0x800511E0..0x80051218` remains separate. Full hardware, CRT, constructor
@@ -39,8 +39,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **42/42 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime, thirteen boot).
+The full public-tree MSVC Release gate passed **43/43 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, fourteen boot).
 `reverse/boot/PROGRESS.md` records the last
 connected boot checkpoint and first fail-closed stop.
 Some suites require the read-only PAL fixture. The scripted stg0100 Dark
@@ -85,8 +85,9 @@ For the boot entry tests, set `SHADOW_BOOT_DOL_PATH` to the read-only PAL
 `main.dol`; CTest verifies its exact SHA-256 before executing the probe and
 mutation regression.
 The default probe stops at `0x80003400`; the optional measured-MSR path stops
-at `0x80370BA8`, and supplying measured HID2 reaches `0x8037172C` with an
-explicit HID2 SPR write request. Its later hardware readback is unresolved.
+at `0x80370BA8`; supplying measured HID2 reaches `0x8037172C` with a HID2
+request, and supplying HID0 also reaches `0x80371730` with an ICFI request.
+Later hardware readbacks and cache effects are unresolved.
 Synthetic Dolphin startup evidence is clearly separated
 from unknown retail IPL state in `reverse/boot/ARCHAEOLOGY_INDEX.md`.
 

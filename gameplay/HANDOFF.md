@@ -4,6 +4,19 @@
 
 ---
 
+## Checkpoint 25 — 2026-09-30 (boot HID0 ICFI request)
+
+- The connected native boot probe now accepts an explicitly observed HID0
+  word, executes the byte-pinned `0x8037172C` call and HID0 ICFI request leaf,
+  and stops before `sync` at `0x80371730`. The issued value is not assumed
+  to be the later self-cleared hardware readback. `reverse/boot/PROGRESS.md`
+  checkpoint 29 records the instruction boundary and first missing effect.
+- The full root Release gate passed 43/43 CTest. The new exact-output case
+  compares the synthetic/HLE state at `0x80371730`; the C++ regression
+  mutates every leaf word and tests a distinct HID0 input. The standalone
+  gameplay 27/27 and stg0100 route were validated in checkpoint 24 and are
+  unaffected by this boot-only step.
+
 ## Checkpoint 24 — 2026-09-30 (boot HID2 boundary and standalone gameplay gate)
 
 - The canonical boot probe in `reverse/boot/` now runs from PAL DOL entry

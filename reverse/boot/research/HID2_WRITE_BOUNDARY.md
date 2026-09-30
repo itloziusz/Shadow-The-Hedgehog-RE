@@ -1,13 +1,14 @@
 # HID2 write boundary from the PAL DOL
 
-Scope: the first native stop at `0x80371724`, its HID2 write leaf, and the
+Scope: the former native stop at `0x80371724`, its HID2 write leaf, and the
 first explicit downstream HID2 read and branch. The authority is the original
 read-only PAL GUPP8P `sys/main.dol`, SHA-256
 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 `PROVEN` below refers to DOL bytes, encoding, and conditional ISA effects;
 `OBSERVED-HLE` refers only to the pinned startup-only Dolphin interpreter run;
 `UNKNOWN` remains unresolved for the retail IPL and native continuation.
-This note does not claim that the C++ probe has executed the write.
+The connected C++ probe now issues a labelled SPR write request for this leaf;
+it does not claim to reproduce the HID2 hardware readback.
 
 ## Raw words and independently decoded fields
 
@@ -104,18 +105,17 @@ capture proves retail IPL initial HID2 or physical cache/paired behavior.
 - The `0x8037172C` HID0/ICFI call and subsequent `sync` cannot be skipped
   just because the first explicit HID2 read occurs after them.
 
-**First fail-closed native boundary:** the current native probe stops before
-`0x80371724`. Its next locally provable arithmetic/call operand is
-`H2_in|0xA0000000`; the first nontrivial platform-effect boundary is the
-`mtspr HID2,r3` at `0x80370BB0`. A bounded native write-intent record could
-be compared through `0x8037172C` for the supplied HLE scenario, but full
-state parity must stop before claiming that HID2 hardware write/readback,
-HID0 ICFI, GQR and paired execution have been reproduced. The next
+**Current fail-closed native boundary:** the probe now derives
+`H2_in|0xA0000000`, records the `mtspr HID2,r3` request at `0x80370BB0`,
+and compares exposed state at `0x8037172C` for the supplied HLE scenario.
+It subsequently records the HID0 ICFI request and stops at `0x80371730`
+before `sync`. Full state parity cannot yet claim HID2 hardware readback,
+ICFI cache effects, GQR or paired execution. The next HID2
 consumer gate is the actual read at `0x80370CE8` and its CR0 branch.
 **UNKNOWN:** retail `H2_in`, privilege/exception context, all unforced
 HID2 bits, direct post-write SPR readback and timing on retail hardware,
 and whether asynchronous effects alter the straight-line path. No native
-equivalence or game transition is claimed here.
+hardware-readback equivalence or game transition is claimed here.
 
 ## Validation command
 

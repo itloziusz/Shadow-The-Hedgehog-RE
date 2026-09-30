@@ -7,9 +7,10 @@ then the direct call at `0x80003158`, stopping at `0x80003400`. With a supplied
 observed MSR, it translates the first five wrapper words and the paired
 callee's four-word stack prefix, stopping before the HID2 read at
 `0x80370BA8`. An additional supplied HID2 word runs the two-word accessor
-then issues the four-word HID2 OR/write request and stops at `0x8037172C`,
-before the HID0 call. It does not execute the HID0/GQR, FPR or cache path,
-or claim that the write request equals a later hardware readback.
+then issues the HID2 OR/write request and stops at `0x8037172C`. A third
+explicit HID0 input runs the ICFI request leaf and stops at `0x80371730`,
+before `sync`. It does not execute GQR, FPR or cache effects, or equate an
+issued SPR request with a later hardware readback.
 The separate `RunApplicationRecurringPhase` translates the static event and
 exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
 **PROVEN for these bounded slices; full hardware, CRT, constructors and game
@@ -63,27 +64,28 @@ operations may be replaced only after their producers and consumers are traced.
   for validation only; the native executable does not depend on Dolphin.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
   register startup, wrapper/stack prefix, explicit-input HID2 read and
-  issued HID2 SPR write request,
+  issued HID2 and HID0 SPR write requests,
   recurring event loop and command-line probe.
 - `tests/` — exact DOL SHA-256 gate, expected stop state and mutations of all
   36 helper instructions, entry words, descriptors, invalid reads and the
   recurring event/exit order. The HLE-input gate checks the connected prefix
-  through the HID2 write request at `0x8037172C`; a separate executable
+  through the HID0 ICFI request at `0x80371730`; a separate executable
   unit gate checks Gekko `mtfsf` summary arithmetic. The CRT return projection
   gate checks two corrected register claims without claiming connected CRT execution.
 - `experimental_native_boot/` — reference-only older authored experiments;
   its generated recompiler dependencies are not in this repository.
 
 Build with the root CMake project. Supply
-`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable twelve content-backed
+`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable thirteen content-backed
 CTest cases. This path stays in the ignored build cache and is never committed.
 
 The ordinary probe stops at `0x80003400`. An independently measured MSR can
 be supplied as `shadow_boot_probe <main.dol> --observed-msr 00002032` to stop
 at the HID2 read. Add `--observed-hid2 E0000000` to run that accessor and stop
-at `0x8037172C` after reporting the HID2 write request. Both values came
-from the documented startup-only synthetic HLE run and are not retail boot
-defaults.
+at `0x8037172C` after reporting the HID2 write request. Add
+`--observed-hid0 0011C464` to report the ICFI request and stop at
+`0x80371730` before `sync`. All supplied values came from a startup-only
+synthetic HLE run and are not retail boot defaults.
 
 ## Confidence convention
 

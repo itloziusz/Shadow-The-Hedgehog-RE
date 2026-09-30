@@ -251,4 +251,39 @@ Hid2WriteBoundary IssueHid2Write(const BootImage& image,
     return next;
 }
 
+Hid0IcfiBoundary IssueHid0IcfiRequest(const BootImage& image,
+                                      const Hid2WriteBoundary& state,
+                                      std::uint32_t measured_hid0) {
+    const auto& cpu = state.prefix.machine.cpu;
+    if (cpu.pc != 0x8037172Cu || cpu.lr != 0x8037172Cu) {
+        throw std::runtime_error("HID0 ICFI entry state mismatch");
+    }
+    if ((state.prefix.machine.msr & 0x4000u) != 0u) {
+        throw std::runtime_error("HID0 ICFI requires supervisor state");
+    }
+    constexpr std::array<std::uint32_t, 6> words{{
+        0x48000EC9u, // 0x8037172C: bl 0x803725F4
+        0x7C70FAA6u, // 0x803725F4: mfspr r3,HID0
+        0x60630800u, // 0x803725F8: ori r3,r3,0x800
+        0x7C70FBA6u, // 0x803725FC: mtspr HID0,r3
+        0x4E800020u, // 0x80372600: blr
+        0x7C0004ACu, // 0x80371730: sync (next unexecuted boundary)
+    }};
+    constexpr std::array<std::uint32_t, 6> addresses{{
+        0x8037172Cu, 0x803725F4u, 0x803725F8u,
+        0x803725FCu, 0x80372600u, 0x80371730u,
+    }};
+    for (std::size_t i = 0; i < words.size(); ++i) {
+        if (image.ReadWord(addresses[i]) != words[i]) {
+            throw std::runtime_error("HID0 ICFI instruction fingerprint mismatch");
+        }
+    }
+
+    Hid0IcfiBoundary next{state, {1008u, measured_hid0 | 0x00000800u}};
+    next.prefix.prefix.machine.cpu.gpr[3] = next.request.value;
+    next.prefix.prefix.machine.cpu.lr = 0x80371730u;
+    next.prefix.prefix.machine.cpu.pc = next.prefix.prefix.machine.cpu.lr;
+    return next;
+}
+
 }  // namespace shadow::boot
