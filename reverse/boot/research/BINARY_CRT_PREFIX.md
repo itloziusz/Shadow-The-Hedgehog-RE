@@ -275,12 +275,18 @@ FPR/FPSCR, paired singles, MMIO or indirect targets.
 Assuming the hardware callee returned with the earlier helper's cleared
 general registers intact, the walker return at `0x80003170` has
 `r0=LR=0x80003170`, `r1=0x8060C5E8`, `r3=0x805FC540` (last `memset`
-return), `r4=r5=r7=0`, `r6=0x805FC5EB` (last destination plus size minus
-one), and restored `r29=r30=r31=0`. The zero-table terminating comparison
-leaves CR0 equal; the final `addic.` countdown in each reached fill makes
-XER.CA=1. XER.SO is not overwritten here, so CR0.SO reflects its incoming
-value. CTR is not written in this path. These are instruction deductions,
-**not yet same-run/native boundary comparisons**.
+return), `r4=0x805FC5E8` (last four-byte store address), `r5=r7=0`,
+`r6=0x805FC5EB` (last destination plus size minus one), and restored
+`r29=r30=0`, and `r31=0x8000315C` (restored from the caller's saved LR).
+The zero-table terminating comparison leaves CR0 equal; the final reached
+`addic.` countdown predicts architectural XER.CA=1. XER.SO is not
+overwritten here, so CR0.SO reflects its incoming value. CTR is not written
+in this path. A fresh synthetic/HLE return capture at `0x80003170`
+independently observed r4=`0x805FC5E8`, r3=`0x805FC540`,
+r6=`0x805FC5EB`, and r31=`0x8000315C`. Its GDB RSP XER field read zero,
+but Dolphin's stub reads the cached SPR word while the interpreter keeps
+carry separately; that field does not validate architectural XER.CA here.
+Connected native CRT parity remains untested.
 
 ## Data flow, CFG, portable projection, and limits
 

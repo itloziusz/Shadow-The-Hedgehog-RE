@@ -88,6 +88,10 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
                 --required-code-range 80003340:800033FC
                 --required-code-range 8000540C:800054F0
                 --required-data-range 80005544:800055E4)
+        add_test(NAME boot_pal_crt_return_projection
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_crt_return_projection.py"
+                "${SHADOW_BOOT_DOL_PATH}")
     endif()
     add_test(NAME boot_pal_fixture
         COMMAND ${CMAKE_COMMAND}
