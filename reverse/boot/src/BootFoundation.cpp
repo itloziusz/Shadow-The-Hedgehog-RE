@@ -181,4 +181,49 @@ HardwareCallPrefix EnterPairedSetupCall(const BootImage& image,
     return next;
 }
 
+PairedSetupStackPrefix EnterHid2ReadCall(const BootImage& image,
+                                         const HardwareCallPrefix& state) {
+    if (state.cpu.pc != 0x80371714u || state.cpu.lr != 0x80003414u ||
+        state.cpu.gpr[1] != 0x8060C5F0u) {
+        throw std::runtime_error("paired setup stack entry state mismatch");
+    }
+    constexpr std::array<std::uint32_t, 4> words{{
+        0x7C0802A6u, // mflr r0
+        0x90010004u, // stw r0,4(r1)
+        0x9421FFF8u, // stwu r1,-8(r1)
+        0x4BFFF489u, // bl 0x80370BA8
+    }};
+    for (std::size_t i = 0; i < words.size(); ++i) {
+        if (image.ReadWord(0x80371714u + static_cast<std::uint32_t>(i * 4)) != words[i]) {
+            throw std::runtime_error("paired setup stack instruction mismatch");
+        }
+    }
+    PairedSetupStackPrefix next{state, {}};
+    const std::uint32_t old_sp = state.cpu.gpr[1];
+    next.machine.cpu.gpr[0] = state.cpu.lr;
+    next.ordered_writes[0] = {old_sp + 4u, next.machine.cpu.gpr[0]};
+    next.ordered_writes[1] = {old_sp - 8u, old_sp};
+    next.machine.cpu.gpr[1] = old_sp - 8u;
+    next.machine.cpu.lr = 0x80371724u;
+    next.machine.cpu.pc = 0x80370BA8u;
+    return next;
+}
+
+PairedSetupStackPrefix ReturnFromHid2Read(const BootImage& image,
+                                          const PairedSetupStackPrefix& state,
+                                          std::uint32_t measured_hid2) {
+    if (state.machine.cpu.pc != 0x80370BA8u ||
+        state.machine.cpu.lr != 0x80371724u) {
+        throw std::runtime_error("HID2 read accessor entry state mismatch");
+    }
+    if (image.ReadWord(0x80370BA8u) != 0x7C78E2A6u ||
+        image.ReadWord(0x80370BACu) != 0x4E800020u) {
+        throw std::runtime_error("HID2 read accessor instruction mismatch");
+    }
+    PairedSetupStackPrefix next = state;
+    next.machine.cpu.gpr[3] = measured_hid2;
+    next.machine.cpu.pc = state.machine.cpu.lr;
+    return next;
+}
+
 }  // namespace shadow::boot

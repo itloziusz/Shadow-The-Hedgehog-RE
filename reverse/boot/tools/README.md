@@ -33,12 +33,18 @@ any numbered SPR field, then prints counts. It writes no files:
 ```text
 python reverse/boot/tools/verify_binary_note.py <main.dol> \
   reverse/boot/research/BINARY_BOOT_PREFIX.md \
-  --expected-words 78 --expected-branches 8 --expected-sprs 17
+  --expected-words 78 --expected-branches 8 --expected-sprs 17 \
+  --required-code-range 80003154:80003158 \
+  --required-code-range 800032B0:8000333C \
+  --required-code-range 80003400:80003420 \
+  --required-code-range 80370BA8:80370BBC \
+  --required-code-range 80371714:80371764 \
+  --required-code-range 803725F4:80372600
 ```
 
-The same gate covers the bounded FPR, cache/handler and CRT notes through
-`boot_pal_raw_fpr_prefix`, `boot_pal_raw_cache_handler` and
-`boot_pal_raw_crt_prefix`. Every direct I/B branch row in those notes must
+The same gate covers the bounded FPR, paired setup, cache/handler and CRT
+notes through their `boot_pal_raw_*` cases. Every direct I/B branch row must
 have a verified target; the CRT case also checks 41 descriptor words with
 `--expected-data-words 41`. This is a byte/ISA gate, not an execution-parity
-gate.
+gate. `boot_pal_raw_coverage_negative` proves that replacing a required word
+with an unrelated valid DOL word fails despite identical row totals.

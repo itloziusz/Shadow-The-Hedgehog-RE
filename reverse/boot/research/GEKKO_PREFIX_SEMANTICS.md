@@ -59,7 +59,7 @@ fixed order: HID/GQR setup, FPR/FPSCR seed, cache/handler setup.
 
 ## Hardware meaning and the correction to the earlier model
 
-**PROVEN ISA:** The three forced HID2 bits in `0xA0000000` are IBM bit 0
+**PROVEN ISA:** The two forced HID2 bits in `0xA0000000` are IBM bit 0
 (`LSQE`, numeric `0x80000000`) and bit 2 (`PSE`, numeric `0x20000000`);
 bit 1 (`WPE`) is **not** forced. The [manual's HID2 table, pp. 2-13–14](https://doc.kodewerx.org/documents/gekko_user_manual.pdf)
 states that the nonindexed `psq_l` needs both PSE and LSQE, while `ps_mr`

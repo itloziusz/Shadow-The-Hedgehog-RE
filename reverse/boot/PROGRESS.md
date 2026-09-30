@@ -5,6 +5,16 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 27: first HID2 read and rerun diagnosis
+
+| Field | Result |
+|---|---|
+| Last fully validated connected boundary | Starting at `0x80003154`, the native probe with **caller-supplied** synthetic/HLE MSR `0x00002032` and HID2 readback `0xE0000000` reaches PC `0x80371724`, before executing that word. Default probe still stops at `0x80003400`; supplying only MSR stops before the HID2 accessor at `0x80370BA8`. |
+| New machine-state transition | Four raw words `0x80371714..20` save LR, emit ordered BE32 stack writes at `0x8060C5F4` and `0x8060C5E8`, decrement r1, and call `0x80370BA8`. Its pinned two-word `mfspr hid2; blr` leaf returns r3 from an explicit input. Fresh synthetic/HLE captures at both boundaries confirm PC/LR/r0/r1/r3/r31/MSR and the stack bytes. The native write events are not yet applied to a downstream memory model. |
+| Adversarial error fixed | The previous raw gate could omit `0x80003404` and insert another valid DOL word while preserving all counts. `tools/verify_binary_note.py` now requires exact aligned VA sets for each note, checks all direct branch annotations and CRT descriptor bytes, and `boot_pal_raw_coverage_negative` proves that substitution is rejected. An independent audit is in `research/ADVERSARIAL_BOOT_AUDIT.md`. |
+| Explicit rerun result | The Release probe exited 0 with **no current execution or modeled-state error**. Boot-only CTest passed **12/12** and complete Release CTest **41/41**. `research/BOOT_RUN_DIAGNOSTIC_2026-09-30.md` records the exact outputs, reference comparison, limitations and next stop. No pixel/game boot claim follows. |
+| First unimplemented instruction | `0x80371724`, DOL bytes `64 63 A0 00` (`oris r3,r3,0xA000`), precedes a call to the HID2 writer. Post-write HID2, HID0 ICFI, GQR/FPR/cache, retail IPL inputs, unmodeled CR/XER/CTR/FPR and downstream stack readers remain unvalidated. Continue from this exact word without forcing a reference value into the native implementation. |
+
 ## 2026-09-30 — checkpoint 26: binary-first FPR, cache and CRT records
 
 | Field | Result |

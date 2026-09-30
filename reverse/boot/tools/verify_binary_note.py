@@ -67,9 +67,20 @@ def signed_branch_target(address, word, mnemonic):
     return (address + delta) & 0xFFFFFFFF
 
 
-def verify(dol, note):
+def address_range(spec):
+    match = re.fullmatch(r"([0-9A-Fa-f]{8}):([0-9A-Fa-f]{8})", spec)
+    if not match:
+        raise ValueError(f"invalid inclusive address range {spec!r}")
+    first, last = int(match[1], 16), int(match[2], 16)
+    if first > last or (first | last) & 3 or last - first > 0x100000:
+        raise ValueError(f"invalid aligned address range {spec!r}")
+    return set(range(first, last + 4, 4))
+
+
+def verify(dol, note, expected_code=None, expected_data=None):
     mapping = sections(dol)
     seen = set()
+    code_addresses, data_addresses = set(), set()
     words = branches = sprs = data_words = 0
     for line in note.splitlines():
         match = ROW.match(line)
@@ -95,8 +106,10 @@ def verify(dol, note):
             raise ValueError(f"raw bytes or BE word differ at 0x{address:08X}")
         if is_data:
             data_words += 1
+            data_addresses.add(address)
             continue
         words += 1
+        code_addresses.add(address)
         target = BRANCH.search(line)
         if noted_word >> 26 in (16, 18) and target is None:
             raise ValueError(f"direct branch lacks checked target at 0x{address:08X}")
@@ -114,6 +127,14 @@ def verify(dol, note):
             sprs += 1
     if words == 0:
         raise ValueError("no raw instruction rows found")
+    if expected_code is not None and code_addresses != expected_code:
+        missing = sorted(expected_code - code_addresses)
+        extra = sorted(code_addresses - expected_code)
+        raise ValueError(f"code address coverage differs: missing={missing[:4]} extra={extra[:4]}")
+    if expected_data is not None and data_addresses != expected_data:
+        missing = sorted(expected_data - data_addresses)
+        extra = sorted(data_addresses - expected_data)
+        raise ValueError(f"data address coverage differs: missing={missing[:4]} extra={extra[:4]}")
     return words, branches, sprs, data_words
 
 
@@ -126,11 +147,18 @@ def main():
     parser.add_argument("--expected-branches", type=int)
     parser.add_argument("--expected-sprs", type=int)
     parser.add_argument("--expected-data-words", type=int, default=0)
+    parser.add_argument("--required-code-range", action="append", required=True,
+                        help="Inclusive aligned START:END VA range; repeat for disjoint regions")
+    parser.add_argument("--required-data-range", action="append", default=[],
+                        help="Inclusive aligned descriptor VA range; repeat as needed")
     args = parser.parse_args()
     dol = args.dol.read_bytes()
     if hashlib.sha256(dol).hexdigest() != PAL_DOL_SHA256:
         raise ValueError("PAL DOL SHA-256 mismatch")
-    result = verify(dol, args.note.read_text(encoding="utf-8"))
+    code_addresses = set().union(*(address_range(x) for x in args.required_code_range))
+    data_addresses = set().union(*(address_range(x) for x in args.required_data_range))
+    result = verify(dol, args.note.read_text(encoding="utf-8"),
+                    code_addresses, data_addresses)
     if result[0] != args.expected_words:
         raise ValueError(f"instruction row count {result[0]} != {args.expected_words}")
     if args.expected_branches is not None and result[1] != args.expected_branches:

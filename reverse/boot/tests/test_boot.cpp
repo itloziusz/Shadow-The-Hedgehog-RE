@@ -103,6 +103,36 @@ int main(int argc, char** argv) {
                     paired_entry.cpu.gpr[31] == 0x8000315Cu &&
                     paired_entry.msr == 0x2032u,
                 "synthetic reference hardware-prefix state differs");
+        const auto hid2_entry = shadow::boot::EnterHid2ReadCall(image, paired_entry);
+        Require(hid2_entry.machine.cpu.pc == 0x80370BA8u &&
+                    hid2_entry.machine.cpu.lr == 0x80371724u &&
+                    hid2_entry.machine.cpu.gpr[0] == 0x80003414u &&
+                    hid2_entry.machine.cpu.gpr[1] == 0x8060C5E8u &&
+                    hid2_entry.machine.cpu.gpr[31] == 0x8000315Cu &&
+                    hid2_entry.machine.msr == paired_entry.msr,
+                "synthetic HID2-read entry register state differs");
+        Require(hid2_entry.ordered_writes[0].address == 0x8060C5F4u &&
+                    hid2_entry.ordered_writes[0].value == 0x80003414u &&
+                    hid2_entry.ordered_writes[1].address == 0x8060C5E8u &&
+                    hid2_entry.ordered_writes[1].value == 0x8060C5F0u,
+                "paired setup stack stores differ from fresh PPC capture");
+        for (std::size_t i = 2; i < 32; ++i) {
+            Require(hid2_entry.machine.cpu.gpr[i] == paired_entry.cpu.gpr[i],
+                    "stack prefix changed an unrelated GPR");
+        }
+        const auto hid2_return = shadow::boot::ReturnFromHid2Read(image, hid2_entry,
+                                                                   0xE0000000u);
+        Require(hid2_return.machine.cpu.pc == 0x80371724u &&
+                    hid2_return.machine.cpu.lr == 0x80371724u &&
+                    hid2_return.machine.cpu.gpr[3] == 0xE0000000u &&
+                    hid2_return.machine.cpu.gpr[0] == 0x80003414u &&
+                    hid2_return.machine.cpu.gpr[1] == 0x8060C5E8u,
+                "measured HID2 accessor return differs from fresh PPC capture");
+        const auto alternate_hid2 = shadow::boot::ReturnFromHid2Read(image, hid2_entry,
+                                                                       0x12345678u);
+        Require(alternate_hid2.machine.cpu.gpr[3] == 0x12345678u &&
+                    alternate_hid2.machine.cpu.pc == hid2_return.machine.cpu.pc,
+                "HID2 read was hard-coded to the synthetic reference value");
         for (std::size_t i = 1; i < 31; ++i) {
             Require(paired_entry.cpu.gpr[i] == call.gpr[i],
                     "hardware prefix changed an unrelated GPR");
@@ -116,6 +146,13 @@ int main(int argc, char** argv) {
                    "hardware call accepted an incorrect source PC");
         MustReject([&] { (void)shadow::boot::EnterPairedSetupCall(image, state, 0x2032u); },
                    "hardware prefix accepted an incorrect source PC");
+        auto wrong_stack_entry = paired_entry;
+        wrong_stack_entry.cpu.gpr[1] -= 8u;
+        MustReject([&] { (void)shadow::boot::EnterHid2ReadCall(image, wrong_stack_entry); },
+                   "paired stack prefix accepted an incorrect SP");
+        MustReject([&] { (void)shadow::boot::ReturnFromHid2Read(image,
+                   shadow::boot::PairedSetupStackPrefix{}, 0xE0000000u); },
+                   "HID2 accessor accepted an incorrect entry PC");
         Require(image.ReadWord(0x805E4500u) == 0x804AB134u,
                 "initialized data6 address mapping differs");
         // PROVEN 0x80372900 passes selector 1 to 0x80373378. The store at
@@ -182,6 +219,21 @@ int main(int argc, char** argv) {
             MustReject([&] { (void)shadow::boot::EnterPairedSetupCall(
                        shadow::boot::LoadValidatedFixture(mutated), call, 0x2032u); },
                        "changed hardware-prefix instruction accepted");
+        }
+        for (std::size_t i = 0; i < 4; ++i) {
+            mutated = original;
+            ChangeWord(mutated, 0x36AFD4 + 4 * i);
+            MustReject([&] { (void)shadow::boot::EnterHid2ReadCall(
+                       shadow::boot::LoadValidatedFixture(mutated), paired_entry); },
+                       "changed paired stack-prefix instruction accepted");
+        }
+        for (std::size_t i = 0; i < 2; ++i) {
+            mutated = original;
+            ChangeWord(mutated, 0x36A468 + 4 * i);
+            MustReject([&] { (void)shadow::boot::ReturnFromHid2Read(
+                       shadow::boot::LoadValidatedFixture(mutated), hid2_entry,
+                       0xE0000000u); },
+                       "changed HID2 read accessor word accepted");
         }
 
         // Independently mutate every instruction at 0x800032B0..0x8000333C.

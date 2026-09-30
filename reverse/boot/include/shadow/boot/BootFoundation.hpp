@@ -22,6 +22,18 @@ struct HardwareCallPrefix {
     std::uint32_t msr = 0;
 };
 
+struct MemoryWrite32 {
+    std::uint32_t address = 0;
+    std::uint32_t value = 0;  // written in guest big-endian byte order
+};
+
+// First four words of the paired setup callee. Stops at the HID2 read leaf,
+// before any hardware register is read. Writes are in original program order.
+struct PairedSetupStackPrefix {
+    HardwareCallPrefix machine;
+    std::array<MemoryWrite32, 2> ordered_writes{};
+};
+
 
 class BootImage {
 public:
@@ -43,5 +55,12 @@ StartupState EnterHardwareCall(const BootImage& image, const StartupState& state
 HardwareCallPrefix EnterPairedSetupCall(const BootImage& image,
                                         const StartupState& state,
                                         std::uint32_t observed_msr);
+PairedSetupStackPrefix EnterHid2ReadCall(const BootImage& image,
+                                         const HardwareCallPrefix& state);
+// Reads the two-word HID2 accessor only with an explicit, externally
+// measured SPR value. No value is inferred from the DOL or defaulted.
+PairedSetupStackPrefix ReturnFromHid2Read(const BootImage& image,
+                                          const PairedSetupStackPrefix& state,
+                                          std::uint32_t measured_hid2);
 
 }  // namespace shadow::boot

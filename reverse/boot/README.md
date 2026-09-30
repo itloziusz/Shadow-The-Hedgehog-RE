@@ -4,8 +4,11 @@ This directory holds PAL GUPP8P boot evidence and bounded native C++17 slices.
 `shadow_boot_probe` translates the DOL entry branch at
 `0x80003154` and the complete register helper at `0x800032B0..0x8000333C`,
 then the direct call at `0x80003158`, stopping at `0x80003400`. With a supplied
-observed MSR, it also translates the first five hardware-helper instructions
-and stops at `0x80371714`. It does not execute the HID/GQR/FPR/cache path.
+observed MSR, it translates the first five wrapper words and the paired
+callee's four-word stack prefix, stopping before the HID2 read at
+`0x80370BA8`. An additional supplied HID2 word runs the two-word accessor
+and stops at `0x80371724`. It does not execute the HID2 write, HID0/GQR,
+FPR or cache path.
 The separate `RunApplicationRecurringPhase` translates the static event and
 exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
 **PROVEN for these bounded slices; full hardware, CRT, constructors and game
@@ -58,24 +61,26 @@ operations may be replaced only after their producers and consumers are traced.
 - `tools/capture_dolphin_rsp.py` — hash-pinned external PPC checkpoint capture
   for validation only; the native executable does not depend on Dolphin.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
-  register-startup and five-instruction hardware-entry slices, recurring event
-  loop and command-line probe.
+  register startup, wrapper/stack prefix and explicit-input HID2 read,
+  recurring event loop and command-line probe.
 - `tests/` — exact DOL SHA-256 gate, expected stop state and mutations of all
   36 helper instructions, entry words, descriptors, invalid reads and the
   recurring event/exit order. The HLE-input gate checks the connected prefix
-  through `0x80371714`; a separate executable unit gate checks Gekko
-  `mtfsf` summary arithmetic; it does not advance the connected boot prefix.
+  through the first HID2 accessor return `0x80371724`; a separate executable
+  unit gate checks Gekko `mtfsf` summary arithmetic; it does not advance the
+  connected boot prefix.
 - `experimental_native_boot/` — reference-only older authored experiments;
   its generated recompiler dependencies are not in this repository.
 
 Build with the root CMake project. Supply
-`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable eight content-backed
+`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable eleven content-backed
 CTest cases. This path stays in the ignored build cache and is never committed.
 
 The ordinary probe stops at `0x80003400`. An independently measured MSR can
-be supplied as `shadow_boot_probe <main.dol> --observed-msr 00002032` to run
-the proven five-instruction prefix. `00002032` came from the documented
-startup-only synthetic HLE run and is not a retail boot default.
+be supplied as `shadow_boot_probe <main.dol> --observed-msr 00002032` to stop
+at the HID2 read. Add `--observed-hid2 E0000000` to run that accessor and stop
+at `0x80371724`. Both values came from the documented startup-only synthetic
+HLE run and are not retail boot defaults.
 
 ## Confidence convention
 
