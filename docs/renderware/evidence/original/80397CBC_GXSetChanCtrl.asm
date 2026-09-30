@@ -1,0 +1,48 @@
+; target SHA-256: fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af
+; GXSetChanCtrl: [80397CBC, 80397D6C), 0xb0 bytes
+; classification: shared SDK lighting/material source state
+; RAM address  DOL offset  raw word  instruction
+80397CBC  0039157C  5480063E  clrlwi       r0, r4, 0x18
+80397CC0  00391580  38800000  li           r4, 0
+80397CC4  00391584  50040FBC  rlwimi       r4, r0, 1, 0x1e, 0x1e
+80397CC8  00391588  39440000  addi         r10, r4, 0
+80397CCC  0039158C  50CA07FE  rlwimi       r10, r6, 0, 0x1f, 0x1f
+80397CD0  00391590  2C090000  cmpwi        r9, 0
+80397CD4  00391594  50AA3672  rlwimi       r10, r5, 6, 0x19, 0x19
+80397CD8  00391598  546B07BE  clrlwi       r11, r3, 0x1e
+80397CDC  0039159C  40820008  bne          0x80397ce4
+80397CE0  003915A0  39000000  li           r8, 0
+80397CE4  003915A4  20890002  subfic       r4, r9, 2
+80397CE8  003915A8  3004FFFF  addic        r0, r4, -1
+80397CEC  003915AC  7C002110  subfe        r0, r0, r4
+80397CF0  003915B0  7D2900D0  neg          r9, r9
+80397CF4  003915B4  510A3DF0  rlwimi       r10, r8, 7, 0x17, 0x18
+80397CF8  003915B8  30C9FFFF  addic        r6, r9, -1
+80397CFC  003915BC  500A4DAC  rlwimi       r10, r0, 9, 0x16, 0x16
+80397D00  003915C0  7CC64910  subfe        r6, r6, r9
+80397D04  003915C4  50CA556A  rlwimi       r10, r6, 0xa, 0x15, 0x15
+80397D08  003915C8  50EA16BA  rlwimi       r10, r7, 2, 0x1a, 0x1d
+80397D0C  003915CC  38A00010  li           r5, 0x10
+80397D10  003915D0  3C80CC01  lis          r4, -0x33ff
+80397D14  003915D4  98A48000  stb          r5, -0x8000(r4)
+80397D18  003915D8  380B100E  addi         r0, r11, 0x100e
+80397D1C  003915DC  50EA3C68  rlwimi       r10, r7, 7, 0x11, 0x14
+80397D20  003915E0  90048000  stw          r0, -0x8000(r4)
+80397D24  003915E4  2C030004  cmpwi        r3, 4
+80397D28  003915E8  91448000  stw          r10, -0x8000(r4)
+80397D2C  003915EC  40820018  bne          0x80397d44
+80397D30  003915F0  98A48000  stb          r5, -0x8000(r4)
+80397D34  003915F4  38001010  li           r0, 0x1010
+80397D38  003915F8  90048000  stw          r0, -0x8000(r4)
+80397D3C  003915FC  91448000  stw          r10, -0x8000(r4)
+80397D40  00391600  4800001C  b            0x80397d5c
+80397D44  00391604  2C030005  cmpwi        r3, 5
+80397D48  00391608  40820014  bne          0x80397d5c
+80397D4C  0039160C  98A48000  stb          r5, -0x8000(r4)
+80397D50  00391610  38001011  li           r0, 0x1011
+80397D54  00391614  90048000  stw          r0, -0x8000(r4)
+80397D58  00391618  91448000  stw          r10, -0x8000(r4)
+80397D5C  0039161C  80620FD8  lwz          r3, 0xfd8(r2)
+80397D60  00391620  38000001  li           r0, 1
+80397D64  00391624  B0030002  sth          r0, 2(r3)
+80397D68  00391628  4E800020  blr

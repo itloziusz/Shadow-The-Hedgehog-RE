@@ -1,0 +1,31 @@
+; target SHA-256: fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af
+; TaskManager_Get: [8001C4F8, 8001C564), 0x6c bytes
+; classification: shared scheduler singleton
+; RAM address  DOL offset  raw word  instruction
+8001C4F8  00015DB8  9421FFF0  stwu         r1, -0x10(r1)
+8001C4FC  00015DBC  7C0802A6  mflr         r0
+8001C500  00015DC0  90010014  stw          r0, 0x14(r1)
+8001C504  00015DC4  800D2BD0  lwz          r0, 0x2bd0(r13)
+8001C508  00015DC8  28000000  cmplwi       r0, 0
+8001C50C  00015DCC  40820044  bne          0x8001c550
+8001C510  00015DD0  880D2BC8  lbz          r0, 0x2bc8(r13)
+8001C514  00015DD4  7C000775  extsb.       r0, r0
+8001C518  00015DD8  4082002C  bne          0x8001c544
+8001C51C  00015DDC  3C608057  lis          r3, -0x7fa9
+8001C520  00015DE0  38631C6C  addi         r3, r3, 0x1c6c
+8001C524  00015DE4  481CF211  bl           0x801eb734
+8001C528  00015DE8  3C80801F  lis          r4, -0x7fe1
+8001C52C  00015DEC  3CA08057  lis          r5, -0x7fa9
+8001C530  00015DF0  3884B6AC  addi         r4, r4, -0x4954
+8001C534  00015DF4  38A51C60  addi         r5, r5, 0x1c60
+8001C538  00015DF8  48384CD9  bl           0x803a1210
+8001C53C  00015DFC  38000001  li           r0, 1
+8001C540  00015E00  980D2BC8  stb          r0, 0x2bc8(r13)
+8001C544  00015E04  3C608057  lis          r3, -0x7fa9
+8001C548  00015E08  38031C6C  addi         r0, r3, 0x1c6c
+8001C54C  00015E0C  900D2BD0  stw          r0, 0x2bd0(r13)
+8001C550  00015E10  80010014  lwz          r0, 0x14(r1)
+8001C554  00015E14  806D2BD0  lwz          r3, 0x2bd0(r13)
+8001C558  00015E18  7C0803A6  mtlr         r0
+8001C55C  00015E1C  38210010  addi         r1, r1, 0x10
+8001C560  00015E20  4E800020  blr

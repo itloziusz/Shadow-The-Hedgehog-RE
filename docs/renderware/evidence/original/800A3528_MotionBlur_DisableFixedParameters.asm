@@ -1,0 +1,48 @@
+; target SHA-256: fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af
+; MotionBlur_DisableFixedParameters: [800A3528, 800A35D8), 0xb0 bytes
+; classification: shared function containing immediate blur disable producer
+; RAM address  DOL offset  raw word  instruction
+800A3528  0009CDE8  9421FFD0  stwu         r1, -0x30(r1)
+800A352C  0009CDEC  7C0802A6  mflr         r0
+800A3530  0009CDF0  C022944C  lfs          f1, -0x6bb4(r2)
+800A3534  0009CDF4  38800000  li           r4, 0
+800A3538  0009CDF8  90010034  stw          r0, 0x34(r1)
+800A353C  0009CDFC  38000080  li           r0, 0x80
+800A3540  0009CE00  C0029450  lfs          f0, -0x6bb0(r2)
+800A3544  0009CE04  93E1002C  stw          r31, 0x2c(r1)
+800A3548  0009CE08  7C7F1B78  mr           r31, r3
+800A354C  0009CE0C  98810010  stb          r4, 0x10(r1)
+800A3550  0009CE10  98810011  stb          r4, 0x11(r1)
+800A3554  0009CE14  D0210014  stfs         f1, 0x14(r1)
+800A3558  0009CE18  98810010  stb          r4, 0x10(r1)
+800A355C  0009CE1C  98010011  stb          r0, 0x11(r1)
+800A3560  0009CE20  D0010014  stfs         f0, 0x14(r1)
+800A3564  0009CE24  48000075  bl           0x800a35d8
+800A3568  0009CE28  38810010  addi         r4, r1, 0x10
+800A356C  0009CE2C  4838BBA9  bl           0x8042f114
+800A3570  0009CE30  387F0028  addi         r3, r31, 0x28
+800A3574  0009CE34  4BFAF989  bl           0x80052efc
+800A3578  0009CE38  5460063F  clrlwi.      r0, r3, 0x18
+800A357C  0009CE3C  40820040  bne          0x800a35bc
+800A3580  0009CE40  38610008  addi         r3, r1, 8
+800A3584  0009CE44  389F0028  addi         r4, r31, 0x28
+800A3588  0009CE48  4BFAF885  bl           0x80052e0c
+800A358C  0009CE4C  38610008  addi         r3, r1, 8
+800A3590  0009CE50  4BFAFAE5  bl           0x80053074
+800A3594  0009CE54  80A30018  lwz          r5, 0x18(r3)
+800A3598  0009CE58  38000000  li           r0, 0
+800A359C  0009CE5C  3880FFFF  li           r4, -1
+800A35A0  0009CE60  60A50010  ori          r5, r5, 0x10
+800A35A4  0009CE64  90A30018  stw          r5, 0x18(r3)
+800A35A8  0009CE68  90030048  stw          r0, 0x48(r3)
+800A35AC  0009CE6C  9003004C  stw          r0, 0x4c(r3)
+800A35B0  0009CE70  90030050  stw          r0, 0x50(r3)
+800A35B4  0009CE74  38610008  addi         r3, r1, 8
+800A35B8  0009CE78  4BFAF805  bl           0x80052dbc
+800A35BC  0009CE7C  38600001  li           r3, 1
+800A35C0  0009CE80  48130619  bl           0x801d3bd8
+800A35C4  0009CE84  80010034  lwz          r0, 0x34(r1)
+800A35C8  0009CE88  83E1002C  lwz          r31, 0x2c(r1)
+800A35CC  0009CE8C  7C0803A6  mtlr         r0
+800A35D0  0009CE90  38210030  addi         r1, r1, 0x30
+800A35D4  0009CE94  4E800020  blr

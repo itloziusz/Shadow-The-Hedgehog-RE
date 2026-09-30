@@ -1,0 +1,36 @@
+; target SHA-256: fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af
+; DrawBlurTask_Construct: [801D2058, 801D20D8), 0x80 bytes
+; classification: motion-blur task lifecycle
+; RAM address  DOL offset  raw word  instruction
+801D2058  001CB918  9421FFF0  stwu         r1, -0x10(r1)
+801D205C  001CB91C  7C0802A6  mflr         r0
+801D2060  001CB920  90010014  stw          r0, 0x14(r1)
+801D2064  001CB924  93E1000C  stw          r31, 0xc(r1)
+801D2068  001CB928  7C7F1B78  mr           r31, r3
+801D206C  001CB92C  4BE74135  bl           0x800461a0
+801D2070  001CB930  7C641B78  mr           r4, r3
+801D2074  001CB934  7FE3FB78  mr           r3, r31
+801D2078  001CB938  8084002C  lwz          r4, 0x2c(r4)
+801D207C  001CB93C  4BE7CF99  bl           0x8004f014
+801D2080  001CB940  3C608054  lis          r3, -0x7fac
+801D2084  001CB944  3C80804D  lis          r4, -0x7fb3
+801D2088  001CB948  3803DC78  addi         r0, r3, -0x2388
+801D208C  001CB94C  901F0018  stw          r0, 0x18(r31)
+801D2090  001CB950  38040F18  addi         r0, r4, 0xf18
+801D2094  001CB954  38600028  li           r3, 0x28
+801D2098  001CB958  901F0000  stw          r0, 0(r31)
+801D209C  001CB95C  A01F0004  lhz          r0, 4(r31)
+801D20A0  001CB960  60000100  ori          r0, r0, 0x100
+801D20A4  001CB964  B01F0004  sth          r0, 4(r31)
+801D20A8  001CB968  481CF2D9  bl           0x803a1380
+801D20AC  001CB96C  7C601B79  or.          r0, r3, r3
+801D20B0  001CB970  4182000C  beq          0x801d20bc
+801D20B4  001CB974  48000025  bl           0x801d20d8
+801D20B8  001CB978  7C601B78  mr           r0, r3
+801D20BC  001CB97C  901F0028  stw          r0, 0x28(r31)
+801D20C0  001CB980  7FE3FB78  mr           r3, r31
+801D20C4  001CB984  80010014  lwz          r0, 0x14(r1)
+801D20C8  001CB988  83E1000C  lwz          r31, 0xc(r1)
+801D20CC  001CB98C  7C0803A6  mtlr         r0
+801D20D0  001CB990  38210010  addi         r1, r1, 0x10
+801D20D4  001CB994  4E800020  blr

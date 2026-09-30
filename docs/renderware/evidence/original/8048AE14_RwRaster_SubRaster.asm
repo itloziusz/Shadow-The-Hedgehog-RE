@@ -1,0 +1,48 @@
+; target SHA-256: fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af
+; RwRaster_SubRaster: [8048AE14, 8048AEC4), 0xb0 bytes
+; classification: shared raster view attachment dependency
+; RAM address  DOL offset  raw word  instruction
+8048AE14  004846D4  9421FFF0  stwu         r1, -0x10(r1)
+8048AE18  004846D8  7C0802A6  mflr         r0
+8048AE1C  004846DC  90010014  stw          r0, 0x14(r1)
+8048AE20  004846E0  93E1000C  stw          r31, 0xc(r1)
+8048AE24  004846E4  7C9F2378  mr           r31, r4
+8048AE28  004846E8  93C10008  stw          r30, 8(r1)
+8048AE2C  004846EC  7C7E1B78  mr           r30, r3
+8048AE30  004846F0  88030021  lbz          r0, 0x21(r3)
+8048AE34  004846F4  54000631  rlwinm.      r0, r0, 0, 0x18, 0x18
+8048AE38  004846F8  4082000C  bne          0x8048ae44
+8048AE3C  004846FC  38600000  li           r3, 0
+8048AE40  00484700  4800006C  b            0x8048aeac
+8048AE44  00484704  80050008  lwz          r0, 8(r5)
+8048AE48  00484708  901E000C  stw          r0, 0xc(r30)
+8048AE4C  0048470C  8005000C  lwz          r0, 0xc(r5)
+8048AE50  00484710  901E0010  stw          r0, 0x10(r30)
+8048AE54  00484714  80050000  lwz          r0, 0(r5)
+8048AE58  00484718  A8DF001C  lha          r6, 0x1c(r31)
+8048AE5C  0048471C  7C000734  extsh        r0, r0
+8048AE60  00484720  7C060214  add          r0, r6, r0
+8048AE64  00484724  B01E001C  sth          r0, 0x1c(r30)
+8048AE68  00484728  80050004  lwz          r0, 4(r5)
+8048AE6C  0048472C  38A00000  li           r5, 0
+8048AE70  00484730  A8DF001E  lha          r6, 0x1e(r31)
+8048AE74  00484734  7C000734  extsh        r0, r0
+8048AE78  00484738  7C060214  add          r0, r6, r0
+8048AE7C  0048473C  B01E001E  sth          r0, 0x1e(r30)
+8048AE80  00484740  80CD615C  lwz          r6, 0x615c(r13)
+8048AE84  00484744  81860078  lwz          r12, 0x78(r6)
+8048AE88  00484748  7D8903A6  mtctr        r12
+8048AE8C  0048474C  4E800421  bctrl
+8048AE90  00484750  2C030000  cmpwi        r3, 0
+8048AE94  00484754  41820014  beq          0x8048aea8
+8048AE98  00484758  801F0000  lwz          r0, 0(r31)
+8048AE9C  0048475C  7FC3F378  mr           r3, r30
+8048AEA0  00484760  901E0000  stw          r0, 0(r30)
+8048AEA4  00484764  48000008  b            0x8048aeac
+8048AEA8  00484768  38600000  li           r3, 0
+8048AEAC  0048476C  80010014  lwz          r0, 0x14(r1)
+8048AEB0  00484770  83E1000C  lwz          r31, 0xc(r1)
+8048AEB4  00484774  83C10008  lwz          r30, 8(r1)
+8048AEB8  00484778  7C0803A6  mtlr         r0
+8048AEBC  0048477C  38210010  addi         r1, r1, 0x10
+8048AEC0  00484780  4E800020  blr

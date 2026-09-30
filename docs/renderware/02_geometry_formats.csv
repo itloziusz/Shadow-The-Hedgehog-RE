@@ -1,0 +1,287 @@
+Section,Structure,Offset,Size,Type,Field,Encoding_or_Values,GX_or_Render_Meaning,Evidence,Confidence
+asset.one,OneHeader,0x00,4,u32 LE,zero,0,,files/stg0604/*.one bytes; tools/one.py,CONFIRMED
+asset.one,OneHeader,0x04,4,u32 LE,archiveSizeMinus12,file size - 12,,bytes,CONFIRMED
+asset.one,OneHeader,0x08,4,u32 LE,rwLibraryStamp,0x1C020037 (RW 3.7.0.2),,bytes,CONFIRMED
+asset.one,OneHeader,0x0C,12,char[12],magic,"""One Ver 0.60""",,bytes; guest parser 0x8004CD38,CONFIRMED
+asset.one,OneHeader,0x1C,4,u32 LE,fileCount,,,bytes,CONFIRMED
+asset.one,OneHeader,0x20,144,bytes,blockName,"""blk01"" padded 0xCD",,bytes,CONFIRMED
+asset.one,OneEntry,0x00,44,char[44],fileName,e.g. STG0604_01_G_.RG1,,bytes (entry i at 0xB0+0x38*i),CONFIRMED
+asset.one,OneEntry,0x2C,4,u32 LE,uncompressedSize,,,bytes; matches PRS output for every FH archive,CONFIRMED
+asset.one,OneEntry,0x30,4,u32 LE,dataOffsetMinus12,file offset = value+12; compressed bytes run to next entry,,bytes,CONFIRMED
+asset.one,OneEntry,0x34,4,u32 LE,flag,1,,bytes,CONFIRMED
+asset.one,PRS,-,-,bitstream,control bits LSB-first,"1=literal; 0,1=long copy {a,b}: end if a=b=0, off=((b<<8|a)>>3)-0x2000, len=(a&7)?(a&7)+2:nextbyte+1; 0,0=short copy len=2bits+2, off=byte-256",,tools/one.py prs_decompress,CONFIRMED
+asset.rwstream,ChunkId,0x29,-,u32 LE,ChunkGroupStart,group name,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x2a,-,u32 LE,ChunkGroupEnd,,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0xb,-,u32 LE,World,RG1 root,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x9,-,u32 LE,AtomicSector,no PI arrays when native,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0xa,-,u32 LE,PlaneSector,,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x8,-,u32 LE,MaterialList,,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x7,-,u32 LE,Material,Struct 28 B,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x6,-,u32 LE,Texture,,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x3,-,u32 LE,Extension,,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x50e,-,u32 LE,BinMesh,"native: per mesh {numIndices, matIndex}, no index data",,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x510,-,u32 LE,NativeDataPLG,"GC native geometry (platform 6); 0 in DFFs, 3092 world sectors on disc",,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x11d,-,u32 LE,CollisionPLG,,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x11f,-,u32 LE,UserDataPLG,,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x120,-,u32 LE,MaterialEffectsPLG,MatFX atomic flag + material effect data,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x116,-,u32 LE,SkinPLG,,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x122,-,u32 LE,DMorphPLG,"6 on disc, 0 live on FH",,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x129,-,u32 LE,GCNMatPLG,0 on disc,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rwstream,ChunkId,0x511,-,u32 LE,GCVtxFmtPLG,runtime plugin id for RpGameCubeVtxFmt (engine/geometry/world); no stream data seen,,"tools/chunks.py, census.py, matcensus.py; 0x80462F64-0x80463048 registration",CONFIRMED
+asset.rg1,WorldStruct,0x00,4,u32 LE,rootIsWorldSector,1 for single-sector worlds,,STG0604_01_G_.RG1 @0x44,CONFIRMED
+asset.rg1,WorldStruct,0x04,12,f32 LE x3,invWorldOrigin,"(0,0,0)",,bytes,CONFIRMED
+asset.rg1,WorldStruct,0x10,4,u32 LE,numTriangles,346,,bytes,CONFIRMED
+asset.rg1,WorldStruct,0x14,4,u32 LE,numVertices,446,,bytes,CONFIRMED
+asset.rg1,WorldStruct,0x18,4,u32 LE,numPlaneSectors,,,bytes,CONFIRMED
+asset.rg1,WorldStruct,0x1C,4,u32 LE,numWorldSectors,,,bytes,CONFIRMED
+asset.rg1,WorldStruct,0x20,4,u32 LE,colSectorSize,0,,bytes,CONFIRMED
+asset.rg1,WorldStruct,0x24,4,u32 LE,format,0x4101002D = TRISTRIP 0x1|TEXTURED 0x4|PRELIT 0x8|LIGHT 0x20|texSets<<16|NATIVE 0x01000000|SECTORSOVERLAP 0x40000000,runtime flags 0x4101000D (game clears LIGHT),bytes + dump world 0x812ED820,CONFIRMED
+asset.rg1,WorldStruct,0x28,24,f32 LE x6,"boundingBox sup,inf",,,bytes,CONFIRMED
+asset.rg1,SectorStruct,0x00,4,u32 LE,matListWindowBase,,,bytes,CONFIRMED
+asset.rg1,SectorStruct,0x04,4,u32 LE,numTriangles,,,bytes vs runtime sector+0x84,CONFIRMED
+asset.rg1,SectorStruct,0x08,4,u32 LE,numVertices,,,bytes vs runtime sector+0x82,CONFIRMED
+asset.rg1,SectorStruct,0x0C,24,f32 LE x6,"bbox inf,sup",,,bytes,CONFIRMED
+asset.rg1,SectorStruct,0x24,8,u32 x2,"collSectorPresent,unused",,,bytes,CODE
+asset.rg1,NativeStruct,0x00,4,u32 LE,platform,6 = GameCube (reader rejects others),,0x80465AE4 cmpwi 6,CONFIRMED
+asset.rg1,NativeStruct,0x04,4,u32 LE,headerSize,12+8*numAttributes+8*numMeshes,,bytes; 0x80465AE4,CONFIRMED
+asset.rg1,NativeStruct,0x08,4,u32 LE,dataSize,display lists + arrays (DLs padded to 32),,bytes,CONFIRMED
+asset.rg1,NativeStruct,0x0C,headerSize,bytes BE,header,instance header (section instance.header); offsets relative to data start,,bytes vs dump,CONFIRMED
+asset.rg1,NativeStruct,0x0C+headerSize,dataSize,bytes BE,data,read into align32(entry+24+headerSize); pointers relocated by adding data base,,0x80465C10,CONFIRMED
+asset.rg1,Reader,-,-,rule,version check,"library version in [0x35000,0x37002] else fail",,0x80465B28-0x80465B44,CODE
+instance.resentry,RwResEntry,0x00,4,ptr,link.next,,,0x80465D90,CODE
+instance.resentry,RwResEntry,0x04,4,ptr,link.prev,,,0x80465D9C,CODE
+instance.resentry,RwResEntry,0x08,4,u32,size,chunk size (native) or alloc size (instanced),,0x80465DB0; dump,CONFIRMED
+instance.resentry,RwResEntry,0x0C,4,ptr,owner,"RpGeometry (ref at +0x58), RpAtomic (+0x14) or RpWorldSector (+0x34)",,"dump: 20+5 geometry, 8 sector entries",CONFIRMED
+instance.resentry,RwResEntry,0x10,4,ptr,ownerRef,&owner->repEntry,,dump,CONFIRMED
+instance.resentry,RwResEntry,0x14,4,fnptr,destroyNotify,0x804638DC static/sector; 0x8044DE14 skinned,,dump,CONFIRMED
+instance.header,Header,0x00,2,u16 BE,drawSyncStamp,[0x805EEFF0] at each render; token for GXSetDrawSync waits,drop natively,"0x80463998, 0x80465DC8, 0x80464890",CONFIRMED
+instance.header,Header,0x02,2,u16 BE,meshSerial,must equal RpMeshHeader.serialNum else free + re-instance,re-instance trigger,0x80464B3C; file 0x08F0 == runtime 2288,CONFIRMED
+instance.header,Header,0x04,4,u32 BE,hdrFlags,"bit0 = vertex colours carry alpha (colType>2, or prelit alpha<255 without fmt)",selects ALPHA0 source VTX vs register,0x8046D31C-0x8046D3A8; 0x80463B00,CONFIRMED
+instance.header,Header,0x08,4,u32 BE,numAttributes,"1..5 (POS,[NRM|NBT],[CLR0],TEX0..)",,0x80463E48,CONFIRMED
+instance.header,Header,0x0C,8*N,record,attribute records,see instance.attr,,dump,CONFIRMED
+instance.header,Header,0x0C+8N,8*numMeshes,record,mesh DL records,see instance.mesh,,dump,CONFIRMED
+instance.attr,AttrRecord,0x00,4,ptr BE,array,relocated pointer to element array,GXSetArray base,0x80463CDC,CONFIRMED
+instance.attr,AttrRecord,0x04,1,u8,gxAttr,"9 POS,10 NRM,11 CLR0,13 TEX0,14 TEX1 (informational)","GX attr id comes from record position, not this byte",dump; 0x80463C80,CONFIRMED
+instance.attr,AttrRecord,0x05,1,u8,stride,POS f32 12; NRM s8 3; CLR RGBA4 2 / RGBA8 4; TEX f32 8,GXSetArray stride,0x80463CE4,CONFIRMED
+instance.attr,AttrRecord,0x06,1,u8,indexType,"2 GX_INDEX8, 3 GX_INDEX16",GXSetVtxDesc type,0x80463CB8,CONFIRMED
+instance.attr,AttrRecord,0x07,1,u8,pad,0,,dump,CONFIRMED
+instance.mesh,MeshDLRecord,0x00,4,ptr BE,displayList,one per RpMesh in mesh-header order,GXCallDisplayList addr,0x80463BA8,CONFIRMED
+instance.mesh,MeshDLRecord,0x04,4,u32 BE,sizeBytes,multiple of 32,GXCallDisplayList nbytes,"dump; census 26,795/26,795",CONFIRMED
+instance.dl,DisplayList,0x00,1,u8,opcode,0x98 GX_TRIANGLESTRIP (only value on disc/FH); 0x90 GX_TRIANGLES when mesh not tristrip; low 3 bits = vtxfmt 0,primitive,"census 411,955 prims all 0x98; 0x8046D200",CONFIRMED
+instance.dl,DisplayList,0x01,2,u16 BE,vertexCount,,,dump,CONFIRMED
+instance.dl,DisplayList,0x03,n*tuple,bytes,vertex tuples,[u8 PNMTXIDX palette skins only] + per attribute index (1 or 2 B BE),indexed vertex fetch,dump,CONFIRMED
+instance.dl,DisplayList,tail,pad,u8,padding,0x00 (GX NOP) to multiple of 32,,dump,CONFIRMED
+instance.dl,IndexPolicy,-,-,rule,world sectors (offline instancer),"per-attribute dedup, mixed idx8/idx16, many strips per mesh",,dump + RG1 census,CONFIRMED
+instance.dl,IndexPolicy,-,-,rule,models (0x8046D124),same RW vertex index for all attributes; numVertices<255 -> idx8 else idx16; 1 primitive per mesh,,0x8046CF80; dump,CONFIRMED
+instance.dl,IndexPolicy,-,-,rule,DL size,align32(3*numPrims + numIndices*tupleBytes),,0x8046C0E4,CODE
+instance.quant,Quantisation,POS,-,f32,copy,identical,,probe9,CONFIRMED
+instance.quant,Quantisation,NRM,-,s8 frac6,(s8)trunc(n*64),GX decode v/64,,probe9 654/654 components,CONFIRMED
+instance.quant,Quantisation,CLR0,-,u16 BE RGBA4,(r>>4)<<12|(g>>4)<<8|(b>>4)<<4|(a>>4),GX decode v*17 per channel,,probe9 123/123,CONFIRMED
+instance.quant,Quantisation,TEX,-,f32,copy,identical,,probe9,CONFIRMED
+instance.quant,Quantisation,skinned NRM,-,s8 frac6,rewritten each frame by 0x8044E738,assumed same truncation,,dump stride 3,INFERRED
+vtxfmt,RpGameCubeVtxFmt,0x00,1,u8,posType,GXCompType; 4=F32 (all live),"GXSetVtxAttrFmt(POS,XYZ,type,frac)",0x80463FFC init; 0x80463FCC/FD8/FE4/FF4 setters; dump 0x805E2748/0x80571BD0,CONFIRMED
+vtxfmt,RpGameCubeVtxFmt,0x01,1,u8,nrmType,4 F32 default; 1 S8 game model fmt,"NRM/NBT type, frac 0 passed",0x80463FFC init; 0x80463FCC/FD8/FE4/FF4 setters; dump 0x805E2748/0x80571BD0,CONFIRMED
+vtxfmt,RpGameCubeVtxFmt,0x02,8,u8[8],texType[0..7],4 F32,TEXn type,0x80463FFC init; 0x80463FCC/FD8/FE4/FF4 setters; dump 0x805E2748/0x80571BD0,CONFIRMED
+vtxfmt,RpGameCubeVtxFmt,0x0A,1,u8,colType,5 RGBA8 default; 3 RGBA4 game model fmt,count = type>2 ? RGBA : RGB,0x80463FFC init; 0x80463FCC/FD8/FE4/FF4 setters; dump 0x805E2748/0x80571BD0,CONFIRMED
+vtxfmt,RpGameCubeVtxFmt,0x0B,1,u8,unknown,always 1,,0x80463FFC init; 0x80463FCC/FD8/FE4/FF4 setters; dump 0x805E2748/0x80571BD0,CONFIRMED
+vtxfmt,RpGameCubeVtxFmt,0x0C,1,u8,posFrac,0 default; 6 model fmt (ignored for F32),,0x80463FFC init; 0x80463FCC/FD8/FE4/FF4 setters; dump 0x805E2748/0x80571BD0,CONFIRMED
+vtxfmt,RpGameCubeVtxFmt,0x0D,1,u8,nbt,0/1: normals bound as GX_VA_NBT,,0x80463FFC init; 0x80463FCC/FD8/FE4/FF4 setters; dump 0x805E2748/0x80571BD0,CONFIRMED
+vtxfmt,RpGameCubeVtxFmt,0x0E,8,u8[8],texFrac[0..7],0 default; 6 model fmt,,0x80463FFC init; 0x80463FCC/FD8/FE4/FF4 setters; dump 0x805E2748/0x80571BD0,CONFIRMED
+vtxfmt,RpGameCubeVtxFmt,0x16,2,u16,refCount,Destroy frees at 1,,0x80463FFC init; 0x80463FCC/FD8/FE4/FF4 setters; dump 0x805E2748/0x80571BD0,CONFIRMED
+vtxfmt,Globals,0x805E2748,24,RpGameCubeVtxFmt,default format (engine plugin),"04x10,05,01,00..,0001",,dump,CONFIRMED
+vtxfmt,Globals,0x80571BD0,24,RpGameCubeVtxFmt,"game model format (set by 0x802E3034, assigned by 0x802E2F84)",040104040404040404040301060006000000000000000208,,dump,CONFIRMED
+vtxfmt,Globals,0x805F25C8,4,s32,geometry VtxFmt plugin offset,0x60,,dump,CONFIRMED
+vtxfmt,Globals,0x805F25CC,4,s32,world VtxFmt plugin offset,0x70,,dump,CONFIRMED
+vtxfmt,Globals,0x805F2760,4,ptr,MatFX NBT VtxFmt,F32 normals as NBT,bump only,0x804A64E4; dump,CONFIRMED
+vtxfmt,Globals,0x805EEE88,4,s32,instance mode,1; selects instancer A for NATIVEINSTANCE geometry,,0x80463C70/78; dump,CONFIRMED
+pipeline,RxPipeline,0x04,4,u32,numNodes,1 for every live pipeline,,dump,CONFIRMED
+pipeline,RxPipeline,0x08,4,ptr,nodes,"RxPipelineNode array, 40 B each",,dump,CONFIRMED
+pipeline,RxPipeline,0x2C,4,u32,pluginId,"0x2 default, 0x116 skin, 0x120 matfx, 0x122 dmorph, 0x12F ptank-id",,0x804643AC stw 44(r3); dump,CONFIRMED
+pipeline,RxPipeline,0x30,4,u32,pluginData (sub id),1 atomic / 2 sector or skin+matfx,,dump,CONFIRMED
+pipeline,RxPipelineNode,0x00,4,ptr,nodeDefinition,0x8056E98C atomic / 0x8056E9F4 sector,,dump,CONFIRMED
+pipeline,RxPipelineNode,0x14,4,ptr,privateData,16 B callbacks,,0x80463C40,CONFIRMED
+pipeline,AllInOnePrivate,0x00,4,fnptr,instanceCB,"(object r3, RxGameCubeInstanceData* r4) -> object or 0",,0x80463C40-0x80463C64; 0x80464AAC,CONFIRMED
+pipeline,AllInOnePrivate,0x04,4,fnptr,reinstanceCB,"(object r3, RxGameCubeInstanceData* r4) -> object or 0",,0x80463C40-0x80463C64; 0x80464AAC,CONFIRMED
+pipeline,AllInOnePrivate,0x08,4,fnptr,lightingCB,"(object r3, RxGameCubeInstanceData* r4) -> object or 0",,0x80463C40-0x80463C64; 0x80464AAC,CONFIRMED
+pipeline,AllInOnePrivate,0x0C,4,fnptr,renderCB,"(object r3, RxGameCubeInstanceData* r4) -> object or 0",,0x80463C40-0x80463C64; 0x80464AAC,CONFIRMED
+pipeline,RxNodeDefinition,0x8056E98C,64,data,"""GameCubeAtomicAllInOne.csl""","body 0x80464AAC, pipelineNodeInit 0x80464D30, privateDataSize 0x10",,data.py vtable,CONFIRMED
+pipeline,RxNodeDefinition,0x8056E9F4,64,data,"""GamerCubeWorldSectorAllInOne.csl""","body 0x80464FF4, pipelineNodeInit 0x804651D8, privateDataSize 0x10",,data.py vtable,CONFIRMED
+pipeline,LivePipeline,0x80784980,-,RxPipeline,default atomic,global worldglobals+60/+84; plugin 0x2/0; inst 0x804649FC; reinst 0x80464890; light 0x80464478; render 0x80463964,per frame on Final Haunt: 33,MEM1 dump 45e9 + watch hits,CONFIRMED
+pipeline,LivePipeline,0x807854C0,-,RxPipeline,default sector,global worldglobals+64/+88; plugin 0x2/0; inst 0x80464F60; reinst 0; light 0x80464E44; render 0x80463964,per frame on Final Haunt: 8,MEM1 dump 45e9 + watch hits,CONFIRMED
+pipeline,LivePipeline,0x80786100,-,RxPipeline,matfx atomic,global [0x805F2764]; plugin 0x120/1; inst 0x804A60A8; reinst 0x804A6174; light 0x80464478; render 0x804A62D0,per frame on Final Haunt: 30.1,MEM1 dump 45e9 + watch hits,CONFIRMED
+pipeline,LivePipeline,0x80786160,-,RxPipeline,matfx sector,global [0x805F2768]; plugin 0x120/2; inst 0x804A6254; reinst 0; light 0x80464E44; render 0x804A62D0,per frame on Final Haunt: 0,MEM1 dump 45e9 + watch hits,CONFIRMED
+pipeline,LivePipeline,0x80786000,-,RxPipeline,skin,global [0x8056E7F0]; plugin 0x116/1; inst 0x8044E974; reinst 0x8044EA8C; light 0x80464478; render 0x8044EEC4,per frame on Final Haunt: 2,MEM1 dump 45e9 + watch hits,CONFIRMED
+pipeline,LivePipeline,0x80786060,-,RxPipeline,skin+matfx,global [0x8056E7F4]; plugin 0x116/2; inst 0x80452ABC; reinst 0x80452B70; light 0x80464478; render 0x80452C1C,per frame on Final Haunt: 2,MEM1 dump 45e9 + watch hits,CONFIRMED
+pipeline,LivePipeline,0x807865C0,-,RxPipeline,ptank-id,global [0x805F24F8]; plugin 0x12F/0; inst 0; reinst 0; light 0x80449D00; render 0x80449D54,per frame on Final Haunt: 16,MEM1 dump 45e9 + watch hits,CONFIRMED
+pipeline,LivePipeline,0x80786560,-,RxPipeline,dmorph,global [0x805F24E4]; plugin 0x122/1; inst 0x80446984; reinst 0x80445ECC; light 0x80464478; render 0x80463964,per frame on Final Haunt: 0,MEM1 dump 45e9 + watch hits,CONFIRMED
+instance.record,RxGameCubeInstanceData,0x00,4,ptr,repEntry,RwResEntry* instance data,,0x80464AAC stack sp+8; 0x80464478 writes; 0x80463964 reads,CONFIRMED
+instance.record,RxGameCubeInstanceData,0x04,4,ptr,meshHeader,RpMeshHeader*,,0x80464AAC stack sp+8; 0x80464478 writes; 0x80463964 reads,CONFIRMED
+instance.record,RxGameCubeInstanceData,0x08,4,u32,flags,geometry flags or curWorld flags,,0x80464AAC stack sp+8; 0x80464478 writes; 0x80463964 reads,CONFIRMED
+instance.record,RxGameCubeInstanceData,0x0C,12,f32x3,ambientRGB,"accumulated ambient, clamped <=1.0",,0x80464AAC stack sp+8; 0x80464478 writes; 0x80463964 reads,CONFIRMED
+instance.record,RxGameCubeInstanceData,0x18,4,f32,ambientA,1.0,,0x80464AAC stack sp+8; 0x80464478 writes; 0x80463964 reads,CONFIRMED
+instance.record,RxGameCubeInstanceData,0x1C,4,s32,hasAmbient,1 if an ambient light was added,,0x80464AAC stack sp+8; 0x80464478 writes; 0x80463964 reads,CONFIRMED
+instance.record,RxGameCubeInstanceData,0x20,4,u32,lightMask,bit i = GX_LIGHTi loaded,,0x80464AAC stack sp+8; 0x80464478 writes; 0x80463964 reads,CONFIRMED
+instance.record,RxGameCubeInstanceData,0x24,4,s32,numLights,0..8,,0x80464AAC stack sp+8; 0x80464478 writes; 0x80463964 reads,CONFIRMED
+instance.record,RxGameCubeInstanceData,0x28,4,ptr,privateData,node callbacks,,0x80464AAC stack sp+8; 0x80464478 writes; 0x80463964 reads,CONFIRMED
+rwobjects,RpAtomic,0x04,-,ptr,frame,RwFrameGetLTM 0x804882E8,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpAtomic,0x14,-,ptr,repEntry,used when numMorphTargets!=1,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpAtomic,0x18,-,ptr,geometry,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpAtomic,0x48,-,fnptr,renderCallBack,0x80456F04 default; game wrappers 0x801645D0/0x8003851C/0x800386EC,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpAtomic,0x4C,-,u32,interpolator.flags,bit0 dirty -> morph reinstance,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpAtomic,0x64,-,list,worldSectorTies,tie+8 = sector,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpAtomic,0x6C,-,ptr,pipeline,NULL -> default,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpAtomic,0x7C,-,ptr,skin plugin: RpHAnimHierarchy*,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x08,-,u32,flags,"0x01 TRISTRIP,0x02 POS,0x04 TEX,0x08 PRELIT,0x10 NORMALS,0x20 LIGHT,0x40 MODULATE,0x80 TEX2,0x01000000 NATIVE,0x02000000 NATIVEINSTANCE",,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x0C,-,u16,lockedSinceLastInst,& 0x17 dirty,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x14,-,s32,numVertices,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x18,-,s32,numMorphTargets,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x1C,-,s32,numTexCoordSets,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x30,-,ptr,preLitLum (RwRGBA*),,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x34,-,ptr[8],texCoords,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x54,-,ptr,mesh (RpMeshHeader*),,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x58,-,ptr,repEntry,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x5C,-,ptr,"morphTarget (+0x14 verts, +0x18 normals)",,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x60,-,ptr,VtxFmt plugin,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpGeometry,0x68,-,ptr,RpSkin plugin,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpMeshHeader,0x00,-,u32,flags,bit0 tristrip,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpMeshHeader,0x04,-,u16,numMeshes,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpMeshHeader,0x06,-,u16,serialNum,compared with header+2,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpMeshHeader,0x10,-,RpMesh[],meshes,"12 B: indices, numIndices, material",,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpMaterial,0x00,-,ptr,texture,NULL -> raster-less Im texture [0x805F270C],,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpMaterial,0x04,-,RGBA8,color,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpMaterial,0x0C,-,f32,surfaceProps.ambient,ka,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpMaterial,0x1C,-,ptr,MatFX data (offset [0x805F2750]),,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpMaterial,0x20,-,ptr,GCN material plugin 0x129 (registry idx 6),NULL on all FH materials,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorldSector,0x34,-,ptr,repEntry,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorldSector,0x40,-,list,lights (tie+8 = RpLight),,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorldSector,0x6C,-,f32x3,tightBBox.inf,origin for quantised worlds,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorldSector,0x78,-,ptr,mesh,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorldSector,0x7C,-,ptr,pipeline,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorldSector,0x82,-,u16,numVertices,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorldSector,0x84,-,u16,numPolygons,0 -> skipped,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorld,0x08,-,u32,flags,0x4101000D live,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorld,0x10,-,RpMaterialList,matList,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorld,0x1C,-,ptr,rootSector,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorld,0x34,-,list,positioned lights,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorld,0x3C,-,list,direct lights (link at light+0x34),,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorld,0x68,-,fnptr,sector render cb,0x80460B60,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorld,0x6C,-,ptr,pipeline,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpWorld,0x70,-,ptr,VtxFmt plugin,NULL live,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpLight,0x01,-,u8,type,"1 dir, 2 amb, 0x80 point, 0x81 spot, 0x82 softspot",,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpLight,0x02,-,u8,flags,"1 LIGHTATOMICS, 2 LIGHTWORLD",,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpLight,0x14,-,f32,radius,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpLight,0x18,-,f32x3,color,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpLight,0x3C,-,u16,lightFrame,,,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+rwobjects,RpLight,[0x805F25D8],-,28 B,GC light plugin,"u32 customAttn; f32 a0,a1,a2,k0,k1,k2",,code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump,CONFIRMED
+skin,RpSkin,0x00,-,u32,numBones,"30,7,7,10,5 live",,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CONFIRMED
+skin,RpSkin,0x04,-,u32,numUsedBones,"26,7,7,9,4",,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CONFIRMED
+skin,RpSkin,0x08,-,u8*,usedBoneIds,,,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CODE
+skin,RpSkin,0x0C,-,RwMatrix*,inverseBindMatrices,64 B each,,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CODE
+skin,RpSkin,0x10,-,u32,maxNumWeightsForVertex,2 for all live skins -> CPU path,,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CONFIRMED
+skin,RpSkin,0x14,-,u32*,vertexBoneIndices,,,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CODE
+skin,RpSkin,0x18,-,RwMatrixWeights*,vertexBoneWeights,,,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CODE
+skin,RpSkin,0x1C,-,ptr,bind-pose POS array (CPU path),,,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CONFIRMED
+skin,RpSkin,0x20,-,ptr,bind-pose NRM array (CPU path),,,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CONFIRMED
+skin,RpSkin,0x2C,-,u32,platform skin type,3 forces CPU; live 1 or 2,,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CONFIRMED
+skin,RpSkin,0x34,-,u32,split boneLimit,0 live; !=0 -> per-mesh RLE palette reload,,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CONFIRMED
+skin,RpSkin,0x40,-,u8*,meshBoneRLECount,"{start,count} per mesh",,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CODE
+skin,RpSkin,0x44,-,u8*,meshBoneRLE,"{firstBone,numBones}",,"0x8044EEC4, 0x8044EA8C, 0x8044E394; dump",CODE
+skin,Globals,0x8056E7C8+4,4,s32,atomic skin plugin offset,0x7C,,dump,CONFIRMED
+skin,Globals,0x8056E7C8+8,4,s32,geometry skin plugin offset,0x68,,dump,CONFIRMED
+skin,Globals,0x8056E7C8+12,4,ptr,bone matrix cache,0x8078B8C0,,dump,CONFIRMED
+skin,Rule,-,-,rule,path select,"cpu = maxWeights>1 || type==3; palette: PNMTXIDX DIRECT, slot i -> GX_PNMTX0+3i",,0x8044EF34-0x8044EF64,CODE
+matfx,rpMatFXMaterialData,0x00,-,union 0x14,data[0],"bump{frame,bumpedTex,bumpTex,coef,invBumpWidth} | env{frame,texture,coef,fbAlpha} | dual{texture,src,dst} | uv{base,dual}",,0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads,CODE
+matfx,rpMatFXMaterialData,0x14,-,u32,data[0].flag,,,0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads,CODE
+matfx,rpMatFXMaterialData,0x18,-,union 0x14,data[1],"second effect (bump-env env, dual-uv dual)",,0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads,CODE
+matfx,rpMatFXMaterialData,0x2C,-,u32,data[1].flag,,,0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads,CODE
+matfx,rpMatFXMaterialData,0x30,-,u32,flags,"0 NULL,1 BUMP,2 ENV,3 BUMPENV,4 DUAL,5 UVTRANSFORM,6 DUALUV",,0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads,CODE
+matfx,Cache,0x805E4388,12,u32x3,"chanValid,lastMaterial,tevValid",cleared per object by render cb / 0x804A3F58,drop natively,0x804A62D0; 0x804A55CC,CONFIRMED
+matfx,Registry,0x805E4398+16*6,16,u32x4,GC plugin registry entry 6,"{6, pluginId 0x129, offset 0x20, size 0xC}",native-shader material plugin,dump; 0x804AA118,CONFIRMED
+matfx,Effect,2 ENVMAP,-,dispatch,0x804A48DC+0x804A4B7C,"base pass (alpha test off) then additive pass: blend src ONE|DESTALPHA dst ONE; chan off, mat=coef; texgen NRM x TEXMTX0 {-.5E.rx,-.5E.ux,-.5E.ax,.5; -.5E.ry,-.5E.uy,-.5E.ay,.5}; MODULATE",per frame FH: 25.1,watch hits C40/D45,CONFIRMED
+matfx,Effect,5 UVTRANSFORM,-,dispatch,inline 0x804A5A44,"base pass with TEXMTX0 {r.x,u.x,0,p.x; r.y,u.y,0,p.y} on TEX0",per frame FH: 6,watch hits C40/D45,CONFIRMED
+matfx,Effect,4 DUALTEXTURE,-,dispatch,0x804A3F74+0x804A4240,"base pass, then same DL with dual texture, blend from data, TEX1 texgen if TEX2 flag",per frame FH: 0,watch hits C40/D45,CODE
+matfx,Effect,6 DUALUVTRANSFORM,-,dispatch,0x804A4358+0x804A47F4,two passes with base/dual UV matrices,per frame FH: 0,watch hits C40/D45,CODE
+matfx,Effect,1/3 BUMP/BUMPENV,-,dispatch,0x804A4E00,3/4 TEV stages with indirect add_prev; see md section 10.3,per frame FH: 0,watch hits C40/D45,CODE
+tev.default,Constants,0x805FC250,4,RGBA8,K1,0xFFFFFFFF,,data,CONFIRMED
+tev.default,Constants,0x805FC254,4,RGBA8,K2,0x000000FF,,data,CONFIRMED
+tev.default,Case,A-L,-,decision,T P X L,"registers: ChanMat(C0A0,K1); !M TevColor(REG0,K1); !H ChanAmb(ALPHA0,K2); COLOR0 (en,amb,mat)=(1,VTX,REG); ALPHA0=H?(1,VTX,REG):(0,REG,REG); stages 2 (TX2); continuation M?0x804662DC:0x804663C0",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,A-U,-,decision,T P X !L,"registers: !M TevColor(REG0,K1); !H ChanMat(ALPHA0,K2); COLOR0 (en,amb,mat)=(0,REG,VTX); ALPHA0=H?(0,REG,VTX):(0,REG,REG); stages 2 (TX2); continuation M?0x804662DC:0x804663C0",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,B-*-M-P,-,decision,T !(P X) M P (L or !L),"registers: !H ChanAmb(ALPHA0,K2); COLOR0 (en,amb,mat)=(1,VTX,REG); ALPHA0=H?(1,VTX,REG):(0,REG,REG); stages 1 (TX1); continuation 0x8046656C",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,B-*-M,-,decision,T M !P (L or !L),"registers: ChanAmb(ALPHA0,K2); COLOR0 (en,amb,mat)=(1,REG,REG); ALPHA0=(0,REG,REG); stages 1 (TX1); continuation 0x804664D0",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,B-L-P,-,decision,T !(P X) L !M P,"registers: ChanMat(C0A0,K1); COLOR0 (en,amb,mat)=(1,VTX,REG); ALPHA0=H?(1,VTX,REG):(0,REG,REG); stages 1 (TX1); continuation none",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,B-L,-,decision,T L !M !P,"registers: ChanMat(C0A0,K1); COLOR0 (en,amb,mat)=(1,REG,REG); ALPHA0=(0,REG,REG); stages 1 (TX1); continuation 0x80466448",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,B-U-P,-,decision,T !(P X) !L !M P,"registers: !H ChanMat(ALPHA0,K2); COLOR0 (en,amb,mat)=(0,REG,VTX); ALPHA0=H?(0,REG,VTX):(0,REG,REG); stages 1 (TX1); continuation none",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,B-U,-,decision,T !L !M !P,"registers: ChanMat(ALPHA0,K2); COLOR0 (en,amb,mat)=(0,REG,REG); ALPHA0=(0,REG,REG); stages 1 (TX1); continuation 0x8046659C",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,C-L-P,-,decision,!T L P,"registers: ChanMat(C0A0,K1); !M TevColor(REG0,K1); COLOR0 (en,amb,mat)=(1,VTX,REG); ALPHA0=H?(1,VTX,REG):(0,REG,REG); stages 1 (UT1); continuation M?0x804662DC:0x804663C0",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,C-L,-,decision,!T L !P,"registers: ChanMat(C0A0,K1); ChanAmb(C0A0,K2); !M TevColor(REG0,K1); COLOR0 (en,amb,mat)=(1,REG,REG); ALPHA0=(0,REG,REG); stages 1 (UT1); continuation M?0x804662DC:0x804663C0",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,C-U-P,-,decision,!T !L P,"registers: !H ChanMat(ALPHA0,K2); !M TevColor(REG0,K1); COLOR0 (en,amb,mat)=(0,REG,VTX); ALPHA0=H?(0,REG,VTX):(0,REG,REG); stages 1 (UT1); continuation M?0x804662DC:0x804663C0",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Case,C-U,-,decision,!T !L !P,"registers: ChanMat(C0A0,K2); !M TevColor(REG0,K1); COLOR0 (en,amb,mat)=(0,REG,REG); ALPHA0=(0,REG,REG); stages 1 (UT1); continuation M?0x804662DC:0x804663C0",COLOR0 mask=lightMask DF_CLAMP AF_SPOT; ALPHA0 mask 0 DF_NONE AF_NONE; COLOR1/ALPHA1 off,0x80466624 recomp_055.cpp:168059,CODE
+tev.default,Program,TX1,-,TEV,TX1,"st0 C(ZERO,RASC,TEXC,ZERO) A(ZERO,RASA,TEXA,ZERO); order(TEXCOORD0,TEXMAP0,COLOR0A0); texgen0 MTX2x4 TEX0 IDENTITY","ops ADD, bias 0, scale 1, clamp, out PREV",0x80466B24-0x80466C84,CODE
+tev.default,Program,TX2,-,TEV,TX2,"st0 C(ZERO,RASC,C0,C1) A(ZERO,RASA,A0,A1) order(NULL,NULL,COLOR0A0); st1 C(ZERO,CPREV,TEXC,ZERO) A(ZERO,APREV,TEXA,ZERO) order(TEXCOORD0,TEXMAP0,COLOR_NULL)","ops ADD, bias 0, scale 1, clamp, out PREV",0x80466B24-0x80466C84,CODE
+tev.default,Program,UT1,-,TEV,UT1,"st0 C(ZERO,RASC,C0,C1) A(ZERO,RASA,A0,A1) order(NULL,NULL,COLOR0A0); 0 texgens","ops ADD, bias 0, scale 1, clamp, out PREV",0x80466B24-0x80466C84,CODE
+tev.default,Continuation,0x804662DC,-,"fn(amb*,col*,f1=ka)",per-mesh colour writer,"TevColor(REG0,col); TevColor(REG1,{col.rgb*amb.rgb*ka,0}); float->byte = fctiwz truncate, low byte",per frame FH: 2,disassembly + hits,CONFIRMED
+tev.default,Continuation,0x804663C0,-,"fn(amb*,col*,f1=ka)",per-mesh colour writer,"TevColor(REG1,{amb*255*ka,0}); float->byte = fctiwz truncate, low byte",per frame FH: 5,disassembly + hits,CONFIRMED
+tev.default,Continuation,0x80466448,-,"fn(amb*,col*,f1=ka)",per-mesh colour writer,"ChanAmbColor(COLOR0,{amb*255*ka,0}); float->byte = fctiwz truncate, low byte",per frame FH: 4,disassembly + hits,CONFIRMED
+tev.default,Continuation,0x804664D0,-,"fn(amb*,col*,f1=ka)",per-mesh colour writer,"ChanMatColor(COLOR0A0,col); ChanAmbColor(COLOR0,{amb*255*ka,0}); float->byte = fctiwz truncate, low byte",per frame FH: 0,disassembly + hits,CONFIRMED
+tev.default,Continuation,0x8046656C,-,"fn(amb*,col*,f1=ka)",per-mesh colour writer,"ChanMatColor(COLOR0A0,col); float->byte = fctiwz truncate, low byte",per frame FH: 0,disassembly + hits,CONFIRMED
+tev.default,Continuation,0x8046659C,-,"fn(amb*,col*,f1=ka)",per-mesh colour writer,"ChanMatColor(COLOR0,{amb*255*ka,0}); float->byte = fctiwz truncate, low byte",per frame FH: 0,disassembly + hits,CONFIRMED
+tev.matfx,Constants,0x805FC4C8,4,RGBA8,white,0xFFFFFFFF,,data,CONFIRMED
+tev.matfx,Constants,0x805FC4CC,4,RGBA8,black,0x000000FF,,data,CONFIRMED
+tev.matfx,ChannelBlock,lights>0,-,decision,lights>0,"!P&&!X: ChanAmb(C0A0,black); ChanCtrl(C0A0,1,P?VTX:REG,REG,mask,CLAMP,SPOT); !M: ChanMat(C0A0,white)",always GX_COLOR0A0 (alpha lit with colour); NumChans(1),0x804A55CC blocks,CODE
+tev.matfx,ChannelBlock,"no lights,P,M",-,decision,"no lights,P,M","ChanCtrl(C0A0,1,VTX,REG,0,NONE,NONE)",always GX_COLOR0A0 (alpha lit with colour); NumChans(1),0x804A55CC blocks,CODE
+tev.matfx,ChannelBlock,"no lights,P,!M",-,decision,"no lights,P,!M","ChanCtrl(C0A0,0,REG,VTX,0,NONE,NONE)",always GX_COLOR0A0 (alpha lit with colour); NumChans(1),0x804A55CC blocks,CODE
+tev.matfx,ChannelBlock,"no lights,!P",-,decision,"no lights,!P","!X&&!M: ChanMat(C0A0,black); ChanCtrl(C0A0,0,REG,REG,0,NONE,NONE)",always GX_COLOR0A0 (alpha lit with colour); NumChans(1),0x804A55CC blocks,CODE
+tev.matfx,MaterialColor 0x804A3CE0,lights>0,-,decision,lights>0,"X&&!P: ChanAmb(C0A0,{255*ka*amb,255}); M: ChanMat(C0A0,col)",runs when material != cache.lastMaterial,recomp_024.cpp:150092,CODE
+tev.matfx,MaterialColor 0x804A3CE0,"no lights,P",-,decision,"no lights,P","M: ChanMat(C0A0,col)",runs when material != cache.lastMaterial,recomp_024.cpp:150092,CODE
+tev.matfx,MaterialColor 0x804A3CE0,"no lights,!P,X",-,decision,"no lights,!P,X","M: ChanMat(C0A0,{col.rgb*ka*amb,col.a}); !M: ChanMat(C0A0,{255*ka*amb,255})",runs when material != cache.lastMaterial,recomp_024.cpp:150092,CODE
+tev.matfx,MaterialColor 0x804A3CE0,"no lights,!P,!X",-,decision,"no lights,!P,!X","M: ChanMat(C0A0,{0,0,0,col.a})",runs when material != cache.lastMaterial,recomp_024.cpp:150092,CODE
+tev.matfx,BaseTEV,-,-,TEV,1 stage,"textured flags: 1 texgen TEX0 IDENTITY, order(TEXCOORD0,TEXMAP0,COLOR0A0), TevOp MODULATE; else 0 texgens, order(NULL,NULL,COLOR0A0), TevOp PASSCLR",,0x804A59B8,CODE
+lighting,Globals,0x805E2760,8*64,GXLightObj[8],GX light objects,index = numLights,,"0x8046521C, 0x80465438",CONFIRMED
+lighting,Globals,0x805E428C,64,RwMatrix,"view matrix used by matrix load, lights, env/bump",,,"0x804960FC, 0x8046521C",CONFIRMED
+lighting,Rule,directional,-,rule,GXInitLightPos,"2^20*(v.x,-v.y,v.z), v = View * LTM.at; color trunc(rgb*255), alpha 0; attn custom or (1,0,0,1,0,0); no 8-light cap",,0x8046521C,CODE
+lighting,Rule,ambient,-,rule,accumulate,inst.amb += color.rgb; hasAmbient=1; clamp <=1 after collection,,0x8046521C; 0x804645C0,CODE
+lighting,Rule,point,-,rule,positioned,"pos (-p.x,p.y,-p.z) view space; AttnA(1,0,0)+DistAttn(radius*0.5,0.5,GX_DA_MEDIUM) or custom; cap 8",,0x80465438,CODE
+lighting,Rule,spot/softspot,-,rule,positioned,"Dir (-a.x,a.y,-a.z); Spot(cone*57.29578, FLAT|COS)+DistAttn(radius*0.5,0.5,MEDIUM) or custom",,0x80465438,CODE
+lighting,Rule,atomic collection,-,rule,0x80464478,"if geom LIGHT && curWorld: direct lights mask 1; sector-tied positioned lights with flags&1, lightFrame dedupe, sphere overlap test",,recomp_012.cpp:160378,CODE
+lighting,Rule,sector collection,-,rule,0x80464E44,"if world LIGHT: direct lights mask 2; sector lights with flags&2, no sphere test",FH world LIGHT cleared -> unlit,recomp_026.cpp:154979,CONFIRMED
+matrix,Rule,0x804960FC,-,rule,position/normal matrix,"M = LTM x View (or View); GX rows: (-M.rx,-M.ux,-M.ax,-M.px),(M.ry,M.uy,M.ay,M.py),(-M.rz,-M.uz,-M.az,-M.pz); PNMTX0; normal = same 3x3",,recomp_063.cpp:155337,CONFIRMED
+matrix,Rule,skin palette,-,rule,bone matrix,invBind[b] x boneLTM x View (flag 0x2) / x matArray x (LTM x View) (0x4000) / x matArray x View; loaded with same flip,,0x8044E394,CODE
+matrix,Rule,skin cpu,-,rule,bone matrix,base = invert(LTM) instead of View; vertices written to instanced arrays; draw with atomic LTM,,"0x8044E394, 0x8044E738",CONFIRMED
+gx.enum,Enum,-,-,enum,GXAttr,"0 PNMTXIDX, 9 POS, 10 NRM, 11 CLR0, 13 TEX0, 14 TEX1, 25 NBT",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXAttrType,"0 NONE, 1 DIRECT, 2 INDEX8, 3 INDEX16",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXCompCnt,POS_XYZ 1; NRM_XYZ 0; NRM_NBT 1; CLR_RGB 0; CLR_RGBA 1; TEX_ST 1,,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXCompType,"0 U8,1 S8,2 U16,3 S16,4 F32; colour 0 RGB565,1 RGB8,2 RGBX8,3 RGBA4,4 RGBA6,5 RGBA8",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXPrimitive,"0x80 QUADS, 0x90 TRIANGLES, 0x98 TRIANGLESTRIP",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXChannelID,"0 COLOR0,1 COLOR1,2 ALPHA0,3 ALPHA1,4 COLOR0A0,5 COLOR1A1",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXColorSrc,"0 REG, 1 VTX",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXDiffuseFn,"0 NONE, 2 CLAMP",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXAttnFn,"1 SPOT, 2 NONE",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXTevColorArg,"0 CPREV,1 APREV,2 C0,4 C1,8 TEXC,10 RASC,14 KONST,15 ZERO",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXTevAlphaArg,"0 APREV,1 A0,2 A1,4 TEXA,5 RASA,6 KONST,7 ZERO",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXTevRegID,"0 PREV, 1 REG0, 2 REG1",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXTevMode,"0 MODULATE, 4 PASSCLR",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXTexGenType/Src,"MTX2x4 1; src NRM 1, TEX0 4, TEX1 5",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXTexMtx,"30 TEXMTX0, 33 TEXMTX1, 60 IDENTITY, 125 PTIDENTITY",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXTevKAlphaSel,"0 KASEL_1, 28 K0_A",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXDistAttnFn,2 MEDIUM,,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,GXSpotFn,"1 FLAT, 2 COS",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,RwBlendFunction,"2 ONE, 7 DESTALPHA",,GX SDK map + call sites,CODE
+gx.enum,Enum,-,-,enum,RwRenderState,"10 SRCBLEND, 11 DESTBLEND; set/get via [RwEngineInstance]+32/+36",,GX SDK map + call sites,CODE
+measure.finalhaunt,PerFrame,frames in window (GXCopyDisp),-,count,frames in window (GXCopyDisp),616,40e9->45e9,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,sector render cbs / non-empty sectors,-,count,sector render cbs / non-empty sectors,15 / 8,0x80460B60 / 0x80464FF4,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,atomic pipeline executions,-,count,atomic pipeline executions,83.10,0x80464AAC,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,default/matfx/skin/skinfx/ptank atomics,-,count,default/matfx/skin/skinfx/ptank atomics,33 / 30.1 / 2 / 2 / 16,render cbs,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,CPU skinned atomics,-,count,CPU skinned atomics,4,0x8044E738,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,0x80466624 objects,-,count,0x80466624 objects,43,hook,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,MatFX meshes / env / uvtransform,-,count,MatFX meshes / env / uvtransform,35.19 / 25.1 / 6,hooks + GXLoadTexMtxImm,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,GXCallDisplayList,-,count,GXCallDisplayList,176.29,hook,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,display list bytes,-,count,display list bytes,110447,host display_list_bytes delta / 616,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,matrix loads / normal loads,-,count,matrix loads / normal loads,91.1 / 67.1,0x804960FC / GXLoadNrmMtxImm,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,light-collecting atomics / GX light loads,-,count,light-collecting atomics / GX light loads,21.1 / 18.1,0x8046521C / GXLoadLightObjImm,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,continuations 62DC/63C0/6448,-,count,continuations 62DC/63C0/6448,2 / 5 / 4,hooks,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,GXSetTevColorIn / GXSetTevColor,-,count,GXSetTevColorIn / GXSetTevColor,44 / 14,hooks,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,RpMaterialUVAnimApplyUpdate,-,count,RpMaterialUVAnimApplyUpdate,5,hook,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,resident sectors / DL bytes,-,count,resident sectors / DL bytes,8 / 35776,dump,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,resident static geometries / DL bytes,-,count,resident static geometries / DL bytes,20 / 8224,dump,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,resident skinned geometries / DL bytes,-,count,resident skinned geometries / DL bytes,5 / 19232,dump,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED
+measure.finalhaunt,PerFrame,disc native sectors / DL bytes,-,count,disc native sectors / DL bytes,3092 / 15122304,rg1 census,"runs A40,B45,C40,D45 (identical deltas)",CONFIRMED

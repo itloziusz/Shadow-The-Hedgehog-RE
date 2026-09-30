@@ -1,0 +1,31 @@
+; target SHA-256: fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af
+; RwCamera_DefaultBegin: [804863A4, 80486410), 0x6c bytes
+; classification: shared camera standard-function dispatch
+; RAM address  DOL offset  raw word  instruction
+804863A4  0047FC64  9421FFF0  stwu         r1, -0x10(r1)
+804863A8  0047FC68  7C0802A6  mflr         r0
+804863AC  0047FC6C  90010014  stw          r0, 0x14(r1)
+804863B0  0047FC70  93E1000C  stw          r31, 0xc(r1)
+804863B4  0047FC74  7C7F1B78  mr           r31, r3
+804863B8  0047FC78  808D615C  lwz          r4, 0x615c(r13)
+804863BC  0047FC7C  93E40000  stw          r31, 0(r4)
+804863C0  0047FC80  48005FE5  bl           0x8048c3a4
+804863C4  0047FC84  80CD615C  lwz          r6, 0x615c(r13)
+804863C8  0047FC88  7FE4FB78  mr           r4, r31
+804863CC  0047FC8C  38600000  li           r3, 0
+804863D0  0047FC90  38A00000  li           r5, 0
+804863D4  0047FC94  8186004C  lwz          r12, 0x4c(r6)
+804863D8  0047FC98  7D8903A6  mtctr        r12
+804863DC  0047FC9C  4E800421  bctrl
+804863E0  0047FCA0  2C030000  cmpwi        r3, 0
+804863E4  0047FCA4  41820014  beq          0x804863f8
+804863E8  0047FCA8  7FE3FB78  mr           r3, r31
+804863EC  0047FCAC  48015DAD  bl           0x8049c198
+804863F0  0047FCB0  7FE3FB78  mr           r3, r31
+804863F4  0047FCB4  48000008  b            0x804863fc
+804863F8  0047FCB8  38600000  li           r3, 0
+804863FC  0047FCBC  80010014  lwz          r0, 0x14(r1)
+80486400  0047FCC0  83E1000C  lwz          r31, 0xc(r1)
+80486404  0047FCC4  7C0803A6  mtlr         r0
+80486408  0047FCC8  38210010  addi         r1, r1, 0x10
+8048640C  0047FCCC  4E800020  blr

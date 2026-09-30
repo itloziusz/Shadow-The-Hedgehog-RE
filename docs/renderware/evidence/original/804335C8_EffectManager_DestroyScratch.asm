@@ -1,0 +1,32 @@
+; target SHA-256: fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af
+; EffectManager_DestroyScratch: [804335C8, 80433638), 0x70 bytes
+; classification: shared screen-raster lifecycle
+; RAM address  DOL offset  raw word  instruction
+804335C8  0042CE88  9421FFF0  stwu         r1, -0x10(r1)
+804335CC  0042CE8C  7C0802A6  mflr         r0
+804335D0  0042CE90  90010014  stw          r0, 0x14(r1)
+804335D4  0042CE94  93E1000C  stw          r31, 0xc(r1)
+804335D8  0042CE98  7C7F1B78  mr           r31, r3
+804335DC  0042CE9C  80630034  lwz          r3, 0x34(r3)
+804335E0  0042CEA0  28030000  cmplwi       r3, 0
+804335E4  0042CEA4  4182001C  beq          0x80433600
+804335E8  0042CEA8  80630000  lwz          r3, 0(r3)
+804335EC  0042CEAC  48057641  bl           0x8048ac2c
+804335F0  0042CEB0  807F0034  lwz          r3, 0x34(r31)
+804335F4  0042CEB4  48057639  bl           0x8048ac2c
+804335F8  0042CEB8  38000000  li           r0, 0
+804335FC  0042CEBC  901F0034  stw          r0, 0x34(r31)
+80433600  0042CEC0  807F0038  lwz          r3, 0x38(r31)
+80433604  0042CEC4  28030000  cmplwi       r3, 0
+80433608  0042CEC8  4182001C  beq          0x80433624
+8043360C  0042CECC  80630000  lwz          r3, 0(r3)
+80433610  0042CED0  4805761D  bl           0x8048ac2c
+80433614  0042CED4  807F0038  lwz          r3, 0x38(r31)
+80433618  0042CED8  48057615  bl           0x8048ac2c
+8043361C  0042CEDC  38000000  li           r0, 0
+80433620  0042CEE0  901F0038  stw          r0, 0x38(r31)
+80433624  0042CEE4  80010014  lwz          r0, 0x14(r1)
+80433628  0042CEE8  83E1000C  lwz          r31, 0xc(r1)
+8043362C  0042CEEC  7C0803A6  mtlr         r0
+80433630  0042CEF0  38210010  addi         r1, r1, 0x10
+80433634  0042CEF4  4E800020  blr

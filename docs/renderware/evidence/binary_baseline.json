@@ -1,0 +1,8 @@
+{
+  "target": "../../../main.dol",
+  "size_bytes": 5773024,
+  "sha256": "fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af",
+  "baseline_date": "2026-09-14",
+  "verification": "Get-FileHash -Algorithm SHA256 main.dol; matches pre-existing motion_blur_analysis/inventory.json",
+  "policy": "Target main.dol and pre-existing analysis artifacts are read-only. Revalidate names and addresses in the reference map against the target binary."
+}

@@ -1,0 +1,42 @@
+; target SHA-256: fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af
+; TaskManager_ConstructGroups: [801EB53C, 801EB5D4), 0x98 bytes
+; classification: shared scheduler group order; index5 is Render
+; RAM address  DOL offset  raw word  instruction
+801EB53C  001E4DFC  9421FFE0  stwu         r1, -0x20(r1)
+801EB540  001E4E00  7C0802A6  mflr         r0
+801EB544  001E4E04  3CA08054  lis          r5, -0x7fac
+801EB548  001E4E08  3C808054  lis          r4, -0x7fac
+801EB54C  001E4E0C  90010024  stw          r0, 0x24(r1)
+801EB550  001E4E10  BF410008  stmw         r26, 8(r1)
+801EB554  001E4E14  7C7A1B78  mr           r26, r3
+801EB558  001E4E18  3B800000  li           r28, 0
+801EB55C  001E4E1C  3BA5ED6C  addi         r29, r5, -0x1294
+801EB560  001E4E20  3BC4ED20  addi         r30, r4, -0x12e0
+801EB564  001E4E24  3BE00000  li           r31, 0
+801EB568  001E4E28  7F7DF82E  lwzx         r27, r29, r31
+801EB56C  001E4E2C  38600028  li           r3, 0x28
+801EB570  001E4E30  481B5E11  bl           0x803a1380
+801EB574  001E4E34  7C601B79  or.          r0, r3, r3
+801EB578  001E4E38  41820010  beq          0x801eb588
+801EB57C  001E4E3C  809A0000  lwz          r4, 0(r26)
+801EB580  001E4E40  4BE63A95  bl           0x8004f014
+801EB584  001E4E44  7C601B78  mr           r0, r3
+801EB588  001E4E48  5765103A  slwi         r5, r27, 2
+801EB58C  001E4E4C  3B9C0001  addi         r28, r28, 1
+801EB590  001E4E50  38850004  addi         r4, r5, 4
+801EB594  001E4E54  3BFF0004  addi         r31, r31, 4
+801EB598  001E4E58  7C1A212E  stwx         r0, r26, r4
+801EB59C  001E4E5C  2C1C0006  cmpwi        r28, 6
+801EB5A0  001E4E60  7C7A202E  lwzx         r3, r26, r4
+801EB5A4  001E4E64  A0030004  lhz          r0, 4(r3)
+801EB5A8  001E4E68  60000100  ori          r0, r0, 0x100
+801EB5AC  001E4E6C  B0030004  sth          r0, 4(r3)
+801EB5B0  001E4E70  7C1E282E  lwzx         r0, r30, r5
+801EB5B4  001E4E74  7C7A202E  lwzx         r3, r26, r4
+801EB5B8  001E4E78  90030000  stw          r0, 0(r3)
+801EB5BC  001E4E7C  4180FFAC  blt          0x801eb568
+801EB5C0  001E4E80  BB410008  lmw          r26, 8(r1)
+801EB5C4  001E4E84  80010024  lwz          r0, 0x24(r1)
+801EB5C8  001E4E88  7C0803A6  mtlr         r0
+801EB5CC  001E4E8C  38210020  addi         r1, r1, 0x20
+801EB5D0  001E4E90  4E800020  blr

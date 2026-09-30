@@ -1,0 +1,46 @@
+{
+  "target_sha256": "fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af",
+  "date": "2026-09-14",
+  "target_unchanged": true,
+  "final_manifest_verification": {
+    "result": "PASS",
+    "command": "python -B analysis/motion_blur/tools/dol_evidence.py verify",
+    "original_function_ranges": 121,
+    "instruction_words_checked": 10075,
+    "data_records": 80,
+    "file_backed_data_bytes_checked": 3908,
+    "checks": ["whole-DOL SHA-256", "per-range SHA-256", "RAM/file offsets", "every exported instruction word", "direct branch decoding", "exported data bytes"]
+  },
+  "semantic_tests": {
+    "result": "PASS",
+    "command": "python -B -W error analysis/motion_blur/tools/test_motion_blur_semantics.py",
+    "unittest_methods": 23,
+    "fixture_counts": {"geometry": 90, "copy_offsets": 1960, "ramp_steps": 144, "finite_alpha_conversion": 260, "progress": 640, "interpolation": 240},
+    "additional_checks": ["eight state dispatch pairs", "unsupported state12", "14 GX argument setups", "16 inherited TEV swap-bit combinations", "literal constants", "fused-rounding witness", "copy-clear provenance"],
+    "method": "Byte-grounded synthetic instruction/semantic checks; detailed comparison methods in semantic_verification_extra.md.",
+    "limitations": ["Not game execution, C++ execution, or a GPU trace.", "Floating fixtures use explicitly documented rounding/input domains.", "Nonfinite/out-of-range FCTIWZ and FPSCR/trap behavior are not fabricated by the test interpreter."]
+  },
+  "final_cpp_verification": {
+    "cpp_lines": 2393,
+    "header_lines": 456,
+    "cpp_sha256": "3d2cb9dca2a2b4f220adfb5c16163d9f8e61229b44d89f701a20564261b8ad1b",
+    "header_sha256": "c1aefedcd422b5f16a14c4f461462c81725a6092fb17144b1966df8001328534",
+    "compiler": "Clang 21.1.8",
+    "target": "powerpc-unknown-eabi",
+    "strict_syntax_and_layout": "PASS: C++17, freestanding, no exceptions/RTTI, no fast-math, FP contraction off, Wall/Wextra/Werror",
+    "llvm_ir": "PASS: default and optimized PowerPC-target LLVM IR emission",
+    "final_ir_artifact": "motion_blur_verified.ppc.ll",
+    "machine_object_generation": "BLOCKED: installed LLVM has no PowerPC machine-code backend; confirmed with --print-targets",
+    "linking": "NOT VERIFIED: real SDK/ABI adapter bindings are not supplied",
+    "execution": "NOT PERFORMED"
+  },
+  "adversarial_review": {
+    "report": "final_source_audit.md",
+    "resolved_finding": "Constructor first-vertex stores now preserve their original interleaving with potentially trapping height arithmetic.",
+    "resolution_report": "source_audit_resolution.md",
+    "original_range": ["0x8042EC24", "0x8042ECB0"],
+    "optimized_ir_order_check": "PASS: 24 of 24 object/FP events match the original instruction order",
+    "remaining_scope_limits": ["Backend domain assertions are non-original analysis guards, not generic engine callbacks.", "Selected input continuations do not implement unrelated containing-function arms or tails.", "Original stack residues and full register/stack/exception ABI are not reproduced."]
+  },
+  "runtime_correlation": "UNAVAILABLE: no actual game/FIFO/debugger capture supplied; no visual or GPU-runtime validation claimed"
+}
