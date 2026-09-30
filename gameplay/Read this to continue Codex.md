@@ -11,9 +11,9 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint 18, 2026-09-30)
+## Current continuation (checkpoint 19, 2026-09-30)
 
-Latest `build_and_run.ps1`: **24/24 CTest suites pass**, and stg0100 Dark 35/35 clears →
+Latest `build_and_run.ps1`: **25/25 CTest suites pass**, and stg0100 Dark 35/35 clears →
 stage index 6 (stg0200). Direct stg0201 Hero 60/60 clears → index 11 (stg0302), and
 stg0404 Hero 50/50 clears → index 32 (stg0412); all three CTest cases assert the
 exact destination route, not only process success. All ten documented enemy-count
@@ -27,12 +27,13 @@ unrecovered animation, world trigger, weapon and movement service is labelled as
 `notes/open_questions_terrain_contact.md` maps terrain contact bits and proves the `Awake`
 setter for Chaos-ready flags 0x22/0x23; geometry is still UNKNOWN. Symbols: 1,344 curated
 data rows and 8,594 exported data rows. The larva test uses checks that remain active
-in Release. The three newest families have focused Release-active tests and are not yet
-wired to `stage_sim`. Normal enemy death now marks its SET slot killed/detached before task deletion;
+in Release. BK WingSmall now has a labelled simulator adapter; stg0100 reports
+18 native WingSmall spawns and zero stub enemies. GUN Robot and BK Worm still
+need simulator adapters. Normal enemy death now marks its SET slot killed/detached before task deletion;
 stg0100 asserts zero duplicate Beetle spawns per SET slot. The enemy teardown fix
 detaches a slot only when the old enemy still owns it. SET flag 0x8 does not
 itself block re-spawn: the scanner preserves it if external 0x40 explicitly
-re-arms the slot. See `HANDOFF.md` checkpoint 18
+re-arms the slot. See `HANDOFF.md` checkpoint 19
 before changing code. Keep all writes and builds inside `gameplay/`.
 
 ---

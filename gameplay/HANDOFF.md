@@ -4,6 +4,26 @@
 
 ---
 
+## Checkpoint 19 — 2026-09-30 (BK WingSmall simulator adapter)
+
+- Connected SET 0x008F `BK_WINGSMALL` to the bounded native `BkWingSmallAI`
+  decision module in `src/sim/stage_sim.cpp`. The harness reads `AppearType`
+  and `ActionType` (SET params 7/8), `FloatWidth` (param 10), builds the shared
+  search sensor, and uses proven type-7 HP 2 / Black Arms team
+  (`data/setobj_catalog.txt`, 0x804CD678/0x804CD310). No path geometry is
+  fabricated: `EnemyPath.one`, activation application, motion, flight and
+  attack displacement remain explicitly labelled harness hooks.
+- Added `stage_sim_stg0100_wing_native` to catch a return to the stub factory.
+  **25/25 CTest** pass; stg0100 now reports 74 native spawns, zero stubs,
+  18 BK WingSmall native spawns and zero duplicate GUN Beetle SET spawns.
+  Dark 35/35 still routes to index 6. All other exact-route gates pass.
+- Next: connect GUN Robot/BK Worm world adapters where stage data exercises
+  them; reconstruct the missing movement, collision and path services from
+  evidence. The clean initial public repository is published, with a follow-up
+  pending for this new simulator integration.
+
+---
+
 ## Checkpoint 18 — 2026-09-30 (three bounded enemy AIs; portable test gate)
 
 - Added PROVEN bounded decision slices for original RTTI `GunRobotAI`

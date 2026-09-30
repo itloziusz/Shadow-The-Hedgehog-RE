@@ -28,8 +28,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **26/26 CTest suites** against
-read-only local game data (24 gameplay, one asset, one runtime). Without game
+The full public-tree MSVC Release gate passed **27/27 CTest suites** against
+read-only local game data (25 gameplay, one asset, one runtime). Without game
 data, **11/11** content-independent suites pass. The scripted stg0100 Dark
 mission reached 35/35 and routed to stage index 6. The simulator deliberately
 supplies labelled engine and player hooks, so a passing route is an integration

@@ -70,3 +70,13 @@ motion flag A transition, attack entry timer, and same-frame flyer deletion.
 Its checks remain active in Release. `Attack::Update` delegates to an
 explicit hook, and `EnemyPath.one` geometry, motion flags, search delivery,
 world transforms and effects are not claimed as native parity.
+
+## Simulator integration
+
+`src/sim/stage_sim.cpp` reads SET params 7/8/10 for AppearType, ActionType and
+FloatWidth, creates the native decision AI, and supplies explicitly labelled
+no-op/instant engine services where the reconstructed module requires world
+geometry, flight or motion. This is a harness integration, not activation or
+attack parity. The `stage_sim_stg0100_wing_native` gate asserts 18 native
+BK WingSmall spawns; stg0100 has zero enemy stubs and still clears Dark 35/35.
+All 25 Release CTest suites passed at checkpoint 19.
