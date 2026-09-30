@@ -27,9 +27,22 @@ class RSP:
         self.sock = sock
         self.sock.settimeout(20)
 
+    def receive_exact(self, size):
+        data = bytearray()
+        while len(data) < size:
+            part = self.sock.recv(size - len(data))
+            if not part:
+                raise EOFError("RSP disconnected in fixed-length field")
+            data += part
+        return bytes(data)
+
     def packet(self):
-        while self.sock.recv(1) != b"$":
-            pass
+        while True:
+            start = self.sock.recv(1)
+            if not start:
+                raise EOFError("RSP disconnected before packet")
+            if start == b"$":
+                break
         data = bytearray()
         while True:
             part = self.sock.recv(1)
@@ -38,7 +51,7 @@ class RSP:
             if part == b"#":
                 break
             data += part
-        check = self.sock.recv(2)
+        check = self.receive_exact(2)
         if int(check, 16) != sum(data) & 0xFF:
             self.sock.sendall(b"-")
             raise ValueError("RSP checksum")
@@ -57,9 +70,12 @@ class RSP:
         for offset in range(0, size, 0x100):
             length = min(0x100, size - offset)
             response = self.send(f"m{address+offset:x},{length:x}")
-            if response.startswith("E"):
+            if len(response) == 3 and response.startswith("E"):
                 raise ValueError(f"RSP memory read 0x{address+offset:08x}: {response}")
-            chunks.append(bytes.fromhex(response))
+            data = bytes.fromhex(response)
+            if len(data) != length:
+                raise ValueError("RSP memory response length mismatch")
+            chunks.append(data)
         return b"".join(chunks)
 
     def snapshot(self):
