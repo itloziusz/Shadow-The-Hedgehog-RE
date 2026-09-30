@@ -190,6 +190,10 @@ int main(int argc, char** argv) {
                    "hardware call accepted an incorrect source PC");
         MustReject([&] { (void)shadow::boot::EnterPairedSetupCall(image, state, 0x2032u); },
                    "hardware prefix accepted an incorrect source PC");
+        MustReject([&] { (void)shadow::boot::EnterPairedSetupCall(image, call, 0x4000u); },
+                   "hardware prefix executed supervisor mfmsr from user mode");
+        MustReject([&] { (void)shadow::boot::EnterPairedSetupCall(image, call, 0x6032u); },
+                   "hardware prefix accepted user mode with FP enabled");
         auto wrong_stack_entry = paired_entry;
         wrong_stack_entry.cpu.gpr[1] -= 8u;
         MustReject([&] { (void)shadow::boot::EnterHid2ReadCall(image, wrong_stack_entry); },
@@ -197,6 +201,11 @@ int main(int argc, char** argv) {
         MustReject([&] { (void)shadow::boot::ReturnFromHid2Read(image,
                    shadow::boot::PairedSetupStackPrefix{}, 0xE0000000u); },
                    "HID2 accessor accepted an incorrect entry PC");
+        auto user_mode_hid2_read = hid2_entry;
+        user_mode_hid2_read.machine.msr |= 0x4000u;
+        MustReject([&] { (void)shadow::boot::ReturnFromHid2Read(
+                   image, user_mode_hid2_read, 0xE0000000u); },
+                   "HID2 accessor executed supervisor mfspr from user mode");
         MustReject([&] { (void)shadow::boot::IssueHid2Write(image, hid2_entry); },
                    "HID2 writer accepted an incorrect entry PC");
         auto user_mode_hid2 = hid2_return;

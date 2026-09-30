@@ -5,6 +5,16 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 30: six-agent wall audit and privilege correction
+
+| Field | Result |
+|---|---|
+| Last validated connected boundary | Unchanged: the native probe starts at `0x80003154` and, with explicitly supplied synthetic/HLE MSR, HID2 and HID0 values, stops **before** `sync` at `0x80371730`. Default and partial-input stops remain earlier. |
+| Earliest divergence found and fixed | An adversarial run with user-mode MSR `0x00004000` previously passed `mfmsr` at `0x80003400`, fabricated a state at `0x80371714`, and emitted stack writes. Raw `0x7C0000A6` and the 750-family privilege rule show the first instruction should trap. `EnterPairedSetupCall()` now declines before it; `ReturnFromHid2Read()` separately declines a user-mode HID2 `mfspr`. Focused API cases and `boot_pal_user_mode_decline` enforce both earliest boundaries. |
+| Six independent wall studies | `SYNC_GQR_CHAIN.md` checks all 14 tail words and nine SPRs; `ICFI_SYNC_BOUNDARY.md` shows why a logged barrier event is insufficient; `PAIRED_FPR_BREAKTHROUGH.md` adds a six-point synthetic PS0 capture but confirms stock GDB cannot expose PS1; `L2_STATUS_ORACLE.md` observes both L2IP polls clear in one synthetic run without inferring retail timing; `OS_ENTRY_NEXT_BOUNDARY.md` independently checks 63 words and traces the time-base/low-memory offset dependency; `NATIVE_PREFIX_ADVERSARIAL_29.md` records the two corrected privilege gaps. All are bounded evidence, not connected native equivalence. |
+| Rerun | Full MSVC Release build and **44/44 CTest** passed after the fixes. The positive HLE-input probe still reaches the same `0x80371730` stop; the user-mode probe now exits nonzero with no later checkpoint or stack-write event. The game inputs stayed read-only. |
+| Exact next proof obligation | `sync` must acknowledge ICFI completion and preserve instruction visibility/ordering before `0x80371734`. The native state has a write operand, not a completed cache/barrier effect or separately derived HID0 readback. Retail ICE/ABE, PS1, L2 timing and OS time-base/low-memory inputs remain UNKNOWN. Do not advance by incrementing PC past a log-only event. |
+
 ## 2026-09-30 — checkpoint 29: HID0 ICFI request and full rerun
 
 | Field | Result |

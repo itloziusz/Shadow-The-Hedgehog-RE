@@ -161,6 +161,11 @@ HardwareCallPrefix EnterPairedSetupCall(const BootImage& image,
     if (state.pc != 0x80003400u || state.lr != 0x8000315Cu) {
         throw std::runtime_error("hardware helper entry state mismatch");
     }
+    // The first instruction is supervisor-only mfmsr. A user-mode entry
+    // takes a program exception before any of this prefix can execute.
+    if ((observed_msr & 0x4000u) != 0u) {
+        throw std::runtime_error("hardware helper mfmsr requires supervisor state");
+    }
     constexpr std::array<std::uint32_t, 5> words{{
         0x7C0000A6u, // mfmsr r0
         0x60002000u, // ori r0,r0,0x2000
@@ -215,6 +220,9 @@ PairedSetupStackPrefix ReturnFromHid2Read(const BootImage& image,
     if (state.machine.cpu.pc != 0x80370BA8u ||
         state.machine.cpu.lr != 0x80371724u) {
         throw std::runtime_error("HID2 read accessor entry state mismatch");
+    }
+    if ((state.machine.msr & 0x4000u) != 0u) {
+        throw std::runtime_error("HID2 read requires supervisor state");
     }
     if (image.ReadWord(0x80370BA8u) != 0x7C78E2A6u ||
         image.ReadWord(0x80370BACu) != 0x4E800020u) {

@@ -60,6 +60,11 @@ operations may be replaced only after their producers and consumers are traced.
 - `research/` — independent pre-entry, HID2/HID0, FPR-lane, L2, CRT-memory,
   constructor and application-loop audits with exact address evidence, including assembly CFG/data-flow and
   a synthetic Dolphin/HLE checkpoint study. The latter is not retail IPL proof.
+- `research/ICFI_SYNC_BOUNDARY.md`, `SYNC_GQR_CHAIN.md`,
+  `PAIRED_FPR_BREAKTHROUGH.md`, `L2_STATUS_ORACLE.md` and
+  `OS_ENTRY_NEXT_BOUNDARY.md` — new bounded hardware, FPR and OS proof
+  obligations beyond the connected stop. `NATIVE_PREFIX_ADVERSARIAL_29.md`
+  records the fixed supervisor-privilege divergence.
 - `tools/capture_dolphin_rsp.py` — hash-pinned external PPC checkpoint capture
   for validation only; the native executable does not depend on Dolphin.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
@@ -76,7 +81,7 @@ operations may be replaced only after their producers and consumers are traced.
   its generated recompiler dependencies are not in this repository.
 
 Build with the root CMake project. Supply
-`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable thirteen content-backed
+`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable fourteen content-backed
 CTest cases. This path stays in the ignored build cache and is never committed.
 
 The ordinary probe stops at `0x80003400`. An independently measured MSR can
@@ -86,6 +91,9 @@ at `0x8037172C` after reporting the HID2 write request. Add
 `--observed-hid0 0011C464` to report the ICFI request and stop at
 `0x80371730` before `sync`. All supplied values came from a startup-only
 synthetic HLE run and are not retail boot defaults.
+The probe declines a user-mode MSR before privileged `mfmsr`; a dedicated
+negative CLI gate prevents regression. Crossing `sync` still requires
+validated cache-command completion and separate HID0 readback.
 
 ## Confidence convention
 

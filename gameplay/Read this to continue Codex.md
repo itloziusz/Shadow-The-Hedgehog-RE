@@ -11,7 +11,7 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint 25, 2026-09-30)
+## Current continuation (checkpoint 26, 2026-09-30)
 
 The canonical public repository builds the C++17 boot-entry foundation under
 `reverse/boot/`. Its default PAL fixture gate stops at `0x80003400`; with
@@ -24,11 +24,13 @@ CRT, constructor and initialization state. Independent `reverse/boot/research/`
 notes now also cover HID2 write, HID0 ICFI, FPR lanes, L2 status polls, CRT
 memory and constructor indices 12–15. Unknown pre-CRT FPR bytes at
 `0x805F1F30..3F` and IPL-dependent FST placement remain unresolved. The
-public Release gate is **43/43 CTest**; the standalone gameplay script passed
+public Release gate is **44/44 CTest**; the standalone gameplay script passed
 **27/27** and stg0100 Dark 35/35 when `SHADOW_GAME_FILES_DIR` pointed to
-read-only extracted assets. `reverse/boot/PROGRESS.md` checkpoint 29 records
-the next exact instruction and remaining proof obligations. See `HANDOFF.md`
-checkpoint 25 and `reverse/boot/OPEN_QUESTIONS.md`.
+read-only extracted assets. Six new boot audits leave the connected stop
+before `sync` at `0x80371730`; an adversarial privilege bug was corrected at
+the earlier `mfmsr` and HID2 read boundaries. `reverse/boot/PROGRESS.md`
+checkpoint 30 records the next exact proof obligations. See `HANDOFF.md`
+checkpoint 26 and `reverse/boot/OPEN_QUESTIONS.md`.
 
 ### Gameplay continuation from checkpoint 20
 

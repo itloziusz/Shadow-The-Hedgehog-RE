@@ -1,0 +1,20 @@
+if(NOT EXISTS "${DOL}")
+    message(FATAL_ERROR "PAL DOL fixture missing")
+endif()
+file(SHA256 "${DOL}" actual_sha256)
+if(NOT actual_sha256 STREQUAL "fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af")
+    message(FATAL_ERROR "PAL GUPP8P DOL SHA-256 mismatch")
+endif()
+
+execute_process(
+    COMMAND "${PROGRAM}" "${DOL}" --observed-msr 00004000
+    RESULT_VARIABLE result OUTPUT_VARIABLE output ERROR_VARIABLE error)
+if(result EQUAL 0)
+    message(FATAL_ERROR "user-mode mfmsr unexpectedly completed")
+endif()
+if(NOT output STREQUAL "CHECKPOINT pc=0x80003158 lr=0x80003158\n")
+    message(FATAL_ERROR "user-mode path advanced beyond the first privileged instruction: ${output}")
+endif()
+if(NOT error MATCHES "mfmsr requires supervisor state")
+    message(FATAL_ERROR "user-mode decline lost its earliest boundary: ${error}")
+endif()

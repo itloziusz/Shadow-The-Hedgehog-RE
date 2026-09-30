@@ -105,6 +105,11 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             "-DPROGRAM=$<TARGET_FILE:shadow_boot_tests>"
             -DMODE=regression
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
+    add_test(NAME boot_pal_user_mode_decline
+        COMMAND ${CMAKE_COMMAND}
+            "-DDOL=${SHADOW_BOOT_DOL_PATH}"
+            "-DPROGRAM=$<TARGET_FILE:shadow_boot_probe>"
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_user_mode_decline.cmake")
     add_test(NAME boot_pal_synthetic_hle_prefix
         COMMAND ${CMAKE_COMMAND}
             "-DDOL=${SHADOW_BOOT_DOL_PATH}"

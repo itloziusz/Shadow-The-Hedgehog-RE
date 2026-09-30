@@ -4,6 +4,24 @@
 
 ---
 
+## Checkpoint 26 — 2026-09-30 (six-agent boot wall audit)
+
+- Six independent boot workstreams checked the `sync`/GQR tail, HID0 ICFI
+  completion, paired FPR lanes, L2 status polls, the first OS clock helper,
+  and the current native prefix adversarially. Their bounded evidence is
+  indexed in `reverse/boot/ARCHAEOLOGY_INDEX.md`; the connected native stop
+  remains **before** `0x80371730`. A write-request log is insufficient to
+  cross `sync` without completed cache/barrier state and later HID0 readback.
+- The adversarial audit reproduced a genuine error: a user-mode MSR passed
+  native `mfmsr` at `0x80003400`. The wrapper now declines before that word;
+  the HID2 read accessor separately declines user mode. A direct negative
+  CLI gate plus API cases prevent recurrence. Full Release CTest passed
+  **44/44**; ordinary supplied-HLE boot still stops at `0x80371730`.
+- Synthetic HLE checkpoints exposed PS0 but not PS1, and observed both L2IP
+  polls clear in one run. Retail PS1/cache timing and the OS time-base plus
+  low-memory offset remain UNKNOWN. Gameplay code and stg0100 route were not
+  changed in this checkpoint. See `reverse/boot/PROGRESS.md` checkpoint 30.
+
 ## Checkpoint 25 — 2026-09-30 (boot HID0 ICFI request)
 
 - The connected native boot probe now accepts an explicitly observed HID0
