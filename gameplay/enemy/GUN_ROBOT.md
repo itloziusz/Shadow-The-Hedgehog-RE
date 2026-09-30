@@ -1,5 +1,12 @@
 # GUN Robot (`GunRobotTask`, SET `GUN_ROBOT` 0x0068)
 
+The stage simulator now uses this bounded native AI for SET 0x0068. Its
+`SimGunRobotBody` supplies explicitly labelled walker, tracking, terrain,
+display and shared-Caution hooks; no shared-Caution transition is invented.
+`stage_sim_stg0301_robot_native` checks 11 native spawns. The full Release
+gameplay gate passed 27/27 at checkpoint 20; world and attack parity remain
+unproven.
+
 Source: PAL GUPP8P `sys/main.dol`, read only. RTTI class names below are original;
 function names describe recovered semantics. Confidence terms: PROVEN = direct PPC/data,
 STRONG = multiple consistent observations, LIKELY = indirect, UNKNOWN = unresolved.

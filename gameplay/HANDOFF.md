@@ -4,6 +4,26 @@
 
 ---
 
+## Checkpoint 20 — 2026-09-30 (GUN Robot and BK Worm simulator adapters)
+
+- Connected native `GunRobotAI` (SET 0x0068, HP 8, team GUN) and `BkWormAI`
+  (SET 0x0090, HP 12, team Black Arms) to the stage simulator. Their SET
+  parameter indices and HP/team values come from `data/setobj_catalog.txt`,
+  0x804CD678 and 0x804CD310. Walker caution, target tracking, terrain RNG,
+  worm movement/effects and animation remain explicit harness hooks; this is
+  decision integration, not world or attack parity.
+- Added native-spawn regressions: stg0301 has 11 native GUN Robots; stg0201
+  has 9 native BK Worms. The full `build_and_run.ps1` gate passes **27/27
+  CTest**, including all ten exact stage routes and stg0100 Dark 35/35 → index
+  6. Independent census: stg0100, stg0301, stg0401 and stg0404 now have zero
+  stub enemies. Remaining stubs across the ten routes are BK WingLarge,
+  Egg Pierrot, BK Giant, GUN Bigfoot, BK Chaos and BK Ninja.
+- Next: recover those remaining families and, more importantly, the missing
+  movement, collision, path and world engine services. Sync this checkpoint
+  to the public repository and re-run its full multi-module gate.
+
+---
+
 ## Checkpoint 19 — 2026-09-30 (BK WingSmall simulator adapter)
 
 - Connected SET 0x008F `BK_WINGSMALL` to the bounded native `BkWingSmallAI`

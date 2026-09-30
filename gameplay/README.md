@@ -51,12 +51,11 @@ recovered semantics; write only inside this folder (other folders in the repo ar
 - Player helpers recover bounded Ground/Fall/Jump/HomingAttack decisions, including
   `PlayerPhysics::ApplyJumpHold` at 0x80087384..0x800873F0. Full world and behavior updates remain open.
 - `stage_sim` — all ten enemy-count mission stages clear through documented routes;
-  route indices are asserted by CTest. GUN Beetle, Egg Pawn, BK Soldier and BK WingSmall use partial native
+  route indices are asserted by CTest. GUN Beetle, GUN Robot, Egg Pawn, BK Soldier, BK WingSmall and BK Worm use partial native
   decision AI; motion, weapon, path and locomotion remain labelled engine hooks.
-  Latest full gate: **25/25 CTest suites**, plus stg0100 Dark 35/35 → stage index 6.
-  stg0100 now has zero enemy stubs; BK WingSmall has 18 native SET spawns. GUN Robot and BK Worm
-  have native focused tests but remain simulator stubs
-  until their world-service adapters are connected.
+  Latest full gate: **27/27 CTest suites**, plus stg0100 Dark 35/35 → stage index 6.
+  stg0100, stg0301, stg0401 and stg0404 have zero enemy stubs; world-service
+  hooks remain, so this does not establish complete enemy parity.
 - `data/` — generated caches and tables (regenerate with the tool pipeline in `tools/README.md`).
 
 ## Milestone status

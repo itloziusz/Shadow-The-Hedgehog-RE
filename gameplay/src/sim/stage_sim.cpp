@@ -10,6 +10,8 @@
 //   GunSoldier AI states ............................. GunSoldierAI.cpp
 //   GUN Beetle decision states ....................... GunBeetleAI.cpp
 //   BK WingSmall decision states ...................... BkWingSmallAI.cpp
+//   GUN Robot decision states ......................... GunRobotAI.cpp
+//   BK Worm decision states ........................... BkWormAI.cpp
 //   Egg Pawn decision states ......................... EggPawnAI.cpp
 //   BK Soldier decision states ....................... BkSoldierAI.cpp
 //   Stage table, mission descriptors, nukkoro2.inf,
@@ -27,10 +29,12 @@
 #include "shadow/gameplay/EnemyAI.hpp"
 #include "shadow/gameplay/BkSoldierAI.hpp"
 #include "shadow/gameplay/BkWingSmallAI.hpp"
+#include "shadow/gameplay/BkWormAI.hpp"
 #include "shadow/gameplay/BkLarva.hpp"
 #include "shadow/gameplay/EggPawnAI.hpp"
 #include "shadow/gameplay/GunBeetleAI.hpp"
 #include "shadow/gameplay/GunSoldierAI.hpp"
+#include "shadow/gameplay/GunRobotAI.hpp"
 #include "shadow/gameplay/Mission.hpp"
 #include "shadow/gameplay/SetSystem.hpp"
 #include "shadow/gameplay/StageFlow.hpp"
@@ -54,6 +58,8 @@ struct World {
     int spawnedNative = 0, spawnedStub = 0, defeated = 0;
     int beetleDuplicateSpawns = 0;
     int wingNativeSpawns = 0;
+    int robotNativeSpawns = 0;
+    int wormNativeSpawns = 0;
     std::map<const SetSlot*, int> beetleSpawnsBySlot;
     std::map<std::string, int> stubTypes;
 };
@@ -325,6 +331,109 @@ struct SimBkWingSmall : Enemy {
     }
 };
 
+// Native GUN Robot decisions. Shared walker motion, target tracking, terrain
+// point selection and EnemyBaseAI_Caution remain world-engine hooks. In
+// particular, the harness does not invent a Caution-to-Attack transition.
+struct SimGunRobotBody : GunRobotBody {
+    Vec3 pos{}, setPos{}, moveTarget{};
+    bool DetectNearestPlayer(const EnemySensor& s) override { return s.Detect(g.player); }
+    void BeginStandingWait() override {}                 // HARNESS: no walker motion
+    void TickStandingWait() override {}
+    void BeginMovingWait() override {}
+    void TickMovingWait() override {}
+    void BeginReturnHome() override {}
+    bool AdvanceTowardMoveTarget() override { return true; } // HARNESS: no locomotion
+    void SetMoveTarget(const Vec3& p) override { moveTarget = p; }
+    Vec3 SetPosition() const override { return setPos; }
+    Vec3 Position() const override { return pos; }
+    Vec3 PickRandomPointNear(const Vec3& centre, float) override { return centre; } // HARNESS: no terrain/RNG
+    void SetMotion(int, bool) override {}                 // HARNESS: no display model
+    bool MotionEnded() const override { return true; }   // HARNESS: instant motion
+    bool TrackedTargetInSearchArea(const EnemySensor& s, const Vec3& p) const override {
+        return s.Detect(p);
+    }
+    Vec3 TrackedTargetPosition() const override { return g.player; }
+    void FaceTrackedTarget() override {}                 // HARNESS: instant facing
+    bool TurnToTargetYaw() override { return true; }     // HARNESS: instant facing
+    void BeginBaseCaution() override {}                  // HARNESS: shared state not recovered
+    void UpdateBaseCaution(GunRobotAI&) override {}      // HARNESS: shared state not recovered
+    void ApplyDeathEffects() override {}                 // HARNESS: no display/status effects
+};
+
+struct SimGunRobot : Enemy {
+    SimGunRobotBody body;
+    EnemySensor sensor;
+    SimStatus* st;
+    SimGunRobot(Task* layer, SetSlot& s) : Enemy(layer, &s) {
+        float p[27] = {};
+        int32_t appear = 0, weapon = 0, waitMove = 0;
+        if (SetSlot_GetParams(s, p, sizeof p)) {
+            std::memcpy(&appear, &p[7], 4);
+            std::memcpy(&weapon, &p[8], 4);
+            std::memcpy(&waitMove, &p[13], 4);
+        }
+        body.pos = body.setPos = SetSlot_GetPosition(s);
+        sensor.Build(body.pos, SetSlot_GetRotationRad(s), p);
+        st = new SimStatus(8.0f);                       // MaxHP table 0x804CD678[3]
+        status.reset(st);
+        disp.reset(new SimDisp);
+        move.reset(new SimMove);
+        auto* a = new GunRobotAI(body, sensor, appear, weapon, waitMove);
+        ai.reset(a);
+        st->ai = a;
+        st->slot = &s;
+        st->team = TeamGun;
+        setBase.reset(new SimSetBase(*this));
+    }
+};
+
+// Native BK Worm decisions. Terrain, random values, rotation and animation
+// are explicit harness inputs. Original world displacement is not inferred.
+struct SimBkWormBody : BkWormBody {
+    Vec3 pos{};
+    Vec3 Position() const override { return pos; }
+    Vec3 TargetPosition() const override { return g.player; }
+    Vec3 TargetDirection() const override {
+        return {g.player.x - pos.x, g.player.y - pos.y, g.player.z - pos.z};
+    }
+    bool TurnTowards(const Vec3&) override { return true; } // HARNESS: instant turn
+    bool MotionEnded() const override { return true; }      // HARNESS: instant motion
+    float Uniform(float lo, float) override { return lo; } // HARNESS: deterministic RNG
+    void InitialSetup() override {}              // HARNESS: no display model
+    void BeginBuriedWait() override {}           // HARNESS: no effect/display
+    void PrepareEmergence(const Vec3&) override {}
+    void BeginAppear() override {}
+    void BeginStanding() override {}
+    void BeginAttack() override {}
+    void BeginAfterAttack() override {}
+    Vec3 BeginMove() override { return pos; }    // HARNESS: no terrain displacement
+    void BeginMoveTravel() override {}
+    void CompleteMoveTravel() override {}
+};
+
+struct SimBkWorm : Enemy {
+    SimBkWormBody body;
+    EnemySensor sensor;
+    SimStatus* st;
+    SimBkWorm(Task* layer, SetSlot& s) : Enemy(layer, &s) {
+        float p[10] = {};
+        int32_t attackTimes = 1;
+        if (SetSlot_GetParams(s, p, sizeof p)) std::memcpy(&attackTimes, &p[8], 4);
+        body.pos = SetSlot_GetPosition(s);
+        sensor.Build(body.pos, SetSlot_GetRotationRad(s), p);
+        st = new SimStatus(12.0f);                    // MaxHP table 0x804CD678[8]
+        status.reset(st);
+        disp.reset(new SimDisp);
+        move.reset(new SimMove);
+        auto* a = new BkWormAI(body, sensor, attackTimes, p[9]);
+        ai.reset(a);
+        st->ai = a;
+        st->slot = &s;
+        st->team = TeamBlackArms;
+        setBase.reset(new SimSetBase(*this));
+    }
+};
+
 // Native Egg Pawn decisions with explicit harness services for walker patrol,
 // target acquisition, terrain random-point selection, animation and movement.
 struct SimEggPawnBody : EggPawnBody {
@@ -531,8 +640,8 @@ int main(int argc, char** argv) {
     if (playSlot < 0) { std::printf("stage has no EnemyMission; nothing to simulate\n"); return 0; }
     std::printf("playing %s mission: defeat %d of team %d\n", kSlot[playSlot], required, team);
 
-    // Factories: native GunSoldier, GunBeetle, BkWingSmall, EggPawn,
-    // BkSoldier AI, and BkLarvaGenerator;
+    // Factories: native GunSoldier, GunBeetle, GunRobot, BkWingSmall,
+    // BkWorm, EggPawn, BkSoldier AI, and BkLarvaGenerator;
     // other enemy ids use labelled stubs.
     Task* enemyLayer = tm.GetLayer(TaskManager::Enemy);
     set.RegisterFactory(0x0064, [&](SetSlot& s) -> void* { ++g.spawnedNative; return new SimGunSoldier(enemyLayer, s); });
@@ -546,6 +655,16 @@ int main(int argc, char** argv) {
         ++g.wingNativeSpawns;
         return new SimBkWingSmall(enemyLayer, s);
     });
+    set.RegisterFactory(0x0068, [&](SetSlot& s) -> void* {
+        ++g.spawnedNative;
+        ++g.robotNativeSpawns;
+        return new SimGunRobot(enemyLayer, s);
+    });
+    set.RegisterFactory(0x0090, [&](SetSlot& s) -> void* {
+        ++g.spawnedNative;
+        ++g.wormNativeSpawns;
+        return new SimBkWorm(enemyLayer, s);
+    });
     set.RegisterFactory(0x0079, [&](SetSlot& s) -> void* { ++g.spawnedNative; return new SimEggPawn(enemyLayer, s); });
     set.RegisterFactory(0x008D, [&](SetSlot& s) -> void* { ++g.spawnedNative; return new SimBkSoldier(enemyLayer, s); });
     set.RegisterFactory(0x0091, [&](SetSlot& s) -> void* {
@@ -553,8 +672,8 @@ int main(int argc, char** argv) {
         return new BkLarvaGenerator(enemyLayer, s, em, larvaEngine);
     });
     for (const auto& d : OriginalSetCatalog()) {
-        if (d.id <= 0x65 || d.id == 0x0079 || d.id == 0x008D || d.id == 0x008F ||
-            d.id == 0x0091 || d.id >= 0x96) continue;
+        if (d.id <= 0x65 || d.id == 0x0068 || d.id == 0x0079 || d.id == 0x008D ||
+            d.id == 0x008F || d.id == 0x0090 || d.id == 0x0091 || d.id >= 0x96) continue;
         const uint16_t id = d.id;
         const std::string name = d.name ? d.name : "?";
         set.RegisterFactory(id, [&, id, name](SetSlot& s) -> void* {
@@ -588,6 +707,8 @@ int main(int argc, char** argv) {
     for (auto& kv : g.stubTypes) std::printf(" [%s x%d]", kv.first.c_str(), kv.second);
     std::printf("\nGUN Beetle duplicate SET-slot spawns: %d", g.beetleDuplicateSpawns);
     std::printf("\nBK WingSmall native SET spawns: %d", g.wingNativeSpawns);
+    std::printf("\nGUN Robot native SET spawns: %d", g.robotNativeSpawns);
+    std::printf("\nBK Worm native SET spawns: %d", g.wormNativeSpawns);
     std::printf("\ndefeated: %d   EnemyManager defeated GUN/Egg/BA = %d/%d/%d\n", g.defeated,
                 em.defeated[0], em.defeated[1], em.defeated[2]);
     const bool cleared = mission && mission->state() == Mission::State::Cleared;

@@ -1,5 +1,11 @@
 # BK_WORM — bounded native decision loop (PAL GUPP8P)
 
+The stage simulator now uses this native decision loop for SET 0x0090. Its
+`SimBkWormBody` supplies explicitly labelled deterministic RNG, instant
+motion, and absent terrain/displacement services. `stage_sim_stg0201_worm_native`
+checks 9 native spawns. The full Release gameplay gate passed 27/27 at
+checkpoint 20; world motion and effects remain unproven.
+
 `BkWorm`, `BkWormAI` and the six `EnemyAIState_BkWormAI_*` names below are **original RTTI** names.
 Method names in `src/BkWormAI.cpp` are **recovered semantics**. The module reconstructs the
 AI state decisions; it does not claim the worm's terrain displacement, animation or effect
