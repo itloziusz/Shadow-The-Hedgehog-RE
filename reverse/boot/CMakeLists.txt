@@ -27,6 +27,10 @@ set(SHADOW_BOOT_DOL_PATH "${PROJECT_SOURCE_DIR}/sys/main.dol" CACHE FILEPATH
 if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
     find_package(Python3 QUIET COMPONENTS Interpreter)
     if(Python3_Interpreter_FOUND)
+        add_test(NAME boot_pal_semantic_recognizer
+            COMMAND "${Python3_EXECUTABLE}" -B
+                "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_recognizer.py"
+                "${SHADOW_BOOT_DOL_PATH}")
         add_test(NAME boot_pal_raw_prefix
             COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/verify_binary_note.py"

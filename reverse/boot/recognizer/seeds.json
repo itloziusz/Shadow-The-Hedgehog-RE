@@ -1,0 +1,53 @@
+{
+  "binary_sha256": "fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af",
+  "regions": [
+    {
+      "id": "register_helper",
+      "start": "800032B0",
+      "end": "80003340",
+      "family": "register_startup",
+      "status": "VALIDATED",
+      "evidence": ["reverse/boot/research/BINARY_BOOT_PREFIX.md", "reverse/boot/PROGRESS.md checkpoint 31", "reverse/boot/tests/test_boot.cpp"]
+    },
+    {
+      "id": "paired_stack_prefix",
+      "start": "80371714",
+      "end": "80371724",
+      "family": "stack_prologue",
+      "status": "VALIDATED",
+      "evidence": ["reverse/boot/research/PAIRED_STACK_MEMORY.md", "reverse/boot/tests/test_boot.cpp"]
+    },
+    {
+      "id": "ctor_12",
+      "start": "80055564",
+      "end": "800555AC",
+      "family": "constructor_static_data",
+      "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/CONSTRUCTOR_NEXT_TARGETS.md: index 12; binary and state projection only"]
+    },
+    {
+      "id": "ctor_13",
+      "start": "80056BB0",
+      "end": "80056C64",
+      "family": "constructor_static_data",
+      "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/CONSTRUCTOR_NEXT_TARGETS.md: index 13; binary and state projection only"]
+    },
+    {
+      "id": "ctor_14",
+      "start": "80058A98",
+      "end": "80058B2C",
+      "family": "constructor_static_data",
+      "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/CONSTRUCTOR_NEXT_TARGETS.md: index 14; binary and state projection only"]
+    },
+    {
+      "id": "ctor_15",
+      "start": "8005A32C",
+      "end": "8005A350",
+      "family": "constructor_static_data",
+      "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/CONSTRUCTOR_NEXT_TARGETS.md: index 15; binary and state projection only"]
+    }
+  ]
+}

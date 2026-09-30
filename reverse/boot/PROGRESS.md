@@ -5,6 +5,17 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 32: binary-first semantic recognizer batch
+
+| Field | Result |
+|---|---|
+| Last validated connected boundary | Unchanged. The Release C++ probe reran from `0x80003154` with explicitly supplied synthetic/HLE MSR/HID2/HID0 inputs and stopped **before** `sync` at `0x80371730`. No first-frame or later boot claim is made. |
+| New tool and first scan | `recognizer/` now reads hash-pinned DOL words, builds bounded normalized CFG/data-flow fingerprints, persists evidence in SQLite, learns patterns from supported seeds, clusters unknown constructor-table targets, and proposes minimal experiments. Batch 1 stored 39 regions: 2 bounded validated seeds, 4 statically supported constructor slices, 33 unknowns. It found 5 multi-member structural clusters; the largest has 15 targets and minimum pair score 0.8036. `research/SEMANTIC_RECOGNIZER_32.md` records the exact raw-word example and limits. |
+| First frontier finding | Raw `0x80371730..0x80371767` matches `sync`, zero, eight consecutive GQR writes, stack restore, return. The detector is strongly supported **for the instruction pattern only**. The missing ICFI/`sync` consequence and live stack/SPR state still block connected native translation; the database frontier did not move. |
+| Falsification fixes | A nonconsecutive eight-write chain initially matched and an unmodeled instruction or call could leave stale abstract constants. The detector now requires eight adjacent writes; unmodeled instructions and untraced calls poison state. A scalar FP load also makes its unproven paired lane UNKNOWN. Mutation tests and reproducible learning checks cover these failures. No candidate was automatically promoted. |
+| Verification | `python -B reverse/boot/tests/test_recognizer.py <PAL main.dol>` passed 11/11 focused tests. The batch reran the current native probe and preserved the stop at `0x80371730`. Complete MSVC Release build and final root CTest passed **45/45**, including the newly registered PAL recognizer gate. |
+| Next proof obligation | Capture the completed ICFI/`sync` contract and live GQR readback, then compare the first paired-single GQR consumer `0x80370CFC` before extending connected C++. Independently capture the live constructor-table pointer and ordered writes for a clustered target before promoting its family. |
+
 ## 2026-09-30 — checkpoint 31: stack writes become addressable guest bytes
 
 | Field | Result |

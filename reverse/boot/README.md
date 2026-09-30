@@ -59,6 +59,10 @@ operations may be replaced only after their producers and consumers are traced.
   original-state comparison required by the run/trace/fix workflow.
 - `ARCHAEOLOGY_INDEX.md` — binary-first coverage, proof ladder and exact
   boundaries for each boot region.
+- `recognizer/` — hash-pinned raw-word semantic recognizer with bounded CFG,
+  symbolic state, structural detectors, SQLite evidence DB, unknown-region
+  clustering, and fail-closed boot-frontier analysis. See its `README.md` and
+  `research/SEMANTIC_RECOGNIZER_32.md` for the first scan and limitations.
 - `research/` — independent pre-entry, HID2/HID0, FPR-lane, L2, CRT-memory,
   constructor and application-loop audits with exact address evidence, including assembly CFG/data-flow and
   a synthetic Dolphin/HLE checkpoint study. The latter is not retail IPL proof.
@@ -85,6 +89,8 @@ operations may be replaced only after their producers and consumers are traced.
 Build with the root CMake project. Supply
 `-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable fourteen content-backed
 CTest cases. This path stays in the ignored build cache and is never committed.
+The PAL fixture also enables `boot_pal_semantic_recognizer`, which checks the
+raw frontier words and adversarial detector/data-flow mutations.
 
 The ordinary probe stops at `0x80003400`. An independently measured MSR can
 be supplied as `shadow_boot_probe <main.dol> --observed-msr 00002032` to stop
