@@ -5,9 +5,17 @@ $ErrorActionPreference = 'Stop'
 $here  = Split-Path -Parent $MyInvocation.MyCommand.Path
 $src   = Join-Path $here 'src'
 $build = Join-Path $here 'build'
-$files = Join-Path (Split-Path -Parent $here) 'files'   # game data, read-only
+$files = if ($env:SHADOW_GAME_FILES_DIR) {
+    $env:SHADOW_GAME_FILES_DIR
+} else {
+    Join-Path (Split-Path -Parent $here) 'files'
+}
+if (-not (Test-Path -LiteralPath (Join-Path $files 'nukkoro2.inf') -PathType Leaf)) {
+    throw "game files not found; set SHADOW_GAME_FILES_DIR to the read-only extracted files directory"
+}
 
-cmake -S $src -B $build | Out-Null
+cmake -S $src -B $build "-DSHADOW_GAME_FILES_DIR=$files" | Out-Null
+if ($LASTEXITCODE -ne 0) { throw "configure failed" }
 cmake --build $build --config Release
 if ($LASTEXITCODE -ne 0) { throw "build failed" }
 ctest --test-dir $build -C Release --output-on-failure

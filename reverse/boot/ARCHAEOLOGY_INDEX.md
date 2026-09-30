@@ -34,16 +34,16 @@ The checked regions are bounded; this is not complete boot coverage.
 | DOL entry `0x80003154`, register helper `0x800032B0..0x8000333C` — CRT/CPU | yes | yes | HLE PC/GPR/LR | PC/GPR/LR | `research/BINARY_BOOT_PREFIX.md`, `MINIMAL_BOOT_FOUNDATION.md`; other incoming state is preserved but not represented by `StartupState`. |
 | Direct call `0x80003158 -> 0x80003400` — CPU | yes | yes | HLE PC/GPR/LR | PC/GPR/LR | Raw relative branch and link bit tested; native stops before callee without supplied MSR. |
 | Wrapper `0x80003400..0x80003410` — CPU/OS | yes | yes | HLE PC/LR/r0/r31/MSR | those fields with supplied MSR | `research/BINARY_BOOT_PREFIX.md`, `ASM_HARDWARE_VALIDATION.md`; `mtmsr` consequences beyond modeled fields require consumer analysis. |
-| Paired setup `0x80371714..0x80371764` and HID accessors — CPU/cache | yes | yes for bounded words | HLE HID2 via GPR, HID0 readback, stack | first four words and two-word HID2 read with supplied input only | `research/PAIRED_SETUP_STATE.md`, `PAIRED_INPUT_PROVENANCE.md`; native matches the two ordered stack stores and stops at `0x80371724` before HID2 OR/write. HID0 ICFI is self-clearing when ICE enabled. |
-| FPR/FPSCR `0x80370CDC..0x80370E00` — CPU | yes, 74 words | yes for opcodes/branch; PS1 effect open | HLE branch and PS0/FPSCR; PS1 unavailable | no | `research/BINARY_FPR_PREFIX.md`, `ASM_HARDWARE_VALIDATION.md`; full two-lane and exceptional state validation remain. |
-| Cache and handler bounded routine/helper/accessor paths — CPU/OS | yes, 305 words | yes for recorded instructions/branches; cache consequence open | HLE selected branches, L2CR, slot | no | `research/BINARY_CACHE_HANDLER.md`, `ASM_HARDWARE_VALIDATION.md`; hardware poll/cache consequences and selector-16 inputs remain. |
-| CRT entry/walker/fill leaf and descriptors — CRT/memory | yes, 111 instruction and 41 descriptor words | yes for recorded code and direct branches | no full boundary comparison | no | `research/BINARY_CRT_PREFIX.md`, `ASM_CRT_ENTRY.md`; stack/zero intervals mapped, connected native depends on hardware return. |
+| Paired setup `0x80371714..0x80371764` and HID accessors — CPU/cache | yes | yes for bounded words | HLE HID2 via GPR, HID0 readback, stack | through HID2 write request with supplied input | `research/PAIRED_SETUP_STATE.md`, `HID2_WRITE_BOUNDARY.md`, `HID0_ICFI_CONSUMERS.md`; native matches the two ordered stack stores and issued HID2 request, then stops at `0x8037172C` before the HID0 read. Later HID2 readback and ICFI effect remain hardware gates. |
+| FPR/FPSCR `0x80370CDC..0x80370E00` — CPU | yes, 74 words | yes for opcodes/branch; PS1 effect open | HLE branch and PS0/FPSCR; PS1 unavailable | no | `research/BINARY_FPR_PREFIX.md`, `FPR_LANE_PROVENANCE.md`; full two-lane and exceptional state validation remain. |
+| Cache and handler bounded routine/helper/accessor paths — CPU/OS | yes, 305 words | yes for recorded instructions/branches; cache consequence open | HLE selected branches, L2CR, slot | no | `research/BINARY_CACHE_HANDLER.md`, `L2_CACHE_STATE.md`; both live polls and hardware cache consequences remain unresolved. |
+| CRT entry/walker/fill leaf and descriptors — CRT/memory | yes, 111 instruction and 41 descriptor words | yes for recorded code and direct branches | HLE return r4/r31 checked, XER RSP field stale | no | `research/BINARY_CRT_PREFIX.md`, `CRT_MEMORY_EXECUTION.md`; return projection has its own negative test, connected native still depends on hardware return. |
 | OS `0x80370E68` onward — OS/device/timing | partial | partial | no | no | `research/OS_STARTUP.md`; live time base, pre-entry words and device responses remain. |
-| Constructor walker `0x803796AC..0x8037971C` and table — C++ runtime/game | partial | yes for walker and first 12 bodies | no | no | `ASM_CONSTRUCTORS.md`; 282 table pointers checked, effects for indices 12–281 unresolved. |
+| Constructor walker `0x803796AC..0x8037971C` and table — C++ runtime/game | partial | yes for walker and first 16 bodies | no | no | `ASM_CONSTRUCTORS.md`, `CONSTRUCTOR_NEXT_TARGETS.md`; 282 table pointers checked, effects for indices 16–281 unresolved. |
 | RenderWare, GX, audio and game application transition — middleware/game | partial | partial | no | no | `research/CRT_TO_GAME.md` and other subsystem docs are navigation only until binary-first region records and connected tests exist. |
 
-The next connected native work starts from the existing `0x80371724` stop
-with an explicitly supplied HID2 readback. Read the raw record and Gekko
-ICFI/cache semantics before coding. Capture
+The next connected native work starts from the `0x8037172C` stop and must
+read the live HID0 value at `0x803725F4` before issuing ICFI. Read the raw
+record and Gekko ICFI/cache semantics before coding. Capture
 the first same-run state and RAM-write divergence, fix its producer, then run
 from `0x80003154` and the complete CTest suite again.

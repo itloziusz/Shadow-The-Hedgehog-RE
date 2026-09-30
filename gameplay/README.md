@@ -48,7 +48,7 @@ maintains the root modules listed in its README. Game inputs remain read-only an
   cmake --build gameplay/build --config Release
   ctest --test-dir gameplay/build -C Release
   ```
-- `build_and_run.ps1` — one command: build into `gameplay/build`, run all tests, run `stage_sim` (do this regularly).
+- `build_and_run.ps1` — one command: build into `gameplay/build`, run all tests, run `stage_sim` (do this regularly). Set `SHADOW_GAME_FILES_DIR` to your read-only extracted `files/` directory when it is outside the repository.
 - Player helpers recover bounded Ground/Fall/Jump/HomingAttack decisions, including
   `PlayerPhysics::ApplyJumpHold` at 0x80087384..0x800873F0. Full world and behavior updates remain open.
 - `stage_sim` — all ten enemy-count mission stages clear through documented routes;

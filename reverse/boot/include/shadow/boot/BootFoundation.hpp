@@ -34,6 +34,18 @@ struct PairedSetupStackPrefix {
     std::array<MemoryWrite32, 2> ordered_writes{};
 };
 
+struct SprWriteRequest {
+    std::uint32_t spr = 0;
+    std::uint32_t value = 0;
+};
+
+// The write is an issued Gekko SPR command, not a claim about a later
+// hardware readback. Stops before the next HID0-reading call at 0x8037172C.
+struct Hid2WriteBoundary {
+    PairedSetupStackPrefix prefix;
+    SprWriteRequest request;
+};
+
 
 class BootImage {
 public:
@@ -62,5 +74,7 @@ PairedSetupStackPrefix EnterHid2ReadCall(const BootImage& image,
 PairedSetupStackPrefix ReturnFromHid2Read(const BootImage& image,
                                           const PairedSetupStackPrefix& state,
                                           std::uint32_t measured_hid2);
+Hid2WriteBoundary IssueHid2Write(const BootImage& image,
+                                 const PairedSetupStackPrefix& state);
 
 }  // namespace shadow::boot

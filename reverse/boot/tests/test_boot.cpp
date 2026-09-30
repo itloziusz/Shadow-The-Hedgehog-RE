@@ -133,6 +133,29 @@ int main(int argc, char** argv) {
         Require(alternate_hid2.machine.cpu.gpr[3] == 0x12345678u &&
                     alternate_hid2.machine.cpu.pc == hid2_return.machine.cpu.pc,
                 "HID2 read was hard-coded to the synthetic reference value");
+        const auto hid2_write = shadow::boot::IssueHid2Write(image, hid2_return);
+        Require(hid2_write.request.spr == 920u &&
+                    hid2_write.request.value == 0xE0000000u &&
+                    hid2_write.prefix.machine.cpu.pc == 0x8037172Cu &&
+                    hid2_write.prefix.machine.cpu.lr == 0x8037172Cu &&
+                    hid2_write.prefix.machine.cpu.gpr[3] == 0xE0000000u &&
+                    hid2_write.prefix.machine.cpu.gpr[1] == hid2_return.machine.cpu.gpr[1] &&
+                    hid2_write.prefix.ordered_writes[0].address == hid2_return.ordered_writes[0].address &&
+                    hid2_write.prefix.ordered_writes[0].value == hid2_return.ordered_writes[0].value &&
+                    hid2_write.prefix.ordered_writes[1].address == hid2_return.ordered_writes[1].address &&
+                    hid2_write.prefix.ordered_writes[1].value == hid2_return.ordered_writes[1].value,
+                "HID2 write boundary differs from the byte-derived PPC transition");
+        const auto alternate_write = shadow::boot::IssueHid2Write(image, alternate_hid2);
+        Require(alternate_write.request.spr == 920u &&
+                    alternate_write.request.value == 0xB2345678u &&
+                    alternate_write.prefix.machine.cpu.gpr[3] == 0xB2345678u,
+                "HID2 OR instruction lost unforced incoming bits");
+        for (std::size_t i = 0; i < 32; ++i) {
+            if (i != 3) {
+                Require(hid2_write.prefix.machine.cpu.gpr[i] == hid2_return.machine.cpu.gpr[i],
+                        "HID2 writer changed an unrelated GPR");
+            }
+        }
         for (std::size_t i = 1; i < 31; ++i) {
             Require(paired_entry.cpu.gpr[i] == call.gpr[i],
                     "hardware prefix changed an unrelated GPR");
@@ -153,6 +176,12 @@ int main(int argc, char** argv) {
         MustReject([&] { (void)shadow::boot::ReturnFromHid2Read(image,
                    shadow::boot::PairedSetupStackPrefix{}, 0xE0000000u); },
                    "HID2 accessor accepted an incorrect entry PC");
+        MustReject([&] { (void)shadow::boot::IssueHid2Write(image, hid2_entry); },
+                   "HID2 writer accepted an incorrect entry PC");
+        auto user_mode_hid2 = hid2_return;
+        user_mode_hid2.machine.msr |= 0x4000u;
+        MustReject([&] { (void)shadow::boot::IssueHid2Write(image, user_mode_hid2); },
+                   "HID2 writer accepted a user-mode SPR access");
         Require(image.ReadWord(0x805E4500u) == 0x804AB134u,
                 "initialized data6 address mapping differs");
         // PROVEN 0x80372900 passes selector 1 to 0x80373378. The store at
@@ -234,6 +263,14 @@ int main(int argc, char** argv) {
                        shadow::boot::LoadValidatedFixture(mutated), hid2_entry,
                        0xE0000000u); },
                        "changed HID2 read accessor word accepted");
+        }
+        for (const std::size_t offset : {0x36AFE4u, 0x36AFE8u,
+                                         0x36A470u, 0x36A474u}) {
+            mutated = original;
+            ChangeWord(mutated, offset);
+            MustReject([&] { (void)shadow::boot::IssueHid2Write(
+                       shadow::boot::LoadValidatedFixture(mutated), hid2_return); },
+                       "changed HID2 write word accepted");
         }
 
         // Independently mutate every instruction at 0x800032B0..0x8000333C.

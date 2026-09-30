@@ -78,14 +78,24 @@ int main(int argc, char** argv) {
                       << " msr=0x" << std::setw(8) << hid2.machine.msr << '\n';
             if (argc == 6) {
                 const auto readback = shadow::boot::ReturnFromHid2Read(image, hid2, observed_hid2);
+                const auto hid2_write = shadow::boot::IssueHid2Write(image, readback);
                 std::cout << "INPUT hid2=0x" << std::setw(8) << observed_hid2
                           << " provenance=CALLER_SUPPLIED" << '\n'
-                          << "STOP pc=0x" << std::setw(8) << readback.machine.cpu.pc
+                          << "CHECKPOINT pc=0x" << std::setw(8) << readback.machine.cpu.pc
                           << " lr=0x" << std::setw(8) << readback.machine.cpu.lr
                           << " r0=0x" << std::setw(8) << readback.machine.cpu.gpr[0]
                           << " r1=0x" << std::setw(8) << readback.machine.cpu.gpr[1]
                           << " r3=0x" << std::setw(8) << readback.machine.cpu.gpr[3]
-                          << " msr=0x" << std::setw(8) << readback.machine.msr << '\n';
+                          << " msr=0x" << std::setw(8) << readback.machine.msr << '\n'
+                          << "SPR_WRITE_REQUEST spr=" << std::dec << hid2_write.request.spr
+                          << std::hex << " value=0x" << std::setw(8) << hid2_write.request.value
+                          << '\n'
+                          << "STOP pc=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.pc
+                          << " lr=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.lr
+                          << " r0=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.gpr[0]
+                          << " r1=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.gpr[1]
+                          << " r3=0x" << std::setw(8) << hid2_write.prefix.machine.cpu.gpr[3]
+                          << " msr=0x" << std::setw(8) << hid2_write.prefix.machine.msr << '\n';
             }
             return 0;
         }

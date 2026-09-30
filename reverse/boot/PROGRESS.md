@@ -5,6 +5,17 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 28: HID2 write request and six independent slices
+
+| Field | Result |
+|---|---|
+| Last fully validated connected boundary | Starting at `0x80003154` with caller-supplied synthetic/HLE MSR `0x00002032` and HID2 read `0xE0000000`, the native probe now reaches PC/LR `0x8037172C` and stops **before** the HID0 call. The default stop remains `0x80003400`; MSR alone stops before the HID2 read at `0x80370BA8`. |
+| New native transition | Raw `0x80371724/28` ORs `0xA0000000` into live r3 and calls `0x80370BB0/B4`, which issues `mtspr HID2,r3` and returns. The C++ boundary reports SPR 920 and its requested word; it does not assert later hardware readback. A fresh synthetic/HLE checkpoint at `0x8037172C` agrees on exposed PC/LR/GPR state. A distinct HID2 input proves unforced bits are preserved. All four instructions have mutation gates and user-mode SPR access declines. |
+| Six separate archaeology results | `HID2_WRITE_BOUNDARY.md`, `HID0_ICFI_CONSUMERS.md`, `FPR_LANE_PROVENANCE.md`, `L2_CACHE_STATE.md`, `CRT_MEMORY_EXECUTION.md` and `CONSTRUCTOR_NEXT_TARGETS.md` cover different boot workstreams. HID0 ICFI readback, both L2 status polls, paired PS1 provenance, CRT fills and constructor table indices 12–15 are documented without implying connected native parity. |
+| Genuine error and root cause | The CRT return note had incorrectly said r4=0 and r31=0. Exact updating stores leave `r4=0x805FC5E8`; the hardware wrapper saves outer LR `0x8000315C` in r31 and the walker restores it. Fresh HLE return state confirms both. The HLE GDB XER field is a stale SPR word and cannot refute the byte-derived final `addic.` carry. The corrected note and `boot_pal_crt_return_projection` test derive the two register values and reject a changed descriptor. |
+| Full rerun | MSVC Release full-tree CTest **42/42** passed. The standalone gameplay script initially lacked a way to use separately stored read-only files; it now accepts `SHADOW_GAME_FILES_DIR`. With that path supplied it passed **27/27** gameplay CTest and stg0100 Dark 35/35 → stage index 6. The probe itself was rerun from entry and printed the exact new stop. |
+| First unresolved instruction | `0x8037172C` is `bl 0x803725F4`, whose first instruction reads live HID0. Its power-on/retail value, ICE-dependent ICFI self-clear and later cache consumers need explicit provenance and state comparison before native continuation. Stack write events still require a memory application model before CRT. |
+
 ## 2026-09-30 — checkpoint 27: first HID2 read and rerun diagnosis
 
 | Field | Result |

@@ -4,6 +4,23 @@
 
 ---
 
+## Checkpoint 24 — 2026-09-30 (boot HID2 boundary and standalone gameplay gate)
+
+- The canonical boot probe in `reverse/boot/` now runs from PAL DOL entry
+  through the exact HID2 OR/write request and stops at `0x8037172C`, before
+  the HID0 read. This uses explicitly supplied synthetic/HLE MSR and HID2;
+  later hardware readback and retail IPL state remain UNKNOWN. Six separate
+  binary-first notes cover HID2, HID0 ICFI, FPR lanes, L2 polls, CRT memory
+  and constructor indices 12–15. `reverse/boot/PROGRESS.md` checkpoint 28
+  gives the exact proof boundary and next failure.
+- A CRT return-state audit corrected r4 and r31 in its static note. A new
+  binary-derived negative gate prevents the incorrect values returning.
+  Full-tree Release CTest passed 42/42.
+- The standalone `build_and_run.ps1` accepts `SHADOW_GAME_FILES_DIR` for
+  read-only extracted assets outside this public repository. With that path
+  set, it passed 27/27 gameplay CTest and stg0100 Dark 35/35, next stage
+  index 6. No gameplay simulation semantics changed in this checkpoint.
+
 ## Checkpoint 23 — 2026-09-30 (strict boot execution frontier)
 
 - Ran the connected native `shadow_boot_probe` again from PAL DOL entry. It

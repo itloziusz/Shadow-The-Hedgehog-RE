@@ -7,8 +7,9 @@ then the direct call at `0x80003158`, stopping at `0x80003400`. With a supplied
 observed MSR, it translates the first five wrapper words and the paired
 callee's four-word stack prefix, stopping before the HID2 read at
 `0x80370BA8`. An additional supplied HID2 word runs the two-word accessor
-and stops at `0x80371724`. It does not execute the HID2 write, HID0/GQR,
-FPR or cache path.
+then issues the four-word HID2 OR/write request and stops at `0x8037172C`,
+before the HID0 call. It does not execute the HID0/GQR, FPR or cache path,
+or claim that the write request equals a later hardware readback.
 The separate `RunApplicationRecurringPhase` translates the static event and
 exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
 **PROVEN for these bounded slices; full hardware, CRT, constructors and game
@@ -55,32 +56,34 @@ operations may be replaced only after their producers and consumers are traced.
   original-state comparison required by the run/trace/fix workflow.
 - `ARCHAEOLOGY_INDEX.md` — binary-first coverage, proof ladder and exact
   boundaries for each boot region.
-- `research/` — independent pre-entry, hardware, CRT and application-loop
-  audits with exact address evidence, including assembly CFG/data-flow and
+- `research/` — independent pre-entry, HID2/HID0, FPR-lane, L2, CRT-memory,
+  constructor and application-loop audits with exact address evidence, including assembly CFG/data-flow and
   a synthetic Dolphin/HLE checkpoint study. The latter is not retail IPL proof.
 - `tools/capture_dolphin_rsp.py` — hash-pinned external PPC checkpoint capture
   for validation only; the native executable does not depend on Dolphin.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
-  register startup, wrapper/stack prefix and explicit-input HID2 read,
+  register startup, wrapper/stack prefix, explicit-input HID2 read and
+  issued HID2 SPR write request,
   recurring event loop and command-line probe.
 - `tests/` — exact DOL SHA-256 gate, expected stop state and mutations of all
   36 helper instructions, entry words, descriptors, invalid reads and the
   recurring event/exit order. The HLE-input gate checks the connected prefix
-  through the first HID2 accessor return `0x80371724`; a separate executable
-  unit gate checks Gekko `mtfsf` summary arithmetic; it does not advance the
-  connected boot prefix.
+  through the HID2 write request at `0x8037172C`; a separate executable
+  unit gate checks Gekko `mtfsf` summary arithmetic. The CRT return projection
+  gate checks two corrected register claims without claiming connected CRT execution.
 - `experimental_native_boot/` — reference-only older authored experiments;
   its generated recompiler dependencies are not in this repository.
 
 Build with the root CMake project. Supply
-`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable eleven content-backed
+`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable twelve content-backed
 CTest cases. This path stays in the ignored build cache and is never committed.
 
 The ordinary probe stops at `0x80003400`. An independently measured MSR can
 be supplied as `shadow_boot_probe <main.dol> --observed-msr 00002032` to stop
 at the HID2 read. Add `--observed-hid2 E0000000` to run that accessor and stop
-at `0x80371724`. Both values came from the documented startup-only synthetic
-HLE run and are not retail boot defaults.
+at `0x8037172C` after reporting the HID2 write request. Both values came
+from the documented startup-only synthetic HLE run and are not retail boot
+defaults.
 
 ## Confidence convention
 

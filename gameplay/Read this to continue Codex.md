@@ -11,22 +11,24 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint 23, 2026-09-30)
+## Current continuation (checkpoint 24, 2026-09-30)
 
 The canonical public repository builds the C++17 boot-entry foundation under
-`reverse/boot/`. Its exact PAL fixture gate stops at `0x80003158` after the
-full pinned register helper at `0x800032B0..0x8000333C`. A separate bounded
+`reverse/boot/`. Its default PAL fixture gate stops at `0x80003400`; with
+explicit synthetic/HLE MSR and HID2 read inputs, the connected native probe
+issues the HID2 SPR write request and stops at `0x8037172C` before HID0.
+This is the last validated connected boot boundary, not a game boot. A separate bounded
 native slice reproduces application-loop event/exit order at
 `0x800511E0..0x80051218`; it is not connected across unresolved hardware,
 CRT, constructor and initialization state. Independent `reverse/boot/research/`
-notes map the preentry, hardware and CRT frontiers, including unknown pre-CRT
-FPR bytes at `0x805F1F30..3F` and IPL-dependent FST placement. The public
-Release gate is **33/33 CTest** including the FPSCR arithmetic test.
-`reverse/boot/PROGRESS.md` now tracks
-the strict connected-prefix execution stop at `0x80003158`. Apploader state 6
-clears the FPR source gap but later FST placement remains IPL-dependent.
-See `HANDOFF.md` checkpoint 23 and `reverse/boot/OPEN_QUESTIONS.md`. Gameplay state below
-remains unchanged.
+notes now also cover HID2 write, HID0 ICFI, FPR lanes, L2 status polls, CRT
+memory and constructor indices 12–15. Unknown pre-CRT FPR bytes at
+`0x805F1F30..3F` and IPL-dependent FST placement remain unresolved. The
+public Release gate is **42/42 CTest**; the standalone gameplay script passed
+**27/27** and stg0100 Dark 35/35 when `SHADOW_GAME_FILES_DIR` pointed to
+read-only extracted assets. `reverse/boot/PROGRESS.md` checkpoint 28 records
+the next exact instruction and remaining proof obligations. See `HANDOFF.md`
+checkpoint 24 and `reverse/boot/OPEN_QUESTIONS.md`.
 
 ### Gameplay continuation from checkpoint 20
 

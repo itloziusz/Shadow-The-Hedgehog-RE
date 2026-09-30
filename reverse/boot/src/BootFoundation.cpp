@@ -226,4 +226,29 @@ PairedSetupStackPrefix ReturnFromHid2Read(const BootImage& image,
     return next;
 }
 
+Hid2WriteBoundary IssueHid2Write(const BootImage& image,
+                                 const PairedSetupStackPrefix& state) {
+    if (state.machine.cpu.pc != 0x80371724u ||
+        state.machine.cpu.lr != 0x80371724u) {
+        throw std::runtime_error("HID2 write entry state mismatch");
+    }
+    if ((state.machine.msr & 0x4000u) != 0u) {
+        throw std::runtime_error("HID2 write requires supervisor state");
+    }
+    if (image.ReadWord(0x80371724u) != 0x6463A000u ||
+        image.ReadWord(0x80371728u) != 0x4BFFF489u ||
+        image.ReadWord(0x80370BB0u) != 0x7C78E3A6u ||
+        image.ReadWord(0x80370BB4u) != 0x4E800020u) {
+        throw std::runtime_error("HID2 write instruction fingerprint mismatch");
+    }
+
+    Hid2WriteBoundary next{state, {920u, state.machine.cpu.gpr[3] | 0xA0000000u}};
+    // oris r3,r3,0xA000; bl writer; mtspr HID2,r3; blr. The command's
+    // observable future readback is hardware-dependent and remains unknown.
+    next.prefix.machine.cpu.gpr[3] = next.request.value;
+    next.prefix.machine.cpu.lr = 0x8037172Cu;
+    next.prefix.machine.cpu.pc = next.prefix.machine.cpu.lr;
+    return next;
+}
+
 }  // namespace shadow::boot
