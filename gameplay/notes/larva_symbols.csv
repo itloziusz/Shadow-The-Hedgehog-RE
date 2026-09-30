@@ -1,0 +1,6 @@
+address,current_name,subsystem,confidence,evidence
+801899E0,BkLarvaGenerator_LoadSet,enemy,STRONG,SET position rotation params and sensor initialized at 801899F8-80189A30
+80189B70,BkLarvaGenerator_Update,enemy,STRONG,RTTI vtable slot 2 and state switch at 80189B94-80189BBC
+8018A7D0,BkLarva_ReportCollisionDefeat,enemy,STRONG,life event at 8018A9CC team 2 flags 1 or 5
+8018AA84,BkLarva_HandleCommand,enemy,STRONG,command 14 check at 8018AA9C and life event at 8018ABE0
+8018AF18,BkLarva_Update,enemy,STRONG,RTTI Task update slot and state switch at 8018AF40-8018AF74

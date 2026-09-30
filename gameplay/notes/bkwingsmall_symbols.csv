@@ -1,0 +1,9 @@
+address,current_name,subsystem,confidence,evidence
+8019162C,BkWingSmallBase_HasAttackWindow,enemy.bkwingsmall,PROVEN,tests E+0x330 == 1; vtable +0x23C
+80181D3C,BkWingSmallAI_MoveOnPath_Update,enemy.bkwingsmall,PROVEN,AI+0x24 substep and inclusive FlyerCommon attack window then advances path
+80181E68,BkWingSmallAI_MoveOnPath_Enter,enemy.bkwingsmall,PROVEN,sets AI+0x24=0; requests motion; sets E+0x2F8/+0x2FC=1.0
+801822E4,BkWingSmallBase_UsesPath,enemy.bkwingsmall,PROVEN,tests E+0x32C == 1; vtable +0x238
+801823EC,BkWingSmallAI_Caution_Update,enemy.bkwingsmall,PROVEN,turns toward target; status motion flag A selects Attack
+80182518,BkWingSmallAI_Caution_Enter,enemy.bkwingsmall,PROVEN,requests motion and SE 0x603F
+80182598,BkWingSmallAI_OnTargetFound,enemy.bkwingsmall,PROVEN,selects Caution through EnemyAISM_ChangeState
+801825D0,BkWingSmallAI_ReturnToWait,enemy.bkwingsmall,PROVEN,AppearType path predicate chooses MoveOnPath else WaitFloating

@@ -1,0 +1,924 @@
+[
+ {
+  "id": "258E",
+  "set_name": "EnemyEntryStart",
+  "desc": "8053BAB0",
+  "create_hook": "00000000",
+  "resource_hook": "801A238C",
+  "alloc_size": null,
+  "ctor": null,
+  "class": null,
+  "ctor_args": [],
+  "resources": [
+   "enemy/EnemyPath.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "0064",
+  "set_name": "GUN_SOLDIER",
+  "desc": "80539868",
+  "create_hook": "80196E38",
+  "resource_hook": "80196EB8",
+  "alloc_size": "0x418",
+  "ctor": "8019708C",
+  "class": "GunSoldier::GunSoldier",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/GunSoldierData_%s.one"
+  ],
+  "ai_class": "GunSoldier::GunSoldierAI",
+  "ai_states": [
+   "AppearHome",
+   "Attack",
+   "Caution",
+   "ChaseTarget",
+   "GoHome",
+   "Hinshi",
+   "NearAttack",
+   "Thanks",
+   "ToHinshi"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "HaveShield",
+   "WeaponType",
+   "AppearType",
+   "Pos0_WaitType",
+   "Pos0_WaitSec",
+   "Pos0_MoveSpeedRatio",
+   "Pos1_X",
+   "Pos1_Z",
+   "Pos1_WaitType",
+   "Pos1_WaitSec",
+   "Pos1_MoveSpeedRatio",
+   "Pos2_X",
+   "Pos2_Z",
+   "Pos2_WaitType",
+   "Pos2_WaitSec",
+   "Pos2_MoveSpeedRatio"
+  ]
+ },
+ {
+  "id": "0065",
+  "set_name": "GUN_BEETLE",
+  "desc": "80537158",
+  "create_hook": "80193DD4",
+  "resource_hook": "80193E54",
+  "alloc_size": "0x470",
+  "ctor": "80193FF0",
+  "class": "GunBeetle",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/GunBeetleData.one"
+  ],
+  "ai_class": "GunBeetleAI",
+  "ai_states": [
+   "Attack",
+   "Caution"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "AppearType",
+   "ActionType",
+   "",
+   "FloatWidth",
+   "AttackStart",
+   "AttackEnd",
+   "PathMirror",
+   "BodyType",
+   "WeaponType",
+   "SparkDischarge",
+   "SparkWait"
+  ]
+ },
+ {
+  "id": "0066",
+  "set_name": "GUN_BIGFOOT",
+  "desc": "8054F964",
+  "create_hook": "80287328",
+  "resource_hook": "802873A8",
+  "alloc_size": "0x390",
+  "ctor": "80287600",
+  "class": "GunBigfoot::GunBigfootTask",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/GunBigfootData.one"
+  ],
+  "ai_class": "GunBigfoot::GunBigfootAI",
+  "ai_states": [
+   "GunAttack",
+   "HoverAttack",
+   "WaitActAttack",
+   "WaitCrouching",
+   "WaitHovering"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "AppearType",
+   "WeaponType",
+   "OffsetPos_Y"
+  ]
+ },
+ {
+  "id": "0068",
+  "set_name": "GUN_ROBOT",
+  "desc": "805384AC",
+  "create_hook": "801952F8",
+  "resource_hook": "80195378",
+  "alloc_size": "0x3B0",
+  "ctor": "80195514",
+  "class": "GunRobotTask",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/GunRobotData.one"
+  ],
+  "ai_class": "GunRobotAI",
+  "ai_states": [
+   "WeaponAttack"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "AppearType",
+   "WeaponType",
+   "BodyType",
+   "OffsetPos_X",
+   "OffsetPos_Y",
+   "OffsetPos_Z",
+   "WaitActMoveType",
+   "Pos0_ActionTime",
+   "Pos0_ActionType",
+   "Pos0_MoveSpeedRatio",
+   "Pos1_X",
+   "Pos1_Z",
+   "Pos1_ActionTime",
+   "Pos1_ActionType",
+   "Pos1_MoveSpeedRatio",
+   "Pos2_X",
+   "Pos2_Z",
+   "Pos2_ActionTime",
+   "Pos2_ActionType",
+   "Pos2_MoveSpeedRatio"
+  ]
+ },
+ {
+  "id": "008C",
+  "set_name": "BK_GIANT",
+  "desc": "805508EC",
+  "create_hook": "8028892C",
+  "resource_hook": "802889AC",
+  "alloc_size": "0x360",
+  "ctor": "80288C18",
+  "class": "BkGiant::BkGiantTask",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/BkGiantData.one"
+  ],
+  "ai_class": "BkGiant::BkGiantAI",
+  "ai_states": [
+   "ChaseTarget",
+   "GunAttack",
+   "RejectAttack",
+   "StickAttack"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "AppearType",
+   "WeaponType",
+   "OffsetPos_Y",
+   "Gurad : ON"
+  ]
+ },
+ {
+  "id": "008D",
+  "set_name": "BK_SOLDIER",
+  "desc": "80531E70",
+  "create_hook": "8018CAD0",
+  "resource_hook": "8018CB50",
+  "alloc_size": "0x438",
+  "ctor": "8018CCEC",
+  "class": "BkSoldier",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/BkSoldierData.one"
+  ],
+  "ai_class": "BkSoldierAI",
+  "ai_states": [
+   "AppearHome",
+   "Attack",
+   "AttackVacuum",
+   "Caution",
+   "ChaseTarget",
+   "GoHome",
+   "NearAttack"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "HaveShield",
+   "WeaponType",
+   "AppearType",
+   "Pos0_WaitType",
+   "Pos0_WaitSec",
+   "Pos0_MoveSpeedRatio",
+   "Pos1_X",
+   "Pos1_Z",
+   "Pos1_WaitType",
+   "Pos1_WaitSec",
+   "Pos1_MoveSpeedRatio",
+   "Pos2_X",
+   "Pos2_Z",
+   "Pos2_WaitType",
+   "Pos2_WaitSec",
+   "Pos2_MoveSpeedRatio",
+   "RideAirSaucer"
+  ]
+ },
+ {
+  "id": "008E",
+  "set_name": "BK_WINGLARGE",
+  "desc": "805337C8",
+  "create_hook": "8018FFF0",
+  "resource_hook": "80190070",
+  "alloc_size": "0x430",
+  "ctor": "80190260",
+  "class": "BkWingLarge",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/BkWingLargeData.one"
+  ],
+  "ai_class": "BkWingLargeAI",
+  "ai_states": [
+   "Attack",
+   "Caution",
+   "DeadToAirWing",
+   "ResistVacuum"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "AppearType",
+   "ActionType",
+   "",
+   "FloatWidth",
+   "AttackStart",
+   "AttackEnd",
+   "PathMirror",
+   "Type"
+  ]
+ },
+ {
+  "id": "008F",
+  "set_name": "BK_WINGSMALL",
+  "desc": "80534BA0",
+  "create_hook": "80191640",
+  "resource_hook": "801916C0",
+  "alloc_size": "0x420",
+  "ctor": "8019185C",
+  "class": "BkWingSmall",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/BkWingSmallData.one"
+  ],
+  "ai_class": "BkWingSmallAI",
+  "ai_states": [
+   "Attack",
+   "Caution",
+   "MoveOnPath"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "AppearType",
+   "ActionType",
+   "",
+   "FloatWidth",
+   "AttackStart",
+   "AttackEnd",
+   "PathMirror"
+  ]
+ },
+ {
+  "id": "0090",
+  "set_name": "BK_WORM",
+  "desc": "80535BEC",
+  "create_hook": "801920AC",
+  "resource_hook": "8019212C",
+  "alloc_size": "0x3A0",
+  "ctor": "801923C8",
+  "class": "BkWorm",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/BkWormData.one"
+  ],
+  "ai_class": "BkWormAI",
+  "ai_states": [
+   "AfterAttack",
+   "Appear",
+   "Attack",
+   "Move",
+   "WaitAppear",
+   "WaitStanding"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "WeaponType",
+   "AttackTimes",
+   "IntervalSec"
+  ]
+ },
+ {
+  "id": "0091",
+  "set_name": "BK_LARVA",
+  "desc": "80531924",
+  "create_hook": "80189864",
+  "resource_hook": "801898E0",
+  "alloc_size": "0x150",
+  "ctor": "8018A2B4",
+  "class": "BkLarvaGenerator",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "None"
+  ],
+  "resources": [
+   "enemy/BkLarvaData.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "Num",
+   "AppearRange",
+   "AppearType",
+   "Offset_Y"
+  ]
+ },
+ {
+  "id": "0092",
+  "set_name": "BK_CHAOS",
+  "desc": "805570B0",
+  "create_hook": "802AF70C",
+  "resource_hook": "802AF78C",
+  "alloc_size": "0x3F8",
+  "ctor": "802AF978",
+  "class": "BkChaos::BkChaosTask",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/BkChaosData.one"
+  ],
+  "ai_class": "BkChaos::BkChaosAI",
+  "ai_states": [
+   "AttackRolling",
+   "AttackStrech",
+   "Caution",
+   "Wait",
+   "WaitChibi"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MaxLife",
+   "ShapeType",
+   "ChibiNum",
+   "MoveHeight",
+   "MoveHeightOffset",
+   "CombineStartTime",
+   "CombineTime"
+  ]
+ },
+ {
+  "id": "0093",
+  "set_name": "BK_NINJA",
+  "desc": "80555C48",
+  "create_hook": "802AC298",
+  "resource_hook": "802AC318",
+  "alloc_size": "0x3D8",
+  "ctor": "802AC4BC",
+  "class": "BkNinja::BkNinjaTask",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/BkNinjaData.one"
+  ],
+  "ai_class": "BkNinja::BkNinjaAI",
+  "ai_states": [
+   "AppearHome",
+   "GunAttack",
+   "MoveDisappear",
+   "WaitWarp"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "AppearType",
+   "ShootCount",
+   "AttackInterval",
+   "WaitInterval",
+   "Pos0_X",
+   "Pos0_Y",
+   "Pos0_Z",
+   "Pos0_AngY",
+   "Pos0_WaitType",
+   "Pos0_DisappearTime",
+   "Pos1_X",
+   "Pos1_Y",
+   "Pos1_Z",
+   "Pos1_AngY",
+   "Pos1_WaitType",
+   "Pos1_DisappearTime"
+  ]
+ },
+ {
+  "id": "0079",
+  "set_name": "EGG_PAWN",
+  "desc": "8052D4C4",
+  "create_hook": "8017BD90",
+  "resource_hook": "8017BE10",
+  "alloc_size": "0x3B0",
+  "ctor": "8017BFAC",
+  "class": "EggPawn",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/EggPawnData.one"
+  ],
+  "ai_class": "EggPawnAI",
+  "ai_states": [
+   "DashAttack",
+   "TukiAttack",
+   "WeaponAttack"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "HaveShield",
+   "WeaponType",
+   "AppearType",
+   "OffsetPos_X",
+   "OffsetPos_Z",
+   "OffsetPos_Y",
+   "WaitActMoveType",
+   "Pos0_ActionTime",
+   "Pos0_ActionType",
+   "Pos0_MoveSpeedRatio",
+   "Pos1_X",
+   "Pos1_Z",
+   "Pos1_ActionTime",
+   "Pos1_ActionType",
+   "Pos1_MoveSpeedRatio",
+   "Pos2_X",
+   "Pos2_Z",
+   "Pos2_ActionTime",
+   "Pos2_ActionType",
+   "Pos2_MoveSpeedRatio"
+  ]
+ },
+ {
+  "id": "0078",
+  "set_name": "EGG_PIERROT",
+  "desc": "80551918",
+  "create_hook": "80289B84",
+  "resource_hook": "80289C0C",
+  "alloc_size": "0x390",
+  "ctor": "80289EDC",
+  "class": "EggPierrot::EggPierrotTask",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/EggPierrotData_horror.one",
+   "enemy/EggPierrotData_busou.one",
+   "enemy/EggPierrotData_pierro.one"
+  ],
+  "ai_class": "EggPierrot::EggPierrotAI",
+  "ai_states": [
+   "BakudanAttack",
+   "DashAttack",
+   "GoHome",
+   "Ottoto",
+   "Wait"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "AppearType",
+   "NOT_USE",
+   "BakudanTime",
+   "OffsetPos_X",
+   "OffsetPos_Y",
+   "OffsetPos_Z"
+  ]
+ },
+ {
+  "id": "007A",
+  "set_name": "EGG_SHADOWANDROID",
+  "desc": "80553CB8",
+  "create_hook": "8029C600",
+  "resource_hook": "8029C680",
+  "alloc_size": "0x3E8",
+  "ctor": "8029C898",
+  "class": "EggShadowAndroid::EggShadowAndroidTask",
+  "ctor_args": [
+   "('k', 1)",
+   "('ret', 2149496340)",
+   "('a', 3)"
+  ],
+  "resources": [
+   "enemy/EggShadowAndroidData.one"
+  ],
+  "ai_class": "EggShadowAndroid::EggShadowAndroidAI",
+  "ai_states": [
+   "Falling",
+   "HomingJump",
+   "Jump",
+   "MissileAttack",
+   "RejectHoming"
+  ],
+  "param_names": [
+   "MoveRange",
+   "SearchRange",
+   "SearchAngle",
+   "SearchWidth",
+   "SearchHeight",
+   "SearchHeightOffset",
+   "MoveSpeedRatio",
+   "AppearType",
+   "OffsetPos_X",
+   "OffsetPos_Y",
+   "OffsetPos_Z"
+  ]
+ },
+ {
+  "id": "00B4",
+  "set_name": "BLACK_BULL_0210",
+  "desc": "8054847C",
+  "create_hook": "80233030",
+  "resource_hook": "80233760",
+  "alloc_size": "0x1C8",
+  "ctor": "80233088",
+  "class": "BlackBull0210",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "('k', 0)"
+  ],
+  "resources": [
+   "enemy/boss/BlackBull0210One.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00B5",
+  "set_name": "BLACK_BULL_0412",
+  "desc": "8054950C",
+  "create_hook": "80243E64",
+  "resource_hook": "80243FCC",
+  "alloc_size": "0x1F0",
+  "ctor": "80243EBC",
+  "class": "BlackBull0412",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "('k', 0)"
+  ],
+  "resources": [
+   "enemy/boss/BlackBull0412One.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00B6",
+  "set_name": "HEAVY_DOG_0410",
+  "desc": "8054A26C",
+  "create_hook": "8024F058",
+  "resource_hook": "8024F59C",
+  "alloc_size": "0x238",
+  "ctor": "8024F0B0",
+  "class": "HeavyDog0410",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "('k', 0)"
+  ],
+  "resources": [
+   "enemy/boss/HeavyDog0410One.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00B7",
+  "set_name": "HEAVY_DOG_0510",
+  "desc": "8054AB3C",
+  "create_hook": "8025447C",
+  "resource_hook": "802545CC",
+  "alloc_size": "0x240",
+  "ctor": "802544D4",
+  "class": "HeavyDog0510",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "('k', 0)"
+  ],
+  "resources": [
+   "enemy/boss/HeavyDog0510One.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00B8",
+  "set_name": "BLACK_DOOM",
+  "desc": "8054F400",
+  "create_hook": "8028390C",
+  "resource_hook": "80283CC8",
+  "alloc_size": "0x2C0",
+  "ctor": "80283964",
+  "class": "BlackDoom",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "('k', 0)"
+  ],
+  "resources": [
+   "enemy/boss/BlackDoomOne.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00B9",
+  "set_name": "EGG_MECA_0310",
+  "desc": "8055AB7C",
+  "create_hook": "802EB3A8",
+  "resource_hook": "802EB478",
+  "alloc_size": "0x288",
+  "ctor": "802EB400",
+  "class": "EggMeca310",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "('k', 0)"
+  ],
+  "resources": [
+   "enemy/boss/EggMecaOne.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00BA",
+  "set_name": "EGG_MECA_0411",
+  "desc": "8055AA54",
+  "create_hook": "802EAD84",
+  "resource_hook": "802EAE54",
+  "alloc_size": "0x288",
+  "ctor": "802EADDC",
+  "class": "EggMeca411",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "('k', 0)"
+  ],
+  "resources": [
+   "enemy/boss/EggMecaOne.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00BB",
+  "set_name": "EGG_MECA_0511",
+  "desc": "8055A914",
+  "create_hook": "802EA2DC",
+  "resource_hook": "802EA7FC",
+  "alloc_size": "0x288",
+  "ctor": "802EA334",
+  "class": "EggMeca511",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "('k', 0)"
+  ],
+  "resources": [
+   "enemy/boss/EggMecaOne.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00BC",
+  "set_name": null,
+  "desc": "80559CE8",
+  "create_hook": "802D9108",
+  "resource_hook": "802D9198",
+  "alloc_size": "0x40",
+  "ctor": "802D9988",
+  "class": null,
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "None"
+  ],
+  "resources": [
+   "enemy/boss/diablon.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00BD",
+  "set_name": "EGG_LASTMECH",
+  "desc": "8055B900",
+  "create_hook": "802FE428",
+  "resource_hook": "802FE4A8",
+  "alloc_size": "0x38",
+  "ctor": "802FE6A8",
+  "class": "EggLastMech::EggLastMechTask",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "None"
+  ],
+  "resources": [
+   "enemy/boss/EggLastMechData.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "00BE",
+  "set_name": "DEVIL_DOOM",
+  "desc": "8055C8AC",
+  "create_hook": "8030DBBC",
+  "resource_hook": "8030E11C",
+  "alloc_size": "0x670",
+  "ctor": "8030DC14",
+  "class": "DevilDoom",
+  "ctor_args": [
+   "('ret', 2149496340)",
+   "('a', 3)",
+   "('k', 0)"
+  ],
+  "resources": [
+   "enemy/boss/DevilDoomOne.one"
+  ],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ },
+ {
+  "id": "258E",
+  "set_name": "EnemyEntryEnd",
+  "desc": "8053BAD4",
+  "create_hook": "00000000",
+  "resource_hook": "801A2360",
+  "alloc_size": null,
+  "ctor": null,
+  "class": null,
+  "ctor_args": [],
+  "resources": [],
+  "ai_class": null,
+  "ai_states": [],
+  "param_names": []
+ }
+]

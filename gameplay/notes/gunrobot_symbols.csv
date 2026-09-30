@@ -1,0 +1,10 @@
+address,current_name,subsystem,confidence,evidence
+0x801952F8,GunRobot_Create,enemy/gunrobot,PROVEN,"SET descriptor 0x805384AC create hook; allocates 0x3B0 and constructs GunRobotTask at 0x80195338"
+0x8018684C,GunRobotAI::EnterInitialState,enemy/gunrobot,PROVEN,"AI slot 0x0C; AppearType E+0x28C selects wait or ReturnHome at 0x80186868..0x8018698C"
+0x8018678C,GunRobotAI::ReturnToWait,enemy/gunrobot,PROVEN,"AI slot 0x0D; WaitActMoveType accessor 0x8019575C selects standing or moving"
+0x801866CC,GunRobotAI::OnTargetFound,enemy/gunrobot,PROVEN,"AI slot 0x0F; enters EnemyBaseAI_Caution singleton at 0x80186710..0x80186718"
+0x801865E8,GunRobotAI::StartAttack,enemy/gunrobot,PROVEN,"AI slot 0x10; enters GunRobotAI_WeaponAttack state at 0x80186604..0x80186608"
+0x80186588,GunRobotAI::OnDeadPresentation,enemy/gunrobot,PROVEN,"AI slot 0x14; invokes display and status component services without changing AI state"
+0x80195A50,GunRobot::GetWeaponAttackMotion,enemy/gunrobot,PROVEN,"weapon E+0x290 maps 0;1;5 to 4 and 2;3;4 to 5; other values to 2"
+0x80186514,GunRobotAI_WeaponAttack::Enter,enemy/gunrobot,PROVEN,"state enter plays attack motion and zeros AI+0x24"
+0x80186308,GunRobotAI_WeaponAttack::Update,enemy/gunrobot,PROVEN,"state update dispatches substeps 0;1;2 with motion; target search; movement; turn gates"

@@ -1,0 +1,184 @@
+address,current_name,subsystem,confidence,evidence
+801773CC,StageInit_SpawnPlayers,player,STRONG,called by TStageInitalizeTask::vf01 @801775CC/801775F8; 1P -> fn_800AD680(0xE;0;0); 2P -> two calls with char ids from bss 8057E89C/8057E8A0
+800AD680,Player_CreatePlayerShadow,player,PROVEN,new PlayerShadow via fn_800AE3F0; vslot1(index); input pad bind fn_800A8B04; stores player+0x298 to sbss 805EF630 (P1) / sdata 805E5A28 (P2)
+800AE3F0,PlayerShadow_New,player,PROVEN,operator_new(0x29C) + Player::PlayerShadow::PlayerShadow(charId) then vslot 0xA (vf0A setup)
+80228958,CharacterId_GetName,player,PROVEN,returns ptr table 80547870[id] ("Sonic".."Shadow"=0xE.."2PCannonGreen"=0x13)
+800AD7E0,Player::PlayerShadow::Setup,player,PROVEN,RTTI PlayerShadow::vf0A; creates Watch(layer7)/"Shadow"(layer13) tasks; Controller; CharaColliMove; ShadowExecuter; ShadowMotion; Attack; ShadowWeapon; Effect; SoundBase; factories
+80079BE4,Player::PlayerBase::SetupBase,player,STRONG,RTTI PlayerBase::vf0A; creates +0x250 (fn_800A87B8) and +0x254 (fn_800AB34C)
+80079A1C,Player::PlayerBase::SetPlayerIndex,player,PROVEN,RTTI PlayerBase::vf01; +0x54 = r4
+80079B04,Player::PlayerBase::SendCommand,player,PROVEN,RTTI PlayerBase::vf02; enqueues command into CharCommandUnit +0x21C (fn_801D9FAC)
+800798A4,Player_ShouldDieOnDamage,player,PROVEN,vtable slot 0x12 of Player::PlayerShadow (RTTI-listed as Npc::vf12); false if flag 0x24/0x20; else rings(record+0x28)==0
+80076EBC,Player::Player::OnDamaged,player,STRONG,RTTI Player::vf10; called from Damage/Dead Enter; sends CastCommand to held object (+0x290) then vslot 0xF
+800B8748,PlayerWatchTask_Create,player,PROVEN,new(0x30) + fn_800B89AC under layer 7 task; stored player+0x268
+800B89AC,PlayerWatchTask_Construct,player,PROVEN,Task ctor; vtbl 805234E0; name "Player::Watch"
+800B86F8,PlayerWaitTask_Create,player,PROVEN,new(0x30) + fn_800B88C4 under Watch task
+800B88C4,PlayerWaitTask_Construct,player,PROVEN,Task ctor; vtbl 805234C4; name "Wait"; registers with fn_8025D580 ("Player")
+800B8798,PlayerWaitTask_Update,player,PROVEN,Task slot1 of vtbl 805234C4; sets own kill flag if player ref null or flags 0x46 and 0x47
+80094378,CharaColliMove_Create,player,PROVEN,new(0x30) Player::CharaColliMove(parent;playerRef)
+80094E88,CharaColliMove_Update,player,STRONG,called by CharaColliMove::vf01; displacement pos-prevPos -> +0x8C; displacement/dt -> +0x98
+800AF5BC,ShadowExecuter_Create,player,PROVEN,new(0x58) Player::Shadow::ShadowExecuter(parent;playerRef)
+800B14B4,ShadowMotion_Create,player,PROVEN,new(0x868) Player::Shadow::ShadowMotion
+8023A334,ShadowWeapon_Create,player,PROVEN,new(0x60) Player::Shadow::ShadowWeapon
+802DBD6C,PlayerSound_Create,player,PROVEN,new(0x40) Player::SoundBase
+800AE718,ShadowBehaviorFactory_Create,player,PROVEN,new(0xC) Player::Shadow::ShadowBehavior
+800AEEF8,ShadowControlFactory_Create,player,PROVEN,new(0xC) Player::Shadow::ShadowControl
+800A8460,Executer_SetBehaviorFactory,player,LIKELY,called from PlayerShadow::vf0A with factory ref; executer+0x38 is read as factory by fn_800A82FC
+8009EF70,PlayerController_ChangeControl,player,LIKELY,called with Control::InitializeArgs id 0 at setup (UserInput)
+8009EF94,PlayerController_SetControlFactory,player,LIKELY,called from PlayerShadow::vf0A with ShadowControl ref
+8006F9F8,Player_GetInput,input,PROVEN,returns player+0x218
+800A8BA8,PlayerInput_Construct,input,PROVEN,clears state; copies 22 logical masks from rodata 804B3C00 to +0x2C
+800A8998,PlayerInput_Update,input,PROVEN,prev=held; held from pad record masks; sticks clamped <=1; +0x20 pressed; +0x24 released; +0x84 idle time
+800A8B04,PlayerInput_BindPad,input,PROVEN,pad index = [fn_8005185C()+0x11C+4*playerIndex]; record = fn_8040EBBC(padMgr;idx)
+80009208,PadManager_Get,input,PROVEN,lazy static bss 8056FE0C (ctor fn_8040ECAC); used by GamePeripheralTask
+8040EA3C,PadManager_Update,input,PROVEN,reads implementor vslot3 buffer; record +0 held; +4 ~held; +8 pressed; +0xC released; sticks via fn_8040EDB0
+8040EBBC,PadManager_GetRecord,input,PROVEN,mgr + 0x2C*index
+80359798,PJSPeripheral::ManagerImpGc::ReadPads,input,PROVEN,RTTI ManagerImpGc::vf03; PADRead fn_80381008; remaps buttons via table 80513D48 (12 x u16 pad/u16 game)
+8009EFF8,Player::Controller::Update,player,PROVEN,RTTI Controller::vf01 (Task slot1); fn_8009F9A4(impl+0x28)
+8009F9A4,PlayerController_Update,player,PROVEN,input sample; contact checks; loop-path/grind commands; control vslot3(dt)
+8009FD14,PlayerControllerImpl_Construct,player,PROVEN,0x20 impl: +0 player ref; +8 control; +0x10 loop-path tracker; +0x18
+8009F29C,PlayerController_CheckDamageContact,player,PROVEN,+0xA4 bit1 -> clear + DamageCommand(power 10)
+8009F17C,PlayerController_CheckDeathContact,player,PROVEN,+0xA4 bit2 (clears flag 0x13) or bit3 (sets 0x13) -> DeadCommand
+800A1D70,Player::Control::UserInput::Update,input,PROVEN,RTTI UserInput::vf03 (Control slot 3 called by controller); stick -> AccelerateInputCommand; buttons -> commands
+800A0130,UserInput_BuildButtonCommands,input,PROVEN,context-dependent press/release command pairs for B (r8) A (r9) X (r10) Y (stack arg)
+800A1790,UserInput_StickToWorld,input,PROVEN,(sx;0;sy) -> camera frame (fn_800940C0) -> player ground frame (+0x1E4/+0x11C); clamp <=1
+800940C0,Player_CameraRelativeInput,input,STRONG,uses camera manager fn_80009548 entry matrix (+0x9C via fn_80094264)
+800A1A30,UserInput_FindHomingTarget,input,STRONG,returns 1 when a lock-on target is available; result feeds HomingAttackCommand
+8009FE58,UserInput_UpdateButtonPrompts,input,LIKELY,maps chosen command ids to icon indices -> fn_8016F2D4 on per-player record
+80206B98,PlayerTarget_SearchTargets,player,STRONG,range sbss 805F0CE0 (150); cone 45 deg (stick pushed) / 90 deg
+80207274,HomingSearch_StaticInit,player,PROVEN,.ctors 804AAE74; sbss 805F0CE0=150; 805F0CE4=40 deg; 805F0CE8=200 deg (radians)
+800AF0B0,Player::Shadow::ShadowControl::Create,player,PROVEN,RTTI ShadowControl::vf01; id 0 UserInput (0x1C); 1 Approach (0x2C); 5 Bukuu (0x20)
+801D9FAC,CharCommandUnit_Enqueue,command,STRONG,called by PlayerBase::vf02; fn_801DA2DC(mgr;cmd;unit;4;0xFE)
+801DA2DC,CharCommandManager_Queue,command,STRONG,stores cmd in bucket (cmd+8)*0xC of current/next buffer; sets cmd+7 bits
+801DA5A4,CharCommandManager_Dispatch,command,STRONG,called by CharCommandManagerTask::vf01; 7 buckets; delivers to receiver via fn_801A02B4; deletes cmd
+80099B58,CharCommandManager_Get,command,PROVEN,lazy static bss 805778B4 (ctor fn_801DA960)
+800AF924,ShadowExecuter_OnCommand,player,PROVEN,PMF 80522F68 bound in ShadowExecuter ctor; behavior vslot4 -> Player_HandleCommand -> Damage/Dead/JumpDash/weapon -> cmd vslot1
+8009CC1C,Player::StartJumpCommand::Execute,command,PROVEN,RTTI StartJumpCommand::vf01; if A0.1 -> InitializeArgsJump(cmd+0x14) -> fn_800A82FC
+800AFD28,Player::Shadow::ShadowExecuter::Update,player,PROVEN,RTTI ShadowExecuter::vf01; fn_800AF868; fn_800AF7B8; fn_800AF6A4; fn_800AF60C; fn_800A8160
+800A8160,Executer_Update,player,PROVEN,idle timer; invincibility; gravity; behavior vslot5(dt); rotation; end-of-frame resets
+800A82FC,Executer_ChangeBehavior,player,PROVEN,factory vslot1(args->id); new->CanEnter(prev;args); cur->Leave(newId); cur=new; new->Enter(prev;args)
+800A76CC,Executer_UpdateIdleTalk,player,LIKELY,+0x48 countdown (20 s) while A0.9 and pad idle -> WaitTalkingCommand 0x132
+800A7AE8,Player_ApplyGravity,physics,PROVEN,up frame; gravity -320 air / -800 ground / -0.0625 idle (flag 0) -> +0x100 -> acc +0x24
+800A78F4,Player_SmoothRotation,physics,STRONG,rotation +0xC toward target with factor min(30*dt;1); skipped when flag 0x38
+800AE8D0,Player::Shadow::ShadowBehavior::Create,player,PROVEN,RTTI ShadowBehavior::vf01; table 80522DE8[id] creator; Super flag 0x25 remaps ids 0/2/3 -> 0x22
+800AF868,ShadowExecuter_UpdateHeldObject,player,LIKELY,flag 0x1E -> player vslot 0x11 / 0x0F
+800AF7B8,ShadowExecuter_UpdateGaugeEffects,player,LIKELY,gauge gs+0x70C>=+0x710 / +0x718>=+0x71C -> Effect fn_800A2FC0 / fn_800A2FE8
+800AF6A4,ShadowExecuter_UpdateSuperRingDrain,player,PROVEN,flag 0x24: -1 ring per second; rings<=0 and flag 0x25 -> Dead (0x1F)
+800AF60C,ShadowExecuter_UpdateSlowEnd,player,LIKELY,flag 0x15: gauge empty or flag 0x22 clear -> Effect fn_800A2DCC
+80079854,Player_Integrate,physics,PROVEN,fn_800939E4(playerRef;dt); called by 31 behavior Update functions
+800939E4,PlayerRef_Integrate,physics,PROVEN,fn_80093A18(pos;vel+0x18;acc+0x24;up+0xF4;flags+0xA8;dt)
+80093A18,Physics_IntegrateWithStateDrag,physics,PROVEN,drag k: flags 7/9 1.0; grounded 20; flag 0x1D 10; air horiz 3 / vert 1 (sdata 805E5640..50)
+80093BBC,Physics_IntegrateLinearDrag,physics,PROVEN,exact solution of v'=a-kv (e^-k dt via fn_803B2D0C); k<=0 -> Euler-exact
+803B2D0C,Math_Pow,math,LIKELY,wrapper of fn_803B0444; called with f1=e (2.71828) f2=k*dt
+80097658,Player_TerrainCollide,physics,STRONG,uses prevPos +0xD0; ray/sweep fn_80097DB4 / fn_80098ABC(mask 0x40000); sets flag 2 grounded; updates ground normal +0x1C8
+80093DE8,Player_TurnTowardInput,physics,STRONG,rotates heading toward move input (+0xB8) or velocity by rate arg
+80079810,Player_GetForward,physics,PROVEN,fn_8007975C(out;player;(0;0;-1))
+800797CC,Player_GetUp,physics,PROVEN,fn_8007975C(out;player;(0;1;0))
+8007975C,Player_LocalToWorldDir,physics,STRONG,ground-frame matrix +0x1E4 rotated by heading +0x10 applied to local vector
+80082E0C,Ground_UpdateAccelLimits,physics,PROVEN,+0x24=1000; +0x28=15000*charTable(804F2904)[id].+4 (carrying: 1000/3000)
+8008331C,Ground_UpdateRun,physics,STRONG,accel ramp (0.81/0.9/0.766/0.234/0.25); |acc|<=+0x28; integrate; turn rate 15..2; anim level
+800841E0,Ground_StaticInitThresholds,physics,PROVEN,.ctors; sbss 805EF4B0=0.2 (->Idle); 805EF4B4=200 (slide); 805EF4B8=30
+8008F26C,SpinDash_UpdateCharge,physics,STRONG,charge +0x24 (10 s max -> Idle); release: vel = forward*(150+850*min(charge;1))
+80084FF4,HomingAttack_SteerToTarget,physics,STRONG,per-axis rotation toward target at rate +0x28*dt (fn_800853EC)
+80084FA0,HomingAttack_OnHit,player,LIKELY,PMF 80521844 registered in HomingAttack::Enter; sets state +0x1C=1 on contact
+8008726C,Jump_PlaySound,player,LIKELY,SoundBase/Effect cue with char table +0x18 id
+800877E0,Player_GetCharId,player,PROVEN,returns +0x64
+800880C8,Player_GetDtPtr,player,PROVEN,returns +0x60
+8007915C,Player_SetInvincibleTime,player,PROVEN,+0x27C = max(+0x27C;t); flag 0x18 if >0 (Damage::Leave passes 2.0)
+80079098,Player_UpdateInvincibility,player,PROVEN,+0x27C -= dt; flag 0x18 cleared at <=0
+800B8130,Player_LoseRings,player,PROVEN,n=min(arg;rings); ring scatter fn_8011B614; rings -= n; skipped for flag 0x24 / +0x214 bit1; flag 0x20 -> Effect
+80178ED4,PlayerRecord_AddRings,player,STRONG,fn_8016F66C(record+0x28;n) overflow -> fn_8016F370(record+0x20)
+80178F10,GameState_GetPlayerRecord,player,PROVEN,gs + 0x728 + 0x4C*index (null if index<0)
+8007993C,GameState_Get,stage_flow,PROVEN,lazy static bss 8057707C (ctor fn_80179114); holds karma gauges +0x70C/+0x718 and player records
+8016F66C,Counter_AddWrap1000,runtime,PROVEN,*p+=n; clamp >=0; >=1000 wraps and returns quotient
+8016F664,Counter_Get,runtime,PROVEN,returns *p
+8007D158,Damage_StaticInitSuperKnockback,player,PROVEN,sbss 805EF458 = 700
+800795FC,Player_ClearChaosFlags,player,PROVEN,clears state flags 0x23 and 0x22
+80076DDC,PlayerFlags_Set,player,PROVEN,multiword bitset: word[n>>5] |= 1<<(n&31) (player+0xA8)
+80076DFC,PlayerFlags_Clear,player,PROVEN,multiword bitset clear (player+0xA8)
+8006CEA0,PlayerFlags_Test,player,PROVEN,multiword bitset test (player+0xA8)
+80014E1C,BitSet32,runtime,PROVEN,*p |= 1<<n
+800613A4,BitClear32,runtime,PROVEN,*p &= ~(1<<n)
+800A4AB4,SlowTask_Construct,player,PROVEN,Task "Slow" vtbl 80522A78; sets flag 0x15
+800A4830,SlowTask_Update,player,PROVEN,ramp over 0.5 s; bss 8057E784/8057E790 = 0.125*ramp; KarmaGauge_Add(gs+0x70C;-2000*dt)
+800A492C,SlowTask_Destruct,player,STRONG,vtbl 80522A78 slot 0 (dataptr 80522A84); clears flag 0x15; 8057E784/8057E790 = 1.0
+80086D3C,BehaviorCreate_Idle,player,PROVEN,factory 80522DE8[0x00] creator; new(0x20) Player::Behavior::Idle
+80082D44,BehaviorCreate_Ground,player,PROVEN,factory [0x01]; new(0x40) Ground
+80080724,BehaviorCreate_Fall,player,PROVEN,factory [0x02]; new(0x60) Fall
+80088E58,BehaviorCreate_Landing,player,PROVEN,factory [0x03]; new(0x24) Landing
+8008BE48,BehaviorCreate_Ottotto,player,PROVEN,factory [0x04]; new(0x20) Ottotto
+80087220,BehaviorCreate_Jump,player,PROVEN,factory [0x05]; new(0x44) Jump
+800881F4,BehaviorCreate_JumpDash,player,PROVEN,factory [0x06]; new(0x28) JumpDash
+8008DA28,BehaviorCreate_Sliding,player,PROVEN,factory [0x07]; new(0x28) Sliding
+80084F58,BehaviorCreate_HomingAttack,player,PROVEN,factory [0x08]; new(0x30) HomingAttack
+800868E0,BehaviorCreate_HomingJump,player,PROVEN,factory [0x09]; new(0x30) HomingJump
+8008FD40,BehaviorCreate_Throw,player,PROVEN,factory [0x0A]; new(0x24) Throw
+8009067C,BehaviorCreate_TurnOver,player,PROVEN,factory [0x0B]; new(0x2C) TurnOver
+8007F154,BehaviorCreate_EdgeHang,player,PROVEN,factory [0x0C]; new(0x50) EdgeHang
+800914D0,BehaviorCreate_WallHang,player,PROVEN,factory [0x0D]; new(0x50) WallHang
+8008A7FC,BehaviorCreate_LineHang,player,PROVEN,factory [0x0E]; new(0x5C) LineHang
+8008E310,BehaviorCreate_SomethingHang,player,PROVEN,factory [0x0F]; new(0x34) SomethingHang
+800927A8,BehaviorCreate_WallJump,player,PROVEN,factory [0x10]; new(0x3C) WallJump
+80081178,BehaviorCreate_Grind,player,PROVEN,factory [0x11]; new(0x70) Grind
+8008EDA4,BehaviorCreate_SpinDash,player,PROVEN,factory [0x12]; new(0x58) SpinDash
+8007D168,BehaviorCreate_DarkSpin,player,PROVEN,factory [0x13]; new(0x68) DarkSpin
+8008985C,BehaviorCreate_LightDash,player,PROVEN,factory [0x14]; new(0x60) LightDash
+8008C084,BehaviorCreate_PickupObject,player,PROVEN,factory [0x15]; new(0x2C) PickupObject
+8008CE94,BehaviorCreate_PickupWeapon,player,PROVEN,factory [0x16]; new(0x2C) PickupWeapon
+800891FC,BehaviorCreate_Launch,player,PROVEN,factory [0x17]; new(0x2C) Launch
+8008FABC,BehaviorCreate_Stream,player,PROVEN,factory [0x18]; new(0x1C) Stream
+80084200,BehaviorCreate_GroundAttack,player,PROVEN,factory [0x19]; new(0x24) GroundAttack
+8007A6A0,BehaviorCreate_AirAttack,player,PROVEN,factory [0x1A]; new(0x28) AirAttack
+8007DD5C,BehaviorCreate_DriveVehicle,player,PROVEN,factory [0x1B]; new(0x48) DriveVehicle
+8007AD94,BehaviorCreate_ChaosBlast,player,PROVEN,factory [0x1C]; new(0x2C) ChaosBlast
+8007BA94,BehaviorCreate_ChaosControl,player,PROVEN,factory [0x1D]; new(0x3C) ChaosControl
+8007CAE0,BehaviorCreate_Damage,player,PROVEN,factory [0x1E]; new(0x28) Damage
+8007D8E4,BehaviorCreate_Dead,player,PROVEN,factory [0x1F]; new(0x28) Dead
+80080218,BehaviorCreate_ExternalControl,player,PROVEN,factory [0x20]; new(0x34) ExternalControl
+80076400,BehaviorCreate_ElectricCircuit,player,PROVEN,factory [0x21]; new(0x44) ElectricCircuit
+802EB590,BehaviorCreate_Super,player,PROVEN,factory [0x22]; new(0x2C) Super
+80086D84,Player::Behavior::Idle::Update,player,PROVEN,RTTI Idle::vf05 (Behavior slot 5 = Update; called by Executer_Update @800A81F4)
+80083A38,Player::Behavior::Ground::Update,player,PROVEN,RTTI Ground::vf05; accel limits; run sub-states; ground/slope/idle transitions
+8008096C,Player::Behavior::Fall::Update,player,PROVEN,RTTI Fall::vf05; acc += input*220; integrate; landing/edge-hang
+80088EA0,Player::Behavior::Landing::Update,player,PROVEN,RTTI Landing::vf05
+8008BE90,Player::Behavior::Ottotto::Update,player,PROVEN,RTTI Ottotto::vf05
+8008731C,Player::Behavior::Jump::Update,player,PROVEN,RTTI Jump::vf05; hold thrust table 804B1628+4 for 0.75 s; air steer 220
+800883E8,Player::Behavior::JumpDash::Update,player,PROVEN,RTTI JumpDash::vf05; +180 impulse; 430 thrust; 0.4 s
+8008DEC0,Player::Behavior::Sliding::Update,player,PROVEN,RTTI Sliding::vf05
+80085628,Player::Behavior::HomingAttack::Update,player,PROVEN,RTTI HomingAttack::vf05; thrust 1000 along forward; 10 s timeout
+80086928,Player::Behavior::HomingJump::Update,player,PROVEN,RTTI HomingJump::vf05
+8008FDD8,Player::Behavior::Throw::Update,player,PROVEN,RTTI Throw::vf05
+800909D4,Player::Behavior::TurnOver::Update,player,PROVEN,RTTI TurnOver::vf05
+8007F810,Player::Behavior::EdgeHang::Update,player,PROVEN,RTTI EdgeHang::vf05
+80091C98,Player::Behavior::WallHang::Update,player,PROVEN,RTTI WallHang::vf05
+8008B274,Player::Behavior::LineHang::Update,player,PROVEN,RTTI LineHang::vf05
+8008E54C,Player::Behavior::SomethingHang::Update,player,PROVEN,RTTI SomethingHang::vf05
+800929FC,Player::Behavior::WallJump::Update,player,PROVEN,RTTI WallJump::vf05
+80081A94,Player::Behavior::Grind::Update,player,PROVEN,RTTI Grind::vf05
+8008F41C,Player::Behavior::SpinDash::Update,player,PROVEN,RTTI SpinDash::vf05
+8007D3EC,Player::Behavior::DarkSpin::Update,player,PROVEN,RTTI DarkSpin::vf05
+80089D64,Player::Behavior::LightDash::Update,player,PROVEN,RTTI LightDash::vf05
+8008C11C,Player::Behavior::PickupObject::Update,player,PROVEN,RTTI PickupObject::vf05
+8008CEF8,Player::Behavior::PickupWeapon::Update,player,PROVEN,RTTI PickupWeapon::vf05
+80089244,Player::Behavior::Launch::Update,player,PROVEN,RTTI Launch::vf05
+8008FB04,Player::Behavior::Stream::Update,player,PROVEN,RTTI Stream::vf05
+800842B4,Player::Behavior::GroundAttack::Update,player,PROVEN,RTTI GroundAttack::vf05
+8007A774,Player::Behavior::AirAttack::Update,player,PROVEN,RTTI AirAttack::vf05
+8007E6D0,Player::Behavior::DriveVehicle::Update,player,PROVEN,RTTI DriveVehicle::vf05
+8007AE10,Player::Behavior::ChaosBlast::Update,player,PROVEN,RTTI ChaosBlast::vf05
+8007BB8C,Player::Behavior::ChaosControl::Update,player,PROVEN,RTTI ChaosControl::vf05; drains gauge gs+0x70C (full gauge in 4.5 s)
+8007CCEC,Player::Behavior::Damage::Update,player,PROVEN,RTTI Damage::vf05; airborne >=1.5 s -> Fall
+8007D92C,Player::Behavior::Dead::Update,player,PROVEN,RTTI Dead::vf05; StageState_RequestAction(9) = StageAction::DeadAction
+80080264,Player::Behavior::ExternalControl::Update,player,PROVEN,RTTI ExternalControl::vf05
+800765B0,Player::Behavior::ElectricCircuit::Update,player,PROVEN,RTTI ElectricCircuit::vf05
+802EB96C,Player::Behavior::Super::Update,player,PROVEN,RTTI Super::vf05
+80087904,Player::Behavior::Jump::Enter,player,PROVEN,RTTI Jump::vf02; initial speed table 804B1628 (100); hold 0.75 s; flags 0/4 set; 2 cleared
+800877E8,Player::Behavior::Jump::Leave,player,PROVEN,RTTI Jump::vf03; clears flags 0/4/0x35/0x38/0x43/0x45 and A0 bits 2/3/6/7
+800880D8,Player::Behavior::Jump::OnCommand,player,PROVEN,RTTI Jump::vf04; EndJumpCommand 0x105 clears hold bit and timer
+8007CE74,Player::Behavior::Damage::Enter,player,PROVEN,RTTI Damage::vf02; knockback up*100-forward*100 (Super -forward*700); Player_LoseRings(10)
+8007CE10,Player::Behavior::Damage::Leave,player,PROVEN,RTTI Damage::vf03; Player_SetInvincibleTime(2.0)
+8007DAA4,Player::Behavior::Dead::Enter,player,PROVEN,RTTI Dead::vf02; flags 0/0x12; clears chaos flags; anim 0x2A
+80085FE0,Player::Behavior::HomingAttack::Enter,player,PROVEN,RTTI HomingAttack::vf02; steer rate +0x28=8; flags 6/0x38/0x31/0x35; hit callback PMF 80521844
+8008F8D0,Player::Behavior::SpinDash::Enter,player,PROVEN,RTTI SpinDash::vf02
+80083EE8,Player::Behavior::Ground::Enter,player,PROVEN,RTTI Ground::vf02; sets flags 0/0x3E and A0 bits 1/3/5/6/7
+80080ED4,Player::Behavior::Fall::Enter,player,PROVEN,RTTI Fall::vf02
+80072548,Player_Behavior_OnCommandDefault,player,STRONG,shared vslot 4 of Landing/Ottotto/JumpDash/HomingAttack/PickupWeapon

@@ -1,0 +1,5 @@
+address,current_name,subsystem,confidence,evidence
+0x800A2FE8,Player_SpawnDarkAwakeEffect,player effects,STRONG,gauge 1 full path 0x800AF814-0x800AF830; calls 0x800A3830 and Awake ctor mode 0
+0x800A2FC0,Player_SpawnHeroAwakeEffect,player effects,STRONG,gauge 0 full path 0x800AF838-0x800AF850; calls 0x800A37A4 and Awake ctor mode 1
+0x800A51F0,Awake_Constructor,player effects,PROVEN,RTTI @unnamed@PlayerEffect_cpp@::Awake 0x805E59D0; vtable 0x80522A94; sets flag from table 0x804B39D4
+0x800A4D2C,Awake_Update,player effects,PROVEN,Awake vtable Update slot 0x80522AA0; clears table selected flag when gauge empty 0x800A4E14-0x800A4E20

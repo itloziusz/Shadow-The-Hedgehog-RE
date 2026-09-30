@@ -1,0 +1,4 @@
+address,current_name,subsystem,confidence,evidence
+0x8017CB50,EggPawnBase::GetWeaponAttackMotion,enemy/eggpawn,PROVEN,"EggPawnAI_WeaponAttack Enter 0x8017E210..0x8017E248 and loop 0x8017E164..0x8017E1A0 call SB vslot +0x280; getter returns weapon/shield motion IDs"
+0x8017CBD8,EggPawnBase::GetWeaponAimMotion,enemy/eggpawn,PROVEN,"EggPawnAI_WeaponAttack Update 0x8017DFE8..0x8017E024 calls SB vslot +0x274; getter returns weapon/shield motion IDs"
+0x8017CC20,EggPawnBase::GetChargePauseMotion,enemy/eggpawn,STRONG,"TukiAttack Update 0x8017E374..0x8017E3B8 and DashAttack Update 0x8017E668..0x8017E6AC call param vslot +0x48 through EggPawnBase thunk; getter returns weapon/shield motion IDs"

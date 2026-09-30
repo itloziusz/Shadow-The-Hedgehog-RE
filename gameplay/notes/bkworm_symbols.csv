@@ -1,0 +1,9 @@
+address,current_name,subsystem,confidence,evidence
+0x801838E4,BkWormAI_EnterInitialState,enemy.bkworm,PROVEN,display setup then WaitAppear singleton
+0x8018388C,BkWormAI_ReturnToWait,enemy.bkworm,PROVEN,AI+0x7C selects WaitAppear or WaitStanding
+0x8018342C,BkWormAI_WaitAppear_Update,enemy.bkworm,PROVEN,sensor and strict timer substeps
+0x801831D0,BkWormAI_Appear_Update,enemy.bkworm,PROVEN,turn and motion-end transition
+0x801830BC,BkWormAI_WaitStanding_Update,enemy.bkworm,PROVEN,strict timer then attack count load
+0x80182F48,BkWormAI_Attack_Update,enemy.bkworm,PROVEN,motion-end to AfterAttack
+0x80182CBC,BkWormAI_AfterAttack_Update,enemy.bkworm,PROVEN,predecrement count then Move or Attack
+0x80182964,BkWormAI_Move_Update,enemy.bkworm,PROVEN,two substeps with turn and motion-end

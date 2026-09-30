@@ -1,0 +1,3212 @@
+80008D40 SonicteamUSA::System::Camera::CameraModeMtnViewer
+800092CC SonicteamUSA::System::Camera::CameraModeStop
+800094C8 boost::detail::sp_counted_base_impl<@unnamed@EnemyVacuumObject_cpp@::CEnemyVacuumObject *, boost::checked_deleter<@unnamed@EnemyVacuumObject_cpp@::CEnemyVacuumObject>>
+80009500 boost::detail::sp_counted_base
+800095B4 SonicteamUSA::System::Camera::CameraModeStop
+80009610 SonicteamUSA::System::Camera::CameraModeUser
+80009F24 boost::bad_function_call
+80009F7C std::runtime_error
+80009FF4 boost::bad_function_call
+8000A038 std::runtime_error
+8000A0DC std::exception
+8000A1A4 std::runtime_error
+8000ABA4 PJSCamera::AdjustCosRot
+8000ADC8 PJSCamera::AdjustLinerLocal
+8000D460 std::bad_alloc
+8000D500 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraManagerUnit *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraManagerUnit>>::sp_counted_base_impl
+8000D8B8 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraShake *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraShake>>::sp_counted_base_impl
+8000DE24 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraShake *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraShake>>
+8000DE80 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraManagerUnit *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraManagerUnit>>
+8000DEDC std::bad_alloc
+8000DEE8 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraManagerUnit *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraManagerUnit>>
+8000DF5C boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraShake *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraShake>>
+800122A0 ResourceManagerTask
+80012890 Resource
+800145A4 ResourceOneFile
+8001689C boost::bad_weak_ptr
+8001D98C boost::detail::sp_counted_base_impl<SonicteamUSA::System::PathData *, boost::checked_deleter<SonicteamUSA::System::PathData>>::sp_counted_base_impl
+8001E458 boost::detail::sp_counted_base_impl<SonicteamUSA::System::PathData *, boost::checked_deleter<SonicteamUSA::System::PathData>>
+800273E4 Effect::System::EffectArranger
+800273E8 SonicteamUSA::System::Effect::EffectArrangerUSA
+800274A4 Effect::System::EffectLaunchInfo
+800274EC SonicteamUSA::System::Effect::EffectArrangerUSA
+8002759C SonicteamUSA::System::Effect::EffectLaunchInfoUSA
+80027770 SonicteamUSA::System::Effect::EffectManagerUSA
+800279E4 SonicteamUSA::System::Effect::EffectShimmerUSA
+80027A4C SonicteamUSA::System::Effect::EffectObjectUSA
+80027DC4 SonicteamUSA::System::Effect::EffectParticle3DUSA
+800282AC SonicteamUSA::System::Effect::EffectParticleUSA
+80028548 SonicteamUSA::System::Effect::EffectRayUSA
+80028730 SonicteamUSA::System::Effect::EffectSystemUSA
+80028BA4 SonicteamUSA::System::Effect::EffectManagerUSA
+80028C94 SonicteamUSA::System::Range::RangeSphere
+80028C9C SonicteamUSA::System::Range::RangeTriangle
+80028CA0 SonicteamUSA::System::Range::RangeBox
+8002A6FC SonicteamUSA::System::Range::RangeSphere
+8002B2FC SonicteamUSA::System::Range::RangeBox
+8002DC88 SonicteamUSA::System::Range::RangeCapsule
+80030ADC SonicteamUSA::System::Range::RangeCylinder
+80030E08 SonicteamUSA::System::Range::RangeCapsule
+80032654 SonicteamUSA::System::Range::RangeCylinder
+8003498C SonicteamUSA::System::Range::RangePlane
+80034AD4 SonicteamUSA::System::Range::RangeSphere
+80035D84 SonicteamUSA::System::Range::RangeTriangle
+80036B0C TMovieManager
+80037380 SonicteamUSA::System::CharaColli::CharaColliBody
+80039E00 SonicteamUSA::System::BitTable
+80039EFC HandleUser
+8003A374 boost::detail::sp_counted_base_impl<TBlockManage::forBlockCheck *, boost::checked_deleter<TBlockManage::forBlockCheck>>::sp_counted_base_impl
+8003AAE8 TBlockManage
+8003AD6C HandleUser
+8003ADB4 TBlockManage
+8003AE98 HandleUser
+8003AEE8 boost::detail::sp_counted_base_impl<TBlockManage::forBlockCheck *, boost::checked_deleter<TBlockManage::forBlockCheck>>
+8003B05C TBlockManage
+8003CB8C TCsdSystem
+8003CBB8 Chao::CSD::RCPtr<Chao::CSD::CScene>::RCObject<Chao::CSD::CScene>
+8003D420 boost::detail::sp_counted_base_impl<TPjsSceneTour *, boost::checked_deleter<TPjsSceneTour>>::sp_counted_base_impl
+8003DF8C Chao::CSD::RCPtr<Chao::CSD::CScene>::RCObject<Chao::CSD::CScene>::RCPtr
+8003DFAC TCsdSystem
+8003E1BC Chao::CSD::RCPtr<Chao::CSD::CNode>::RCObject<Chao::CSD::CNode>
+8003E71C Chao::CSD::RCPtr<Chao::CSD::CTexList>::RCObject<Chao::CSD::CTexList>
+8003EF98 Chao::CSD::RCPtr<Chao::CSD::CTexList>::RCObject<Chao::CSD::CTexList>::RCPtr
+8003F1E8 Chao::CSD::CResourceBase<Chao::CSD::Project>
+8003F3D0 Chao::CSD::RCPtr<unsigned char>::RCObject<unsigned char>
+8003F42C Chao::CSD::CResourceBase<Chao::CSD::Project>::CResourceBase
+8003F6B0 Chao::CSD::RCPtr<unsigned char>::RCObject<unsigned char>::RCPtr
+8003FFAC TPjsCsd
+80040054 boost::detail::sp_counted_base_impl<TPjsSceneTour *, boost::checked_deleter<TPjsSceneTour>>
+800400B0 Chao::CSD::CResourceBase<Chao::CSD::Project>
+800400F0 boost::detail::sp_counted_base_impl<TPjsSceneTour *, boost::checked_deleter<TPjsSceneTour>>
+8004218C TCsdSystem
+80042804 Chao::CSD::RCPtr<Chao::CSD::CNode>::RCObject<Chao::CSD::CNode>::RCPtr
+80042A54 Chao::CSD::RCPtr<Chao::CSD::CScene>::RCObject<Chao::CSD::CScene>::RCPtr
+80042C80 Chao::CSD::RCPtr<Chao::CSD::CSceneList>::RCObject<Chao::CSD::CSceneList>
+80042F74 Chao::CSD::RCPtr<Chao::CSD::CSceneList>::RCObject<Chao::CSD::CSceneList>::RCPtr
+800431C4 Chao::CSD::RCPtr<Chao::CSD::CTexList>::RCObject<Chao::CSD::CTexList>::RCPtr
+800431F8 Chao::CSD::CMemoryAlloc
+80043604 Chao::CSD::RCPtr<Chao::CSD::CNode>::RCObject<Chao::CSD::CNode>::RCPtr
+80043704 Chao::CSD::RCPtr<Chao::CSD::CSceneList>::RCObject<Chao::CSD::CSceneList>::RCPtr
+8004384C TDestroyManager
+80043D5C TExpandBG
+80043EF8 TExpandNotice
+800441D4 SonicteamUSA::System::Fade::FadeDrawTask
+80044228 SonicteamUSA::System::Fade::FadeTask
+80044DB0 SonicteamUSA::System::Fade::FadeDrawTask
+800452C8 TBGReadManager
+80045680 TBGRead
+8004580C TFileControlAsycManager
+80045FDC LandDispManager
+800466B4 LandALoadMananger
+800477A0 LandDispManager
+800491B4 Sonicteam::System::Diagnostics::DefaultDebugListener
+8004922C Sonicteam::System::Diagnostics::DebugListener
+8004AC78 TOneFileNotice
+8004B26C TOneFileAsync<RpDMorphAnimation>
+8004B688 TOneFileAsync<RpWorld>
+8004BAA0 TOneFileAsync<RtDict>
+8004BEBC TOneFileAsync<RpClump>
+8004C2D4 TOneFileAsync<RwTexDictionary>
+8004C6C4 TOneFileAsync<void>
+8004D05C TOneFileAsync<RpDMorphAnimation>
+8004D0D8 TOneFileAsync<RpWorld>
+8004D154 TOneFileAsync<RtDict>
+8004D1D0 TOneFileAsync<RpClump>
+8004D24C TOneFileAsync<RwTexDictionary>
+8004D2C8 TOneFileAsync<void>
+8004E25C boost::detail::sp_counted_base_impl<Render *, boost::checked_deleter<Render>>::sp_counted_base_impl
+8004E390 RenderUnit
+8004E75C boost::detail::sp_counted_base_impl<Render *, boost::checked_deleter<Render>>
+8004EA80 Task
+8004F3C4 TTextureChange
+80052368 Weapon::Bullet::BulletBase
+80053AA8 Weapon::Bullet::Cannon
+80055278 Weapon::Bullet::CannonBomb
+80056284 Weapon::Bullet::BulletGun
+80057310 Weapon::Bullet::Homing
+80058B74 Weapon::Bullet::BulletManagerTask
+80059F9C Weapon::Bullet::Ring
+8005A934 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliAttack *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliAttack>>::sp_counted_base_impl
+8005B7B8 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliAttack *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliAttack>>
+8005BCE0 boost::detail::sp_counted_base_impl<Weapon::Item *, boost::checked_deleter<Weapon::Item>>::sp_counted_base_impl
+8005BD14 Weapon::Item
+8005BFD0 boost::detail::sp_counted_base_impl<Weapon::WeaponBase *, boost::checked_deleter<Weapon::WeaponBase>>::sp_counted_base_impl
+8005C054 boost::detail::sp_counted_base_impl<Weapon::WeaponBase *, boost::checked_deleter<Weapon::WeaponBase>>
+8005C0B0 boost::detail::sp_counted_base_impl<Weapon::Item *, boost::checked_deleter<Weapon::Item>>
+8005C180 boost::detail::sp_counted_base_impl<Weapon::WeaponBase *, boost::checked_deleter<Weapon::WeaponBase>>
+8005C1F4 EmbeddedGun::AutoRifle
+8005C204 Weapon::WeaponBase
+8005C464 Weapon::AntiAircraftRifle
+8005C784 Weapon::AntiTankMissile
+8005CDBC Weapon::AutoRifle
+8005CFD4 Weapon::WeaponBase
+8005D2A4 Weapon::Bazooka
+8005D52C Weapon::BigBarrel
+8005D7AC Weapon::BlackBarrel
+8005DD30 Weapon::BlackSword
+8005E13C Weapon::WeaponCannonBase
+8005E868 Weapon::FlashShot
+8005EA80 Weapon::Grenade
+8005ECCC Weapon::WeaponGunBase
+8005EF10 Weapon::HandGun
+8005F1F0 Weapon::Item
+8005F740 Weapon::LightShot
+8005FC3C Weapon::WeaponLockonBase
+8006014C boost::detail::sp_counted_base_impl<TargetSearchList *, boost::checked_deleter<TargetSearchList>>::sp_counted_base_impl
+80060D24 boost::detail::sp_counted_base_impl<Weapon::LockonTarget *, boost::checked_deleter<Weapon::LockonTarget>>::sp_counted_base_impl
+800612EC boost::detail::sp_counted_base_impl<Weapon::LockonTarget *, boost::checked_deleter<Weapon::LockonTarget>>
+80061348 boost::detail::sp_counted_base_impl<TargetSearchList *, boost::checked_deleter<TargetSearchList>>
+80061430 boost::detail::sp_counted_base_impl<Weapon::LockonTarget *, boost::checked_deleter<Weapon::LockonTarget>>
+80061E60 Weapon::LockonMark
+80064A4C Weapon::RingShot
+80064C64 Weapon::RocketLauncher
+800674C0 Weapon::Stick
+800679EC Weapon::WeaponStickBase
+80068CFC Weapon::SubMachineGun
+80068F98 Weapon::TankCannon
+800699B0 Weapon::Vulcan
+8006AE18 ResourceOneFileReq
+8006C1B8 Player::Npc::Amy::MotionImpl
+8006C278 Player::Npc::Sonic::MotionImpl
+8006D274 Player::Control::Approach
+8006D2D0 Player::Control::ControlBase
+8006D440 Player::Control::InitializeArgs
+8006E47C AccelerateCommand
+8006E4CC CharCommand
+8006EEB8 Player::StartAttackCommand
+8006EEFC Player::PlayerCommand
+8006FFB0 Player::HomingAttackCommand
+80070000 Player::EndJumpCommand
+80070E1C Player::Npc::NpcHand
+80072450 Player::Behavior::InitializeArgs
+80072498 Player::Behavior::InitializeArgsDamage
+80072548 Player::Behavior::HomingAttack
+80072638 Player::Npc::SonicType::SonicTypeExecuter
+80072F90 Player::Npc::EnemyDeadByPlayerCommand
+80073170 Player::Npc::ShowCommand
+80073440 Player::Npc::HideCommand
+800735B0 Player::Npc::NpcCommand
+800736F8 Player::Npc
+8007375C CharInfo
+80073B48 Player::Npc
+8007434C Player::Npc::Npc
+800750D4 boost::detail::sp_counted_base_impl<Player::Npc::NpcManageUnit *, boost::checked_deleter<Player::Npc::NpcManageUnit>>::sp_counted_base_impl
+80075348 boost::detail::sp_counted_base_impl<Player::Npc::NpcManageUnit *, boost::checked_deleter<Player::Npc::NpcManageUnit>>
+80075FB4 NpcWatch::Watch
+80076448 Player::Behavior::ElectricCircuit
+800766E4 Player::Behavior::InitializeArgsJump
+80076794 Player::Behavior::ElectricCircuit
+80076C6C Player::Behavior::Behavior
+80076D24 Player::Behavior::ElectricCircuit
+80076D70 Player::Behavior::Behavior
+80076DD8 Player::Behavior::ChaosBlast
+80076E30 Player
+800773D0 Player::Player
+800775F8 Player::IgnoreInputCommand
+80077B44 Player::Attack
+80078C60 CharInfo
+800795B8 Player::StartActionCommand
+800798A4 Player::Npc
+80079A1C Player::PlayerBase
+8007A44C boost::detail::sp_counted_base_impl<CharCommandUnit *, boost::checked_deleter<CharCommandUnit>>::sp_counted_base_impl
+8007A54C Player::PlayerObject
+8007A5A4 boost::detail::sp_counted_base_impl<CharCommandUnit *, boost::checked_deleter<CharCommandUnit>>
+8007A600 CharInfo
+8007A628 boost::detail::sp_counted_base_impl<CharCommandUnit *, boost::checked_deleter<CharCommandUnit>>
+8007A6E8 Player::Behavior::AirAttack
+8007AE10 Player::Behavior::ChaosBlast
+8007BADC Player::Behavior::ChaosControl
+8007CCEC Player::Behavior::Damage
+8007D1B0 Player::Behavior::DarkSpin
+8007D92C Player::Behavior::Dead
+8007E6D0 Player::Behavior::DriveVehicle
+8007F80C Player::Behavior::EdgeHang
+80080260 Player::Behavior::ExternalControl
+8008096C Player::Behavior::Fall
+80080C74 Player::Behavior::InitializeArgsEdgeHang
+80080E54 Player::Behavior::Fall
+800811C0 Player::Behavior::Grind
+80083A38 Player::Behavior::Ground
+80084248 Player::Behavior::GroundAttack
+800845EC Player::Behavior::InitializeArgsGround
+80084670 Player::Behavior::GroundAttack
+80085628 Player::Behavior::HomingAttack
+80085898 Player::Behavior::InitializeArgsHomingJump
+80085950 Player::Behavior::HomingAttack
+80086928 Player::Behavior::HomingJump
+80086D84 Player::Behavior::Idle
+80087268 Player::Behavior::Jump
+80088314 Player::Behavior::InitializeArgsWallHang
+800883E8 Player::Behavior::JumpDash
+80088EA0 Player::Behavior::Landing
+80089244 Player::Behavior::Launch
+800898A4 Player::Behavior::LightDash
+8008A844 Player::Behavior::LineHang
+8008BE90 Player::Behavior::Ottotto
+8008C0CC Player::Behavior::PickupObject
+8008CEDC Player::Behavior::PickupWeapon
+8008DA70 Player::Behavior::Sliding
+8008E54C Player::Behavior::SomethingHang
+8008EDEC Player::Behavior::SpinDash
+8008FB04 Player::Behavior::Stream
+8008FD88 Player::Behavior::Throw
+800906C4 Player::Behavior::TurnOver
+800919B0 Player::Behavior::WallHang
+800922FC Player::Behavior::InitializeArgsWallJump
+80092418 Player::Behavior::WallHang
+800929FC Player::Behavior::WallJump
+80094CFC Player::CharaColliMove
+80099A24 Player::ResetCommand
+80099C64 Player::ResetCameraCommand
+80099E1C Player::CancelActingCommand
+80099EE4 Player::ActingAccelerateCommand
+8009A02C Player::SetLookAtPositionCommand
+8009A17C Player::ElectricCircuitCommand
+8009A21C Player::Behavior::InitializeArgsElectricCircuit
+8009A2E8 Player::ToSuperCommand
+8009A4E8 Player::PressGroundCommand
+8009A5F0 Player::SetGravityCommand
+8009A7E0 Player::StartExternalControlCommand
+8009A8D4 Player::Behavior::InitializeArgsExternalControl
+8009A9B0 Player::SetExternalMotionCommand
+8009AAB8 Player::SetMotionCommand
+8009AB48 Player::IgnoreInputCommand
+8009ACC4 Player::InvincibleCommand
+8009AD40 Player::EndParallelMoveCommand
+8009ADC0 Player::StartParallelMoveCommand
+8009AE40 Player::GetOnVehicleCommand
+8009AEDC Player::Behavior::InitializeArgsDriveVehicle
+8009AFE0 Player::GetOnVehicleCommand
+8009B0A4 Player::StreamCommand
+8009B1A4 Player::LaunchCommand
+8009B240 Player::Behavior::InitializeArgsLaunch
+8009B2C4 Player::LaunchCommand
+8009B30C Player::TurnOverCommand
+8009B3A8 Player::Behavior::InitializeArgsTurnOver
+8009B46C Player::ThrowCommand
+8009B508 Player::Behavior::InitializeArgsThrow
+8009B5CC Player::PickupObjectCommand
+8009B668 Player::Behavior::InitializeArgsPickupObject
+8009B72C Player::ApproachControlCommand
+8009B7CC Player::Control::InitializeArgsApproach
+8009B898 Player::GetItemCommand
+8009BAD8 Player::AddWeaponCommand
+8009BBDC Player::CastWeaponCommand
+8009BCD4 Player::Behavior::InitializeArgsPickupWeapon
+8009BD98 Player::PickupWeaponCommand
+8009BFA8 Player::Behavior::InitializeArgsPickupWeapon
+8009BFFC Player::ChaosControlCommand
+8009C0A4 Player::ChaosBlastCommand
+8009C14C Player::TouchHangCommand
+8009C1F4 Player::Behavior::InitializeArgsSomethingHang
+8009C2D0 Player::TouchLineCommand
+8009C388 Player::Behavior::InitializeArgsLineHang
+8009C4A8 Player::LightDashCommand
+8009C550 Player::DarkSpinCommand
+8009C5EC Player::Behavior::InitializeArgsDarkSpin
+8009C6B0 Player::SpinDashCommand
+8009C758 Player::GrindCommand
+8009C7F4 Player::Behavior::InitializeArgsGrind
+8009C8B8 Player::SetLoopPathCommand
+8009C8C8 Player::HomingJumpCommand
+8009C968 Player::HomingAttackCommand
+8009CA1C Player::Behavior::InitializeArgsHomingAttack
+8009CAE0 Player::SlidingCommand
+8009CB88 Player::EndActionCommand
+8009CB98 Player::StartActionCommand
+8009CBA8 Player::StartJumpCommand
+8009CDAC Player::EndAttackCommand
+8009CDBC Player::StartAttackCommand
+8009CF5C Player::CancelBehaviorCommand
+8009D0B0 Player::PlayerCommand
+8009D0FC Player::ResetCameraCommand
+8009D158 Player::CancelActingCommand
+8009D1B4 Player::ActingAccelerateCommand
+8009D210 Player::ElectricCircuitCommand
+8009D27C Player::StartExternalControlCommand
+8009D2E8 Player::SetExternalMotionCommand
+8009D344 Player::SetMotionCommand
+8009D3A0 Player::IgnoreInputCommand
+8009D3FC Player::InvincibleCommand
+8009D458 Player::EndParallelMoveCommand
+8009D4B4 Player::StartParallelMoveCommand
+8009D510 Player::StreamCommand
+8009D56C Player::LaunchCommand
+8009D5C8 Player::TurnOverCommand
+8009D634 Player::ThrowCommand
+8009D6A0 Player::PickupObjectCommand
+8009D70C Player::ApproachControlCommand
+8009D778 Player::GetItemCommand
+8009D7D4 Player::AddWeaponCommand
+8009D830 Player::CastWeaponCommand
+8009D88C Player::PickupWeaponCommand
+8009D8F8 Player::ChaosControlCommand
+8009D954 Player::ChaosBlastCommand
+8009D9B0 Player::TouchHangCommand
+8009DA1C Player::TouchLineCommand
+8009DA94 Player::LightDashCommand
+8009DAF0 Player::DarkSpinCommand
+8009DB5C Player::SpinDashCommand
+8009DBB8 Player::GrindCommand
+8009DC24 Player::SetLoopPathCommand
+8009DC90 Player::HomingJumpCommand
+8009DCEC Player::HomingAttackCommand
+8009DD58 Player::SlidingCommand
+8009DDB4 Player::EndActionCommand
+8009DE10 Player::StartActionCommand
+8009DE6C Player::StartJumpCommand
+8009DEC8 Player::EndAttackCommand
+8009DF24 Player::StartAttackCommand
+8009DF80 Player::CancelBehaviorCommand
+8009E08C Player::Control::ControlBase
+8009E124 Player::Control::Approach
+8009E490 Player::TurnOverCommand
+8009E4E0 Player::PickupObjectCommand
+8009E548 Player::Control::Approach
+8009E738 Player::Control::Bukuu
+8009E8E8 SetPositionCommand
+8009E938 Player::Control::Bukuu
+8009E9E0 Player::EndExternalControlCommand
+8009EA24 Player::Control::Bukuu
+8009EC4C Player::SetMotionCommand
+8009ECA4 Player::StartExternalControlCommand
+8009ED00 ClrVelocityCommand
+8009ED44 Player::Control::Bukuu
+8009EE10 Player::EndExternalControlCommand
+8009EFF8 Player::Controller
+8009F258 DeadCommand
+8009FB6C Player::CancelUseWeaponCommand
+8009FBB0 Player::GrindCommand
+8009FC00 Player::SetLoopPathCommand
+8009FD6C Player::CancelUseWeaponCommand
+800A1344 Player::PickupWeaponCommand
+800A1430 Player::ApproachControlCommand
+800A148C Player::JumpDashCommand
+800A14D0 Player::SpinDashCommand
+800A1514 Player::SlidingCommand
+800A1558 Player::LightDashCommand
+800A159C Player::DarkSpinCommand
+800A15EC Player::ThrowCommand
+800A163C Player::CastWeaponCommand
+800A1680 Player::ChaosControlCommand
+800A16C4 Player::ChaosBlastCommand
+800A1708 Player::EndUseWeaponCommand
+800A174C Player::StartUseWeaponCommand
+800A1D70 Player::Control::UserInput
+800A2548 Player::EndActionCommand
+800A258C Player::EndAttackCommand
+800A25D0 Player::EndParallelMoveCommand
+800A2614 Player::StartParallelMoveCommand
+800A2658 Player::Control::UserInput
+800A27F8 Player::StartUseWeaponCommand
+800A2854 Player::EndUseWeaponCommand
+800A28B0 Player::JumpDashCommand
+800A3194 Player::Effect
+800A3664 Effect::PJS::EffectManagerPJS
+800A7870 Player::WaitTalkingCommand
+800A84C4 Player::Executer
+800A8654 Player::WaitTalkingCommand
+800A9580 boost::detail::sp_counted_base_impl<Player::PlayerManageUnit *, boost::checked_deleter<Player::PlayerManageUnit>>::sp_counted_base_impl
+800A97EC boost::detail::sp_counted_base_impl<Player::PlayerManageUnit *, boost::checked_deleter<Player::PlayerManageUnit>>
+800AAB28 Player::Npc::Amy::MotionImpl
+800AABB0 Player::PlayerMotion
+800AB104 Player::ExternalOption
+800AB550 boost::detail::sp_counted_base_impl<Player::ExternalOption *, boost::checked_deleter<Player::ExternalOption>>::sp_counted_base_impl
+800AB6B8 boost::detail::sp_counted_base_impl<Player::InternalOption *, boost::checked_deleter<Player::InternalOption>>::sp_counted_base_impl
+800AB6EC Player::ExternalOption
+800AB904 Player::InternalOption
+800ABABC boost::detail::sp_counted_base_impl<Player::InternalOption *, boost::checked_deleter<Player::InternalOption>>
+800ABB18 boost::detail::sp_counted_base_impl<Player::ExternalOption *, boost::checked_deleter<Player::ExternalOption>>
+800ABB74 Player::InternalOption
+800ABBBC boost::detail::sp_counted_base_impl<Player::ExternalOption *, boost::checked_deleter<Player::ExternalOption>>
+800ABC30 boost::detail::sp_counted_base_impl<Player::InternalOption *, boost::checked_deleter<Player::InternalOption>>
+800ABE58 boost::detail::sp_counted_base_impl<Player::PathImpl *, boost::checked_deleter<Player::PathImpl>>::sp_counted_base_impl
+800AD4B4 boost::detail::sp_counted_base_impl<Player::PathImpl *, boost::checked_deleter<Player::PathImpl>>
+800AD7E0 Player::PlayerShadow
+800AE608 boost::detail::sp_counted_base_impl<Player::PlayerShadow *, boost::checked_deleter<Player::PlayerShadow>>::sp_counted_base_impl
+800AE63C boost::detail::sp_counted_base_impl<Player::PlayerShadow *, boost::checked_deleter<Player::PlayerShadow>>
+800AE89C boost::detail::sp_counted_base_impl<Player::Shadow::ShadowBehavior *, boost::checked_deleter<Player::Shadow::ShadowBehavior>>::sp_counted_base_impl
+800AE8D0 Player::Shadow::ShadowBehavior
+800AEB98 boost::detail::sp_counted_base_impl<Player::Behavior::Behavior *, boost::checked_deleter<Player::Behavior::Behavior>>::sp_counted_base_impl
+800AEBCC Player::Shadow::ShadowBehavior
+800AED10 Player::Behavior::Factory
+800AED58 boost::detail::sp_counted_base_impl<Player::Behavior::Behavior *, boost::checked_deleter<Player::Behavior::Behavior>>
+800AEDB4 boost::detail::sp_counted_base_impl<Player::Shadow::ShadowBehavior *, boost::checked_deleter<Player::Shadow::ShadowBehavior>>
+800AEE84 boost::detail::sp_counted_base_impl<Player::Behavior::Behavior *, boost::checked_deleter<Player::Behavior::Behavior>>
+800AF07C boost::detail::sp_counted_base_impl<Player::Shadow::ShadowControl *, boost::checked_deleter<Player::Shadow::ShadowControl>>::sp_counted_base_impl
+800AF0B0 Player::Shadow::ShadowControl
+800AF2E4 boost::detail::sp_counted_base_impl<Player::Control::ControlBase *, boost::checked_deleter<Player::Control::ControlBase>>::sp_counted_base_impl
+800AF318 Player::Shadow::ShadowControl
+800AF3D4 Player::Control::Factory
+800AF41C boost::detail::sp_counted_base_impl<Player::Control::ControlBase *, boost::checked_deleter<Player::Control::ControlBase>>
+800AF478 boost::detail::sp_counted_base_impl<Player::Shadow::ShadowControl *, boost::checked_deleter<Player::Shadow::ShadowControl>>
+800AF548 boost::detail::sp_counted_base_impl<Player::Control::ControlBase *, boost::checked_deleter<Player::Control::ControlBase>>
+800AFD28 Player::Shadow::ShadowExecuter
+800B05F0 Player::Shadow::MotionHand
+800B5044 Player::Shadow::ShadowMotion
+800B601C Player::Shadow::MotionEye
+800B6AD0 Player::Shadow::PlayerTarget
+800B859C Player::ResetCameraCommand
+800B85E0 SetAngleCommand
+800B8A04 Player::WeaponBase
+800B8E0C TGiPause
+800B9698 boost::detail::sp_counted_base_impl<folderTargetWindow *, boost::checked_deleter<folderTargetWindow>>::sp_counted_base_impl
+800B982C boost::detail::sp_counted_base_impl<folderStoryRoute *, boost::checked_deleter<folderStoryRoute>>::sp_counted_base_impl
+800B99C0 boost::detail::sp_counted_base_impl<folderPause *, boost::checked_deleter<folderPause>>::sp_counted_base_impl
+800B9BC0 boost::detail::sp_counted_base_impl<folderPause *, boost::checked_deleter<folderPause>>
+800B9C1C boost::detail::sp_counted_base_impl<folderStoryRoute *, boost::checked_deleter<folderStoryRoute>>
+800B9C78 boost::detail::sp_counted_base_impl<folderTargetWindow *, boost::checked_deleter<folderTargetWindow>>
+800B9D48 boost::detail::sp_counted_base_impl<folderStoryRoute *, boost::checked_deleter<folderStoryRoute>>
+800B9DBC boost::detail::sp_counted_base_impl<folderPause *, boost::checked_deleter<folderPause>>
+800BD4B8 TGiHdGage
+800BDE24 TGiHissatu
+800BE6E4 TGiHPGaugeBoss
+800BF384 boost::detail::sp_counted_base_impl<GiHPGaugeEnemy *, boost::checked_deleter<GiHPGaugeEnemy>>::sp_counted_base_impl
+800C0500 boost::detail::sp_counted_base_impl<GiHPGaugeEnemy *, boost::checked_deleter<GiHPGaugeEnemy>>
+800C07F4 TGameInfomation
+800C0BB0 SonicteamUSA::System::CharaColli::CharaColliBody
+800C1A14 SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo
+800C1CA4 SonicteamUSA::System::CharaColli::CharaColliGeneral
+800C3C34 SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo
+800C3C3C SonicteamUSA::System::CharaColli::CharaColliGeneralBone
+800C4044 SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo
+800C85A8 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneralBone *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneralBone>>::sp_counted_base_impl
+800C88F4 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo>>::sp_counted_base_impl
+800C8A5C boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo>>::sp_counted_base_impl
+800C8DCC boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneral *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneral>>::sp_counted_base_impl
+800C8F34 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliBody *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBody>>::sp_counted_base_impl
+800C908C boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliBody *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBody>>
+800C90E8 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneral *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneral>>
+800C9144 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo>>
+800C91A0 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo>>
+800C91FC boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneralBone *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneralBone>>
+800C92CC boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo>>
+800C9340 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo>>
+800C93B4 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneral *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneral>>
+800C9428 boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliBody *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBody>>
+800C949C SonicteamUSA::System::CharaColli::CharaColliManageTask
+800C9910 MotionSequenceModule
+800C9CD0 SetAdapterState
+800CB794 SetManagerTask
+800CC004 ArkCannon
+800CC094 FleetHolder
+800CC37C boost::detail::sp_counted_base_impl<EggFleet *, boost::checked_deleter<EggFleet>>::sp_counted_base_impl
+800CC444 FleetHolder
+800CE5A4 boost::detail::sp_counted_base_impl<EggCannon *, boost::checked_deleter<EggCannon>>::sp_counted_base_impl
+800CE818 EggFleetData
+800CFCFC EggCannonBullet
+800D0344 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Collision::CollisionResultList *, boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResultList>>::sp_counted_base_impl
+800D0378 EggCannonBullet
+800D12E0 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Collision::CollisionResultList *, boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResultList>>
+800D133C EggFleetData
+800D1398 boost::detail::sp_counted_base_impl<EggCannon *, boost::checked_deleter<EggCannon>>
+800D13F4 boost::detail::sp_counted_base_impl<EggFleet *, boost::checked_deleter<EggFleet>>
+800D14C4 boost::detail::sp_counted_base_impl<EggCannon *, boost::checked_deleter<EggCannon>>
+800D1538 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Collision::CollisionResultList *, boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResultList>>
+800D295C PowerDeviceCage
+800D34C8 PowerDeviceCageSetState
+800D4708 PowerDeviceNaked
+800D4D1C PowerDeviceNakedSetState
+800D5374 RainEffect
+800D5DE8 boost::detail::sp_counted_base_impl<RollCircleObj *, boost::checked_deleter<RollCircleObj>>::sp_counted_base_impl
+800D6000 RollCircle
+800D71C0 RollCircleSetState
+800D7284 boost::detail::sp_counted_base_impl<RollCircleObj *, boost::checked_deleter<RollCircleObj>>
+800D7C9C boost::detail::sp_counted_base_impl<StonePoleAir *, boost::checked_deleter<StonePoleAir>>::sp_counted_base_impl
+800D7E04 boost::detail::sp_counted_base_impl<StonePoleSlope *, boost::checked_deleter<StonePoleSlope>>::sp_counted_base_impl
+800D7FFC boost::detail::sp_counted_base_impl<StonePoleFlat *, boost::checked_deleter<StonePoleFlat>>::sp_counted_base_impl
+800D80A4 PoleHolder
+800D8370 StonePoleAir
+800D83F0 StonePoleSlope
+800D850C StonePoleFlat
+800D85E4 FallingStone
+800D8620 StonePoleFlat
+800D90F4 StonePoleAir
+800D90F8 FallingStone
+800D94EC StonePoleAir
+800D992C FallingStone
+800D9A78 StonePole
+800DA080 boost::detail::sp_counted_base_impl<FallingStoneSoft *, boost::checked_deleter<FallingStoneSoft>>::sp_counted_base_impl
+800DA1E8 boost::detail::sp_counted_base_impl<FallingStoneHard *, boost::checked_deleter<FallingStoneHard>>::sp_counted_base_impl
+800DA274 FallingStoneSoft
+800DAB9C FallingStoneHard
+800DB92C FallingStone
+800DBA64 boost::detail::sp_counted_base_impl<FallingStoneHard *, boost::checked_deleter<FallingStoneHard>>
+800DBAC0 boost::detail::sp_counted_base_impl<FallingStoneSoft *, boost::checked_deleter<FallingStoneSoft>>
+800DBB1C boost::detail::sp_counted_base_impl<StonePoleFlat *, boost::checked_deleter<StonePoleFlat>>
+800DBB78 boost::detail::sp_counted_base_impl<StonePoleSlope *, boost::checked_deleter<StonePoleSlope>>
+800DBBD4 boost::detail::sp_counted_base_impl<StonePoleAir *, boost::checked_deleter<StonePoleAir>>
+800DBC30 StonePoleAir
+800DBC50 StonePoleSlope
+800DBC70 StonePoleFlat
+800DBC90 boost::detail::sp_counted_base_impl<StonePoleAir *, boost::checked_deleter<StonePoleAir>>
+800DBD04 boost::detail::sp_counted_base_impl<StonePoleSlope *, boost::checked_deleter<StonePoleSlope>>
+800DBD78 boost::detail::sp_counted_base_impl<StonePoleFlat *, boost::checked_deleter<StonePoleFlat>>
+800DBDEC boost::detail::sp_counted_base_impl<FallingStoneSoft *, boost::checked_deleter<FallingStoneSoft>>
+800DBE60 boost::detail::sp_counted_base_impl<FallingStoneHard *, boost::checked_deleter<FallingStoneHard>>
+800DCED8 StoneStatue
+800DD978 StoneStatueSetState
+800DE0DC Tornado
+800DE6D4 boost::detail::sp_counted_base_impl<TornadoCharInfo *, boost::checked_deleter<TornadoCharInfo>>::sp_counted_base_impl
+800DEA9C SetVelocityCommand
+800DEAEC Player::IgnoreInputCommand
+800DEB50 Player::InvincibleCommand
+800DEF64 TornadoTowing
+800DF710 TornadoCharInfo
+800DF768 boost::detail::sp_counted_base_impl<TornadoCharInfo *, boost::checked_deleter<TornadoCharInfo>>
+800DFB88 TornadoCollision
+800E0100 CityChaosEmerald
+800E0BFC boost::detail::sp_counted_base_impl<CityLaser *, boost::checked_deleter<CityLaser>>::sp_counted_base_impl
+800E0C30 CityLaserHolder
+800E1DF8 boost::detail::sp_counted_base_impl<CityLaser *, boost::checked_deleter<CityLaser>>
+800E2BB4 boost::detail::sp_counted_base_impl<FallBuilding *, boost::checked_deleter<FallBuilding>>::sp_counted_base_impl
+800E2BE8 FallBuildingHolder
+800E40A4 FallBuildingData
+800E411C boost::detail::sp_counted_base_impl<FallBuilding *, boost::checked_deleter<FallBuilding>>
+800E43F0 ArtWork::BreakableOrnament
+800E6000 ArtWork::Ornament
+800E6768 Balloon::VacuumBalloon
+800E6A94 boost::detail::sp_counted_base_impl<Balloon::VacuumBalloon *, boost::checked_deleter<Balloon::VacuumBalloon>>::sp_counted_base_impl
+800E6AC8 Balloon::VacuumBalloon
+800E72D4 Balloon
+800E7738 Balloon::Balloon
+800E8900 boost::detail::sp_counted_base_impl<Balloon::VacuumBalloon *, boost::checked_deleter<Balloon::VacuumBalloon>>
+800E8C68 Vehicle::BatteryArmy
+800EAD24 Vehicle::BatteryBlackKiller
+800ECF64 BlastBreak
+800ED828 BlockChange
+800EDF1C Container::ContainerHard
+800EDF20 GadgetPickup::PickupBase
+800EE0E8 boost::detail::sp_counted_base_impl<Bomb::Bomb *, boost::checked_deleter<Bomb::Bomb>>::sp_counted_base_impl
+800EE504 Bomb::BombBlast
+800EF238 Bomb
+800EFA1C boost::detail::sp_counted_base_impl<ContainerBehavior *, boost::checked_deleter<ContainerBehavior>>::sp_counted_base_impl
+800F02DC Bomb
+800F0E24 boost::detail::sp_counted_base_impl<PickupCharInfo *, boost::checked_deleter<PickupCharInfo>>::sp_counted_base_impl
+800F0E58 Bomb::Bomb
+800F0FBC GadgetPickup::PickupBase
+800F115C boost::detail::sp_counted_base_impl<PickupCharInfo *, boost::checked_deleter<PickupCharInfo>>
+800F11B8 boost::detail::sp_counted_base_impl<ContainerBehavior *, boost::checked_deleter<ContainerBehavior>>
+800F1214 boost::detail::sp_counted_base_impl<Bomb::Bomb *, boost::checked_deleter<Bomb::Bomb>>
+800F12E4 boost::detail::sp_counted_base_impl<ContainerBehavior *, boost::checked_deleter<ContainerBehavior>>
+800F1358 boost::detail::sp_counted_base_impl<PickupCharInfo *, boost::checked_deleter<PickupCharInfo>>
+800F1B18 BreakObj
+800F29A0 Cage
+800F2CCC Cage::Cage
+800F3E20 CaptureCage
+800F40A8 CaptureCage::CaptureCage
+800F5218 CatchStick
+800F5D34 boost::detail::sp_counted_base_impl<Sonicteam::System::Geometry::Line *, boost::checked_deleter<Sonicteam::System::Geometry::Line>>::sp_counted_base_impl
+800F6574 Player::TouchLineCommand
+800F6634 boost::detail::sp_counted_base_impl<Sonicteam::System::Geometry::Line *, boost::checked_deleter<Sonicteam::System::Geometry::Line>>
+800F6C3C boost::detail::sp_counted_base_impl<Container::ContainerNormal *, boost::checked_deleter<Container::ContainerNormal>>::sp_counted_base_impl
+800F7A80 Container::ContainerNormal
+800F8CF8 GadgetPickup::PickupBase
+800F8DA4 boost::detail::sp_counted_base_impl<Container::ContainerNormal *, boost::checked_deleter<Container::ContainerNormal>>
+800F9678 ContainerBehavior
+800F9D2C boost::detail::sp_counted_base_impl<Container::ContainerHard *, boost::checked_deleter<Container::ContainerHard>>::sp_counted_base_impl
+800FAB04 Container::ContainerHard
+800FBD74 GadgetPickup::PickupBase
+800FBE28 boost::detail::sp_counted_base_impl<Container::ContainerHard *, boost::checked_deleter<Container::ContainerHard>>
+800FC33C Container::ContainerUnbreak
+800FD074 boost::detail::sp_counted_base_impl<Container::ContainerWeapon *, boost::checked_deleter<Container::ContainerWeapon>>::sp_counted_base_impl
+800FDD98 Container::ContainerWeapon
+800FEFD4 GadgetPickup::PickupBase
+800FF084 boost::detail::sp_counted_base_impl<Container::ContainerWeapon *, boost::checked_deleter<Container::ContainerWeapon>>
+800FF734 DashPanel
+800FF894 DashPanel::DashPanel
+80100418 Player::CancelBehaviorCommand
+8010083C DashRing
+8010099C DashRing::DashRing
+80101610 EnergyCore::EnergyCoreTask
+80101880 EnergyCore::SetEnergyCoreTask
+801038EC Fan
+80103D04 Fan::Fan
+801046E0 Fire
+801047A8 Fire::Fire
+80105EE0 Fruit::FruitTask
+80106A20 GoalRing
+80106ACC GoalRing::GoalRing
+80107678 boost::detail::sp_counted_base_impl<HealingUnit::HealingUnit *, boost::checked_deleter<HealingUnit::HealingUnit>>::sp_counted_base_impl
+801079FC HealingUnit::HealingBlast
+80108730 HealingUnit
+80109720 HealingUnit::HealingUnit
+8010986C GadgetPickup::PickupBase
+8010999C boost::detail::sp_counted_base_impl<HealingUnit::HealingUnit *, boost::checked_deleter<HealingUnit::HealingUnit>>
+8010A568 HintRing::SetHintRing
+8010B6C8 SetItem::VacuumItemBox
+8010B92C boost::detail::sp_counted_base_impl<SetItem::VacuumItemBox *, boost::checked_deleter<SetItem::VacuumItemBox>>::sp_counted_base_impl
+8010B960 SetItem::VacuumItemBox
+8010BED8 boost::detail::sp_counted_base_impl<SetItem::ItemBox *, boost::checked_deleter<SetItem::ItemBox>>::sp_counted_base_impl
+8010C068 SetItem::SetItemBoxTask
+8010C394 SetItem::ItemBoxTask
+8010E3B8 Player::HomingJumpCommand
+8010E408 boost::detail::sp_counted_base_impl<SetItem::ItemBox *, boost::checked_deleter<SetItem::ItemBox>>
+8010E464 boost::detail::sp_counted_base_impl<SetItem::VacuumItemBox *, boost::checked_deleter<SetItem::VacuumItemBox>>
+8010E534 boost::detail::sp_counted_base_impl<SetItem::ItemBox *, boost::checked_deleter<SetItem::ItemBox>>
+8010EBB8 JumpBoard
+8010ED38 JumpBoard::JumpBoard
+8010FCC0 LongSpring
+8010FF4C LongSpring::LongSpring
+80110F88 PoisonGas
+80111050 PoisonGas::PoisonGas
+80112588 RegularRing::RingState
+8011305C ColliDetectArgs
+80113F8C RegularRing::Ring
+80114AB4 RegularRing::RingState
+8011515C Rocket::RocketBase
+80115510 boost::detail::sp_counted_base_impl<Rocket::Rocket *, boost::checked_deleter<Rocket::Rocket>>::sp_counted_base_impl
+80115584 Rocket::RocketBase
+80115CF0 Rocket::RocketTask
+80115F58 Player::TouchHangCommand
+80117470 boost::detail::sp_counted_base_impl<Rocket::Rocket *, boost::checked_deleter<Rocket::Rocket>>
+80117E24 SavePoint
+801187E8 SavePoint::SavePoint
+801197E8 SavePoint::PauseWatch
+8011A480 ScatteringRing
+8011A760 ScatteringRing::ScatteringRing
+8011BAF0 SecretDoor
+8011BE58 SecretDoor::SecretDoor
+8011C57C SecretKey
+8011C6BC SecretKey::SecretKey
+8011DBFC SetCollision
+8011DDC0 SetCollision::SetCollision
+8011E130 SetParticle
+8011E690 SetVehicle::SetVehicleTask
+8011ECEC boost::detail::sp_counted_base_impl<SetWeapon::Arms *, boost::checked_deleter<SetWeapon::Arms>>::sp_counted_base_impl
+8011F134 SetWeapon::SetWeaponTask
+8011F514 SetWeapon::WeaponTask
+8011F860 Player::AddWeaponCommand
+801203A0 boost::detail::sp_counted_base_impl<SetWeapon::Arms *, boost::checked_deleter<SetWeapon::Arms>>
+80120948 Spring
+80120AA4 Spring::Spring
+801224E4 Stick
+80122DBC Stick::Stick
+80123A0C Switch
+80123A94 Switch::Switch
+80124E48 TargetSwitch
+801267B8 TurnOver::TurnOverTask
+80127E14 UpDownReel
+801286A0 UpDownReel::UpDownReel
+80129A28 WarpHole::ManagerTask
+8012A5A8 WarpHole::SetWarpHole
+8012B680 Weight
+8012BA7C Weight::Weight
+8012D6B8 CandleStick
+8012DCB0 CandleStickSetState
+8012E0EC boost::detail::sp_counted_base_impl<Chao *, boost::checked_deleter<Chao>>::sp_counted_base_impl
+8012E174 ChaoHolder
+8012F7D0 ChaoData
+8012F87C boost::detail::sp_counted_base_impl<Chao *, boost::checked_deleter<Chao>>
+8012FDA4 CircusBall
+8013055C CircusBall::CircusBall
+80130E04 CircusPole
+80132328 boost::detail::sp_counted_base_impl<SonicteamUSA::System::PathCtrl *, boost::checked_deleter<SonicteamUSA::System::PathCtrl>>::sp_counted_base_impl
+801324B0 Coaster
+8013428C boost::detail::sp_counted_base_impl<SonicteamUSA::System::PathCtrl *, boost::checked_deleter<SonicteamUSA::System::PathCtrl>>
+801348D8 Cream
+801354D4 CreamSetState
+80135AC4 FireRing
+80135E04 FireRing::FireRing
+80136FCC Gong::CSD::GongCSD
+80137B28 Gong
+80137C40 Gong::Gong
+80138FC0 Monster
+8013A240 boost::detail::sp_counted_base_impl<MonsterCharInfo *, boost::checked_deleter<MonsterCharInfo>>::sp_counted_base_impl
+8013A3B4 MonsterCharInfo
+8013A40C boost::detail::sp_counted_base_impl<MonsterCharInfo *, boost::checked_deleter<MonsterCharInfo>>
+8013A8B0 MonsterControl
+8013B8A4 boost::detail::sp_counted_base_impl<ShootingGame::RandomSampling<float> *, boost::checked_deleter<ShootingGame::RandomSampling<float>>>::sp_counted_base_impl
+8013BA88 boost::detail::sp_counted_base_impl<ShootingGame::RandomSampling<ShootingGame::Kind::__Kind> *, boost::checked_deleter<ShootingGame::RandomSampling<ShootingGame::Kind::__Kind>>>::sp_counted_base_impl
+8013BB2C ShootingGame::BalloonGenerator
+8013C4BC ShootingGame::Balloon
+8013CF54 boost::detail::sp_counted_base_impl<ShootingGame::RandomSampling<ShootingGame::Kind::__Kind> *, boost::checked_deleter<ShootingGame::RandomSampling<ShootingGame::Kind::__Kind>>>
+8013CFB0 boost::detail::sp_counted_base_impl<ShootingGame::RandomSampling<float> *, boost::checked_deleter<ShootingGame::RandomSampling<float>>>
+8013D428 boost::detail::sp_counted_base_impl<ShootingGame::RandomSampling<ShootingGame::Kind::__Kind> *, boost::checked_deleter<ShootingGame::RandomSampling<ShootingGame::Kind::__Kind>>>
+8013D6CC ShootingGame::ManagerTask
+8013D760 StageAction::IAction
+8013D768 ShootingGame::ManagerTask
+8013DD28 ShootingGame::Score
+8013F3EC boost::detail::sp_counted_base_impl<ThreatObj *, boost::checked_deleter<ThreatObj>>::sp_counted_base_impl
+8013F4A0 ThreatObjHolder
+80140450 boost::detail::sp_counted_base_impl<ThreatObj *, boost::checked_deleter<ThreatObj>>
+80140D3C BreakWall
+8014136C BreakWall::BreakWall
+801423F8 Catapult
+80142898 Catapult::Catapult
+80143578 DamageBlock
+8014386C Door::SetMorphDoor
+801443F0 Door::SetDoor
+801458EC EggBalloon::SetEggBalloon
+80145CCC boost::detail::sp_counted_base_impl<EggBalloon::SetEggBalloon *, boost::checked_deleter<EggBalloon::SetEggBalloon>>::sp_counted_base_impl
+80145F9C EggBalloon::SetEggBalloon
+80147C28 PathObject
+80147CEC EscapePlane::SetEscapePlane
+80147CF0 boost::detail::sp_counted_base_impl<EggBalloon::SetEggBalloon *, boost::checked_deleter<EggBalloon::SetEggBalloon>>
+80148828 Elevator
+80148D78 Elevator::Elevator
+80149834 Footing
+8014A870 FootingMovable
+8014B830 FootingMovable::FootingMovable
+8014C3D0 StretchGrass::SetStretchGrass
+8014DB14 Player::StartExternalControlCommand
+8014E178 Vine::FireBallBlast
+8014E894 Vine::FireBall
+8014F398 MotionSequenceModule
+8015013C Vine
+801502D0 Vine::Vine
+80152BF4 ElecBar
+80154A08 ElecSearchLight
+801581F4 ElecSecurityCodeGenerator
+80158E08 ElecBlock
+801597F4 SpringPanel
+8015AC7C ArkCannon
+8015AD28 Gadget
+8015BED8 boost::detail::sp_counted_base_impl<GadgetCharCollision *, boost::checked_deleter<GadgetCharCollision>>::sp_counted_base_impl
+8015C42C GadgetColliDetectArgs
+8015C7A0 boost::detail::sp_counted_base_impl<GadgetCharCollision *, boost::checked_deleter<GadgetCharCollision>>
+8015D140 boost::detail::sp_counted_base_impl<GadgetCharInfo *, boost::checked_deleter<GadgetCharInfo>>::sp_counted_base_impl
+8015D4C4 GadgetCharInfo
+8015D600 boost::detail::sp_counted_base_impl<GadgetCharInfo *, boost::checked_deleter<GadgetCharInfo>>
+8015DA90 GadgetCommand::GadgetCommand
+8015DAEC GadgetCommand
+8015DCC8 GadgetCrash3D::TObjEffCrash3DRChildObj
+8015E578 GadgetCrash3D::TObjEffCrash3DR
+8015E954 GadgetCrash3D::TObjEffCrash3DChildObj
+8015F1EC GadgetCrash3D::TObjEffCrash3D
+8015FB44 Player::GetItemCommand
+8015FD88 boost::detail::sp_counted_base_impl<GadgetModelInfo *, boost::checked_deleter<GadgetModelInfo>>::sp_counted_base_impl
+8016139C boost::detail::sp_counted_base_impl<_stMtnPlayWork *, void (*)(_stMtnPlayWork *)>
+80163D58 GadgetModelInfo
+801647D8 boost::detail::sp_counted_base_impl<_stMtnPlayWork *, void (*)(_stMtnPlayWork *)>
+80164834 boost::detail::sp_counted_base_impl<GadgetModelInfo *, boost::checked_deleter<GadgetModelInfo>>
+80164904 boost::detail::sp_counted_base_impl<_stMtnPlayWork *, void (*)(_stMtnPlayWork *)>
+801660FC boost::detail::sp_counted_base_impl<TrigerCounter *, boost::checked_deleter<TrigerCounter>>::sp_counted_base_impl
+801664F4 boost::detail::sp_counted_base_impl<TrigerCounter *, boost::checked_deleter<TrigerCounter>>
+80166EA4 boost::detail::sp_counted_base_impl<GadgetParticle::GadgetParticleCtrl *, boost::checked_deleter<GadgetParticle::GadgetParticleCtrl>>::sp_counted_base_impl
+80167B10 GadgetParticle::GadgetParticleCtrl
+8016806C boost::detail::sp_counted_base_impl<GadgetParticle::GadgetParticleCtrl *, boost::checked_deleter<GadgetParticle::GadgetParticleCtrl>>
+80168968 GadgetPickup::SetPickupBaseTask
+80168C18 GadgetPickup::PickupBaseTask
+80168DE0 GadgetPickup::PickupBase
+80169B7C boost::detail::sp_counted_base_impl<GadgetUtility::Watcher *, boost::checked_deleter<GadgetUtility::Watcher>>::sp_counted_base_impl
+8016A41C boost::detail::sp_counted_base_impl<GadgetUtility::Watcher *, boost::checked_deleter<GadgetUtility::Watcher>>
+8016A904 TFogSet
+8016AE74 Mission
+8016AE80 Mission::CountMission
+8016B31C Mission
+8016B6B0 Mission::Mission
+8016BBF4 boost::detail::sp_counted_base_impl<Mission::RingMission *, boost::checked_deleter<Mission::RingMission>>::sp_counted_base_impl
+8016BD6C boost::detail::sp_counted_base_impl<Mission::TimerCountMission *, boost::checked_deleter<Mission::TimerCountMission>>::sp_counted_base_impl
+8016BEE4 boost::detail::sp_counted_base_impl<Mission::TimerGoalMission *, boost::checked_deleter<Mission::TimerGoalMission>>::sp_counted_base_impl
+8016C05C boost::detail::sp_counted_base_impl<Mission::TimerMission *, boost::checked_deleter<Mission::TimerMission>>::sp_counted_base_impl
+8016C1D4 boost::detail::sp_counted_base_impl<Mission::EnemyMission *, boost::checked_deleter<Mission::EnemyMission>>::sp_counted_base_impl
+8016C34C boost::detail::sp_counted_base_impl<Mission::CountMission *, boost::checked_deleter<Mission::CountMission>>::sp_counted_base_impl
+8016C4B4 boost::detail::sp_counted_base_impl<Mission::GoalMission *, boost::checked_deleter<Mission::GoalMission>>::sp_counted_base_impl
+8016C65C boost::detail::sp_counted_base_impl<Mission::Mission *, boost::checked_deleter<Mission::Mission>>::sp_counted_base_impl
+8016CEEC boost::detail::sp_counted_base_impl<Mission::Mission *, boost::checked_deleter<Mission::Mission>>
+8016CF48 boost::detail::sp_counted_base_impl<Mission::GoalMission *, boost::checked_deleter<Mission::GoalMission>>
+8016CFA4 boost::detail::sp_counted_base_impl<Mission::CountMission *, boost::checked_deleter<Mission::CountMission>>
+8016D000 boost::detail::sp_counted_base_impl<Mission::EnemyMission *, boost::checked_deleter<Mission::EnemyMission>>
+8016D05C boost::detail::sp_counted_base_impl<Mission::TimerMission *, boost::checked_deleter<Mission::TimerMission>>
+8016D0B8 boost::detail::sp_counted_base_impl<Mission::TimerGoalMission *, boost::checked_deleter<Mission::TimerGoalMission>>
+8016D114 boost::detail::sp_counted_base_impl<Mission::TimerCountMission *, boost::checked_deleter<Mission::TimerCountMission>>
+8016D170 boost::detail::sp_counted_base_impl<Mission::RingMission *, boost::checked_deleter<Mission::RingMission>>
+8016D240 boost::detail::sp_counted_base_impl<Mission::TimerCountMission *, boost::checked_deleter<Mission::TimerCountMission>>
+8016D2B4 boost::detail::sp_counted_base_impl<Mission::TimerGoalMission *, boost::checked_deleter<Mission::TimerGoalMission>>
+8016D328 boost::detail::sp_counted_base_impl<Mission::TimerMission *, boost::checked_deleter<Mission::TimerMission>>
+8016D39C boost::detail::sp_counted_base_impl<Mission::EnemyMission *, boost::checked_deleter<Mission::EnemyMission>>
+8016D410 boost::detail::sp_counted_base_impl<Mission::CountMission *, boost::checked_deleter<Mission::CountMission>>
+8016D484 boost::detail::sp_counted_base_impl<Mission::GoalMission *, boost::checked_deleter<Mission::GoalMission>>
+8016D4F8 boost::detail::sp_counted_base_impl<Mission::Mission *, boost::checked_deleter<Mission::Mission>>
+8016E824 Mission::MissionManagerTask
+8016F0D4 Mission::RingMission
+80171544 TPjsEventActionScene
+80173418 TPjsEventActionManager
+8017484C TPjsEventFolder
+80174970 StageAction::IAction
+80174F48 boost::detail::sp_counted_base_impl<StageAction::EndAction *, boost::checked_deleter<StageAction::EndAction>>::sp_counted_base_impl
+8017509C boost::detail::sp_counted_base_impl<StageAction::TimeupAction *, boost::checked_deleter<StageAction::TimeupAction>>::sp_counted_base_impl
+801751F0 boost::detail::sp_counted_base_impl<StageAction::Result2PAction *, boost::checked_deleter<StageAction::Result2PAction>>::sp_counted_base_impl
+80175344 boost::detail::sp_counted_base_impl<StageAction::FlashbackAction *, boost::checked_deleter<StageAction::FlashbackAction>>::sp_counted_base_impl
+80175498 boost::detail::sp_counted_base_impl<StageAction::ShowAction *, boost::checked_deleter<StageAction::ShowAction>>::sp_counted_base_impl
+801755EC boost::detail::sp_counted_base_impl<StageAction::TryAgainAction *, boost::checked_deleter<StageAction::TryAgainAction>>::sp_counted_base_impl
+80175740 boost::detail::sp_counted_base_impl<StageAction::SaveAction *, boost::checked_deleter<StageAction::SaveAction>>::sp_counted_base_impl
+80175894 boost::detail::sp_counted_base_impl<StageAction::DeadAction *, boost::checked_deleter<StageAction::DeadAction>>::sp_counted_base_impl
+801759E8 boost::detail::sp_counted_base_impl<StageAction::ContinueAction *, boost::checked_deleter<StageAction::ContinueAction>>::sp_counted_base_impl
+80175B3C boost::detail::sp_counted_base_impl<StageAction::RestartAction *, boost::checked_deleter<StageAction::RestartAction>>::sp_counted_base_impl
+80175C90 boost::detail::sp_counted_base_impl<StageAction::PauseAction *, boost::checked_deleter<StageAction::PauseAction>>::sp_counted_base_impl
+80175DE4 boost::detail::sp_counted_base_impl<StageAction::GoalAction *, boost::checked_deleter<StageAction::GoalAction>>::sp_counted_base_impl
+80175F38 boost::detail::sp_counted_base_impl<StageAction::EventAction *, boost::checked_deleter<StageAction::EventAction>>::sp_counted_base_impl
+8017608C boost::detail::sp_counted_base_impl<StageAction::PlayAction *, boost::checked_deleter<StageAction::PlayAction>>::sp_counted_base_impl
+80176220 boost::detail::sp_counted_base_impl<StageAction::InitAction *, boost::checked_deleter<StageAction::InitAction>>::sp_counted_base_impl
+80176398 boost::detail::sp_counted_base_impl<StageAction::InitAction *, boost::checked_deleter<StageAction::InitAction>>
+801763F4 boost::detail::sp_counted_base_impl<StageAction::PlayAction *, boost::checked_deleter<StageAction::PlayAction>>
+80176450 boost::detail::sp_counted_base_impl<StageAction::EventAction *, boost::checked_deleter<StageAction::EventAction>>
+801764AC boost::detail::sp_counted_base_impl<StageAction::GoalAction *, boost::checked_deleter<StageAction::GoalAction>>
+80176508 boost::detail::sp_counted_base_impl<StageAction::PauseAction *, boost::checked_deleter<StageAction::PauseAction>>
+80176564 boost::detail::sp_counted_base_impl<StageAction::RestartAction *, boost::checked_deleter<StageAction::RestartAction>>
+801765C0 boost::detail::sp_counted_base_impl<StageAction::ContinueAction *, boost::checked_deleter<StageAction::ContinueAction>>
+8017661C boost::detail::sp_counted_base_impl<StageAction::DeadAction *, boost::checked_deleter<StageAction::DeadAction>>
+80176678 boost::detail::sp_counted_base_impl<StageAction::SaveAction *, boost::checked_deleter<StageAction::SaveAction>>
+801766D4 boost::detail::sp_counted_base_impl<StageAction::TryAgainAction *, boost::checked_deleter<StageAction::TryAgainAction>>
+80176730 boost::detail::sp_counted_base_impl<StageAction::ShowAction *, boost::checked_deleter<StageAction::ShowAction>>
+8017678C boost::detail::sp_counted_base_impl<StageAction::FlashbackAction *, boost::checked_deleter<StageAction::FlashbackAction>>
+801767E8 boost::detail::sp_counted_base_impl<StageAction::Result2PAction *, boost::checked_deleter<StageAction::Result2PAction>>
+80176844 boost::detail::sp_counted_base_impl<StageAction::TimeupAction *, boost::checked_deleter<StageAction::TimeupAction>>
+801768A0 boost::detail::sp_counted_base_impl<StageAction::EndAction *, boost::checked_deleter<StageAction::EndAction>>
+80176970 boost::detail::sp_counted_base_impl<StageAction::TimeupAction *, boost::checked_deleter<StageAction::TimeupAction>>
+801769E4 boost::detail::sp_counted_base_impl<StageAction::Result2PAction *, boost::checked_deleter<StageAction::Result2PAction>>
+80176A58 boost::detail::sp_counted_base_impl<StageAction::FlashbackAction *, boost::checked_deleter<StageAction::FlashbackAction>>
+80176ACC boost::detail::sp_counted_base_impl<StageAction::ShowAction *, boost::checked_deleter<StageAction::ShowAction>>
+80176B40 boost::detail::sp_counted_base_impl<StageAction::TryAgainAction *, boost::checked_deleter<StageAction::TryAgainAction>>
+80176BB4 boost::detail::sp_counted_base_impl<StageAction::SaveAction *, boost::checked_deleter<StageAction::SaveAction>>
+80176C28 boost::detail::sp_counted_base_impl<StageAction::DeadAction *, boost::checked_deleter<StageAction::DeadAction>>
+80176C9C boost::detail::sp_counted_base_impl<StageAction::ContinueAction *, boost::checked_deleter<StageAction::ContinueAction>>
+80176D10 boost::detail::sp_counted_base_impl<StageAction::RestartAction *, boost::checked_deleter<StageAction::RestartAction>>
+80176D84 boost::detail::sp_counted_base_impl<StageAction::PauseAction *, boost::checked_deleter<StageAction::PauseAction>>
+80176DF8 boost::detail::sp_counted_base_impl<StageAction::GoalAction *, boost::checked_deleter<StageAction::GoalAction>>
+80176E6C boost::detail::sp_counted_base_impl<StageAction::EventAction *, boost::checked_deleter<StageAction::EventAction>>
+80176EE0 boost::detail::sp_counted_base_impl<StageAction::PlayAction *, boost::checked_deleter<StageAction::PlayAction>>
+80176F54 boost::detail::sp_counted_base_impl<StageAction::InitAction *, boost::checked_deleter<StageAction::InitAction>>
+80177068 TStageKeyNoInput
+80177510 TStageInitalizeTask
+80178000 boost::detail::sp_counted_base_impl<TMessageDisp *, boost::checked_deleter<TMessageDisp>>::sp_counted_base_impl
+801789F8 boost::detail::sp_counted_base_impl<TFogSet *, boost::checked_deleter<TFogSet>>::sp_counted_base_impl
+80178A48 StageManager
+80178D34 boost::detail::sp_counted_base_impl<TFogSet *, boost::checked_deleter<TFogSet>>
+80178D90 boost::detail::sp_counted_base_impl<TMessageDisp *, boost::checked_deleter<TMessageDisp>>
+80178DEC boost::detail::sp_counted_base_impl<TFogSet *, boost::checked_deleter<TFogSet>>
+80178E60 boost::detail::sp_counted_base_impl<TMessageDisp *, boost::checked_deleter<TMessageDisp>>
+801791AC BossCharaColli
+80179DE8 BossCtrl
+8017A700 BossMotion
+8017AAD0 BossRender
+8017B010 BossTarget
+8017B8C0 EnemyBaseAI
+8017B8EC TEnemySetBase
+8017B924 EnemyMoveWalker
+8017B92C EnemyMoveCommon
+8017B954 EnemyMoveFunc
+8017B95C EnemyDispCommon
+8017B9D0 EnemyStatusCommon
+8017BC80 BkChaos
+8017BC98 EnemyParamCommon
+8017BE70 EggPawn
+8017BF00 EnemyTemplate<EggPawnBase, EggPawnAI>
+8017BFAC EggPawn
+8017C070 EnemyTemplate<EggPawnBase, EggPawnAI>
+8017C168 EggPawnBase
+8017C774 EnemyStatFunc
+8017C77C EnemyCtrlFunc
+8017C780 EggPawnBase
+8017CA34 EnemyCtrlFunc
+8017CA4C EggPawnBase
+8017CB0C EnemyStatFunc
+8017CB14 EggPawnBase
+8017CE74 EnemyMoveFunc
+8017CE84 EggPawnBase
+8017D028 EnemyDispFunc
+8017D030 EnemyWalkerCommon
+8017D09C EggPawnBase
+8017DB3C EnemySetFunc
+8017DB44 EnemyTemplate<EggPawnBase, EggPawnAI>
+8017DE70 EggPawnBase
+8017DE88 EnemyTemplate<EggPawnBase, EggPawnAI>
+8017DEB0 EggPawnBase
+8017DF10 EggPawn
+8017DF18 EggPawnBase
+8017DF48 EggPawn
+8017DF50 EnemyTemplate<EggPawnBase, EggPawnAI>
+8017DF58 EggPawn
+8017DF60 EggPawnBase
+8017DF70 EggPawn
+8017DF80 EnemyAIState_EggPawnAI_WeaponAttack
+8017E1E8 EnemyStatFunc
+8017E1F8 EnemyAIState_EggPawnAI_WeaponAttack
+8017E26C EnemyAIState_EggPawnAI_TukiAttack
+8017E500 EnemyParaFunc
+8017E508 EnemyAIState_EggPawnAI_TukiAttack
+8017E5E4 EnemyAIState_EggPawnAI_DashAttack
+8017E8D4 EggPawnAI
+8017E9A4 EnemyAIState_EggPawnAI_WeaponAttack
+8017EA50 EnemyAIState_EggPawnAI_TukiAttack
+8017EAFC EnemyAIState_EggPawnAI_DashAttack
+8017EB58 EggPawnAI
+8017EC18 EnemyAIState_EnemyWalkerAI_WaitAction_Moving
+8017EC74 EnemyAIState_EnemyWalkerAI_WaitAction_Standing
+8017ECD0 EggPawnAI
+8017EE68 EnemyAIState_EnemyWalkerAI_ReturnHomeDash
+8017EEC4 EnemyAIState_EnemyWalkerAI_ReturnHome
+8017EF20 EggPawnAI
+8017EFF8 EnemyAIState_EggPawnAI_WeaponAttack
+8017F068 TEnemyAIState
+8017F0B0 EnemyAIState_EggPawnAI_TukiAttack
+8017F120 EnemyAIState_EggPawnAI_DashAttack
+8017F190 BkChaos::EnemyAIState_BkChaosAI_AttackRolling
+8017F198 BkSoldierAI
+8017F1F0 SoldierCommonAI
+8017F24C EnemyParaFunc
+8017F254 EnemyAIState_BkSoldierAI_AppearHome
+8017F370 EnemyAIState_BkSoldierAI_GoHome
+8017F4B0 EnemyAIState_BkSoldierAI_Caution
+8017F50C EnemyAIState_BkSoldierAI_GoHome
+8017F590 EnemyAIState_BkSoldierAI_AttackVacuum
+8017F5E8 EnemyDispFunc
+8017F5EC EnemyAIState_BkSoldierAI_AttackVacuum
+8017F924 EnemyAIState_BkSoldierAI_GoHome
+8017F980 EnemyAIState_BkSoldierAI_AttackVacuum
+8017FA30 EnemyAIState_BkSoldierAI_Attack
+8017FE24 EnemyStatFunc
+8017FE2C EnemyParaFunc
+8017FE34 EnemyAIState_BkSoldierAI_Attack
+8017FEF0 EnemyAIState_BkSoldierAI_NearAttack
+801800EC EnemyAIState_BkSoldierAI_ChaseTarget
+80180148 EnemyAIState_EnemyBaseAI_GoHome
+801801A4 EnemyAIState_BkSoldierAI_NearAttack
+80180230 EnemyAIState_BkSoldierAI_ChaseTarget
+8018036C EnemyAIState_BkSoldierAI_NearAttack
+801803C8 EnemyAIState_BkSoldierAI_ChaseTarget
+80180438 EnemyAIState_BkSoldierAI_Caution
+80180550 EnemyParaFunc
+80180558 EnemyStatFunc
+80180630 EnemyAIState_BkSoldierAI_Attack
+801806DC EnemyAIState_BkSoldierAI_AttackVacuum
+80180738 BkSoldierAI
+80180938 EnemyAIState_BkSoldierAI_AppearHome
+80180994 EnemyAIState_SoldierCommonAI_WaitAction_Moving
+801809F0 EnemyAIState_SoldierCommonAI_WaitAction_Standing
+80180A4C BkSoldierAI
+80180AD8 EnemyAIState_BkSoldierAI_AppearHome
+80180B48 EnemyAIState_BkSoldierAI_GoHome
+80180BB8 EnemyAIState_BkSoldierAI_AttackVacuum
+80180C28 EnemyAIState_BkSoldierAI_Attack
+80180C98 EnemyAIState_BkSoldierAI_NearAttack
+80180D08 EnemyAIState_BkSoldierAI_ChaseTarget
+80180D78 EnemyAIState_BkSoldierAI_Caution
+80180DE8 BkWingLargeAI
+80180E40 FlyerCommonAI
+80180E9C EnemyAIState_BkWingLargeAI_DeadToAirWing
+80180F98 EnemySetFunc
+80180F9C EnemyAIState_BkWingLargeAI_DeadToAirWing
+8018100C EnemyParaFunc
+80181014 EnemyAIState_BkWingLargeAI_Attack
+80181180 EnemyAIState_BkWingLargeAI_Caution
+801811DC EnemyAIState_BkWingLargeAI_Attack
+80181234 EnemyAIState_BkWingLargeAI_Caution
+80181320 EnemyAIState_BkWingLargeAI_Attack
+8018137C EnemyAIState_BkWingLargeAI_Caution
+80181390 EnemyAIState_BkWingLargeAI_ResistVacuum
+801813EC EnemyDispFunc
+8018141C EnemyAIState_BkWingLargeAI_ResistVacuum
+80181570 EnemyStatFunc
+8018167C EnemyDispFunc
+80181680 BkWingLargeAI
+80181720 EnemyAIState_BkWingLargeAI_DeadToAirWing
+8018177C BkWingLargeAI
+801817D0 BkWingLargeBase
+801817E4 BkWingLargeAI
+801818A4 EnemyAIState_FlyerCommonAI_WaitFloating
+80181900 EnemyAIState_FlyerCommonAI_MoveOnPath
+8018195C BkWingLargeBase
+80181970 BkWingLargeAI
+80181A44 EnemyAIState_BkWingLargeAI_ResistVacuum
+80181AA0 BkWingLargeAI
+80181B20 EnemyAIState_BkWingLargeAI_DeadToAirWing
+80181B90 EnemyAIState_BkWingLargeAI_Attack
+80181C00 EnemyAIState_BkWingLargeAI_Caution
+80181C70 EnemyAIState_BkWingLargeAI_ResistVacuum
+80181CE0 BkWingSmallAI
+80181D38 EnemyAIState_BkWingSmallAI_MoveOnPath
+80181E0C EnemyAIState_BkWingSmallAI_Caution
+80181E68 EnemyAIState_BkWingSmallAI_MoveOnPath
+80181EF8 EnemyAIState_BkWingSmallAI_Attack
+801822B8 EnemyParaFunc
+801822E4 BkWingSmallBase
+801822F8 EnemyAIState_BkWingSmallAI_Attack
+801823E8 EnemyAIState_BkWingSmallAI_Caution
+801824BC EnemyAIState_BkWingSmallAI_Attack
+80182518 EnemyAIState_BkWingSmallAI_Caution
+80182598 BkWingSmallAI
+801826B4 EnemyAIState_BkWingSmallAI_MoveOnPath
+80182710 BkWingSmallAI
+80182790 EnemyAIState_BkWingSmallAI_MoveOnPath
+80182800 EnemyAIState_BkWingSmallAI_Attack
+80182870 EnemyAIState_BkWingSmallAI_Caution
+801828E0 BkWormAI
+8018293C EnemyAIState_BkWormAI_Move
+80182B94 EnemyAIState_BkWormAI_WaitAppear
+80182BF0 EnemyStatFunc
+80182BF8 EnemyAIState_BkWormAI_Move
+80182CB8 EnemyAIState_BkWormAI_AfterAttack
+80182DB4 EnemyAIState_BkWormAI_Attack
+80182E60 EnemyAIState_BkWormAI_Move
+80182EBC EnemyAIState_BkWormAI_AfterAttack
+80182F44 EnemyAIState_BkWormAI_Attack
+80183018 EnemyAIState_BkWormAI_AfterAttack
+80183074 EnemyAIState_BkWormAI_Attack
+801830B8 EnemyAIState_BkWormAI_WaitStanding
+801831CC EnemyAIState_BkWormAI_Appear
+801832A0 EnemyAIState_BkWormAI_WaitStanding
+801832FC EnemyAIState_BkWormAI_Appear
+80183428 EnemyAIState_BkWormAI_WaitAppear
+80183590 EnemyAIState_BkWormAI_Appear
+801835EC EnemyAIState_BkWormAI_WaitAppear
+80183828 BkWormAI
+80183888 EnemyDispFunc
+8018388C BkWormAI
+801839C8 EnemyBaseAI
+80183A10 EnemyAIState_BkWormAI_Move
+80183A80 EnemyAIState_BkWormAI_AfterAttack
+80183AF0 EnemyAIState_BkWormAI_Attack
+80183B60 EnemyAIState_BkWormAI_WaitStanding
+80183BD0 EnemyAIState_BkWormAI_Appear
+80183C40 EnemyAIState_BkWormAI_WaitAppear
+80183CB0 EnemyAIState_FlyerCommonAI_MoveOnPath
+80183E0C FlyerCommonBase
+80183E8C EnemyAIState_FlyerCommonAI_MoveOnPath
+80183F2C EnemyAIState_FlyerCommonAI_WaitFloating
+80184268 FlyerCommonBase
+80184270 EnemyAIState_FlyerCommonAI_WaitFloating
+80184310 EnemyParamCommon
+80184318 FlyerCommonAI
+80184408 EnemyAIState_FlyerCommonAI_MoveOnPath
+80184478 EnemyAIState_FlyerCommonAI_WaitFloating
+801844E8 GunBeetleAI
+80184540 EnemyAIState_GunBeetleAI_Attack
+801846D4 EnemyAIState_GunBeetleAI_Caution
+80184730 EnemyAIState_GunBeetleAI_Attack
+80184780 EnemyAIState_GunBeetleAI_Caution
+8018486C EnemyAIState_GunBeetleAI_Attack
+801848C8 EnemyAIState_GunBeetleAI_Caution
+801848DC GunBeetleAI
+801849D4 GunBeetleBase
+801849E8 GunBeetleAI
+80184A68 EnemyAIState_GunBeetleAI_Attack
+80184AD8 EnemyAIState_GunBeetleAI_Caution
+80184B48 GunBigfoot::EnemyAIState_GunBigfootAI_HoverAttack
+80185028 GunBigfoot::EnemyAIState_GunBigfootAI_GunAttack
+80185360 GunBigfoot::EnemyAIState_GunBigfootAI_WaitActAttack
+801855F4 GunBigfoot::EnemyAIState_GunBigfootAI_WaitHovering
+80185920 GunBigfoot::EnemyAIState_GunBigfootAI_WaitCrouching
+80185A6C GunBigfoot::GunBigfootAI
+80185B18 GunBigfoot::EnemyAIState_GunBigfootAI_GunAttack
+80185BC4 GunBigfoot::EnemyAIState_GunBigfootAI_HoverAttack
+80185C20 GunBigfoot::GunBigfootAI
+80185CA8 EnemyAIState_EnemyBaseAI_Wait
+80185D54 GunBigfoot::EnemyAIState_GunBigfootAI_WaitHovering
+80185DB0 GunBigfoot::GunBigfootAI
+80185ED4 GunBigfoot::EnemyAIState_GunBigfootAI_WaitActAttack
+80185F80 GunBigfoot::EnemyAIState_GunBigfootAI_WaitCrouching
+80185FDC GunBigfoot::GunBigfootAI
+801860D4 GunBigfoot::EnemyAIState_GunBigfootAI_HoverAttack
+80186144 GunBigfoot::EnemyAIState_GunBigfootAI_GunAttack
+801861B4 GunBigfoot::EnemyAIState_GunBigfootAI_WaitActAttack
+80186224 GunBigfoot::EnemyAIState_GunBigfootAI_WaitHovering
+80186294 GunBigfoot::EnemyAIState_GunBigfootAI_WaitCrouching
+80186304 EnemyAIState_GunRobotAI_WeaponAttack
+80186588 GunRobotAI
+80186670 EnemyAIState_GunRobotAI_WeaponAttack
+801866CC GunRobotAI
+80186730 EnemyAIState_EnemyBaseAI_Caution
+8018678C GunRobotAI
+80186A7C EnemyAIState_GunRobotAI_WeaponAttack
+80186AEC GunSoldier::GunSoldierAI
+80186B44 GunSoldier::EnemyAIState_GunSoldierAI_AppearHome
+80186C60 GunSoldier::EnemyAIState_GunSoldierAI_GoHome
+80186DA0 GunSoldier::EnemyAIState_GunSoldierAI_Caution
+80186DFC GunSoldier::EnemyAIState_GunSoldierAI_GoHome
+80186E80 GunSoldier::EnemyAIState_GunSoldierAI_Attack
+80187254 GunSoldier::EnemyAIState_GunSoldierAI_GoHome
+801872B0 GunSoldier::EnemyAIState_GunSoldierAI_Attack
+8018736C GunSoldier::EnemyAIState_GunSoldierAI_NearAttack
+8018750C GunSoldier::EnemyAIState_GunSoldierAI_ChaseTarget
+80187568 GunSoldier::EnemyAIState_GunSoldierAI_NearAttack
+801875F4 GunSoldier::EnemyAIState_GunSoldierAI_ChaseTarget
+80187704 GunSoldier::EnemyAIState_GunSoldierAI_NearAttack
+80187760 GunSoldier::EnemyAIState_GunSoldierAI_ChaseTarget
+801877D0 GunSoldier::EnemyAIState_GunSoldierAI_Caution
+801878E8 GunSoldier::EnemyAIState_GunSoldierAI_Thanks
+8018796C EnemyStatFunc
+801879A8 GunSoldier::EnemyAIState_GunSoldierAI_Thanks
+80187BC4 EnemyStatFunc
+80187BCC GunSoldier::EnemyAIState_GunSoldierAI_Thanks
+80187C84 GunSoldier::EnemyAIState_GunSoldierAI_Hinshi
+80187D10 EnemyStatFunc
+80187D14 GunSoldier::EnemyAIState_GunSoldierAI_Hinshi
+80187EBC GunSoldier::EnemyAIState_GunSoldierAI_ToHinshi
+80188010 GunSoldier::EnemyAIState_GunSoldierAI_Hinshi
+8018806C EnemySetFunc
+80188070 EnemyMoveFunc
+80188078 GunSoldier::EnemyAIState_GunSoldierAI_ToHinshi
+80188144 GunSoldier::EnemyAIState_GunSoldierAI_AppearHome
+80188254 GunSoldier::EnemyAIState_GunSoldierAI_Attack
+801882B0 GunSoldier::GunSoldierAI
+80188384 GunSoldier::EnemyAIState_GunSoldierAI_Thanks
+801883E0 GunSoldier::GunSoldierAI
+80188570 GunSoldier::EnemyAIState_GunSoldierAI_ToHinshi
+801885CC GunSoldier::GunSoldierAI
+80188768 GunSoldier::EnemyAIState_GunSoldierAI_AppearHome
+801887D8 GunSoldier::EnemyAIState_GunSoldierAI_GoHome
+80188848 GunSoldier::EnemyAIState_GunSoldierAI_Attack
+801888B8 GunSoldier::EnemyAIState_GunSoldierAI_NearAttack
+80188928 GunSoldier::EnemyAIState_GunSoldierAI_ChaseTarget
+80188998 GunSoldier::EnemyAIState_GunSoldierAI_Caution
+80188A08 GunSoldier::EnemyAIState_GunSoldierAI_Thanks
+80188A78 GunSoldier::EnemyAIState_GunSoldierAI_Hinshi
+80188AE8 GunSoldier::EnemyAIState_GunSoldierAI_ToHinshi
+80188B58 EnemyAIState_SoldierCommonAI_WaitAction_Moving
+801891C0 EnemyDispFunc
+801891C4 EnemyAIState_SoldierCommonAI_WaitAction_Moving
+80189304 EnemyAIState_SoldierCommonAI_WaitAction_Standing
+80189704 SoldierCommonAI
+80189784 EnemyAIState_SoldierCommonAI_WaitAction_Moving
+801897F4 EnemyAIState_SoldierCommonAI_WaitAction_Standing
+80189B28 BkLarvaGenerator
+80189E94 SBkLarvaStateData
+80189EB8 BkLarvaGenerator
+8018AF18 BkLarva
+8018C6C4 SetEnemyBase
+8018C7DC SBkLarvaStateData
+8018CBB0 BkSoldier
+8018CC40 EnemyTemplate<BkSoldierBase, BkSoldierAI>
+8018CCEC BkSoldier
+8018CDB0 EnemyTemplate<BkSoldierBase, BkSoldierAI>
+8018D204 BkSoldierBase
+8018EB60 SoldierCommonBase
+8018EBE0 EnemyWalkerCommon
+8018EC88 TEnemyCommonBase
+8018ED0C EnemyRefBase
+8018ED64 Enemy
+8018EDE4 EnemyStatusCommon
+8018EE58 EnemyMotionSequenceModule
+8018EF54 EnemySetFunc
+8018EF5C BkSoldierBase
+8018F128 SoldierCommonBase
+8018F244 EnemyWalkerCommon
+8018F4E8 boost::detail::sp_counted_base_impl<CollisionEffect *, boost::checked_deleter<CollisionEffect>>::sp_counted_base_impl
+8018F52C EnemyMoveWalker
+8018F58C TEnemyCommonBase
+8018F648 EnemyStatusCommon
+8018F760 EnemyMotionSequenceModule
+8018F7A8 EnemyRefBase
+8018F80C Enemy
+8018FC60 EnemyStatFunc
+8018FD14 boost::detail::sp_counted_base_impl<CollisionEffect *, boost::checked_deleter<CollisionEffect>>
+8018FD70 EnemyParamCommon
+8018FDA8 EnemyTemplate<BkSoldierBase, BkSoldierAI>
+8018FDB0 boost::detail::sp_counted_base_impl<CollisionEffect *, boost::checked_deleter<CollisionEffect>>
+8018FE24 BkSoldierBase
+8018FE3C EnemyTemplate<BkSoldierBase, BkSoldierAI>
+8018FE6C SoldierCommonBase
+8018FE84 EnemyWalkerCommon
+8018FEA4 BkSoldierBase
+8018FF04 BkSoldier
+8018FF0C BkSoldierBase
+8018FF44 BkSoldier
+8018FF4C BkSoldierBase
+8018FF54 EnemyTemplate<BkSoldierBase, BkSoldierAI>
+8018FF5C BkSoldier
+8018FF64 BkSoldierBase
+8018FF74 BkSoldier
+8018FF84 EnemyMoveFlyer
+8018FF8C BkWingLargeBase
+801900D0 BkWingLarge
+801901B4 EnemyTemplate<BkWingLargeBase, BkWingLargeAI>
+80190260 BkWingLarge
+80190324 EnemyTemplate<BkWingLargeBase, BkWingLargeAI>
+80190424 BkWingLargeBase
+80190910 FlyerCommonBase
+801909A0 EnemyFlyerCommon
+80190A3C BkWingLargeBase
+80190BB4 FlyerCommonBase
+80190C8C EnemyFlyerCommon
+80190D90 EnemyMoveFlyer
+80190DF8 BkWingLargeAirCutter
+80190FB8 AttackObject
+80190FC0 BkWingLargeAirCutter
+801911AC FlyingObject
+80191348 AttackObject
+801913DC EnemyTemplate<BkWingLargeBase, BkWingLargeAI>
+8019150C BkWingLargeAirCutter
+8019151C BkWingLargeBase
+80191534 EnemyTemplate<BkWingLargeBase, BkWingLargeAI>
+80191564 EnemyFlyerCommon
+80191574 BkWingLargeBase
+801915BC FlyerCommonBase
+801915C4 BkWingLarge
+801915CC BkWingLargeBase
+801915F4 BkWingLarge
+801915FC EnemyTemplate<BkWingLargeBase, BkWingLargeAI>
+80191604 BkWingLarge
+8019160C BkWingLargeBase
+8019161C BkWingLarge
+8019162C BkWingSmallBase
+80191720 BkWingSmall
+801917B0 EnemyTemplate<BkWingSmallBase, BkWingSmallAI>
+8019185C BkWingSmall
+80191920 EnemyTemplate<BkWingSmallBase, BkWingSmallAI>
+80191A28 BkWingSmallBase
+80191FB4 EnemyTemplate<BkWingSmallBase, BkWingSmallAI>
+80191FBC BkWingSmallBase
+80191FD4 EnemyTemplate<BkWingSmallBase, BkWingSmallAI>
+80191FFC BkWingSmallBase
+80192034 BkWingSmall
+8019203C BkWingSmallBase
+8019206C BkWingSmall
+80192074 EnemyTemplate<BkWingSmallBase, BkWingSmallAI>
+8019207C BkWingSmall
+80192084 BkWingSmallBase
+80192094 BkWingSmall
+801920A4 BkWormBase
+8019218C BkWorm
+8019231C EnemyTemplate<BkWormBase, BkWormAI>
+801923C8 BkWorm
+801924A4 EnemyTemplate<BkWormBase, BkWormAI>
+801925CC BkWorm
+80192BF0 BkWormBase
+80192F0C EnemyParaFunc
+80192F14 BkWormBase
+801936C0 EnemyTemplate<BkWormBase, BkWormAI>
+80193700 BkWormBase
+80193718 EnemyTemplate<BkWormBase, BkWormAI>
+80193740 BkWormBase
+80193768 BkWorm
+80193770 BkWormBase
+801937A0 BkWorm
+801937A8 BkWormBase
+801937B0 BkWorm
+801937B8 EnemyTemplate<BkWormBase, BkWormAI>
+801937C0 BkWorm
+80193CAC FlyerCommonBase
+80193DC0 GunBeetleBase
+80193EB4 GunBeetle
+80193F44 EnemyTemplate<GunBeetleBase, GunBeetleAI>
+80193FF0 GunBeetle
+801940B4 EnemyTemplate<GunBeetleBase, GunBeetleAI>
+801941B4 GunBeetleBase
+80194840 EnemyDispFunc
+80194848 GunBeetleBase
+801950F0 EnemyTemplate<GunBeetleBase, GunBeetleAI>
+801950F8 GunBeetleBase
+80195110 EnemyTemplate<GunBeetleBase, GunBeetleAI>
+80195138 GunBeetleBase
+80195190 GunBeetle
+80195198 GunBeetleBase
+801951B8 GunBeetle
+801951C0 EnemyTemplate<GunBeetleBase, GunBeetleAI>
+801951C8 GunBeetle
+801951D0 GunBeetleBase
+801951E0 GunBeetle
+801951F0 GunRobot
+801953D8 GunRobotTask
+80195468 EnemyTemplate<GunRobot, GunRobotAI>
+80195514 GunRobotTask
+801955D8 EnemyTemplate<GunRobot, GunRobotAI>
+8019575C GunRobot
+80195C40 EnemyMoveFunc
+80195C48 GunRobot
+801969DC EnemyCtrlFunc
+801969FC EnemyTemplate<GunRobot, GunRobotAI>
+80196D28 GunRobot
+80196D40 EnemyTemplate<GunRobot, GunRobotAI>
+80196D68 GunRobot
+80196DC0 GunRobotTask
+80196DC8 GunRobot
+80196E00 GunRobotTask
+80196E08 EnemyTemplate<GunRobot, GunRobotAI>
+80196E10 GunRobotTask
+80196E18 GunRobot
+80196E28 GunRobotTask
+80196F3C GunSoldier::GunSoldier
+80196FE0 EnemyTemplate<GunSoldier::GunSoldierBase, GunSoldier::GunSoldierAI>
+8019708C GunSoldier::GunSoldier
+80197164 EnemyTemplate<GunSoldier::GunSoldierBase, GunSoldier::GunSoldierAI>::EnemyTemplate
+801975B0 GunSoldier
+80197700 GunSoldier::GunSoldierBase
+8019893C GunSoldier::STemporaryData
+80198964 GunSoldier::GunSoldierBase
+80198BF0 GunSoldier::STemporaryData
+80198C4C EnemyTemplate<GunSoldier::GunSoldierBase, GunSoldier::GunSoldierAI>
+80198C60 GunSoldier::GunSoldierBase
+80198C78 EnemyTemplate<GunSoldier::GunSoldierBase, GunSoldier::GunSoldierAI>
+80198CA0 GunSoldier::GunSoldierBase
+80198D20 GunSoldier
+80198D28 GunSoldier::GunSoldierBase
+80198D58 GunSoldier
+80198D60 EnemyTemplate<GunSoldier::GunSoldierBase, GunSoldier::GunSoldierAI>
+80198D68 GunSoldier
+80198D70 GunSoldier::GunSoldierBase
+80198D80 GunSoldier
+80198F9C FlyingObject
+80199114 AttackObject
+80199D24 EnemyAIState_EnemyWalkerAI_Caution
+80199E8C EnemyAIState_EnemyWalkerAI_WaitAction_Moving
+8019A2FC EnemyAIState_EnemyWalkerAI_WaitAction_Standing
+8019A69C EnemyAIState_EnemyWalkerAI_ReturnHomeDash
+8019A778 EnemyAIState_EnemyWalkerAI_ReturnHome
+8019A85C EnemyWalkerAI
+8019A8E4 EnemyAIState_EnemyWalkerAI_Caution
+8019A940 EnemyWalkerAI
+8019AA1C EnemyAIState_EnemyWalkerAI_Caution
+8019AA8C EnemyAIState_EnemyWalkerAI_WaitAction_Moving
+8019AAFC EnemyAIState_EnemyWalkerAI_WaitAction_Standing
+8019AB6C EnemyAIState_EnemyWalkerAI_ReturnHomeDash
+8019ABDC EnemyAIState_EnemyWalkerAI_ReturnHome
+8019AFB0 Enemy
+8019B0C0 EnemyParaFunc
+8019B0C8 Enemy
+8019B70C EnemySetFunc
+8019B72C EnemyCtrlFunc
+8019B74C EnemyDispFunc
+8019B7DC EnemyCtrlFunc
+8019B7F4 EnemyMoveFunc
+8019B820 EnemyParaFunc
+8019B8BC EnemyAIState_EnemyBaseAI_Recover
+8019BB48 EnemyAIState_EnemyBaseAI_Dead
+8019BCC8 EnemyAIState_EnemyBaseAI_WaitFinishFalling
+8019BDBC EnemyAIState_EnemyBaseAI_WaitFinishDamaged
+8019BF2C EnemyAIState_EnemyBaseAI_GoHome
+8019C064 EnemyAIState_EnemyBaseAI_Wait
+8019C3CC EnemyAIState_EnemyBaseAI_Guard
+8019C540 EnemyAIState_EnemyBaseAI_Caution
+8019C82C EnemyAIState_EnemyBaseAI_WarpWait
+8019CAC4 EnemyAIState_EnemyBaseAI_CaptureWait
+8019CD5C EnemyAIState_EnemyBaseAI_Idle
+8019CEFC EnemyAIState_EnemyBaseAI_None
+8019CF08 EnemyBaseAI
+8019D010 EnemyAIState_EnemyBaseAI_Recover
+8019D06C EnemyBaseAI
+8019D170 EnemyAIState_EnemyBaseAI_Dead
+8019D1CC EnemyBaseAI
+8019D2CC EnemyAIState_EnemyBaseAI_WaitFinishDamaged
+8019D328 EnemyBaseAI
+8019D428 EnemyAIState_EnemyBaseAI_Guard
+8019D484 EnemyBaseAI
+8019D9C0 EnemyAIState_EnemyBaseAI_Idle
+8019DA1C EnemyBaseAI
+8019E9C4 EnemyAIState_EnemyBaseAI_CaptureWait
+8019EA70 EnemyAIState_EnemyBaseAI_WarpWait
+8019EACC EnemyBaseAI
+8019EE68 EnemyAIState_EnemyBaseAI_WaitFinishFalling
+8019EEC4 EnemyBaseAI
+8019F634 EnemyAIState_EnemyBaseAI_None
+8019FDC4 EnemyAIState_EnemyBaseAI_Recover
+8019FDF8 EnemyAIState_EnemyBaseAI_Dead
+8019FE2C EnemyAIState_EnemyBaseAI_WaitFinishFalling
+8019FE60 EnemyAIState_EnemyBaseAI_WaitFinishDamaged
+8019FE94 EnemyAIState_EnemyBaseAI_GoHome
+8019FEC8 EnemyAIState_EnemyBaseAI_Caution
+8019FEFC EnemyAIState_EnemyBaseAI_Guard
+8019FF30 EnemyAIState_EnemyBaseAI_Wait
+8019FF64 EnemyAIState_EnemyBaseAI_WarpWait
+8019FF98 EnemyAIState_EnemyBaseAI_CaptureWait
+8019FFCC EnemyAIState_EnemyBaseAI_Idle
+801A0000 EnemyAIState_EnemyBaseAI_None
+801A0118 EnemyCharInfo
+801A05A0 boost::detail::sp_counted_base_impl<EnemyCharInfo *, boost::checked_deleter<EnemyCharInfo>>::sp_counted_base_impl
+801A05D4 EnemyCharInfo
+801A0710 boost::detail::sp_counted_base_impl<EnemyCharInfo *, boost::checked_deleter<EnemyCharInfo>>
+801A0890 EnemyDispCommon
+801A59C8 EnemyMoveCommon
+801A65EC EnemyParamCommon
+801A6EB8 TEnemySetTask
+801A7200 TEnemySetBase
+801A7B38 boost::detail::sp_counted_base_impl<EnemyShield *, boost::checked_deleter<EnemyShield>>::sp_counted_base_impl
+801A7C9C EnemyShieldTask
+801A8250 boost::detail::sp_counted_base_impl<EnemyShield *, boost::checked_deleter<EnemyShield>>
+801A8320 EnemyStatusCommon
+801A85E8 BkChaos
+801A86CC EnemyStatusCommon
+801A883C BkChaos
+801A8868 EnemyStatusCommon
+801A9628 EnemyMotionSequenceModule
+801AAA94 EnemyWalker
+801AB894 EnemyWeapon
+801ACC84 Vehicle::Walker
+801AF9E4 Vehicle::AirSaucer
+801B31C4 Vehicle::BirdBase::AirWing
+801B45E4 Vehicle::AirWingModel
+801B4EA0 boost::detail::sp_counted_base_impl<Vehicle::TVehicleBase *, boost::checked_deleter<Vehicle::TVehicleBase>>::sp_counted_base_impl
+801B4F14 boost::detail::sp_counted_base_impl<Vehicle::TVehicleBase *, boost::checked_deleter<Vehicle::TVehicleBase>>
+801B5ECC Vehicle::VehicleTask
+801B65A8 Vehicle::BatteryArmy
+801B65C4 Vehicle::AirSaucer
+801B65D4 Vehicle::BatteryArmy
+801B65DC Vehicle::AirSaucer
+801B66E8 Vehicle::BatteryArmy
+801B66EC Vehicle::TVehicleBase
+801B8B24 Vehicle::TVehicleCar
+801B9AB8 boost::detail::sp_counted_base_impl<Vehicle::TVehicleCarMove *, boost::checked_deleter<Vehicle::TVehicleCarMove>>::sp_counted_base_impl
+801B9AFC boost::detail::sp_counted_base_impl<Vehicle::TVehicleCarMove *, boost::checked_deleter<Vehicle::TVehicleCarMove>>
+801BCC40 Player::SetExternalMotionCommand
+801BF7D8 boost::detail::sp_counted_base_impl<Vehicle::TVehicleCamera *, boost::checked_deleter<Vehicle::TVehicleCamera>>::sp_counted_base_impl
+801BFB64 boost::detail::sp_counted_base_impl<Vehicle::TVehicleCamera *, boost::checked_deleter<Vehicle::TVehicleCamera>>
+801C0E80 PJSCamera::CameraModeFixEye
+801C103C PJSCamera::CameraModeFixEye2
+801C1380 PJSCamera::CameraModeFixLook
+801C16C8 PJSCamera::CameraModeFixLook2
+801C1C24 PJSCamera::CameraModeFree
+801C2138 PJSCamera::CameraModeGeneral
+801C2F54 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Collision::CollisionResult *, boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResult>>::sp_counted_base_impl
+801C4F28 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Collision::CollisionResult *, boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResult>>
+801C5100 PJSCamera::CameraModeLookFront
+801C5974 PJSCamera::CameraModeSetCamEdit
+801C60F0 PJSCamera::CameraModeSetEditor
+801C6408 PJSCamera::CameraModeTestPlayer
+801C684C PJSCamera::CameraModeTestPlayerNoRot
+801C6E04 boost::detail::sp_counted_base_impl<PJSCamera::Collision::ProcessDeltaMoveNoLook *, boost::checked_deleter<PJSCamera::Collision::ProcessDeltaMoveNoLook>>::sp_counted_base_impl
+801C70BC PJSCamera::Collision::ProcessDeltaMoveNoLook
+801C7208 PJSCamera::Collision::ProcessBase
+801C73CC PJSCamera::Collision::ProcessRay2Eye
+801C7428 boost::detail::sp_counted_base_impl<PJSCamera::Collision::ProcessRay2Eye *, boost::checked_deleter<PJSCamera::Collision::ProcessRay2Eye>>::sp_counted_base_impl
+801C745C PJSCamera::Collision::ProcessRay2Eye
+801C74A8 boost::detail::sp_counted_base_impl<PJSCamera::Collision::ProcessRay2Eye *, boost::checked_deleter<PJSCamera::Collision::ProcessRay2Eye>>
+801C7504 boost::detail::sp_counted_base_impl<PJSCamera::Collision::ProcessDeltaMoveNoLook *, boost::checked_deleter<PJSCamera::Collision::ProcessDeltaMoveNoLook>>
+801C7560 PJSCamera::Collision::ProcessRay2Eye
+801C7564 boost::detail::sp_counted_base_impl<PJSCamera::Collision::ProcessDeltaMoveNoLook *, boost::checked_deleter<PJSCamera::Collision::ProcessDeltaMoveNoLook>>
+801C75D8 boost::detail::sp_counted_base_impl<PJSCamera::Collision::ProcessRay2Eye *, boost::checked_deleter<PJSCamera::Collision::ProcessRay2Eye>>
+801C98A4 PJSCamera::StageCameraManager
+801CC870 PJSCamera::StageCameraPostProcess
+801CF3B8 boost::detail::sp_counted_base_impl<PJSCamera::ExternalCameraRequest *, boost::checked_deleter<PJSCamera::ExternalCameraRequest>>::sp_counted_base_impl
+801CF5D8 boost::detail::sp_counted_base_impl<PJSCamera::ExternalCameraRequest *, boost::checked_deleter<PJSCamera::ExternalCameraRequest>>
+801CFAF0 PJSCamera::AdjustLinerLocal
+801CFEC8 PJSCamera::AdjustLinerWorld
+801D006C PJSCamera::AdjustOnlyAov
+801D0144 CameraMatrixChangeFor2D
+801D0250 RenderStop
+801D032C RenderStart
+801D0418 CameraRenderClose
+801D04D4 CameraRender
+801D05FC RenderStop
+801D0654 RenderStart
+801D06AC CameraRenderClose
+801D071C CameraRender
+801D0794 CameraRenderClose
+801D079C PJSCamera::PJSCameraFactory
+801D0B0C PJSCamera::PJSCameraPostTask
+801D0C18 PJSCamera::PJSCameraPreTask
+801D0E9C Effect::PJS::EffectManagerPJS
+801D116C Effect::PJS::EffectShimmerPJS
+801D11BC SonicteamUSA::System::Effect::EffectLocusUSA
+801D1224 Effect::PJS::EffectShimmerPJS
+801D128C Effect::PJS::EffectLensFlarePJS
+801D12F4 Effect::RW3::EffectLensFlareRW3
+801D12F8 Effect::PJS::EffectGlobalParamPJS
+801D1360 Effect::System::EffectGlobalParam
+801D1364 Effect::PJS::EffectLocusPJS
+801D13CC Effect::PJS::EffectRayPJS
+801D1434 Effect::PJS::EffectArrangerPJS
+801D149C Effect::PJS::EffectParticlePJS
+801D1504 Effect::PJS::EffectObjectPJS
+801D17B8 Effect::PJS::EffectParticle3DPJS
+801D1C30 Effect::PJS::EffectDeleteResourceTask
+801D1C94 Effect::PJS::EffectDrawShimmerTask
+801D1CF8 Effect::PJS::EffectDrawGlareTask
+801D1D5C Effect::PJS::EffectDrawSubTask
+801D1DC0 Effect::PJS::EffectDrawAddTask
+801D1E24 Effect::PJS::EffectDrawTransTask
+801D1E88 Effect::PJS::EffectDrawPunchTask
+801D1EEC Effect::PJS::EffectDrawOpaqTask
+801D1F50 Effect::PJS::EffectDrawGlobalLensFlareTask
+801D1FF4 Effect::PJS::EffectDrawScreenColorTask
+801D2058 Effect::PJS::EffectDrawBlurTask
+801D20D8 Effect::PJS::EffectSaveScreenTask
+801D213C Effect::PJS::EffectPostGlareTask
+801D21A0 Effect::PJS::EffectPreGlareTask
+801D224C Effect::PJS::EffectDrawFullScreenShimmerTask
+801D22BC Effect::PJS::EffectDrawFullScreenShimmerSubTask
+801D2318 Effect::PJS::EffectTask
+801D250C Effect::PJS::EffectDrawFullScreenShimmerSubTask
+801D2598 Effect::PJS::EffectDrawFullScreenShimmerTask
+801D2614 Effect::PJS::EffectPreGlareTask
+801D2690 Effect::PJS::EffectPostGlareTask
+801D270C Effect::PJS::EffectSaveScreenTask
+801D2788 Effect::PJS::EffectDrawBlurTask
+801D2820 Effect::PJS::EffectDrawScreenColorTask
+801D289C Effect::PJS::EffectDrawGlobalLensFlareTask
+801D29D8 Effect::PJS::EffectDrawGlobalLensFlareAnotherTask
+801D2ABC Effect::PJS::EffectDrawOpaqTask
+801D2B38 Effect::PJS::EffectDrawPunchTask
+801D2BB4 Effect::PJS::EffectDrawTransTask
+801D2C30 Effect::PJS::EffectDrawAddTask
+801D2CAC Effect::PJS::EffectDrawSubTask
+801D2D28 Effect::PJS::EffectDrawGlareTask
+801D2DA4 Effect::PJS::EffectDrawShimmerTask
+801D2E20 Effect::PJS::EffectDeleteResourceTask
+801D33CC Advertise
+801D3D68 AudioController::ActStageController
+801D430C AudioLoopManagerTask
+801D4EDC AudioManagerTask
+801D6430 IAudio
+801D6E14 TObjSERIF
+801D7094 TObjBGM
+801DA048 CharCommand
+801DA0A0 CharCommandManagerTask
+801DAA78 CharCommandUnit
+801DABA4 SpringCommand
+801DAC4C ScoreCommand
+801DACC0 ReleaseCommand
+801DAD1C BindCommand
+801DAD78 GenerateCommand
+801DADF4 SetLightCommand
+801DAE4C SetTransparentCommand
+801DAF40 AnnounceAttackCommand
+801DB0E0 ControlVehicleCommand
+801DB39C VacuumCommand
+801DB52C ThrowCommand
+801DB598 CastCommand
+801DB604 PickupCommand
+801DB690 RecoverCommand
+801DB6FC CancelCommand
+801DB758 ReadyCommand
+801DB7B4 UseCommand
+801DB87C LeaveCommand
+801DB95C RideCommand
+801DBA3C WallJumpCommand
+801DBB20 SwitchCommand
+801DBB94 DeadCommand
+801DBB9C DamageCommand
+801DBC68 AccelerateCommand
+801DBD70 SetVelocityCommand
+801DBE78 ClrVelocityCommand
+801DBF04 SetAngleCommand
+801DC0A4 SetPositionCommand
+801DC1A4 AccelerateInputCommand
+801DC274 ScoreCommand
+801DC2D0 ReleaseCommand
+801DC33C BindCommand
+801DC3A8 GenerateCommand
+801DC404 SetLightCommand
+801DC460 SetTransparentCommand
+801DC4BC ControlVehicleCommand
+801DC518 VacuumCommand
+801DC59C ThrowCommand
+801DC608 CastCommand
+801DC674 PickupCommand
+801DC6E0 RecoverCommand
+801DC74C CancelCommand
+801DC7B8 ReadyCommand
+801DC824 UseCommand
+801DC89C LeaveCommand
+801DC908 RideCommand
+801DC974 WallJumpCommand
+801DC9E0 SwitchCommand
+801DCA3C DeadCommand
+801DCA98 DamageCommand
+801DCAF4 AccelerateCommand
+801DCB50 SetVelocityCommand
+801DCBAC ClrVelocityCommand
+801DCC08 SetAngleCommand
+801DCC64 SetPositionCommand
+801DCCC0 AccelerateInputCommand
+801DCD1C CharInfo
+801DE2F0 DeltaMorphAnimManagerTask
+801E293C Effect::PJS::EffectSystemPJS
+801E2978 SonicteamUSA::System::Effect::EffectSystemUSA
+801E2C64 GameSystem
+801E2EEC boost::detail::sp_counted_base_impl<LineTarget *, void (*)(LineTarget *)>
+801E2F5C LineTarget
+801E306C boost::detail::sp_counted_base_impl<LineTarget *, void (*)(LineTarget *)>
+801E3ECC TPauseManager
+801E455C PickupCharInfo
+801E4A58 RenderStatic
+801E4EF0 RenderDiv
+801E50B4 CameraEnd
+801E5100 CameraStart
+801E5178 RenderDiv
+801E51D0 CameraEnd
+801E5228 CameraStart
+801E75BC boost::detail::sp_counted_base_impl<Target *, void (*)(Target *)>
+801E76FC Target
+801E78D8 boost::detail::sp_counted_base_impl<Target *, void (*)(Target *)>
+801E7A08 TargetManageTask
+801E8974 TargetSearchList
+801E8DB0 TargetList
+801EB790 TextureUVAnimManagerTask
+801EC88C Player::Npc::FlyType::FlyTypeExecuter
+801ED044 Player::Npc::DoomsEye::MotionImpl
+801ED778 SetAdapterEventArgs
+801ED838 SetControl::WakeupByRangeEventArgs
+801EE128 LightColliMasterTask
+801EF3C0 LightColli
+801F1EB4 BossAfterCtrl
+801F21AC AudioGCN
+801F2FC8 Player::Behavior::Fly
+801F3438 Player::Behavior::Hide
+801F3C00 Mission::GoalMission
+801F3C9C Mission::EnemyMission
+801F3F18 Weapon::EggBazooka
+801F43C0 Weapon::EggGun
+801F4F2C ElecCoreProgram
+801F6E78 ElecFireWall
+801F7D0C ElecCircuit
+801F83C0 ElecCircuitEntrance
+801F8D6C Player::ElectricCircuitCommand
+801F9314 ElecCristalWall
+801FA464 ElecCristalWallSwitch
+801FA5EC SonicteamUSA::System::Effect::EffectGlobalParamUSA
+801FAA20 PJSCamera::CameraModeFixLookChar
+801FB5AC MessageTask
+801FCF14 Player::Behavior::FirstMeet
+801FD870 Player::Npc::NpcMotion
+801FDA40 Player::Npc::EggMonitor::MotionImpl
+801FE24C TGiCommandWindow
+801FFC44 boost::detail::sp_counted_base_impl<TGiNumberDisplay *, boost::checked_deleter<TGiNumberDisplay>>::sp_counted_base_impl
+801FFDE8 boost::detail::sp_counted_base_impl<TGiNumberDisplay *, boost::checked_deleter<TGiNumberDisplay>>
+801FFF9C TGiRingChallenge
+802012C0 TGiScoreDisplay
+80203848 ResultTask
+80203E9C NpcNameDisplay
+802046A8 StageAction::ContinueAction
+80204AA4 StageAction::DeadAction
+80204C60 StageAction::EndAction
+80204E30 StageAction::EventAction
+8020554C StageAction::GoalAction
+80205F80 StageAction::InitAction
+802060EC StageAction::PlayAction
+80206298 StageAction::RestartAction
+80206E60 Player::PlayerTargetBase
+802072A4 Player::Npc::NpcTarget
+802084C4 HintCollision::SetHintCollision
+80208F08 boost::detail::sp_counted_base_impl<GadgetBuilder::CrashInfoCtrl *, boost::checked_deleter<GadgetBuilder::CrashInfoCtrl>>::sp_counted_base_impl
+80208F84 boost::detail::sp_counted_base_impl<GadgetBuilder::CrashInfoCtrl *, boost::checked_deleter<GadgetBuilder::CrashInfoCtrl>>
+80209054 StageTitleTask
+802093A8 StageAction::PauseAction
+80209468 VacuumThrowBomb
+80209C58 boost::detail::sp_counted_base_impl<VacuumThrowBomb *, boost::checked_deleter<VacuumThrowBomb>>::sp_counted_base_impl
+80209EA8 boost::detail::sp_counted_base_impl<ThrowBombImpl *, boost::checked_deleter<ThrowBombImpl>>::sp_counted_base_impl
+80209F88 ThrowBombTask
+8020C310 ThrowBombImpl
+8020CFBC boost::detail::sp_counted_base_impl<ThrowBombImpl *, boost::checked_deleter<ThrowBombImpl>>
+8020D018 boost::detail::sp_counted_base_impl<VacuumThrowBomb *, boost::checked_deleter<VacuumThrowBomb>>
+8020D0E8 boost::detail::sp_counted_base_impl<ThrowBombImpl *, boost::checked_deleter<ThrowBombImpl>>
+8020D458 WaitInitialize
+8020D7B8 Player::Npc::Knuckles::MotionImpl
+8020F780 Player::Npc::Knuckles::NpcKnuckles
+8020FD58 boost::detail::sp_counted_base_impl<Player::Npc::Knuckles::NpcKnuckles *, boost::checked_deleter<Player::Npc::Knuckles::NpcKnuckles>>::sp_counted_base_impl
+8020FD8C boost::detail::sp_counted_base_impl<Player::Npc::Knuckles::NpcKnuckles *, boost::checked_deleter<Player::Npc::Knuckles::NpcKnuckles>>
+8020FF68 Player::Npc::Sonic::NpcSonic
+80210538 boost::detail::sp_counted_base_impl<Player::Npc::Sonic::NpcSonic *, boost::checked_deleter<Player::Npc::Sonic::NpcSonic>>::sp_counted_base_impl
+8021056C boost::detail::sp_counted_base_impl<Player::Npc::Sonic::NpcSonic *, boost::checked_deleter<Player::Npc::Sonic::NpcSonic>>
+80210748 Player::Npc::EggMonitor::NpcEggMonitor
+80210D44 boost::detail::sp_counted_base_impl<Player::Npc::EggMonitor::NpcEggMonitor *, boost::checked_deleter<Player::Npc::EggMonitor::NpcEggMonitor>>::sp_counted_base_impl
+80210D78 boost::detail::sp_counted_base_impl<Player::Npc::EggMonitor::NpcEggMonitor *, boost::checked_deleter<Player::Npc::EggMonitor::NpcEggMonitor>>
+80210F5C Player::Npc::DoomsEye::NpcDoomsEye
+80211538 boost::detail::sp_counted_base_impl<Player::Npc::DoomsEye::NpcDoomsEye *, boost::checked_deleter<Player::Npc::DoomsEye::NpcDoomsEye>>::sp_counted_base_impl
+8021156C boost::detail::sp_counted_base_impl<Player::Npc::DoomsEye::NpcDoomsEye *, boost::checked_deleter<Player::Npc::DoomsEye::NpcDoomsEye>>
+80211748 Player::Npc::Maria::NpcMaria
+80211D18 boost::detail::sp_counted_base_impl<Player::Npc::Maria::NpcMaria *, boost::checked_deleter<Player::Npc::Maria::NpcMaria>>::sp_counted_base_impl
+80211D4C boost::detail::sp_counted_base_impl<Player::Npc::Maria::NpcMaria *, boost::checked_deleter<Player::Npc::Maria::NpcMaria>>
+80211EC8 Player::Npc::Maria::MotionImpl
+80212AB0 Player::Npc::Tails::NpcTails
+80213080 boost::detail::sp_counted_base_impl<Player::Npc::Tails::NpcTails *, boost::checked_deleter<Player::Npc::Tails::NpcTails>>::sp_counted_base_impl
+802130B4 boost::detail::sp_counted_base_impl<Player::Npc::Tails::NpcTails *, boost::checked_deleter<Player::Npc::Tails::NpcTails>>
+80213234 Player::Npc::Tails::MotionImpl
+80213F48 Player::Npc::Omega::NpcOmega
+80214518 boost::detail::sp_counted_base_impl<Player::Npc::Omega::NpcOmega *, boost::checked_deleter<Player::Npc::Omega::NpcOmega>>::sp_counted_base_impl
+8021454C boost::detail::sp_counted_base_impl<Player::Npc::Omega::NpcOmega *, boost::checked_deleter<Player::Npc::Omega::NpcOmega>>
+802146C4 Player::Npc::Omega::MotionImpl
+80215240 Player::Npc::Espio::NpcEspio
+80215810 boost::detail::sp_counted_base_impl<Player::Npc::Espio::NpcEspio *, boost::checked_deleter<Player::Npc::Espio::NpcEspio>>::sp_counted_base_impl
+80215844 boost::detail::sp_counted_base_impl<Player::Npc::Espio::NpcEspio *, boost::checked_deleter<Player::Npc::Espio::NpcEspio>>
+802159C0 Player::Npc::Espio::MotionImpl
+802165D8 Player::Npc::Vector::NpcVector
+80216BA8 boost::detail::sp_counted_base_impl<Player::Npc::Vector::NpcVector *, boost::checked_deleter<Player::Npc::Vector::NpcVector>>::sp_counted_base_impl
+80216BDC boost::detail::sp_counted_base_impl<Player::Npc::Vector::NpcVector *, boost::checked_deleter<Player::Npc::Vector::NpcVector>>
+80216D58 Player::Npc::Vector::MotionImpl
+80217970 Player::Npc::Rouge::NpcRouge
+80217F40 boost::detail::sp_counted_base_impl<Player::Npc::Rouge::NpcRouge *, boost::checked_deleter<Player::Npc::Rouge::NpcRouge>>::sp_counted_base_impl
+80217F74 boost::detail::sp_counted_base_impl<Player::Npc::Rouge::NpcRouge *, boost::checked_deleter<Player::Npc::Rouge::NpcRouge>>
+802180EC Player::Npc::Rouge::MotionImpl
+80218C68 Player::Npc::Bee::NpcBee
+8021923C boost::detail::sp_counted_base_impl<Player::Npc::Bee::NpcBee *, boost::checked_deleter<Player::Npc::Bee::NpcBee>>::sp_counted_base_impl
+80219270 boost::detail::sp_counted_base_impl<Player::Npc::Bee::NpcBee *, boost::checked_deleter<Player::Npc::Bee::NpcBee>>
+802193F8 Player::Npc::Bee::MotionImpl
+80219E28 Player::Npc::Amy::NpcAmy
+8021A3F8 boost::detail::sp_counted_base_impl<Player::Npc::Amy::NpcAmy *, boost::checked_deleter<Player::Npc::Amy::NpcAmy>>::sp_counted_base_impl
+8021A42C boost::detail::sp_counted_base_impl<Player::Npc::Amy::NpcAmy *, boost::checked_deleter<Player::Npc::Amy::NpcAmy>>
+8021A5A8 Player::Npc::Amy::MotionImpl
+8021B57C ElecSmallCube
+8021C454 ElecCube
+8021CA8C ElecPillar
+8021CFE0 Meteor
+8021E3B8 boost::detail::sp_counted_base_impl<Meteors *, boost::checked_deleter<Meteors>>::sp_counted_base_impl
+8021E3EC MeteorsHolder
+8021E624 MeteorsTask
+80220224 boost::detail::sp_counted_base_impl<Meteors *, boost::checked_deleter<Meteors>>
+80221D44 Weapon::WeaponLaserBase
+802231D8 DefenseShield
+80223634 DefenseShieldSetState
+802243EC DefenseSystem
+80224CAC DefenseSystemSetState
+80226024 Weapon::VacuumPod
+80226BC0 Weapon::WeaponVacuumBase
+80226C78 Weapon::VacuumPod
+80227C60 ArkCannon
+80228550 GrindGadget
+8022896C SonicteamUSA::System::Effect::EffectLocusUSA
+80228FEC CloseWall::SetCloseWall
+8022A548 DefenseWall::SetDefenseWall
+8022B438 MagmaGuard::SetMagmaGuard
+8022C208 PopFooting::SetPopFooting
+8022D068 SecurityLaser::SetSecurityLaser
+8022E3E4 SuperComputer::SetSuperComputer
+802309B4 ElecKyuu
+80231474 ElecSmallPillar
+80231828 ElecWakka
+80231AB8 MissionClearCollision
+80231E8C BlackBull0210CtrlUnit_FixLookCharCamera
+80231F58 BlackBull0210CtrlUnit
+80231FE8 BlackBullCtrlUnit
+8023206C BlackBull0210CtrlUnit_FixLookCharCamera
+80232184 BlackBull0210CtrlUnit
+80232218 BlackBullCtrlUnit
+80232274 BossCtrlUnit
+802322BC BlackBull0210CtrlUnit_MoveMotion
+80232644 BlackBull0210CtrlUnit
+80232658 BlackBullCtrlUnit
+8023266C BlackBull0210CtrlUnit_FixLookCharCamera
+802326AC BlackBull0210
+80232714 BlackBull0210VarParam
+8023276C BlackBullVarParam
+802327C4 BossVarParam
+8023287C BlackBull0210
+80232C4C BlackBullCtrlUnit_CheckMotionAttribute
+80232CF8 BlackBull0210ModeCtrlUnit
+80232DA4 BlackBullCtrlUnit_AttackCallbackOther
+80232E34 BlackBullCtrlUnit_AttackCallback
+80232ECC BlackBullCtrlUnit_AttackCallbackEye
+80232F5C BlackBullCtrlUnit_AttackCallbackBody
+80233088 BlackBull0210
+802330D0 BlackBull0210VarParam
+80233114 BlackBullVarParam
+80233440 BossCharInfo
+802334A8 boost::detail::sp_counted_base_impl<BossCharInfo *, boost::checked_deleter<BossCharInfo>>::sp_counted_base_impl
+802334DC BossCharInfo
+80233658 BossVarParam
+8023381C boost::detail::sp_counted_base_impl<BossCharInfo *, boost::checked_deleter<BossCharInfo>>
+80233878 BossCharInfo
+802338F8 AttackCallbackContainer
+80233904 BlackBullCtrlUnit_AttackCallback
+8023390C boost::detail::sp_counted_base_impl<BossCharInfo *, boost::checked_deleter<BossCharInfo>>
+80233A34 BlackBullCtrlUnit_AttackCallback
+80233A5C BlackBull0210ModeCtrlUnit
+80233E44 BlackBull0210ModeCtrlUnit_MOVETEST
+80233ECC BlackBull0210ModeCtrlUnit_START
+80234008 BlackBull0210ModeCtrlUnit_ATK_CLOSERANGE
+80234104 BlackBull0210ModeCtrlUnit_ATK_WAVERING
+80234204 BlackBull0210ModeCtrlUnit_ATK_BREATH
+802342F0 BlackBull0210ModeCtrlUnit_DEATH
+80234458 BlackBull0210ModeCtrlUnit_BELOW_HALF
+802345A4 BlackBull0210ModeCtrlUnit_GET_ATK
+802346F8 BlackBull0210ModeCtrlUnit_GET_COMBO
+802347DC BlackBull0210ModeCtrlUnit_DIZZY
+80234924 BlackBull0210ModeCtrlUnit_ESCAPE
+80234BEC BlackBull0210ModeCtrlUnit_CHASE
+80234EAC BlackBull0210ModeCtrlUnit_EDIT
+80234F60 BlackBull0210ModeCtrlUnit_WAIT
+80235438 BlackBull0210ModeCtrlUnit_EDIT
+802354D0 BlackBull0210ModeCtrlUnit_CHASE
+80235590 BlackBull0210ModeCtrlUnit_ESCAPE
+80235670 BlackBull0210ModeCtrlUnit_DIZZY
+8023574C BlackBull0210ModeCtrlUnit_GET_COMBO
+80235878 BlackBull0210ModeCtrlUnit_GET_ATK
+80235B34 BlackBull0210ModeCtrlUnit_BELOW_HALF
+80235D20 BlackBull0210ModeCtrlUnit_DEATH
+8023601C BlackBull0210ModeCtrlUnit_ATK_BREATH
+802361D4 BlackBull0210ModeCtrlUnit_ATK_WAVERING
+8023642C BlackBull0210ModeCtrlUnit_ATK_CLOSERANGE
+802365CC BlackBull0210ModeCtrlUnit_START
+80236718 BlackBull0210ModeCtrlUnit_MOVETEST
+80236984 BlackBull0210ModeCtrlUnit_START
+802369AC BlackBull0210ModeCtrlUnit_ATK_CLOSERANGE
+802369D4 BlackBull0210ModeCtrlUnit_ATK_WAVERING
+802369FC BlackBull0210ModeCtrlUnit_ATK_BREATH
+80236A24 BlackBull0210ModeCtrlUnit_DEATH
+80236A4C BlackBull0210ModeCtrlUnit_BELOW_HALF
+80236A74 BlackBull0210ModeCtrlUnit_GET_ATK
+80236A9C BlackBull0210ModeCtrlUnit_GET_COMBO
+80236AC4 BlackBull0210ModeCtrlUnit_DIZZY
+80236AEC BlackBull0210ModeCtrlUnit_ESCAPE
+80236B14 BlackBull0210ModeCtrlUnit_CHASE
+80236B3C BlackBull0210ModeCtrlUnit_EDIT
+80236B64 BlackBull0210ModeCtrlUnit_WAIT
+80236B8C BlackBull0210ModeCtrlUnit
+80236E00 GiantLantern
+80237B58 GiantLanternSetState
+80237D3C VacuumObjectTask
+80238268 VacuumObject
+802397A0 boost::detail::sp_counted_base_impl<@unnamed@VacuumRing_cpp@::Ring *, boost::checked_deleter<@unnamed@VacuumRing_cpp@::Ring>>::sp_counted_base_impl
+802397D4 boost::detail::sp_counted_base_impl<@unnamed@VacuumRing_cpp@::Ring *, boost::checked_deleter<@unnamed@VacuumRing_cpp@::Ring>>
+80239DB8 Weapon::WeaponVacuumBase
+8023A584 Player::Shadow::ControlWeaponBase
+8023B238 Player::Shadow::ShadowWeapon
+8023C0A8 Player::Shadow::ControlWeaponBase
+8023F4D4 BlackBullCtrlUnit_CheckMotionAttribute
+8023F734 BlackBullCtrlUnit_Dizzy
+8023F8EC BlackBullCtrlUnit_WallFire
+8023FDC0 AttackCallbackContainer
+8023FFD8 BlackBullCtrlUnit_WaveRingFire
+802405F8 AttackCallbackContainer
+802407E8 BlackBullCtrlUnit_FireExplosion
+80240C0C AttackCallbackContainer
+80240DEC BlackBullCtrlUnit_FireBall
+802411E4 AttackCallbackContainer
+80241590 BlackBullCtrlUnit_AdjustNeck
+80241950 MotionCallbackContainer
+80241C20 BlackBullCtrlUnit_AdjustEye
+80241DD0 MotionCallbackContainer
+80241ED4 BlackBullCtrlUnit_KnockOff
+80242284 BlackBullCtrlUnit_Move
+80242670 BlackBullCtrlUnit_AttackCallbackOther
+802427C4 BlackBullCtrlUnit_AttackCallbackEye
+80242B20 BlackBullCtrlUnit_AttackCallbackBody
+80242C74 AttackCallbackContainer
+80242E68 BlackBullCtrlUnit_GetStatus
+802433DC BlackBullCtrlUnit_AttackCallbackOther
+80243474 BlackBullCtrlUnit_AttackCallbackEye
+8024350C BlackBullCtrlUnit_AttackCallbackBody
+802435A4 BlackBullCtrlUnit_GetStatus
+802435CC BlackBullCtrlUnit_AttackCallbackBody
+802435F0 BlackBullCtrlUnit_AttackCallbackEye
+80243614 BlackBullCtrlUnit_AttackCallbackOther
+80243638 BlackBullCtrlUnit_Move
+80243660 BlackBullCtrlUnit_KnockOff
+80243688 BlackBullCtrlUnit_AdjustEye
+802436B8 BlackBullCtrlUnit_AdjustNeck
+802436E8 BlackBullCtrlUnit_FireBall
+80243720 BlackBullCtrlUnit_FireExplosion
+80243750 BlackBullCtrlUnit_WaveRingFire
+80243780 BlackBullCtrlUnit_WallFire
+802437B0 BlackBullCtrlUnit_Dizzy
+802437D8 BlackBullCtrlUnit_CheckMotionAttribute
+80243818 BlackBull0412
+80243880 BlackBull0412VarParam
+802438D8 BlackBull0412
+80243C90 BlackBull0412ModeCtrlUnit
+80243D3C BlackBull0412CtrlUnit
+80243EBC BlackBull0412
+80243F04 BlackBull0412VarParam
+8024412C BlackBull0412CtrlUnit
+80244140 BlackBull0412ModeCtrlUnit
+802444C0 BlackBull0412ModeCtrlUnit_START
+8024460C MotionCallbackContainer
+80244770 BlackBull0412ModeCtrlUnit_ATK_CLOSERANGE
+8024486C BlackBull0412ModeCtrlUnit_ATK_WAVERING
+8024498C BlackBull0412ModeCtrlUnit_ATK_BREATH
+80244A78 BlackBull0412ModeCtrlUnit_DEATH
+80244BE0 BlackBull0412ModeCtrlUnit_BELOW_HALF
+80244D2C BlackBull0412ModeCtrlUnit_GET_ATK
+80244E80 BlackBull0412ModeCtrlUnit_GET_COMBO
+80244F58 BlackBull0412ModeCtrlUnit_ESCAPE
+80245008 BlackBull0412ModeCtrlUnit_EDIT
+802450BC BlackBull0412ModeCtrlUnit_WAIT
+802452F0 BlackBull0412ModeCtrlUnit_EDIT
+80245388 BlackBull0412ModeCtrlUnit_ESCAPE
+802454E4 BlackBull0412ModeCtrlUnit_GET_COMBO
+802455D8 BlackBull0412ModeCtrlUnit_GET_ATK
+80245868 BlackBull0412ModeCtrlUnit_BELOW_HALF
+80245A54 BlackBull0412ModeCtrlUnit_DEATH
+80245D00 BlackBull0412ModeCtrlUnit_ATK_BREATH
+80245ECC BlackBull0412ModeCtrlUnit_ATK_WAVERING
+80246114 BlackBull0412ModeCtrlUnit_ATK_CLOSERANGE
+802462B4 BlackBull0412ModeCtrlUnit_ATK_CHARGE
+80246978 BlackBull0412ModeCtrlUnit_START
+80246AF8 BlackBull0412ModeCtrlUnit_ATK_CHARGE
+80246B30 BlackBull0412ModeCtrlUnit_ATK_CLOSERANGE
+80246B58 BlackBull0412ModeCtrlUnit_ATK_WAVERING
+80246B80 BlackBull0412ModeCtrlUnit_ATK_BREATH
+80246BA8 BlackBull0412ModeCtrlUnit_DEATH
+80246BD0 BlackBull0412ModeCtrlUnit_BELOW_HALF
+80246BF8 BlackBull0412ModeCtrlUnit_GET_ATK
+80246C20 BlackBull0412ModeCtrlUnit_GET_COMBO
+80246C48 BlackBull0412ModeCtrlUnit_ESCAPE
+80246C70 BlackBull0412ModeCtrlUnit_EDIT
+80246C98 BlackBull0412ModeCtrlUnit_WAIT
+80246CC0 BlackBull0412ModeCtrlUnit
+80246F64 GravityChangeSwitch
+80247ABC GravityChangeCollision
+802480E4 GravityChangeZone
+80248FAC ElecAccessPanel
+80249A28 ElecAccessPanelData
+80249C30 HeavyDogCtrlUnit_DestroyEffect
+80249D8C HeavyDogCtrlUnit
+80249E10 HeavyDogCtrlUnit_DestroyEffect
+80249F08 HeavyDogCtrlUnit
+80249F64 HeavyDogCtrlUnit_DispEnergy
+8024A660 HeavyDogCtrlUnit_DispCanopy
+8024A914 HeavyDogCtrlUnit_CheckMotionAttribute
+8024A938 HeavyDogCtrlUnit_CheckLauncherNum
+8024AAD0 HeavyDogCtrlUnit_Barrier
+8024AF94 AttackCallbackContainer
+8024B748 HeavyDogCtrlUnit_Engine
+8024C0FC HeavyDogCtrlUnit_RocketLauncher
+8024CC7C MotionCallbackContainer
+8024D09C HeavyDogCtrlUnit_Rotate
+8024D45C HeavyDogCtrlUnit_AttackCallbackCanopy
+8024D764 HeavyDogCtrlUnit_AttackCallbackBody
+8024D83C AttackCallbackContainer
+8024DA30 HeavyDogCtrlUnit_GetStatus
+8024DEC4 HeavyDogCtrlUnit_AttackCallback
+8024DF64 HeavyDogCtrlUnit_CheckMotionAttribute
+8024E030 HeavyDogCtrlUnit_AttackCallbackCanopy
+8024E0C8 HeavyDogCtrlUnit_AttackCallbackBody
+8024E244 HeavyDogCtrlUnit_GetStatus
+8024E26C HeavyDogCtrlUnit_AttackCallbackBody
+8024E290 HeavyDogCtrlUnit_AttackCallbackCanopy
+8024E2B4 HeavyDogCtrlUnit_Rotate
+8024E2DC HeavyDogCtrlUnit_RocketLauncher
+8024E314 HeavyDogCtrlUnit_Engine
+8024E33C HeavyDogCtrlUnit_Barrier
+8024E36C HeavyDogCtrlUnit_CheckLauncherNum
+8024E394 HeavyDogCtrlUnit_CheckMotionAttribute
+8024E3D4 HeavyDogCtrlUnit_DispCanopy
+8024E3FC HeavyDogCtrlUnit_DispEnergy
+8024E424 HeavyDogCtrlUnit
+8024E438 HeavyDogCtrlUnit_AttackCallback
+8024E460 HeavyDogCtrlUnit_DestroyEffect
+8024E488 HeavyDog0410
+8024E4F0 HeavyDog0410VarParam
+8024E548 HeavyDogVarParam
+8024E5BC HeavyDog0410
+8024ECB8 HeavyDogCtrlUnit_CheckMotionAttribute
+8024ED64 HeavyDog0410ModeCtrlUnit
+8024EE10 HeavyDog0410CtrlUnit
+8024EF34 HeavyDogCtrlUnit_AttackCallbackCanopy
+8024EFC4 HeavyDogCtrlUnit_AttackCallbackBody
+8024F0B0 HeavyDog0410
+8024F0F8 HeavyDog0410VarParam
+8024F180 HeavyDogVarParam
+8024F6EC HeavyDog0410CtrlUnit
+8024F700 HeavyDog0410ModeCtrlUnit
+8024FA80 HeavyDog0410ModeCtrlUnit_MOVETEST
+8024FB08 HeavyDog0410ModeCtrlUnit_ATK_MINE
+8024FD1C HeavyDog0410ModeCtrlUnit_ATK_BARRIER
+8024FDF8 HeavyDog0410ModeCtrlUnit_ATK_ROCKET
+8024FE98 HeavyDog0410ModeCtrlUnit_DESTROY
+8025004C HeavyDog0410ModeCtrlUnit_BELOW_HALF
+80250178 HeavyDog0410ModeCtrlUnit_START
+802502E8 HeavyDog0410ModeCtrlUnit_GET_ATK
+8025039C HeavyDog0410ModeCtrlUnit_ESCAPE
+80250438 HeavyDog0410ModeCtrlUnit_CHASE
+802504DC HeavyDog0410ModeCtrlUnit_EDIT
+80250578 HeavyDog0410ModeCtrlUnit_WAIT
+80250718 HeavyDog0410ModeCtrlUnit_EDIT
+802507C4 HeavyDog0410ModeCtrlUnit_CHASE
+80250998 HeavyDog0410ModeCtrlUnit_ESCAPE
+80250F14 HeavyDog0410ModeCtrlUnit_GET_ATK
+80250FFC HeavyDog0410ModeCtrlUnit_START
+80251118 HeavyDog0410ModeCtrlUnit_BELOW_HALF
+80251254 HeavyDog0410ModeCtrlUnit_DESTROY
+802513D8 HeavyDog0410ModeCtrlUnit_ATK_ROCKET
+8025147C HeavyDog0410ModeCtrlUnit_ATK_BARRIER
+802516A0 HeavyDog0410ModeCtrlUnit_ATK_MINE
+80251744 HeavyDog0410ModeCtrlUnit_MOVETEST
+80251850 HeavyDog0410ModeCtrlUnit_ATK_MINE
+80251878 HeavyDog0410ModeCtrlUnit_ATK_BARRIER
+802518A0 HeavyDog0410ModeCtrlUnit_ATK_ROCKET
+802518C8 HeavyDog0410ModeCtrlUnit_DESTROY
+802518F0 HeavyDog0410ModeCtrlUnit_BELOW_HALF
+80251918 HeavyDog0410ModeCtrlUnit_START
+80251940 HeavyDog0410ModeCtrlUnit_GET_ATK
+80251968 HeavyDog0410ModeCtrlUnit_ESCAPE
+80251990 HeavyDog0410ModeCtrlUnit_CHASE
+802519B8 HeavyDog0410ModeCtrlUnit_EDIT
+802519E0 HeavyDog0410ModeCtrlUnit_WAIT
+80251A08 HeavyDog0410ModeCtrlUnit
+80251A48 HeavyDog0510ModeCtrlUnit
+80251B14 HeavyDog0510CtrlUnit
+80251BA4 HeavyDog0510ModeCtrlUnit
+80251E58 HeavyDog0510ModeCtrlUnit_MOVETEST
+80251EE0 HeavyDog0510CtrlUnit
+80251F74 HeavyDog0510ModeCtrlUnit_ATK_MINE
+80252148 HeavyDog0510ModeCtrlUnit_ATK_BARRIER
+80252224 HeavyDog0510ModeCtrlUnit_ATK_ROCKET
+802522C4 HeavyDog0510ModeCtrlUnit_DESTROY
+80252478 HeavyDog0510ModeCtrlUnit_BELOW_HALF
+802525A4 HeavyDog0510ModeCtrlUnit_START
+80252714 HeavyDog0510ModeCtrlUnit_GET_ATK
+802527C8 HeavyDog0510ModeCtrlUnit_ESCAPE
+8025288C HeavyDog0510ModeCtrlUnit_CHASE
+80252934 HeavyDog0510ModeCtrlUnit_EDIT
+802529C8 HeavyDog0510ModeCtrlUnit_WAIT
+80252B28 HeavyDog0510ModeCtrlUnit_EDIT
+80252BCC HeavyDog0510ModeCtrlUnit_CHASE
+80252F00 HeavyDog0510ModeCtrlUnit_ESCAPE
+80253228 HeavyDog0510ModeCtrlUnit_GET_ATK
+80253310 HeavyDog0510ModeCtrlUnit_START
+80253458 HeavyDog0510ModeCtrlUnit_BELOW_HALF
+802535A0 HeavyDog0510ModeCtrlUnit_DESTROY
+802536AC HeavyDog0510ModeCtrlUnit_ATK_ROCKET
+80253750 HeavyDog0510ModeCtrlUnit_ATK_BARRIER
+80253940 HeavyDog0510ModeCtrlUnit_ATK_MINE
+802539E4 HeavyDog0510ModeCtrlUnit_MOVETEST
+80253AA0 HeavyDog0510CtrlUnit
+80253AB4 HeavyDog0510ModeCtrlUnit_MOVETEST
+80253ADC HeavyDog0510ModeCtrlUnit_ATK_MINE
+80253B04 HeavyDog0510ModeCtrlUnit_ATK_BARRIER
+80253B2C HeavyDog0510ModeCtrlUnit_ATK_ROCKET
+80253B54 HeavyDog0510ModeCtrlUnit_DESTROY
+80253B7C HeavyDog0510ModeCtrlUnit_BELOW_HALF
+80253BA4 HeavyDog0510ModeCtrlUnit_START
+80253BCC HeavyDog0510ModeCtrlUnit_GET_ATK
+80253BF4 HeavyDog0510ModeCtrlUnit_ESCAPE
+80253C1C HeavyDog0510ModeCtrlUnit_CHASE
+80253C44 HeavyDog0510ModeCtrlUnit_EDIT
+80253C6C HeavyDog0510ModeCtrlUnit_WAIT
+80253C94 HeavyDog0510ModeCtrlUnit
+80253CD4 HeavyDog0510
+80253D3C HeavyDog0510VarParam
+80253D94 HeavyDog0510
+802543CC HeavyDog0510ModeCtrlUnit
+802544D4 HeavyDog0510
+8025451C HeavyDog0510VarParam
+8025493C boost::detail::sp_counted_base_impl<VacuumContainer::Container *, boost::checked_deleter<VacuumContainer::Container>>::sp_counted_base_impl
+80254CD8 VacuumContainer::Container
+80255118 boost::detail::sp_counted_base_impl<VacuumContainer::Container *, boost::checked_deleter<VacuumContainer::Container>>
+802552A4 EscapePlane::SetEscapePlane
+802555F4 boost::detail::sp_counted_base_impl<EscapePlane::SetEscapePlane *, boost::checked_deleter<EscapePlane::SetEscapePlane>>::sp_counted_base_impl
+80255B10 EscapePlane::SetEscapePlane
+80256810 boost::detail::sp_counted_base_impl<EscapePlane::SetEscapePlane *, boost::checked_deleter<EscapePlane::SetEscapePlane>>
+80256F0C Door::SetBaseDoor
+80258018 SwitchCommand
+80258124 RailSwitch::SetRailSwitch
+80258DC0 DarkSpinEntrance
+80259220 GravitySignBoard
+8025A0A8 ElecPanel
+8025B338 ElecPanelData
+8025B798 ElecPanelManagerTask
+8025E154 StageTriggerEventTask
+8025EAF8 GadgetCommand::MoveEndCommand
+8025EB4C GadgetCommand::GadgetCommand
+8025EB8C GadgetCommand::MoveStartCommand
+8025ED18 GadgetCommand::MoveEndCommand
+8025EFA0 EscapePlaneController::Controller
+80260550 CommandCollision
+802606AC CommandCollision::CommandCollision
+802614AC FootingRoll
+80262BAC FootingBreak
+80263D34 ElecBarrier
+80264560 ElecBomb
+80264ADC ElecBombData
+802652C4 ElecCoreWall
+8026642C ElecFanDraw
+80266EF8 ElecFan
+80267834 ElecRollHexa
+80269630 WatchCamera::SetWatchCamera
+8026A3D4 boost::detail::sp_counted_base_impl<WatchCamera::Sight *, boost::checked_deleter<WatchCamera::Sight>>::sp_counted_base_impl
+8026A588 boost::detail::sp_counted_base_impl<WatchCamera::Monitor *, boost::checked_deleter<WatchCamera::Monitor>>::sp_counted_base_impl
+8026A790 boost::detail::sp_counted_base_impl<WatchCamera::Monitor *, boost::checked_deleter<WatchCamera::Monitor>>
+8026A7EC boost::detail::sp_counted_base_impl<WatchCamera::Sight *, boost::checked_deleter<WatchCamera::Sight>>
+8026A8BC boost::detail::sp_counted_base_impl<WatchCamera::Monitor *, boost::checked_deleter<WatchCamera::Monitor>>
+8026B2A4 SpaceGadget
+8026B86C BackDrop
+8026BB0C HeavyDog0510CtrlUnit_FixLookCharCamera
+8026BE74 HeavyDog0510CtrlUnit_Bomb
+8026C348 HeavyDog0510CtrlUnit_Move
+8026C854 HeavyDog0510CtrlUnit_Bomb
+8026C87C HeavyDog0510CtrlUnit_FixLookCharCamera
+8026C8BC HeavyDog0410CtrlUnit_Dust
+8026CBB8 HeavyDog0410CtrlUnit_Mine
+8026D110 AttackCallbackContainer
+8026D614 HeavyDog0410CtrlUnit_Move
+8026D8D8 HeavyDog0410CtrlUnit_Mine
+8026D908 HeavyDog0410CtrlUnit_Dust
+8026D930 BlackBull0412CtrlUnit_FixLookCharCamera
+8026DBEC BlackBull0412CtrlUnit_MoveMotion
+8026DF68 BlackBull0412CtrlUnit_FixLookCharCamera
+8026E544 ArkLaser
+8026FA48 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraRequest *, void (*)(SonicteamUSA::System::Camera::CameraRequest *)>::sp_counted_base_impl
+8026FC3C boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraMode *, void (*)(SonicteamUSA::System::Camera::CameraMode *)>::sp_counted_base_impl
+80270E54 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraMode *, void (*)(SonicteamUSA::System::Camera::CameraMode *)>
+80270EB0 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraRequest *, void (*)(SonicteamUSA::System::Camera::CameraRequest *)>
+80270F84 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraMode *, void (*)(SonicteamUSA::System::Camera::CameraMode *)>
+80272408 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraScreen *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraScreen>>::sp_counted_base_impl
+802726E0 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraScreen *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraScreen>>
+80273D3C GadgetCommand::AttackEndCommand
+80273D90 GadgetCommand::AttackStartCommand
+80273F30 GadgetCommand::AttackEndCommand
+802741E0 EggBalloonController::Controller
+80276FA8 WeaponSpecialSatelliteLaser::SatelliteLaser
+80278710 boost::detail::sp_counted_base_impl<Container::ContainerSecret *, boost::checked_deleter<Container::ContainerSecret>>::sp_counted_base_impl
+80278DC8 Container::ContainerSecret
+8027A66C boost::detail::sp_counted_base_impl<Container::ContainerSecret *, boost::checked_deleter<Container::ContainerSecret>>
+8027B3D4 BulletSatelliteLaser::SatelliteLaser
+8027B94C ThrowContainer::Container
+8027BED4 Magma::SetMagma
+8027C3D4 SetGenerator
+8027C644 SetGenerator::SetGeneratorState
+8027C668 SetGenerator::SetGenerator
+8027C9B8 boost::detail::sp_counted_base_impl<SetGenerator::Manager *, boost::checked_deleter<SetGenerator::Manager>>::sp_counted_base_impl
+8027CE84 SetGenerator::FindArgs
+8027D00C boost::detail::sp_counted_base_impl<SetGenerator::Manager *, boost::checked_deleter<SetGenerator::Manager>>
+8027D068 SetGenerator::SetGeneratorState
+8027D0C4 boost::detail::sp_counted_base_impl<SetGenerator::Manager *, boost::checked_deleter<SetGenerator::Manager>>
+8027D16C ThrowObject
+8027E2A4 BossRootTask
+8027E590 Player::Shadow::Super
+8027F5A8 BlackDoomCtrlUnit_DispAura
+8027F734 BlackDoomCtrlUnit
+8027F7B8 BlackDoomCtrlUnit_DispAura
+8027F960 BlackDoomCtrlUnit
+8027F9BC BlackDoomCtrlUnit_DispEye
+8027FCE0 BlackDoomCtrlUnit_CheckMotionAttribute
+8027FD6C BlackDoomCtrlUnit_Boomerang
+802804C4 AttackCallbackContainer
+80280668 BlackDoomCtrlUnit_Meteor
+80280A68 AttackCallbackContainer
+80280E34 BlackDoomCtrlUnit_Disk
+80281598 AttackCallbackContainer
+802817E4 BlackDoomCtrlUnit_FixLookCharCamera
+80281928 BlackDoomCtrlUnit_Move
+80282374 BlackDoomCtrlUnit_AttackCallback
+802826EC AttackCallbackContainer
+802828DC BlackDoomCtrlUnit_GetStatus
+80282D54 BlackDoomCtrlUnit_CheckMotionAttribute
+80282E20 BlackDoomCtrlUnit_FixLookCharCamera
+80282FAC BlackDoomCtrlUnit_GetStatus
+80282FD4 BlackDoomCtrlUnit_AttackCallback
+8028300C BlackDoomCtrlUnit_Move
+80283034 BlackDoomCtrlUnit_FixLookCharCamera
+80283074 BlackDoomCtrlUnit_Disk
+802830A4 BlackDoomCtrlUnit_Meteor
+802830DC BlackDoomCtrlUnit_Boomerang
+8028310C BlackDoomCtrlUnit_CheckMotionAttribute
+8028314C BlackDoomCtrlUnit_DispEye
+80283174 BlackDoomCtrlUnit
+80283188 BlackDoomCtrlUnit_DispAura
+802831B0 BlackDoom
+80283218 BlackDoomVarParam
+80283270 BlackDoom
+802837B0 BlackDoomCtrlUnit_CheckMotionAttribute
+8028385C BlackDoomModeCtrlUnit
+80283964 BlackDoom
+802839AC BlackDoomVarParam
+80283DD8 BlackDoomModeCtrlUnit
+80284158 BlackDoomModeCtrlUnit_MOVETEST
+80284200 BlackDoomModeCtrlUnit_DEATH
+802843B4 BlackDoomModeCtrlUnit_BELOW_HALF
+80284574 BlackDoomModeCtrlUnit_START
+80284700 BlackDoomModeCtrlUnit_ATK_BOOMERANG
+802849CC BlackDoomModeCtrlUnit_ATK_METEOR
+80284D08 BlackDoomModeCtrlUnit_ATK_DISK
+802850B8 BlackDoomModeCtrlUnit_ATK_READY
+802851F4 BlackDoomModeCtrlUnit_GET_ATK
+802853CC BlackDoomModeCtrlUnit_GET_COMBO
+802854B0 BlackDoomModeCtrlUnit_EDIT
+80285564 BlackDoomModeCtrlUnit_WAIT
+80285704 BlackDoomModeCtrlUnit_EDIT
+8028579C BlackDoomModeCtrlUnit_GET_COMBO
+80285980 BlackDoomModeCtrlUnit_GET_ATK
+80285B44 BlackDoomModeCtrlUnit_ATK_READY
+80285F78 BlackDoomModeCtrlUnit_ATK_DISK
+802862F0 BlackDoomModeCtrlUnit_ATK_METEOR
+80286718 BlackDoomModeCtrlUnit_ATK_BOOMERANG
+802869FC BlackDoomModeCtrlUnit_START
+80286AFC BlackDoomModeCtrlUnit_BELOW_HALF
+80286CB4 BlackDoomModeCtrlUnit_DEATH
+80286E38 BlackDoomModeCtrlUnit_MOVETEST
+80286F48 BlackDoomModeCtrlUnit_DEATH
+80286F70 BlackDoomModeCtrlUnit_BELOW_HALF
+80286F98 BlackDoomModeCtrlUnit_START
+80286FC0 BlackDoomModeCtrlUnit_ATK_BOOMERANG
+80286FE8 BlackDoomModeCtrlUnit_ATK_METEOR
+80287010 BlackDoomModeCtrlUnit_ATK_DISK
+80287038 BlackDoomModeCtrlUnit_ATK_READY
+80287060 BlackDoomModeCtrlUnit_GET_ATK
+80287088 BlackDoomModeCtrlUnit_GET_COMBO
+802870B0 BlackDoomModeCtrlUnit_EDIT
+802870D8 BlackDoomModeCtrlUnit_WAIT
+80287100 BlackDoomModeCtrlUnit
+80287320 GunBigfoot
+802874C4 GunBigfoot::GunBigfootTask
+80287554 EnemyTemplate<GunBigfoot::GunBigfoot, GunBigfoot::GunBigfootAI>
+80287600 GunBigfoot::GunBigfootTask
+802876C4 EnemyTemplate<GunBigfoot::GunBigfoot, GunBigfoot::GunBigfootAI>::EnemyTemplate
+802877BC GunBigfoot
+802883F8 GunBigfoot::GunBigfoot
+802887F4 EnemyTemplate<GunBigfoot::GunBigfoot, GunBigfoot::GunBigfootAI>
+802887FC GunBigfoot
+80288814 EnemyTemplate<GunBigfoot::GunBigfoot, GunBigfoot::GunBigfootAI>
+8028883C GunBigfoot
+802888B4 GunBigfoot::GunBigfootTask
+802888BC GunBigfoot
+802888EC GunBigfoot::GunBigfootTask
+802888F4 EnemyTemplate<GunBigfoot::GunBigfoot, GunBigfoot::GunBigfootAI>
+802888FC GunBigfoot::GunBigfootTask
+80288904 GunBigfoot
+80288914 GunBigfoot::GunBigfootTask
+80288924 BkGiant
+80288ADC BkGiant::BkGiantTask
+80288B6C EnemyTemplate<BkGiant::BkGiant, BkGiant::BkGiantAI>
+80288C18 BkGiant::BkGiantTask
+80288CDC EnemyTemplate<BkGiant::BkGiant, BkGiant::BkGiantAI>::EnemyTemplate
+80288DD4 BkGiant
+8028987C BkGiant::BkGiant
+80289A54 EnemyTemplate<BkGiant::BkGiant, BkGiant::BkGiantAI>
+80289A5C BkGiant
+80289A74 EnemyTemplate<BkGiant::BkGiant, BkGiant::BkGiantAI>
+80289A9C BkGiant
+80289B04 BkGiant::BkGiantTask
+80289B0C BkGiant
+80289B4C BkGiant::BkGiantTask
+80289B54 EnemyTemplate<BkGiant::BkGiant, BkGiant::BkGiantAI>
+80289B5C BkGiant::BkGiantTask
+80289B64 BkGiant
+80289B74 BkGiant::BkGiantTask
+80289DA0 EggPierrot::EggPierrotTask
+80289E30 EnemyTemplate<EggPierrot::EggPierrot, EggPierrot::EggPierrotAI>
+80289EDC EggPierrot::EggPierrotTask
+80289FA0 EnemyTemplate<EggPierrot::EggPierrot, EggPierrot::EggPierrotAI>::EnemyTemplate
+8028A128 EggPierrot
+8028AA38 boost::detail::sp_counted_base_impl<EggPierrot::BakudanManager *, boost::checked_deleter<EggPierrot::BakudanManager>>::sp_counted_base_impl
+8028ABEC boost::detail::sp_counted_base_impl<EggPierrot::PierrotBall *, boost::checked_deleter<EggPierrot::PierrotBall>>::sp_counted_base_impl
+8028AC20 EggPierrot
+8028AF18 EggPierrot::EggPierrot
+8028CD54 boost::detail::sp_counted_base_impl<EggPierrot::PierrotBall *, boost::checked_deleter<EggPierrot::PierrotBall>>
+8028CDB0 boost::detail::sp_counted_base_impl<EggPierrot::BakudanManager *, boost::checked_deleter<EggPierrot::BakudanManager>>
+8028CE0C EnemyTemplate<EggPierrot::EggPierrot, EggPierrot::EggPierrotAI>
+8028CE14 boost::detail::sp_counted_base_impl<EggPierrot::BakudanManager *, boost::checked_deleter<EggPierrot::BakudanManager>>
+8028CE88 boost::detail::sp_counted_base_impl<EggPierrot::PierrotBall *, boost::checked_deleter<EggPierrot::PierrotBall>>
+8028CFE0 EggPierrot
+8028CFF8 EnemyTemplate<EggPierrot::EggPierrot, EggPierrot::EggPierrotAI>
+8028D020 EggPierrot
+8028D088 EggPierrot::EggPierrotTask
+8028D090 EggPierrot
+8028D0C8 EggPierrot::EggPierrotTask
+8028D0D0 EnemyTemplate<EggPierrot::EggPierrot, EggPierrot::EggPierrotAI>
+8028D0D8 EggPierrot::EggPierrotTask
+8028D0E0 EggPierrot
+8028D0F0 EggPierrot::EggPierrotTask
+8028DB24 boost::detail::sp_counted_base_impl<@unnamed@EnemyVacuumObject_cpp@::CEnemyVacuumObject *, boost::checked_deleter<@unnamed@EnemyVacuumObject_cpp@::CEnemyVacuumObject>>::sp_counted_base_impl
+8028DB58 boost::detail::sp_counted_base_impl<@unnamed@EnemyVacuumObject_cpp@::CEnemyVacuumObject *, boost::checked_deleter<@unnamed@EnemyVacuumObject_cpp@::CEnemyVacuumObject>>
+8028DC98 Player::Shadow::Electric
+8028E22C BkGiant::EnemyAIState_BkGiantAI_RejectAttack
+8028E3D4 BkGiant::EnemyAIState_BkGiantAI_GunAttack
+8028E7D4 BkGiant::EnemyAIState_BkGiantAI_StickAttack
+8028E96C BkGiant::EnemyAIState_BkGiantAI_ChaseTarget
+8028E9C8 BkGiant::EnemyAIState_BkGiantAI_StickAttack
+8028EA50 BkGiant::EnemyAIState_BkGiantAI_ChaseTarget
+8028EBEC BkGiant::EnemyAIState_BkGiantAI_StickAttack
+8028EC48 BkGiant::EnemyAIState_BkGiantAI_ChaseTarget
+8028ECF0 BkGiant::BkGiantAI
+8028EE00 BkGiant::EnemyAIState_BkGiantAI_GunAttack
+8028EE5C BkGiant::BkGiantAI
+8028EFC8 BkGiant::EnemyAIState_BkGiantAI_RejectAttack
+8028F024 BkGiant::BkGiantAI
+8028F100 BkGiant::EnemyAIState_BkGiantAI_RejectAttack
+8028F170 BkGiant::EnemyAIState_BkGiantAI_GunAttack
+8028F1E0 BkGiant::EnemyAIState_BkGiantAI_StickAttack
+8028F250 BkGiant::EnemyAIState_BkGiantAI_ChaseTarget
+8028F2C0 EggPierrot::EnemyAIState_EggPierrotAI_BakudanAttack
+8028F408 EggPierrot::EnemyAIState_EggPierrotAI_DashAttack
+8028F6D0 EggPierrot::EnemyAIState_EggPierrotAI_Ottoto
+8028FA2C EggPierrot::EnemyAIState_EggPierrotAI_GoHome
+8028FB14 EggPierrot::EnemyAIState_EggPierrotAI_Wait
+8028FDC0 EggPierrot::EggPierrotAI
+8028FE90 EggPierrot::EnemyAIState_EggPierrotAI_BakudanAttack
+8028FF3C EggPierrot::EnemyAIState_EggPierrotAI_DashAttack
+8028FFE8 EggPierrot::EnemyAIState_EggPierrotAI_Ottoto
+80290044 EggPierrot::EggPierrotAI
+802900CC EggPierrot::EnemyAIState_EggPierrotAI_Wait
+80290128 EggPierrot::EggPierrotAI
+802901D8 EggPierrot::EnemyAIState_EggPierrotAI_GoHome
+80290234 EggPierrot::EggPierrotAI
+802903A8 EggPierrot::EnemyAIState_EggPierrotAI_BakudanAttack
+80290418 EggPierrot::EnemyAIState_EggPierrotAI_DashAttack
+80290488 EggPierrot::EnemyAIState_EggPierrotAI_Ottoto
+802904F8 EggPierrot::EnemyAIState_EggPierrotAI_GoHome
+80290568 EggPierrot::EnemyAIState_EggPierrotAI_Wait
+802905D8 PJSCamera::PJSCameraTargetInfo
+80290788 BossCtrlUnit_Shadow
+8029093C BossCtrlUnit_StageObject
+8029108C BossCtrlUnit_CheckMotionAttribute
+802911E8 BossCtrlUnit_CheckEvent
+802913BC BossCtrlUnit_DispGauge
+80291514 BossCtrlUnit_CheckFirstDamage
+80291600 BossCtrlUnit_FixLookCharCamera
+80291B60 BossCtrlUnit_PlayCameraMotion
+802928B8 BossCtrlUnit_DamageEff
+80292994 BossModeCtrlUnit
+80292DE0 BossCtrlUnit_FixLookCharCamera
+80292E08 BossCtrlUnit_DispGauge
+80292E30 BossCtrlUnit_CheckMotionAttribute
+802931E8 Parachute
+80293444 Parachute::Parachute
+80294074 Player::Npc::BossSonic
+80294760 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::BossSonicWork *, boost::checked_deleter<Player::Npc::BossSonic::BossSonicWork>>::sp_counted_base_impl
+802947D4 Player::Npc::BossSonic::BossSonic
+80294BA8 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::BossSonic *, boost::checked_deleter<Player::Npc::BossSonic::BossSonic>>::sp_counted_base_impl
+80294BDC boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::BossSonic *, boost::checked_deleter<Player::Npc::BossSonic::BossSonic>>
+80294C38 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::BossSonicWork *, boost::checked_deleter<Player::Npc::BossSonic::BossSonicWork>>
+80294D08 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::BossSonic *, boost::checked_deleter<Player::Npc::BossSonic::BossSonic>>
+8029576C boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::SonicTypeControl *, boost::checked_deleter<Player::Npc::BossSonic::SonicTypeControl>>::sp_counted_base_impl
+802957A0 Player::Npc::BossSonic::SonicTypeControl
+80295B58 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::SonicTypeControl *, boost::checked_deleter<Player::Npc::BossSonic::SonicTypeControl>>
+80295C28 Player::Npc::BossSonicTarget
+8029638C boost::detail::sp_counted_base_impl<Player::Npc::SonicType::SonicTypeBehaviorFactory *, boost::checked_deleter<Player::Npc::SonicType::SonicTypeBehaviorFactory>>::sp_counted_base_impl
+80296400 Player::Npc::SonicType::SonicTypeBehaviorFactory
+80296750 boost::detail::sp_counted_base_impl<Player::Npc::SonicType::SonicTypeBehaviorFactory *, boost::checked_deleter<Player::Npc::SonicType::SonicTypeBehaviorFactory>>
+802969A4 boost::detail::sp_counted_base_impl<Player::Npc::FlyType::FlyTypeControlFactory *, boost::checked_deleter<Player::Npc::FlyType::FlyTypeControlFactory>>::sp_counted_base_impl
+802969D8 Player::Npc::FlyType::FlyTypeControlFactory
+80296DB4 boost::detail::sp_counted_base_impl<Player::Npc::FlyType::FlyTypeControlFactory *, boost::checked_deleter<Player::Npc::FlyType::FlyTypeControlFactory>>
+80297038 boost::detail::sp_counted_base_impl<Player::Npc::FlyType::FlyTypeBehaviorFactory *, boost::checked_deleter<Player::Npc::FlyType::FlyTypeBehaviorFactory>>::sp_counted_base_impl
+802970AC Player::Npc::FlyType::FlyTypeBehaviorFactory
+802973FC boost::detail::sp_counted_base_impl<Player::Npc::FlyType::FlyTypeBehaviorFactory *, boost::checked_deleter<Player::Npc::FlyType::FlyTypeBehaviorFactory>>
+80297650 boost::detail::sp_counted_base_impl<Player::Npc::SonicType::SonicTypeControlFactory *, boost::checked_deleter<Player::Npc::SonicType::SonicTypeControlFactory>>::sp_counted_base_impl
+80297684 Player::Npc::SonicType::SonicTypeControlFactory
+80297A60 boost::detail::sp_counted_base_impl<Player::Npc::SonicType::SonicTypeControlFactory *, boost::checked_deleter<Player::Npc::SonicType::SonicTypeControlFactory>>
+80299FA0 TMemoryCardCtrl
+8029C75C EggShadowAndroid::EggShadowAndroidTask
+8029C7EC EnemyTemplate<EggShadowAndroid::EggShadowAndroid, EggShadowAndroid::EggShadowAndroidAI>
+8029C898 EggShadowAndroid::EggShadowAndroidTask
+8029C95C EnemyTemplate<EggShadowAndroid::EggShadowAndroid, EggShadowAndroid::EggShadowAndroidAI>::EnemyTemplate
+8029CE34 EggShadowAndroid
+8029DA1C EggShadowAndroid::EggShadowAndroid
+8029DC98 EggShadowAndroid::Belt
+8029DE4C EnemyTemplate<EggShadowAndroid::EggShadowAndroid, EggShadowAndroid::EggShadowAndroidAI>
+8029DEA8 EggShadowAndroid
+8029DEC0 EnemyTemplate<EggShadowAndroid::EggShadowAndroid, EggShadowAndroid::EggShadowAndroidAI>
+8029DEE8 EggShadowAndroid
+8029DF48 EggShadowAndroid::EggShadowAndroidTask
+8029DF50 EggShadowAndroid
+8029DF80 EggShadowAndroid::EggShadowAndroidTask
+8029DF88 EnemyTemplate<EggShadowAndroid::EggShadowAndroid, EggShadowAndroid::EggShadowAndroidAI>
+8029DF90 EggShadowAndroid::EggShadowAndroidTask
+8029DF98 EggShadowAndroid
+8029DFA8 EggShadowAndroid::EggShadowAndroidTask
+8029DFB8 EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_Falling
+8029E31C EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_HomingJump
+8029E514 EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_Falling
+8029E570 EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_HomingJump
+8029E600 EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_RejectHoming
+8029EA2C EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_HomingJump
+8029EA88 EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_RejectHoming
+8029EB88 EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_Jump
+8029EF0C EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_RejectHoming
+8029F03C EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_Jump
+8029F0F4 EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_MissileAttack
+8029F290 EggShadowAndroid::EggShadowAndroidAI
+8029F318 EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_MissileAttack
+8029F374 EggShadowAndroid::EggShadowAndroidAI
+8029F558 EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_Jump
+8029F5B4 EggShadowAndroid::EggShadowAndroidAI
+8029F6AC EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_Falling
+8029F71C EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_HomingJump
+8029F78C EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_RejectHoming
+8029F7FC EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_Jump
+8029F86C EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_MissileAttack
+8029F8DC EggMecaCtrlUnit_AdjustCircleArea
+8029FB9C EggMecaCtrlUnit
+8029FC20 EggMecaCtrlUnit_AdjustCircleArea
+8029FCB4 EggMecaCtrlUnit
+8029FD10 EggMecaCtrlUnit_DispGuideCircle
+8029FDA8 EggMecaCtrlUnit_DispAura
+802A01DC EggMecaCtrlUnit_ShockWave
+802A0FC0 EggMecaCtrlUnit_RollUpper
+802A1B44 EggMecaCtrlUnit_Bomb
+802A2568 EggMecaCtrlUnit_Laser
+802A3D24 EggMecaCtrlUnit_IronBall
+802A4B58 boost::detail::sp_counted_base_impl<EggMecaCtrlUnit_ShockWave *, boost::checked_deleter<EggMecaCtrlUnit_ShockWave>>::sp_counted_base_impl
+802A4C84 EggMecaCtrlUnit_IronBall
+802A5280 EggMecaCtrlUnit_DispEye
+802A5944 EggMecaCtrlUnit_DispEggman
+802A5BB8 EggMecaCtrlUnit_DispCanopy
+802A5E2C EggMecaCtrlUnit_CheckMotionAttribute
+802A5ECC EggMecaCtrlUnit_FixLookCharCamera
+802A6454 EggMecaCtrlUnit_Move
+802A69A8 EggMecaCtrlUnit_AttackCallback
+802A7178 EggMecaCtrlUnit_GetStatus
+802A7540 boost::detail::sp_counted_base_impl<EggMecaCtrlUnit_ShockWave *, boost::checked_deleter<EggMecaCtrlUnit_ShockWave>>
+802A759C EggMecaCtrlUnit_CheckMotionAttribute
+802A7668 EggMecaCtrlUnit_FixLookCharCamera
+802A7734 boost::detail::sp_counted_base_impl<EggMecaCtrlUnit_ShockWave *, boost::checked_deleter<EggMecaCtrlUnit_ShockWave>>
+802A7DE4 EggMecaCtrlUnit_GetStatus
+802A7E0C EggMecaCtrlUnit_AttackCallback
+802A7E34 EggMecaCtrlUnit_Move
+802A7E5C EggMecaCtrlUnit_FixLookCharCamera
+802A7E9C EggMecaCtrlUnit_CheckMotionAttribute
+802A7EDC EggMecaCtrlUnit_DispCanopy
+802A7F04 EggMecaCtrlUnit_DispEggman
+802A7F2C EggMecaCtrlUnit_DispEye
+802A7F54 EggMecaCtrlUnit_IronBall
+802A7F7C EggMecaCtrlUnit_Laser
+802A7FA4 EggMecaCtrlUnit_Bomb
+802A7FCC EggMecaCtrlUnit_RollUpper
+802A7FF4 EggMecaCtrlUnit_ShockWave
+802A801C EggMecaCtrlUnit_DispAura
+802A8044 EggMecaCtrlUnit_DispGuideCircle
+802A806C EggMecaCtrlUnit
+802A8080 EggMecaCtrlUnit_AdjustCircleArea
+802A80A8 EggMecaModeCtrlUnit
+802A84C4 EggMecaModeCtrlUnit_DEATH
+802A87A4 EggMecaModeCtrlUnit_BELOW_HALF
+802A8960 EggMecaModeCtrlUnit_START
+802A8A78 EggMecaModeCtrlUnit_ATK_JUMP
+802A8BF4 EggMecaModeCtrlUnit_ATK_LASER
+802A8CE0 EggMecaModeCtrlUnit_ATK_BOMB
+802A9084 boost::detail::sp_counted_base_impl<EggMecaCtrlUnit_Bomb *, boost::checked_deleter<EggMecaCtrlUnit_Bomb>>::sp_counted_base_impl
+802A90B8 EggMecaModeCtrlUnit_ATK_MOVE
+802A91C0 EggMecaModeCtrlUnit_ATK_SHOOT
+802A92D0 EggMecaModeCtrlUnit_ATK_HAMMER
+802A93B0 EggMecaModeCtrlUnit_DASH
+802A94AC EggMecaModeCtrlUnit_MOVE
+802A959C EggMecaModeCtrlUnit_GET_ATK
+802A96F0 EggMecaModeCtrlUnit_GET_COMBO
+802A97D0 EggMecaModeCtrlUnit_EDIT
+802A9884 EggMecaModeCtrlUnit_WAIT
+802AA194 EggMecaModeCtrlUnit_EDIT
+802AA22C EggMecaModeCtrlUnit_GET_COMBO
+802AA378 EggMecaModeCtrlUnit_GET_ATK
+802AA528 EggMecaModeCtrlUnit_MOVE
+802AA694 EggMecaModeCtrlUnit_DASH
+802AA8F8 EggMecaModeCtrlUnit_ATK_HAMMER
+802AAA2C EggMecaModeCtrlUnit_ATK_SHOOT
+802AACE0 EggMecaModeCtrlUnit_ATK_MOVE
+802AADB0 boost::detail::sp_counted_base_impl<EggMecaCtrlUnit_Bomb *, boost::checked_deleter<EggMecaCtrlUnit_Bomb>>
+802AAE0C EggMecaModeCtrlUnit_ATK_BOMB
+802AAF9C EggMecaModeCtrlUnit_ATK_LASER
+802AB170 EggMecaModeCtrlUnit_ATK_JUMP
+802AB6EC EggMecaModeCtrlUnit_START
+802AB7F4 EggMecaModeCtrlUnit_BELOW_HALF
+802AB9E4 EggMecaModeCtrlUnit_DEATH
+802ABB94 boost::detail::sp_counted_base_impl<EggMecaCtrlUnit_Bomb *, boost::checked_deleter<EggMecaCtrlUnit_Bomb>>
+802ABC08 EggMecaModeCtrlUnit_DEATH
+802ABC30 EggMecaModeCtrlUnit_BELOW_HALF
+802ABC58 EggMecaModeCtrlUnit_START
+802ABC80 EggMecaModeCtrlUnit_ATK_JUMP
+802ABCA8 EggMecaModeCtrlUnit_ATK_LASER
+802ABCD0 EggMecaModeCtrlUnit_ATK_BOMB
+802ABCF8 EggMecaModeCtrlUnit_ATK_MOVE
+802ABD20 EggMecaModeCtrlUnit_ATK_SHOOT
+802ABD48 EggMecaModeCtrlUnit_ATK_HAMMER
+802ABD70 EggMecaModeCtrlUnit_DASH
+802ABD98 EggMecaModeCtrlUnit_MOVE
+802ABDC0 EggMecaModeCtrlUnit_GET_ATK
+802ABDE8 EggMecaModeCtrlUnit_GET_COMBO
+802ABE10 EggMecaModeCtrlUnit_EDIT
+802ABE38 EggMecaModeCtrlUnit_WAIT
+802ABE60 EggMecaModeCtrlUnit
+802AC02C EscapePlaneRail
+802AC14C EscapePlaneRail::EscapePlaneRail
+802AC380 BkNinja::BkNinjaTask
+802AC410 EnemyTemplate<BkNinja::BkNinja, BkNinja::BkNinjaAI>
+802AC4BC BkNinja::BkNinjaTask
+802AC580 EnemyTemplate<BkNinja::BkNinja, BkNinja::BkNinjaAI>::EnemyTemplate
+802AC870 BkNinja
+802ADC8C BkNinja::BkNinja
+802AE148 EnemyTemplate<BkNinja::BkNinja, BkNinja::BkNinjaAI>
+802AE150 BkNinja
+802AE168 EnemyTemplate<BkNinja::BkNinja, BkNinja::BkNinjaAI>
+802AE190 BkNinja
+802AE210 BkNinja::BkNinjaTask
+802AE218 BkNinja
+802AE258 BkNinja::BkNinjaTask
+802AE260 BkNinja
+802AE268 EnemyTemplate<BkNinja::BkNinja, BkNinja::BkNinjaAI>
+802AE270 BkNinja::BkNinjaTask
+802AE278 BkNinja
+802AE288 BkNinja::BkNinjaTask
+802AE298 BkNinja::EnemyAIState_BkNinjaAI_GunAttack
+802AE664 BkNinja::EnemyAIState_BkNinjaAI_MoveDisappear
+802AE6C0 BkNinja::EnemyAIState_BkNinjaAI_GunAttack
+802AE754 BkNinja::EnemyAIState_BkNinjaAI_AppearHome
+802AE9EC BkNinja::EnemyAIState_BkNinjaAI_MoveDisappear
+802AEBE4 BkNinja::EnemyAIState_BkNinjaAI_WaitWarp
+802AEF44 BkNinja::EnemyAIState_BkNinjaAI_AppearHome
+802AEFA8 BkNinja::EnemyAIState_BkNinjaAI_WaitWarp
+802AF098 BkNinja::BkNinjaAI
+802AF120 BkNinja::EnemyAIState_BkNinjaAI_GunAttack
+802AF17C BkNinja::BkNinjaAI
+802AF2F0 BkNinja::EnemyAIState_BkNinjaAI_WaitWarp
+802AF34C BkNinja::BkNinjaAI
+802AF54C BkNinja::EnemyAIState_BkNinjaAI_GunAttack
+802AF5BC BkNinja::EnemyAIState_BkNinjaAI_MoveDisappear
+802AF62C BkNinja::EnemyAIState_BkNinjaAI_AppearHome
+802AF69C BkNinja::EnemyAIState_BkNinjaAI_WaitWarp
+802AF884 BkChaos::BkChaosTask
+802AFA3C EnemyTemplate<BkChaos::BkChaos, BkChaos::BkChaosAI>
+802AFAE8 EnemyTemplate<BkChaos::BkChaos, BkChaos::BkChaosAI>::EnemyTemplate
+802AFEDC BkChaos
+802B0D20 BkChaos::BkChaos
+802B314C EnemyTemplate<BkChaos::BkChaos, BkChaos::BkChaosAI>
+802B3314 BkChaos
+802B332C EnemyTemplate<BkChaos::BkChaos, BkChaos::BkChaosAI>
+802B3354 BkChaos
+802B33A4 BkChaos::BkChaosTask
+802B33AC BkChaos
+802B33E4 BkChaos::BkChaosTask
+802B33EC EnemyTemplate<BkChaos::BkChaos, BkChaos::BkChaosAI>
+802B33F4 BkChaos::BkChaosTask
+802B33FC BkChaos
+802B340C BkChaos::BkChaosTask
+802B341C BkChaos::EnemyAIState_BkChaosAI_AttackRolling
+802B34E8 BkChaos::EnemyAIState_BkChaosAI_Caution
+802B3544 BkChaos::EnemyAIState_BkChaosAI_AttackRolling
+802B3588 BkChaos::EnemyAIState_BkChaosAI_AttackStrech
+802B3734 BkChaos::EnemyAIState_BkChaosAI_Wait
+802B3790 BkChaos::EnemyAIState_BkChaosAI_AttackStrech
+802B37B0 BkChaos::EnemyAIState_BkChaosAI_Caution
+802B39DC BkChaos::EnemyAIState_BkChaosAI_Wait
+802B3BAC BkChaos::EnemyAIState_BkChaosAI_WaitChibi
+802B3CF8 BkChaos::BkChaosAI
+802B3E3C BkChaos::EnemyAIState_BkChaosAI_AttackStrech
+802B3EE8 BkChaos::EnemyAIState_BkChaosAI_AttackRolling
+802B3F44 BkChaos::BkChaosAI
+802B401C BkChaos::EnemyAIState_BkChaosAI_WaitChibi
+802B4078 BkChaos::BkChaosAI
+802B41C4 BkChaos::EnemyAIState_BkChaosAI_AttackRolling
+802B4234 BkChaos::EnemyAIState_BkChaosAI_AttackStrech
+802B42A4 BkChaos::EnemyAIState_BkChaosAI_Caution
+802B4314 BkChaos::EnemyAIState_BkChaosAI_Wait
+802B4384 BkChaos::EnemyAIState_BkChaosAI_WaitChibi
+802B4868 boost::detail::sp_counted_base_impl<GiMissionTarget *, boost::checked_deleter<GiMissionTarget>>::sp_counted_base_impl
+802B5424 boost::detail::sp_counted_base_impl<GiMissionTarget *, boost::checked_deleter<GiMissionTarget>>
+802B55D8 AdvReal::AdvBase
+802B6778 AdvReal::AdvFolder
+802B6C74 boost::detail::sp_counted_base_impl<AdvReal::Logo::Phase *, boost::checked_deleter<AdvReal::Logo::Phase>>::sp_counted_base_impl
+802B6DDC boost::detail::sp_counted_base_impl<AdvReal::MemoryCheck::Phase *, boost::checked_deleter<AdvReal::MemoryCheck::Phase>>::sp_counted_base_impl
+802B6F44 boost::detail::sp_counted_base_impl<AdvReal::Movie::Phase *, boost::checked_deleter<AdvReal::Movie::Phase>>::sp_counted_base_impl
+802B70AC boost::detail::sp_counted_base_impl<AdvReal::BattleMode::Phase *, boost::checked_deleter<AdvReal::BattleMode::Phase>>::sp_counted_base_impl
+802B7214 boost::detail::sp_counted_base_impl<AdvReal::SelectMode::Phase *, boost::checked_deleter<AdvReal::SelectMode::Phase>>::sp_counted_base_impl
+802B737C boost::detail::sp_counted_base_impl<AdvReal::Synopsis::Phase *, boost::checked_deleter<AdvReal::Synopsis::Phase>>::sp_counted_base_impl
+802B74E4 boost::detail::sp_counted_base_impl<AdvReal::StoryLibrary::Phase *, boost::checked_deleter<AdvReal::StoryLibrary::Phase>>::sp_counted_base_impl
+802B764C boost::detail::sp_counted_base_impl<AdvReal::Option::Phase *, boost::checked_deleter<AdvReal::Option::Phase>>::sp_counted_base_impl
+802B77F4 boost::detail::sp_counted_base_impl<AdvReal::Title::Phase *, boost::checked_deleter<AdvReal::Title::Phase>>::sp_counted_base_impl
+802B797C boost::detail::sp_counted_base_impl<AdvReal::Title::Phase *, boost::checked_deleter<AdvReal::Title::Phase>>
+802B79D8 boost::detail::sp_counted_base_impl<AdvReal::Option::Phase *, boost::checked_deleter<AdvReal::Option::Phase>>
+802B7A34 boost::detail::sp_counted_base_impl<AdvReal::StoryLibrary::Phase *, boost::checked_deleter<AdvReal::StoryLibrary::Phase>>
+802B7A90 boost::detail::sp_counted_base_impl<AdvReal::Synopsis::Phase *, boost::checked_deleter<AdvReal::Synopsis::Phase>>
+802B7AEC boost::detail::sp_counted_base_impl<AdvReal::SelectMode::Phase *, boost::checked_deleter<AdvReal::SelectMode::Phase>>
+802B7B48 boost::detail::sp_counted_base_impl<AdvReal::BattleMode::Phase *, boost::checked_deleter<AdvReal::BattleMode::Phase>>
+802B7BA4 boost::detail::sp_counted_base_impl<AdvReal::Movie::Phase *, boost::checked_deleter<AdvReal::Movie::Phase>>
+802B7C00 boost::detail::sp_counted_base_impl<AdvReal::MemoryCheck::Phase *, boost::checked_deleter<AdvReal::MemoryCheck::Phase>>
+802B7C5C boost::detail::sp_counted_base_impl<AdvReal::Logo::Phase *, boost::checked_deleter<AdvReal::Logo::Phase>>
+802B7D2C boost::detail::sp_counted_base_impl<AdvReal::MemoryCheck::Phase *, boost::checked_deleter<AdvReal::MemoryCheck::Phase>>
+802B7DA0 boost::detail::sp_counted_base_impl<AdvReal::Movie::Phase *, boost::checked_deleter<AdvReal::Movie::Phase>>
+802B7E14 boost::detail::sp_counted_base_impl<AdvReal::BattleMode::Phase *, boost::checked_deleter<AdvReal::BattleMode::Phase>>
+802B7E88 boost::detail::sp_counted_base_impl<AdvReal::SelectMode::Phase *, boost::checked_deleter<AdvReal::SelectMode::Phase>>
+802B7EFC boost::detail::sp_counted_base_impl<AdvReal::Synopsis::Phase *, boost::checked_deleter<AdvReal::Synopsis::Phase>>
+802B7F70 boost::detail::sp_counted_base_impl<AdvReal::StoryLibrary::Phase *, boost::checked_deleter<AdvReal::StoryLibrary::Phase>>
+802B7FE4 boost::detail::sp_counted_base_impl<AdvReal::Option::Phase *, boost::checked_deleter<AdvReal::Option::Phase>>
+802B8058 boost::detail::sp_counted_base_impl<AdvReal::Title::Phase *, boost::checked_deleter<AdvReal::Title::Phase>>
+802B81C4 AdvReal::Option::Phase
+802B8B90 boost::detail::sp_counted_base_impl<AdvReal::AdvCsdEffect *, boost::checked_deleter<AdvReal::AdvCsdEffect>>::sp_counted_base_impl
+802BA1E0 boost::detail::sp_counted_base_impl<AdvReal::AdvCsdEffect *, boost::checked_deleter<AdvReal::AdvCsdEffect>>
+802BA34C AdvReal::StoryLibrary::Phase
+802BCF10 AdvReal::Title::Phase
+802BE9A8 CNowLoadingThread
+802BED74 NowLoading
+802BFF00 BlackDoomCtrlUnit_AlterEgo
+802C1314 AdvReal::BattleMode::Phase
+802C471C AdvReal::SelectMode::Phase
+802C83C0 boost::detail::sp_counted_base_impl<SavedataAnalyzer::StoryCheck *, boost::checked_deleter<SavedataAnalyzer::StoryCheck>>::sp_counted_base_impl
+802C8420 boost::detail::sp_counted_base_impl<SavedataAnalyzer::StoryCheck *, boost::checked_deleter<SavedataAnalyzer::StoryCheck>>
+802C86DC ElecCircuitExit
+802C8B14 DebugMissionClearCollision
+802C904C Mission::TimerMission
+802C905C Mission::TimerGoalMission
+802C9188 Mission::TimerMission
+802C9200 Mission::TimerGoalMission
+802C9228 Mission::TimerMission
+802C95E4 Vehicle::BirdBase::BirdModelBase
+802C9C38 Vehicle::AirBoltModel
+802CBAD0 Vehicle::BirdBase
+802CC5A4 Vehicle::BirdBase::BirdBase
+802CCD34 Vehicle::BirdBase::AirBolt
+802CD300 boost::detail::sp_counted_base_impl<Weapon::AirBolt::AirBolt *, boost::checked_deleter<Weapon::AirBolt::AirBolt>>::sp_counted_base_impl
+802CD384 Weapon::AirBolt
+802CD56C Weapon::AirBolt::AirBolt
+802CD670 boost::detail::sp_counted_base_impl<Weapon::AirBolt::AirBolt *, boost::checked_deleter<Weapon::AirBolt::AirBolt>>
+802CE02C boost::detail::sp_counted_base_impl<EnemyRender *, boost::checked_deleter<EnemyRender>>::sp_counted_base_impl
+802CE398 boost::detail::sp_counted_base_impl<EnemyRender::Impl *, boost::checked_deleter<EnemyRender::Impl>>::sp_counted_base_impl
+802CE4AC boost::detail::sp_counted_base_impl<EnemyRender::Impl *, boost::checked_deleter<EnemyRender::Impl>>
+802CE508 boost::detail::sp_counted_base_impl<EnemyRender *, boost::checked_deleter<EnemyRender>>
+802CE5D8 boost::detail::sp_counted_base_impl<EnemyRender::Impl *, boost::checked_deleter<EnemyRender::Impl>>
+802CE64C StageSequence::StageSequenceBase
+802CE6B0 StageSequence::Manager
+802CEC14 boost::detail::sp_counted_base_impl<StageSequence::PlayFlashback::Phase *, boost::checked_deleter<StageSequence::PlayFlashback::Phase>>::sp_counted_base_impl
+802CED7C boost::detail::sp_counted_base_impl<StageSequence::PlayHard::Phase *, boost::checked_deleter<StageSequence::PlayHard::Phase>>::sp_counted_base_impl
+802CEEE4 boost::detail::sp_counted_base_impl<StageSequence::MovieTest::Phase *, boost::checked_deleter<StageSequence::MovieTest::Phase>>::sp_counted_base_impl
+802CF04C boost::detail::sp_counted_base_impl<StageSequence::Play2PThree::Phase *, boost::checked_deleter<StageSequence::Play2PThree::Phase>>::sp_counted_base_impl
+802CF1B4 boost::detail::sp_counted_base_impl<StageSequence::Play2POnce::Phase *, boost::checked_deleter<StageSequence::Play2POnce::Phase>>::sp_counted_base_impl
+802CF31C boost::detail::sp_counted_base_impl<StageSequence::PlayEvent::Phase *, boost::checked_deleter<StageSequence::PlayEvent::Phase>>::sp_counted_base_impl
+802CF484 boost::detail::sp_counted_base_impl<StageSequence::PlayStory::Phase *, boost::checked_deleter<StageSequence::PlayStory::Phase>>::sp_counted_base_impl
+802CF67C boost::detail::sp_counted_base_impl<StageSequence::PlayOnce::Phase *, boost::checked_deleter<StageSequence::PlayOnce::Phase>>::sp_counted_base_impl
+802CF73C StageSequence::Manager
+802CF7F0 boost::detail::sp_counted_base_impl<StageSequence::PlayOnce::Phase *, boost::checked_deleter<StageSequence::PlayOnce::Phase>>
+802CF84C boost::detail::sp_counted_base_impl<StageSequence::PlayStory::Phase *, boost::checked_deleter<StageSequence::PlayStory::Phase>>
+802CF8A8 boost::detail::sp_counted_base_impl<StageSequence::PlayEvent::Phase *, boost::checked_deleter<StageSequence::PlayEvent::Phase>>
+802CF904 boost::detail::sp_counted_base_impl<StageSequence::Play2POnce::Phase *, boost::checked_deleter<StageSequence::Play2POnce::Phase>>
+802CF960 boost::detail::sp_counted_base_impl<StageSequence::Play2PThree::Phase *, boost::checked_deleter<StageSequence::Play2PThree::Phase>>
+802CF9BC boost::detail::sp_counted_base_impl<StageSequence::MovieTest::Phase *, boost::checked_deleter<StageSequence::MovieTest::Phase>>
+802CFA18 boost::detail::sp_counted_base_impl<StageSequence::PlayHard::Phase *, boost::checked_deleter<StageSequence::PlayHard::Phase>>
+802CFA74 boost::detail::sp_counted_base_impl<StageSequence::PlayFlashback::Phase *, boost::checked_deleter<StageSequence::PlayFlashback::Phase>>
+802CFB44 boost::detail::sp_counted_base_impl<StageSequence::PlayHard::Phase *, boost::checked_deleter<StageSequence::PlayHard::Phase>>
+802CFBB8 boost::detail::sp_counted_base_impl<StageSequence::MovieTest::Phase *, boost::checked_deleter<StageSequence::MovieTest::Phase>>
+802CFC2C boost::detail::sp_counted_base_impl<StageSequence::Play2PThree::Phase *, boost::checked_deleter<StageSequence::Play2PThree::Phase>>
+802CFCA0 boost::detail::sp_counted_base_impl<StageSequence::Play2POnce::Phase *, boost::checked_deleter<StageSequence::Play2POnce::Phase>>
+802CFD14 boost::detail::sp_counted_base_impl<StageSequence::PlayEvent::Phase *, boost::checked_deleter<StageSequence::PlayEvent::Phase>>
+802CFD88 boost::detail::sp_counted_base_impl<StageSequence::PlayStory::Phase *, boost::checked_deleter<StageSequence::PlayStory::Phase>>
+802CFDFC boost::detail::sp_counted_base_impl<StageSequence::PlayOnce::Phase *, boost::checked_deleter<StageSequence::PlayOnce::Phase>>
+802CFE70 StageSequence::Play2POnce::Phase
+802D02D0 boost::detail::sp_counted_base_impl<StageManager *, boost::checked_deleter<StageManager>>::sp_counted_base_impl
+802D0484 boost::detail::sp_counted_base_impl<StageManager *, boost::checked_deleter<StageManager>>
+802D0554 StageSequence::Play2PThree::Phase
+802D0BC0 StageSequence::PlayEvent::Phase
+802D0F9C StageSequence::PlayOnce::Phase
+802D1350 StageSequence::PlayStory::Phase
+802D1C34 boost::detail::sp_counted_base_impl<StageStaffroll *, boost::checked_deleter<StageStaffroll>>::sp_counted_base_impl
+802D1D9C boost::detail::sp_counted_base_impl<StageMovie *, boost::checked_deleter<StageMovie>>::sp_counted_base_impl
+802D2484 boost::detail::sp_counted_base_impl<StageRouteDisplay *, boost::checked_deleter<StageRouteDisplay>>::sp_counted_base_impl
+802D27C8 boost::detail::sp_counted_base_impl<StageRouteDisplay *, boost::checked_deleter<StageRouteDisplay>>
+802D2824 boost::detail::sp_counted_base_impl<StageMovie *, boost::checked_deleter<StageMovie>>
+802D2880 boost::detail::sp_counted_base_impl<StageStaffroll *, boost::checked_deleter<StageStaffroll>>
+802D297C boost::detail::sp_counted_base_impl<StageRouteDisplay *, boost::checked_deleter<StageRouteDisplay>>
+802D29F0 boost::detail::sp_counted_base_impl<StageMovie *, boost::checked_deleter<StageMovie>>
+802D2A64 StageBase::Base
+802D310C StageMovie
+802D387C AdvReal::Movie::Phase
+802D3B90 Boss::Diablon::Behavior::BehaviorBase
+802D3E58 boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Event *, boost::checked_deleter<Boss::Diablon::Behavior::Event>>::sp_counted_base_impl
+802D4E9C Boss::Diablon::Parts::Action
+802D4EE4 Boss::Diablon::ToUnderCommand
+802D4F5C Boss::Diablon::Behavior::Event
+802D515C Boss::Diablon::Behavior::InitializeArgs
+802D51A4 Boss::Diablon::Behavior::Event
+802D5374 Boss::Diablon::ToUnderCommand
+802D53D0 boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Event *, boost::checked_deleter<Boss::Diablon::Behavior::Event>>
+802D58C4 boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Idle *, boost::checked_deleter<Boss::Diablon::Behavior::Idle>>::sp_counted_base_impl
+802D59F4 Boss::Diablon::Behavior::Idle
+802D5C18 Boss::Diablon::Parts::ActionMove
+802D5C9C Boss::Diablon::Behavior::Idle
+802D5DF8 boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Idle *, boost::checked_deleter<Boss::Diablon::Behavior::Idle>>
+802D5EEC Boss::Diablon::Controller
+802D63B0 Boss::Desire::DesireBase
+802D63B4 Boss::Diablon::Desire::DiablonDesireBase
+802D6474 Boss::Diablon::Parts::PartsBase
+802D6910 Boss::Diablon::Parts::ActionDamage
+802D777C Boss::Diablon::Parts::Body
+802D8180 Boss::Diablon::Parts::Charge
+802D8654 Boss::Diablon::Parts::ChargeMeter
+802D88A8 Boss::Diablon::Parts::Head
+802D8E34 Boss::Diablon::Parts::Shoulder
+802D9CC4 Boss::Diablon
+802D9D44 Boss::Diablon::Diablon
+802DA294 boost::detail::sp_counted_base_impl<Boss::Diablon::Diablon *, boost::checked_deleter<Boss::Diablon::Diablon>>::sp_counted_base_impl
+802DA2C8 boost::detail::sp_counted_base_impl<Boss::Diablon::Diablon *, boost::checked_deleter<Boss::Diablon::Diablon>>
+802DA454 Boss::Diablon::Executer
+802DABE0 Boss::Diablon::Parts::HPGauge
+802DAF50 Boss::Diablon::Parts::ModelBase
+802DBDD0 Player::Shadow::Sound
+802DC2D4 Player::SoundBase
+802DCF2C Boss::Diablon::Effect
+802DD2EC boost::detail::sp_counted_base_impl<ElecFootingRotateObj *, boost::checked_deleter<ElecFootingRotateObj>>::sp_counted_base_impl
+802DD440 ElecFootingRotate
+802DDBD0 boost::detail::sp_counted_base_impl<ElecFootingRotateObj *, boost::checked_deleter<ElecFootingRotateObj>>
+802DE244 Test::EffBelt
+802DEF68 Test::EffLocusMultiVtx
+802DFA38 Sample
+802DFC64 TestNakazawa
+802DFF60 BossForceClear
+802E1614 SonicteamUSA::System::DebugDisp
+802E18AC SonicteamUSA::System::DebugDispBase
+802E1940 SonicteamUSA::System::DebugDisp
+802E21C8 SonicteamUSA::System::DebugDispCapsule
+802E254C SonicteamUSA::System::DebugDispBase
+802E257C SonicteamUSA::System::DebugDispBox
+802E27FC SonicteamUSA::System::DebugDispLine
+802E2A8C SonicteamUSA::System::DebugDispCylinder
+802E2D34 SonicteamUSA::System::DebugDispSphere
+802E311C GiGameOver
+802E4204 SaveCycle::CycleTask
+802E46C0 boost::detail::sp_counted_base_impl<SaveCycle::CheckModule::Phase *, boost::checked_deleter<SaveCycle::CheckModule::Phase>>::sp_counted_base_impl
+802E4828 boost::detail::sp_counted_base_impl<SaveCycle::Check::Phase *, boost::checked_deleter<SaveCycle::Check::Phase>>::sp_counted_base_impl
+802E4990 boost::detail::sp_counted_base_impl<SaveCycle::Save::Phase *, boost::checked_deleter<SaveCycle::Save::Phase>>::sp_counted_base_impl
+802E4B88 boost::detail::sp_counted_base_impl<SaveCycle::Load::Phase *, boost::checked_deleter<SaveCycle::Load::Phase>>::sp_counted_base_impl
+802E4CEC SaveCycle::CycleBase
+802E4E70 boost::detail::sp_counted_base_impl<SaveCycle::Load::Phase *, boost::checked_deleter<SaveCycle::Load::Phase>>
+802E4ECC boost::detail::sp_counted_base_impl<SaveCycle::Save::Phase *, boost::checked_deleter<SaveCycle::Save::Phase>>
+802E4F28 boost::detail::sp_counted_base_impl<SaveCycle::Check::Phase *, boost::checked_deleter<SaveCycle::Check::Phase>>
+802E4F84 boost::detail::sp_counted_base_impl<SaveCycle::CheckModule::Phase *, boost::checked_deleter<SaveCycle::CheckModule::Phase>>
+802E5054 boost::detail::sp_counted_base_impl<SaveCycle::Check::Phase *, boost::checked_deleter<SaveCycle::Check::Phase>>
+802E50C8 boost::detail::sp_counted_base_impl<SaveCycle::Save::Phase *, boost::checked_deleter<SaveCycle::Save::Phase>>
+802E513C boost::detail::sp_counted_base_impl<SaveCycle::Load::Phase *, boost::checked_deleter<SaveCycle::Load::Phase>>
+802E5F80 SaveCycle::MessageDrawTask
+802E61D8 StageAction::SaveAction
+802E6384 StageAction::TryAgainAction
+802E696C boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Beam *, boost::checked_deleter<Boss::Diablon::Behavior::Beam>>::sp_counted_base_impl
+802E69A0 Boss::Diablon::Behavior::Beam
+802E6D04 boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Beam *, boost::checked_deleter<Boss::Diablon::Behavior::Beam>>
+802E6F74 boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Bomb *, boost::checked_deleter<Boss::Diablon::Behavior::Bomb>>::sp_counted_base_impl
+802E6FA8 Boss::Diablon::Behavior::Bomb
+802E730C boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Bomb *, boost::checked_deleter<Boss::Diablon::Behavior::Bomb>>
+802E757C boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Wipe *, boost::checked_deleter<Boss::Diablon::Behavior::Wipe>>::sp_counted_base_impl
+802E75B0 Boss::Diablon::Behavior::Wipe
+802E7864 boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Wipe *, boost::checked_deleter<Boss::Diablon::Behavior::Wipe>>
+802E7ACC boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Beam *, boost::checked_deleter<Boss::Diablon::Desire::Beam>>::sp_counted_base_impl
+802E7C90 Boss::Diablon::Desire::Beam
+802E7E34 boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Beam *, boost::checked_deleter<Boss::Diablon::Desire::Beam>>
+802E809C boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Bomb *, boost::checked_deleter<Boss::Diablon::Desire::Bomb>>::sp_counted_base_impl
+802E8188 Boss::Diablon::Desire::Bomb
+802E8304 boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Bomb *, boost::checked_deleter<Boss::Diablon::Desire::Bomb>>
+802E858C boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Event *, boost::checked_deleter<Boss::Diablon::Desire::Event>>::sp_counted_base_impl
+802E85C0 Boss::Diablon::Desire::Event
+802E86C0 Boss::Diablon::Behavior::InitializeArgsEvent
+802E8744 Boss::Diablon::Desire::Event
+802E88DC boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Event *, boost::checked_deleter<Boss::Diablon::Desire::Event>>
+802E8B44 boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Wipe *, boost::checked_deleter<Boss::Diablon::Desire::Wipe>>::sp_counted_base_impl
+802E8C80 Boss::Diablon::Desire::Wipe
+802E8DE0 boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Wipe *, boost::checked_deleter<Boss::Diablon::Desire::Wipe>>
+802E9810 Boss::Diablon::Parts::Barrier
+802E9C78 EggMeca511
+802E9CE0 EggMecaVarParam
+802E9D38 EggMeca511
+802EA180 EggMecaCtrlUnit_CheckMotionAttribute
+802EA22C EggMecaModeCtrlUnit
+802EA334 EggMeca511
+802EA37C EggMecaVarParam
+802EA910 EggMeca411
+802EAF68 EggMeca310
+802EB96C Player::Behavior::Super
+802EBB60 Mission::TimerCountMission
+802EBF58 Mission::BasicMessageManage
+802EC214 boost::detail::sp_counted_base_impl<Mission::BasicMessage *, boost::checked_deleter<Mission::BasicMessage>>::sp_counted_base_impl
+802EC268 Mission::BasicMessageManage
+802EC77C Mission::BasicMessage
+802EC7D4 boost::detail::sp_counted_base_impl<Mission::BasicMessage *, boost::checked_deleter<Mission::BasicMessage>>
+802ED5A4 Mission::CountMessageManage
+802ED8CC boost::detail::sp_counted_base_impl<Mission::CountMessage *, boost::checked_deleter<Mission::CountMessage>>::sp_counted_base_impl
+802ED920 Mission::CountMessageManage
+802EDE10 Mission::CountMessage
+802EDF64 boost::detail::sp_counted_base_impl<Mission::CountMessage *, boost::checked_deleter<Mission::CountMessage>>
+802EF068 Mission::Message
+802EF264 Mission::TimerMessageManage
+802EF610 boost::detail::sp_counted_base_impl<Mission::TimerMessage *, boost::checked_deleter<Mission::TimerMessage>>::sp_counted_base_impl
+802EF664 Mission::TimerMessageManage
+802EFBA4 Mission::TimerMessage
+802EFBFC boost::detail::sp_counted_base_impl<Mission::TimerMessage *, boost::checked_deleter<Mission::TimerMessage>>
+802F0CA8 Weapon::ChaosSpear
+802F0E3C boost::detail::sp_counted_base_impl<Weapon::ChaosSpear::ChaosSpear *, boost::checked_deleter<Weapon::ChaosSpear::ChaosSpear>>::sp_counted_base_impl
+802F10D8 Weapon::ChaosSpear
+802F15B4 Weapon::ChaosSpear::ChaosSpear
+802F16D8 boost::detail::sp_counted_base_impl<Weapon::ChaosSpear::ChaosSpear *, boost::checked_deleter<Weapon::ChaosSpear::ChaosSpear>>
+802F1984 Weapon::DarkHammer
+802F1F10 Weapon::HeavyShot
+802F251C Weapon::Bullet::ChaosSpear
+802F2628 Weapon::Bullet::ChaosSpear::ChaosSpear
+802F34CC HintController
+802F3664 HintController::HintController
+802F39B8 CityBombBig
+802F4E68 boost::detail::sp_counted_base_impl<VacuumCityBombSmall *, boost::checked_deleter<VacuumCityBombSmall>>::sp_counted_base_impl
+802F4E9C VacuumCityBombSmall
+802F54C4 CityBombSmall
+802F6614 boost::detail::sp_counted_base_impl<VacuumCityBombSmall *, boost::checked_deleter<VacuumCityBombSmall>>
+802F7234 CityGadget
+802F76B8 CityGadgetState
+802F86C4 Helicopter
+802FA500 SecretDisk
+802FA74C SecretDisk::SecretDisk
+802FDB54 EggLastMech::EggLastMech
+802FE00C boost::detail::sp_counted_base_impl<EggLastMech::EggLastMech *, boost::checked_deleter<EggLastMech::EggLastMech>>::sp_counted_base_impl
+802FE070 boost::detail::sp_counted_base_impl<EggLastMech::EggLastMech *, boost::checked_deleter<EggLastMech::EggLastMech>>
+802FE5B8 EggLastMech::EggLastMechTask
+802FEEE4 BAGunShip
+802FF540 BAGunShip::BAGunShip
+80300A1C BAMine
+80300B8C BAMine::BAMine
+80301D4C BAShield
+80302008 BAShield::BAShield
+80303208 BASwitch
+80303378 BASwitch::BASwitch
+80303E18 BDHologram
+80303FBC BDHologram::BDHologram
+80304350 BDTrue
+80304410 BDTrue::BDTrue
+803048DC SuctionPillar
+80304B70 SuctionPillar::SuctionPillar
+8030566C boost::detail::sp_counted_base_impl<Effect::PJS::Launcher *, void (*)(Effect::PJS::Launcher *)>::sp_counted_base_impl
+8030569C Effect::PJS::Loader
+8030583C Effect::PJS::Launcher
+80305F7C boost::detail::sp_counted_base_impl<Effect::PJS::Launcher *, void (*)(Effect::PJS::Launcher *)>
+8030725C Player::Npc::Sound
+8030738C AdvReal::MemoryCheck::Phase
+80307714 DevilDoomCtrlUnit_DoomsEye
+8030796C DevilDoomCtrlUnit
+803079F0 DevilDoomCtrlUnit_DoomsEye
+80307BA4 DevilDoomCtrlUnit
+80307C00 DevilDoomCtrlUnit_AdjustTarget
+80307FA8 DevilDoomCtrlUnit_CheckMotionAttribute
+80307FCC DevilDoomCtrlUnit_Cloud
+80308320 DevilDoomCtrlUnit_BallControl
+80308474 MotionCallbackContainer
+803088F0 DevilDoomCtrlUnit_WingControl
+80309884 MotionCallbackContainer
+8030A154 DevilDoomCtrlUnit_FireBreath
+8030AA44 AttackCallbackContainer
+8030AFD0 DevilDoomCtrlUnit_CheckInterrupt
+8030B1AC DevilDoomCtrlUnit_AdjustNeck
+8030B3B4 MotionCallbackContainer
+8030B4D4 DevilDoomCtrlUnit_AdjustEye
+8030B9C0 MotionCallbackContainer
+8030BBA4 DevilDoomCtrlUnit_FixLookCharCamera
+8030BC84 DevilDoomCtrlUnit_Move
+8030BF84 DevilDoomCtrlUnit_AttackCallbackChest
+8030BF90 DevilDoomCtrlUnit_AttackCallbackEyeL
+8030BFCC DevilDoomCtrlUnit_AttackCallbackEyeR
+8030C008 DevilDoomCtrlUnit_AttackCallbackEye
+8030C1C0 AttackCallbackContainer
+8030C380 DevilDoomCtrlUnit_GetStatus
+8030CA94 DevilDoomCtrlUnit_AttackCallback
+8030CB34 DevilDoomCtrlUnit_CheckMotionAttribute
+8030CC00 DevilDoomCtrlUnit_FixLookCharCamera
+8030CCCC DevilDoomCtrlUnit_AttackCallbackChest
+8030CD64 DevilDoomCtrlUnit_AttackCallbackEyeL
+8030CDFC DevilDoomCtrlUnit_AttackCallbackEye
+8030CE94 DevilDoomCtrlUnit_AttackCallbackEyeR
+8030D010 DevilDoomCtrlUnit_GetStatus
+8030D038 DevilDoomCtrlUnit_AttackCallbackEye
+8030D054 DevilDoomCtrlUnit_AttackCallbackEyeR
+8030D070 DevilDoomCtrlUnit_AttackCallbackEyeL
+8030D08C DevilDoomCtrlUnit_AttackCallbackChest
+8030D0A8 DevilDoomCtrlUnit_Move
+8030D0D0 DevilDoomCtrlUnit_FixLookCharCamera
+8030D110 DevilDoomCtrlUnit_AdjustEye
+8030D140 DevilDoomCtrlUnit_AdjustNeck
+8030D170 DevilDoomCtrlUnit_CheckInterrupt
+8030D198 DevilDoomCtrlUnit_FireBreath
+8030D1C8 DevilDoomCtrlUnit_WingControl
+8030D200 DevilDoomCtrlUnit_BallControl
+8030D230 DevilDoomCtrlUnit_Cloud
+8030D258 DevilDoomCtrlUnit_CheckMotionAttribute
+8030D298 DevilDoomCtrlUnit_AdjustTarget
+8030D2C0 DevilDoomCtrlUnit
+8030D2D4 DevilDoomCtrlUnit_AttackCallback
+8030D2FC DevilDoomCtrlUnit_DoomsEye
+8030D324 DevilDoom
+8030D38C DevilDoomVarParam
+8030D3E4 DevilDoom
+8030D820 DevilDoomCtrlUnit_CheckMotionAttribute
+8030D8CC DevilDoomModeCtrlUnit
+8030D978 DevilDoomCtrlUnit_AttackCallbackChest
+8030DA08 DevilDoomCtrlUnit_AttackCallbackEyeL
+8030DA98 DevilDoomCtrlUnit_AttackCallbackEye
+8030DB28 DevilDoomCtrlUnit_AttackCallbackEyeR
+8030DC14 DevilDoom
+8030DC5C DevilDoomVarParam
+8030E258 DevilDoomModeCtrlUnit
+8030E640 DevilDoomModeCtrlUnit_DEATH
+8030E844 DevilDoomModeCtrlUnit_BELOW_HALF
+8030EAEC DevilDoomModeCtrlUnit_START
+8030EC54 DevilDoomModeCtrlUnit_ATK_BIT3
+8030ED3C DevilDoomModeCtrlUnit_ATK_BIT2
+8030EE38 DevilDoomModeCtrlUnit_ATK_BIT1
+8030EF20 DevilDoomModeCtrlUnit_ATK_PSYCHO_THROW
+8030F080 DevilDoomModeCtrlUnit_ATK_PSYCHO_PREPARE
+8030F1D8 DevilDoomModeCtrlUnit_ATK_FIRE
+8030F308 DevilDoomModeCtrlUnit_CHAOS_CONTROL
+8030F4C8 DevilDoomModeCtrlUnit_INVERSE
+8030F5D0 DevilDoomModeCtrlUnit_GET_ATK
+8030F7B4 DevilDoomModeCtrlUnit_EDIT
+8030F860 DevilDoomModeCtrlUnit_WAIT
+8030FD38 DevilDoomModeCtrlUnit_EDIT
+8030FDD0 DevilDoomModeCtrlUnit_GET_ATK
+80310024 DevilDoomModeCtrlUnit_INVERSE
+8031023C DevilDoomModeCtrlUnit_CHAOS_CONTROL
+80310508 DevilDoomModeCtrlUnit_ATK_FIRE
+80310888 DevilDoomModeCtrlUnit_ATK_PSYCHO_PREPARE
+80310B18 DevilDoomModeCtrlUnit_ATK_PSYCHO_THROW
+80310CAC DevilDoomModeCtrlUnit_ATK_BIT1
+80310D50 DevilDoomModeCtrlUnit_ATK_BIT2
+80310DF4 DevilDoomModeCtrlUnit_ATK_BIT3
+80310E98 DevilDoomModeCtrlUnit_START
+80310FEC DevilDoomModeCtrlUnit_BELOW_HALF
+803111D0 DevilDoomModeCtrlUnit_DEATH
+8031143C DevilDoomModeCtrlUnit_BELOW_HALF
+80311464 DevilDoomModeCtrlUnit_START
+8031148C DevilDoomModeCtrlUnit_ATK_BIT3
+803114B4 DevilDoomModeCtrlUnit_ATK_BIT2
+803114DC DevilDoomModeCtrlUnit_ATK_BIT1
+80311504 DevilDoomModeCtrlUnit_ATK_PSYCHO_THROW
+8031152C DevilDoomModeCtrlUnit_ATK_PSYCHO_PREPARE
+80311554 DevilDoomModeCtrlUnit_ATK_FIRE
+8031157C DevilDoomModeCtrlUnit_CHAOS_CONTROL
+803115A4 DevilDoomModeCtrlUnit_INVERSE
+803115CC DevilDoomModeCtrlUnit_GET_ATK
+803115F4 DevilDoomModeCtrlUnit_EDIT
+8031161C DevilDoomModeCtrlUnit_WAIT
+80311644 DevilDoomModeCtrlUnit
+80311684 EggLastMech::AIState::End
+80311838 EggLastMech::EggLastMechAIStateBase
+80311880 EggLastMech::AIState::BreakTime
+80311A2C EggLastMech::AIState::FeverRing
+80311BD8 EggLastMech::AIState::FeverShadow
+80311D44 EggLastMech::AIState::FeverPawn
+80311F14 EggLastMech::AIState::FeverBombFailed
+803121D8 EggLastMech::AIState::FeverBomb
+803123B4 EggLastMech::AIState::FeverMissile
+803125B8 EggLastMech::AIState::Brake
+80312778 EggLastMech::AIState::Pursuit
+80312A98 EggLastMech::AIState::Flee
+80313044 EggLastMech::AIState::Idle
+803131FC EggLastMech::AIState::Start
+80313374 EggLastMech::AIState::Event
+8031398C EggLastMech::AIState::EventStart
+80313B00 EggLastMech::AIState::Nop
+80313C8C EggLastMech::AIState::BreakTime
+80313C94 EggLastMech::AIState::FeverRing
+80313C9C EggLastMech::AIState::FeverShadow
+80313CA4 EggLastMech::AIState::FeverPawn
+80313CAC EggLastMech::AIState::FeverBombFailed
+80313CB4 EggLastMech::AIState::FeverBomb
+80313CBC EggLastMech::AIState::FeverMissile
+80313CC4 EggLastMech::AIState::Brake
+80313CCC EggLastMech::AIState::Pursuit
+80313CD4 EggLastMech::AIState::Flee
+80313CDC EggLastMech::AIState::Idle
+80313CE4 EggLastMech::AIState::Start
+80313CEC EggLastMech::AIState::Event
+80313CF4 EggLastMech::AIState::EventStart
+80313CFC EggLastMech::AIState::Nop
+80314EA0 EggLastMech::CameraTask
+803161F8 BombingWall
+80316AF0 BombServer
+8031765C Vehicle::GunLift
+8031A1D4 Researcher
+8031AD0C ResearcherCharInfo
+8031AD64 boost::detail::sp_counted_base_impl<ResearcherCharInfo *, boost::checked_deleter<ResearcherCharInfo>>::sp_counted_base_impl
+8031AD98 boost::detail::sp_counted_base_impl<ResearcherCharInfo *, boost::checked_deleter<ResearcherCharInfo>>
+8031ADF4 ResearcherCharInfo
+8031ADFC boost::detail::sp_counted_base_impl<ResearcherCharInfo *, boost::checked_deleter<ResearcherCharInfo>>
+8031B5AC boost::detail::sp_counted_base_impl<EnemyTarget *, boost::checked_deleter<EnemyTarget>>::sp_counted_base_impl
+8031B5E0 boost::detail::sp_counted_base_impl<EnemyTarget *, boost::checked_deleter<EnemyTarget>>
+8031D194 boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Move *, boost::checked_deleter<Boss::Diablon::Behavior::Move>>::sp_counted_base_impl
+8031D254 Boss::Diablon::Behavior::Move
+8031D5FC boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Move *, boost::checked_deleter<Boss::Diablon::Behavior::Move>>
+8031D864 boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Move *, boost::checked_deleter<Boss::Diablon::Desire::Move>>::sp_counted_base_impl
+8031D9D4 Boss::Diablon::Desire::Move
+8031DB4C boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Move *, boost::checked_deleter<Boss::Diablon::Desire::Move>>
+8031EB9C Boss::Diablon::Parts::Beam
+8031FC58 Boss::Diablon::Parts::Bomb
+80320048 BKTank::SetBKTank
+80320440 boost::detail::sp_counted_base_impl<BKTank::SetBKTank *, boost::checked_deleter<BKTank::SetBKTank>>::sp_counted_base_impl
+80320474 BKTank::SetBKTank
+8032236C boost::detail::sp_counted_base_impl<BKTank::SetBKTank *, boost::checked_deleter<BKTank::SetBKTank>>
+80322CE8 BKTankController::Controller
+80323C54 Boss::Diablon::Parts::CameraControl
+80324310 DevilDoomCtrlUnit_PsychoObject
+80325234 AttackCallbackContainer
+8032580C DevilDoomCtrlUnit_PsychoObjectControl
+80326054 DevilDoomCtrlUnit_PsychoObject
+8032608C DevilDoomCtrlUnit_BitLaser
+80326B84 AttackCallbackContainer
+8032781C DevilDoomCtrlUnit_Bit
+80328340 AttackCallbackContainer
+80328420 DevilDoomCtrlUnit_BitGroupControl
+80328E68 DevilDoomCtrlUnit_BitAttackControl
+80329618 DevilDoomCtrlUnit_BitGroupControl
+80329640 DevilDoomCtrlUnit_Bit
+80329670 DevilDoomCtrlUnit_BitLaser
+80329CE0 TPjsEventActionFade
+8032AC4C Boss::Desire::DesireBase
+8032AEB0 FallRoad
+8032B744 BreakRoad
+8032C694 GunBuilding
+8032E334 Player::Npc::Tails::Tail
+8032E718 Player::Npc::Bee::Feather
+8032EE94 boost::detail::sp_counted_base_impl<EggLastMech::EggLastMechSlotDisp2D *, boost::checked_deleter<EggLastMech::EggLastMechSlotDisp2D>>::sp_counted_base_impl
+8032FF78 Chao::CSD::RCPtr<Chao::CSD::CScene>::RCObject<Chao::CSD::CScene>::RCPtr
+80330020 boost::detail::sp_counted_base_impl<EggLastMech::EggLastMechSlotDisp2D *, boost::checked_deleter<EggLastMech::EggLastMechSlotDisp2D>>
+80331258 StageSequence::MovieTest::Phase
+80332328 SavePointSelect::EventArgs
+80332404 SavePointSelect::SavePointSelectTask
+80336068 Vehicle::CharaColliMove
+80336828 boost::detail::sp_counted_base_impl<BossCtrlUnit *, boost::checked_deleter<BossCtrlUnit>>::sp_counted_base_impl
+8033685C AttackCallbackContainer
+80337158 MotionCallbackContainer
+80337354 boost::detail::sp_counted_base_impl<BossCtrlUnit *, boost::checked_deleter<BossCtrlUnit>>
+803373B0 MotionCallbackContainer
+803373B4 boost::detail::sp_counted_base_impl<BossCtrlUnit *, boost::checked_deleter<BossCtrlUnit>>
+803385EC Player::Npc::BossSonic::SubControlJump
+80338914 Player::Npc::BossSonic::Desire::BossSonicDesireBase
+80338B70 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::CounterAttack *, boost::checked_deleter<Player::Npc::BossSonic::Desire::CounterAttack>>::sp_counted_base_impl
+80338BA4 Player::Npc::BossSonic::Desire::CounterAttack
+80338CF0 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::CounterAttack *, boost::checked_deleter<Player::Npc::BossSonic::Desire::CounterAttack>>
+80338F58 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::Dodge *, boost::checked_deleter<Player::Npc::BossSonic::Desire::Dodge>>::sp_counted_base_impl
+80338F8C Player::Npc::BossSonic::Desire::Dodge
+803390A0 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::Dodge *, boost::checked_deleter<Player::Npc::BossSonic::Desire::Dodge>>
+80339308 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::Move *, boost::checked_deleter<Player::Npc::BossSonic::Desire::Move>>::sp_counted_base_impl
+80339934 Player::Npc::BossSonic::Desire::Move
+80339CA8 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::Move *, boost::checked_deleter<Player::Npc::BossSonic::Desire::Move>>
+8033A0DC Player::Npc::BossSonic::BossSonicExecuter
+8033A890 Player::Npc::BossSonic::SubControlDodge
+8033AF74 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::Attack *, boost::checked_deleter<Player::Npc::BossSonic::Desire::Attack>>::sp_counted_base_impl
+8033B1C8 Player::Npc::BossSonic::Desire::Attack
+8033B2E0 boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::Attack *, boost::checked_deleter<Player::Npc::BossSonic::Desire::Attack>>
+8033B9A4 boost::detail::sp_counted_base_impl<VehicleArrow *, boost::checked_deleter<VehicleArrow>>::sp_counted_base_impl
+8033C684 boost::detail::sp_counted_base_impl<VehicleArrow *, boost::checked_deleter<VehicleArrow>>
+8033CA80 ElecCircuitColli
+8033D930 SetSeLoop
+8033E1B8 SetSeOneShot
+8033EB10 Player::Barrier
+8033FC40 ThrowVacuumBomb::Bomb
+803400F0 boost::detail::sp_counted_base_impl<VacuumBomb::Bomb *, boost::checked_deleter<VacuumBomb::Bomb>>::sp_counted_base_impl
+80340480 VacuumBomb::Bomb
+80340898 boost::detail::sp_counted_base_impl<VacuumBomb::Bomb *, boost::checked_deleter<VacuumBomb::Bomb>>
+80341934 AdvReal::Synopsis::Phase
+80342D94 AdvReal::StaffRoll::StaffRollTask
+80343210 AdvReal::StaffRoll::StaffRollDrawTask
+80344C1C AdvReal::Logo::Phase
+80345CB0 ItemIcon::ManagerTask
+803461C8 boost::detail::sp_counted_base_impl<ItemIcon::ManagerUnit *, boost::checked_deleter<ItemIcon::ManagerUnit>>::sp_counted_base_impl
+803462D4 ItemIcon::ManagerTask
+80346654 boost::detail::sp_counted_base_impl<ItemIcon::Icon *, boost::checked_deleter<ItemIcon::Icon>>::sp_counted_base_impl
+80347158 boost::detail::sp_counted_base_impl<ItemIcon::Icon *, boost::checked_deleter<ItemIcon::Icon>>
+803471B4 boost::detail::sp_counted_base_impl<ItemIcon::ManagerUnit *, boost::checked_deleter<ItemIcon::ManagerUnit>>
+80347284 boost::detail::sp_counted_base_impl<ItemIcon::Icon *, boost::checked_deleter<ItemIcon::Icon>>
+80349784 StageAction::ShowAction
+8034A534 GamePeripheralTask
+8034AF38 Sonicteam::System::Peripheral::IKeyboardManagerImp
+8034AF94 Sonicteam::System::Peripheral::IMouseManagerImp
+8034B0C0 Sonicteam::System::Peripheral::Pad2MouseImplementor
+8034B0E0 Sonicteam::System::Peripheral::IManagerImp
+8034B7E8 boost::detail::sp_counted_base_impl<Vibration::RequestWithPos *, boost::checked_deleter<Vibration::RequestWithPos>>::sp_counted_base_impl
+8034BB14 boost::detail::sp_counted_base_impl<Vibration::Request *, boost::checked_deleter<Vibration::Request>>::sp_counted_base_impl
+8034BCE8 boost::detail::sp_counted_base_impl<Vibration::RequestHandle *, boost::checked_deleter<Vibration::RequestHandle>>::sp_counted_base_impl
+8034C6E8 boost::detail::sp_counted_base_impl<Vibration::ManagerUnit *, boost::checked_deleter<Vibration::ManagerUnit>>::sp_counted_base_impl
+8034C7F4 Vibration::ManagerTask
+8034C8D4 boost::detail::sp_counted_base_impl<Vibration::ManagerUnit *, boost::checked_deleter<Vibration::ManagerUnit>>
+8034C930 boost::detail::sp_counted_base_impl<Vibration::RequestHandle *, boost::checked_deleter<Vibration::RequestHandle>>
+8034C98C boost::detail::sp_counted_base_impl<Vibration::Request *, boost::checked_deleter<Vibration::Request>>
+8034C9E8 boost::detail::sp_counted_base_impl<Vibration::RequestWithPos *, boost::checked_deleter<Vibration::RequestWithPos>>
+8034CAB8 boost::detail::sp_counted_base_impl<Vibration::Request *, boost::checked_deleter<Vibration::Request>>
+8034CB2C boost::detail::sp_counted_base_impl<Vibration::RequestHandle *, boost::checked_deleter<Vibration::RequestHandle>>
+8034CBA0 boost::detail::sp_counted_base_impl<Vibration::ManagerUnit *, boost::checked_deleter<Vibration::ManagerUnit>>
+8034EDB4 Vibration::RequestWithPos
+8034EFF4 Vibration::Request
+8034FC20 Vibration::Server
+8034FC7C Vibration::ServerGC
+8035008C Vehicle::Effect
+80350534 Player::Shadow::MotionSub
+80350B0C EmbeddedBazooka::Bazooka
+80350CA8 boost::detail::sp_counted_base_impl<EmbeddedBazooka::Bazooka *, boost::checked_deleter<EmbeddedBazooka::Bazooka>>::sp_counted_base_impl
+80350E68 boost::detail::sp_counted_base_impl<EmbeddedGun::AutoRifle *, boost::checked_deleter<EmbeddedGun::AutoRifle>>::sp_counted_base_impl
+80350F14 EmbeddedBazooka::Bazooka
+80351208 EmbeddedGun::AutoRifle
+803514C8 boost::detail::sp_counted_base_impl<EmbeddedGun::AutoRifle *, boost::checked_deleter<EmbeddedGun::AutoRifle>>
+80351524 boost::detail::sp_counted_base_impl<EmbeddedBazooka::Bazooka *, boost::checked_deleter<EmbeddedBazooka::Bazooka>>
+80351580 EmbeddedGun::AutoRifle
+80351590 boost::detail::sp_counted_base_impl<EmbeddedBazooka::Bazooka *, boost::checked_deleter<EmbeddedBazooka::Bazooka>>
+80351604 boost::detail::sp_counted_base_impl<EmbeddedGun::AutoRifle *, boost::checked_deleter<EmbeddedGun::AutoRifle>>
+803516F4 StageAction::Result2PAction
+803529E4 StageAction::TimeupAction
+80352BD4 StageRouteDisplay
+80353E00 CsdOneShot
+803548F0 StageStaffroll
+803549FC StageAction::FlashbackAction
+80354C58 StageSequence::PlayFlashback::Phase
+80355590 StageSequence::PlayHard::Phase
+803585DC EggLastMechFeverRing::EggLastMechFeverRingGenerator
+80358B64 EggLastMechFeverRing
+80358E28 EggLastMechFeverRing::EggLastMechFeverRing
+8035970C PJSPeripheral::ManagerImpGc
+80359A28 PJSCamera::AdjustCosRot
+8035A0BC SonicteamUSA::System::Thread
+8035A440 SaveCycle::CheckModule::Phase
+8035A878 SaveCycle::Check::Phase
+8035B264 SaveCycle::Load::Phase
+8035BCAC SaveCycle::Save::Phase
+8035FC94 Chao::CSD::RCPtr<Chao::CSD::CTexList>::RCObject<Chao::CSD::CTexList>::RCPtr
+80364D28 Chao::CSD::CMemoryAlloc
+8036513C Chao::CSD::RCPtr<Chao::CSD::CTexList>::RCObject<Chao::CSD::CTexList>::RCPtr
+80366620 Chao::CSD::RCPtr<Chao::CSD::CNode>::RCObject<Chao::CSD::CNode>::RCPtr
+80369984 Chao::CSD::RCPtr<unsigned char>::RCObject<unsigned char>::RCPtr
+8036CE2C Chao::CSD::RCPtr<Chao::CSD::CScene>::RCObject<Chao::CSD::CScene>::RCPtr
+8036E344 Chao::CSD::RCPtr<Chao::CSD::CSceneList>::RCObject<Chao::CSD::CSceneList>::RCPtr
+8036EF2C Chao::CSD::RCPtr<unsigned char>::RCObject<unsigned char>::RCPtr
+803A1D60 std::bad_cast
+803A2DAC std::bad_exception
+8040BC90 Sonicteam::System::Heap
+8040E238 Sonicteam::System::Diagnostics::DefaultDebugListener
+8040EF60 Sonicteam::System::Peripheral::Pad2MouseImplementor
+8040F098 Sonicteam::System::Peripheral::Pad2Keyboard::Implementor
+8040FF08 SonicUSA::System::Random
+804226BC Effect::System::EffectObject
+80422C68 Effect::System::EffCmdVector3Exec
+80422CC4 Effect::System::EffectObject
+80422EE8 Effect::System::EffectCommandExec
+80422FAC Effect::System::EffCmd3DVelExec
+80423008 Effect::System::EffCmd3DRotExec
+80423064 Effect::System::EffCmd3DPosExec
+804230C0 Effect::System::EffCmdRequestStopExec
+804232F8 Effect::System::EffCmdLaunchExec
+80423B68 Effect::System::EffCmdCallbackExec
+80423BC4 Effect::System::EffCmdLoopEndExec
+80423D44 Effect::System::EffCmdLoopStartExec
+80423DC8 Effect::System::EffCmdWaitExec
+80423F20 Effect::System::EffCmdMatAlphaExec
+80424324 Effect::System::EffCmdMatColorExec
+80424958 Effect::System::EffCmd2DSclExec
+80424C70 Effect::System::EffCmd3DSclExec
+80424FE8 Effect::System::EffCmdGlareSWExec
+80425088 Effect::System::EffCmdPtnAnimExec
+80425544 Effect::System::EffCmdVector3Exec
+8042584C Effect::System::EffCmdVector2Exec
+80425B20 Effect::System::EffCmdSingleExec
+80425D70 Effect::System::EffCmdCallbackExec
+80425DCC Effect::System::EffCmdLoopEndExec
+80425E28 Effect::System::EffCmdLoopStartExec
+80425E84 Effect::System::EffCmdWaitExec
+80425EE0 Effect::System::EffCmdMatAlphaExec
+80425F3C Effect::System::EffCmdMatColorExec
+80425F98 Effect::System::EffCmd2DSclExec
+80425FF4 Effect::System::EffCmd3DSclExec
+80426050 Effect::System::EffCmdGlareSWExec
+804260AC Effect::System::EffCmdPtnAnimExec
+80426108 Effect::System::EffCmdVector2Exec
+80426164 Effect::System::EffCmdSingleExec
+80426644 Effect::System::EffectManager
+80426EDC Effect::System::EffectElement
+804270C0 boost::detail::sp_counted_base_impl<Effect::System::EffectElement *, boost::checked_deleter<Effect::System::EffectElement>>
+804271C8 boost::detail::sp_counted_base
+804271FC boost::detail::sp_counted_base_impl<Effect::System::EffectElement *, boost::checked_deleter<Effect::System::EffectElement>>
+8042736C Effect::System::EffectArranger
+80427E2C Effect::System::EffectParticle
+804295B4 Effect::System::EffectParticleExecUnit
+804297B4 Effect::System::EffCmd2DRotExec
+80429810 Effect::System::EffCmdGenQuantityExec
+8042986C Effect::System::EffCmdFrictionExec
+804298C8 Effect::System::EffCmdGravityExec
+80429958 Effect::System::EffectRay
+8042AF84 Effect::System::EffectRayExecUnit
+8042B0CC Effect::System::EffCmdWidthExec
+8042B128 Effect::System::EffCmdLengthExec
+8042B184 Effect::System::EffCmdLastAlphaExec
+8042B1E0 Effect::System::EffCmdLastColorExec
+8042B23C Effect::System::EffCmdTopAlphaExec
+8042B298 Effect::System::EffCmdTopColorExec
+8042B63C Effect::System::EffectGlobalParam
+8042B7C0 Effect::System::EffectLensFlare
+8042B93C Effect::System::EffectShimmer
+8042C1D4 Effect::System::EffCmdWaveLengthExec
+8042C230 Effect::System::EffCmdCycleExec
+8042C28C Effect::System::EffCmdAmplitudeExec
+8042C2E8 Effect::System::EffCmd2DWaveLengthExec
+8042C344 Effect::System::EffCmd2DCycleExec
+8042C3A0 Effect::System::EffCmd2DAmplitudeExec
+8042C3FC Effect::System::EffectLocus
+8042D788 Effect::System::EffectLocusExecUnit
+8042D870 Effect::RW3::EffectRayRW3
+80431AA4 Effect::RW3::EffectLensFlareRW3
+80433754 Effect::RW3::EffectManagerRW3
+80433AA0 Effect::RW3::EffectObjectRW3
+80433DA8 Effect::RW3::EffectParticle3DRW3
+80434824 Effect::RW3::EffectParticleRW3
+8043511C Effect::RW3::EffectArrangerRW3
+80435294 Effect::System::EffectLaunchInfo
+804352C0 Effect::RW3::EffectLaunchInfoRW3
+8043531C Effect::RW3::EffectShimmerRW3
+80438C64 Effect::RW3::EffectManagerRW3
+80439A8C Effect::RW3::EffectGlobalParamRW3
+8043B618 Effect::RW3::EffectLocusRW3

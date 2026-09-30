@@ -1,0 +1,1345 @@
+address,current_name,subsystem,confidence,evidence
+80003154,__start,runtime,PROVEN,DOL entry point; sets r1/r2/r13
+8000540C,memset,runtime,PROVEN,.init; memset(dst;val;n) usage in fn_800CAF38
+800054F4,memmove,runtime,PROVEN,byte copy with overlap handling
+800091D0,Vec3_Copy,math,PROVEN,copies 3 floats
+800091EC,Vec3_Copy2,math,PROVEN,copies 3 floats (duplicate instance)
+80014E34,BitTest,runtime,PROVEN,(word & (1<<n)) != 0
+8001C4F8,TaskManager_Get,task,PROVEN,lazy static bss 80571C6C; ctor 801EB734
+80043C80,ByteSwapByFormat,resource,PROVEN,called with format "ffffffiisccii" by SetData_LoadFile
+80043D34,ByteSwapWords,resource,STRONG,swaps misc block as u32 in SetData_LoadFile
+80049078,MainLoop,engine,STRONG,only caller of Game_FrameStep
+8004EB04,Task_IsAlive,task,PROVEN,walks parents; returns 0 if any has kill bit
+8004EB30,Task_CountDescendants,task,LIKELY,recursive count into *r4
+8004EBC4,Task_SetParent,task,PROVEN,unlink + relink under new parent
+8004ECAC,Task_UpdateChildren,task,PROVEN,calls vtbl slot1(dt); deletes killed tasks via slot0
+8004EDF0,Task_UpdateProfiled,task,PROVEN,times slot1 call with OS timebase; stores ticks at +0x20
+8004EECC,Task_MarkSubtreeKill,task,PROVEN,sets flags bit0 on all descendants
+8004EF18,Task::~Task,task,PROVEN,vptr store 8051E768; unlink; delete if flag
+8004F014,Task::Task,task,PROVEN,vptr store 8051E768; link as last child of parent
+800C9C44,SetSlot_SetFlag8,set,PROVEN,rec->runtimeFlags |= 8 (set at spawn by GunSoldier ctor post-init; meaning UNKNOWN)
+800C9D18,SetSlot_SetField14,set,PROVEN,slot+0x14 = r4 (meaning unknown)
+800C9D54,SetSlot_IsOutOfFadeRange,set,STRONG,distance vs (range*100+margin)^2 unless flag 0x800
+800C9E4C,SetSlot_ShouldDespawn,set,STRONG,flag 0x4 or global despawn bit unless 0x8000
+800C9F6C,SetManager_Get,set,PROVEN,lazy static sbss 805EF77C
+800CA0B8,SetSlot_Attach,set,PROVEN,flags|=2 &=~4; slot+0xC=obj
+800CA1A4,SetSlot_GetParams,set,PROVEN,memcpy misc params if size==miscLen else flag 0x20000000
+800CA238,SetSlot_GetLinkId,set,PROVEN,u8 rec+0x22 -> int
+800CA248,SetSlot_GetLinkIdByte,set,PROVEN,u8 rec+0x22 -> byte
+800CA2BC,SetSlot_GetRotationRad,set,PROVEN,rec rot degrees * pi/180
+800CA2FC,SetSlot_GetPosition,set,PROVEN,copies rec pos
+800CA6B4,SetData_BuildSlots,set,LIKELY,called at end of SetData_LoadStage
+800CA780,SetData_LoadUsedResources,set,PROVEN,calls desc+0x04 for descriptors flagged used
+800CA7F0,SetData_MarkUsedTypes,set,PROVEN,setid.bin stage bitmask -> desc flags bit0
+800CA8D8,SetSlot_TrySpawn,set,PROVEN,in range -> desc->create(slot)
+800CA970,SetSlot_InRange,set,PROVEN,dist^2 to camera unit pos <= (u8 range*100)^2 or flags 0x80800
+800CAA2C,SetData_ScanSlots2P,set,PROVEN,per-slot spawn/rearm for two players
+800CAC08,SetData_ScanSlots1P,set,STRONG,single-player variant (called by SetManager_Update)
+800CAE24,SetData_RebuildLinkList,set,PROVEN,links alive slots with link id into list head
+800CAF38,SetData_Reset,set,PROVEN,frees misc; memset records 0x16000; resets slots
+800CB044,SetData_LoadSetId,set,STRONG,called with "setid.bin"
+800CB0EC,SetData_LoadFileWithSourceMask,set,PROVEN,load + OR/ANDNOT source bits
+800CB1A4,SetData_LoadFile,set,PROVEN,"sky2" check + "ffffffiisccii" swap
+800CB794,SetManagerTask::Update,set,PROVEN,vtable slot1; calls SetManager_Update
+800CB97C,SetManager_Update,set,PROVEN,per-frame SET scan (1P/2P) using camera unit positions (fn_80009548/fn_80010244)
+800CBC54,SetData_LoadStage,set,PROVEN,setid.bin + cmn/nrm|hrd/ds1
+80196E38,GunSoldier_Create,enemy,PROVEN,SET desc create hook; new(0x418); GunSoldier ctor
+80196E90,GunSoldier_ReleaseResources,enemy,PROVEN,desc hook +8; ResourceManager slot 7
+80196EB8,GunSoldier_LoadResources,enemy,PROVEN,desc hook +4; "enemy/GunSoldierData_%s.one"
+8019708C,GunSoldier::GunSoldier::GunSoldier,enemy,PROVEN,vptr stores for 8 subobjects
+801975B0,GunSoldier_MarkSlotFlag8,enemy,PROVEN,called from ctor post-init vcall 0x80197140; [this+0x40C] slot -> SetSlot_SetFlag8
+801A6EB8,TEnemySetTask::Update,enemy,PROVEN,Task slot1 of every enemy
+801A7280,TEnemySetBase::LifecycleUpdate,enemy,PROVEN,state machine at +8 (1..4)
+801783D4,StageManager_InitStage,stage,STRONG,creates per-layer stage tasks
+801E2210,Game_FrameStep,engine,PROVEN,pad/fps/dt; runs task tree; mode object
+801EB4A4,TaskManager_CreateSceneLayers,task,PROVEN,13 layers under Scene from table 8053ED84
+801EB53C,TaskManager_CreateRootLayers,task,PROVEN,6 layers under root from table 8053ED6C
+801EB614,TaskManager_GetLayer,task,PROVEN,*(mgr+4+4i)
+801EB680,TaskManager_Run,task,PROVEN,Task_UpdateChildren(mgr->root; dt)
+801EB734,TaskManager::TaskManager,task,PROVEN,creates root + layers
+803A1210,__register_global_object,runtime,STRONG,atexit-style registration for static singletons
+803A1334,operator_delete,runtime,PROVEN,null check + free
+803A1380,operator_new,runtime,PROVEN,size 0->4; new_handler loop
+803A1AFC,__dynamic_cast,runtime,STRONG,called with (obj; 0; typeinfo; typeinfo; 0)
+803AA248,sprintf,runtime,STRONG,format strings "stg%04d/..."
+803AD96C,strcmp,runtime,PROVEN,byte compare loop
+8040DDC4,Vec3_Sub,math,PROVEN,dst = a - b
+8040DF7C,Vec3_LengthSq,math,STRONG,used for range test in SetSlot_InRange
+800CA118,SetSlot_GetParamPtr,set,PROVEN,returns rec->misc if descriptor has a param schema
+80206868,ScoreData_Load,scoring,PROVEN,"loads common/ScoreData.bin; table ptr -> sbss 805F0CDC"
+802067B0,Score_Award,scoring,PROVEN,entry = table[id]*0x18; id 0x27 awards nothing; calls Score_SendCommand
+80206740,Score_SendCommand,scoring,PROVEN,new ScoreCommand(v0..v4) sent via target +0x38 vslot 0x10
+8040F66C,DataFile_Parse,resource,STRONG,generic Sega data container; +0x17 'B' = big-endian else swap
+801DA024,CharCommand_Alloc,command,LIKELY,allocator used before every *Command ctor (size arg)
+800A7CE4,Player_HandleCommand,player,STRONG,switch on command type u16 +4; case 0x1C applies ScoreCommand
+8016F99C,ScoreCounter_Add,scoring,PROVEN,c[idx]+=v (0 normal 1 hero 2 dark); stamps frame counter at +0xC+4*idx
+8016F4B0,KarmaGauge_Add,scoring,PROVEN,(g+0x70C; idx 0 hero 1 dark; v): no gain while any gauge full; clamp; ChaosControl drains 0 and ChaosBlast drains 1
+8005D344,Weapon_Create_Bazooka,weapon,PROVEN,new(0x3C) WeaponCannonBase(owner;13;params) vptr Weapon::Bazooka
+8005D304,WeaponItem_Create_Bazooka,weapon,PROVEN,new(0x10) Weapon::Item
+8005D3D8,Weapon_InitResources_Bazooka,weapon,PROVEN,SET desc 0x00DD hook04; "%s::Initialize"
+8006D7D0,MissionManager_Get,mission,PROVEN,lazy static bss 80576FBC; ctor fn_8016E7B8; dtor fn_8016E750 registered via __register_global_object
+8016E7B8,MissionManager_Construct,mission,PROVEN,+0=0; +4=-1; shared_ptr[3] at +8; +0x20=1; map at +0x30 filled by fn_8016CB48
+8016E750,MissionManager_Destruct,mission,STRONG,destroys map +0x30 (fn_8016CA24) and shared_ptr array +8; registered dtor of bss 80576FBC
+8016E4EC,MissionManager_InitStage,mission,PROVEN,called by StageManager_InitStage @80178604 with stage index bss 8057E80C; creates 3 missions via fn_8016B768 and MissionManagerTask
+8016DC80,MissionManager_Shutdown,mission,STRONG,called from MissionManagerTask dtor; +4=-1; resets 3 shared_ptrs; fn_80337DAC(stage timer bss 8057E7E8); +0=0
+8016DD58,MissionManager_Update,mission,PROVEN,called by MissionManagerTask::vf01; fn_8016B5B4 for each of 3 missions
+8016DDBC,MissionManager_CheckAllFailed,mission,PROVEN,all slots null or state 2 -> fn_801762D0(StageState;15=TimeupAction)
+8016DE18,MissionManager_OnGoalRing,mission,STRONG,clears first TimerGoalMission (type 5) else GoalMission (type 1); caller fn_80107330 registered by GoalRing handler fn_80106824
+8016E220,MissionManager_SetCurrentMission,mission,PROVEN,+0x20=slot; fn_80074B24(fn_8006F87C();slot); bss 8057E8AA = HasTimeLimit of that mission
+8016E1A8,MissionManager_IsMissionActivated,mission,STRONG,slot 1 always true; else mission+0x14; 0 when bss 8057E811 set
+8016E454,MissionManager_AutoActivateKey1C,mission,PROVEN,mission key (+4)==0x1C -> +0x14=+0x15=1 and made current
+8016E2D8,MissionManager_ResetAll,mission,PROVEN,called by StageAction::RestartAction::vf00; fn_8016B490 per mission; restart timer; current=1
+8016E360,MissionManager_RestoreCheckpoint,mission,PROVEN,called by StageAction::ContinueAction::vf00; fn_8016B4F4 per mission; current=+0x24
+8016E3DC,MissionManager_SaveCheckpoint,mission,PROVEN,called by checkpoint fn_80119350; fn_8016B554 per mission; +0x24=+0x20
+8007420C,MissionManager_GetMission,mission,PROVEN,returns shared_ptr copy of mgr+8+8*slot; used by all mission-progress gadgets
+8016B768,Mission_Create,mission,PROVEN,factory: fn_8016C7BC(map;key) then switch desc.type via jump table 8052C930 -> 8 Mission classes
+8016C7BC,MissionDescMap_Find,mission,STRONG,std::map lower_bound + end compare; returns node+0x10 or 0
+8016C8EC,MissionDescMap_InsertDefault,mission,PROVEN,inserts key -> {type;param;1;0}
+8016CB48,MissionDescMap_InitDefaults,mission,PROVEN,41 fn_8016C8EC calls keys 0x00-0x28
+8016D798,MissionDescMap_Clear,mission,STRONG,erases tree and resets header; only caller fn_8016CB48
+8016C690,MissionDescMap_Assign,mission,STRONG,map[key]=desc; only caller fn_801DF470
+8016B5B4,Mission_Update,mission,PROVEN,state not 1/2 -> vslot 0xF [[m]+0x44]
+8016B688,Mission_Clear,mission,PROVEN,state=1; fn_8016B43C; callers CountMission vf05/vf06; MissionClearCollision; goal ring; ElecCoreProgram
+8016B654,Mission_Fail,mission,PROVEN,state=2 unless already 1; fn_8016B330
+8016B43C,Mission_OnClear,mission,PROVEN,BasicMessageManage post(1); fn_801762D0(StageState;6=GoalAction) unless mode 9
+8016B330,Mission_OnFail,mission,PROVEN,post(2); CsdFiles/MissionFailed%s scene mf anim Dark/Hero; fn_8016DDBC
+8016B490,Mission_Reset,mission,PROVEN,state=0; flags 0; message reset; vslot 0xE
+8016B4F4,Mission_RestoreCheckpoint,mission,PROVEN,state=+0x10; +0x14=+0x15; vslot 0xD
+8016B554,Mission_SaveCheckpoint,mission,PROVEN,+0x10=state; +0x15=+0x14; vslot 0xC
+8016B31C,Mission::Mission::GetType,mission,PROVEN,RTTI Mission::vf01 (Mission-view slot 1) returns 0
+8016B624,Mission::Mission::GetCount,mission,PROVEN,RTTI Mission::vf04; idx0 state==1; idx1 state==2
+8016E824,Mission::MissionManagerTask::Update,mission,STRONG,RTTI MissionManagerTask::vf01 (Task slot 1); calls MissionManager_Update(dt)
+8016AE80,Mission::CountMission::GetType,mission,PROVEN,RTTI CountMission::vf01 returns 2
+8016B0DC,Mission::CountMission::GetCount,mission,PROVEN,RTTI CountMission::vf02; idx0 +0x18 else +0x1C
+8016B0D4,Mission::CountMission::GetRequired,mission,PROVEN,RTTI CountMission::vf03 returns +0x8
+8016B0CC,Mission::CountMission::GetFailCount,mission,PROVEN,RTTI CountMission::vf04 returns +0xC
+8016B00C,Mission::CountMission::AddCount,mission,PROVEN,RTTI CountMission::vf05; count+=delta; >=+0x8 -> Mission_Clear; idx1 vs +0xC -> Mission_Fail
+8016AF74,Mission::CountMission::SetCount,mission,PROVEN,RTTI CountMission::vf06; count=value; >=+0x8 -> Mission_Clear
+8016AF5C,Mission::CountMission::SetRequired,mission,PROVEN,RTTI CountMission::vf07; idx0 +0x8 else +0xC
+8016AF18,Mission::CountMission::SaveCheckpoint,mission,PROVEN,RTTI CountMission::vf08; +0x20/+0x24 = +0x18/+0x1C
+8016AED4,Mission::CountMission::RestoreCheckpoint,mission,PROVEN,RTTI CountMission::vf09; +0x18/+0x1C = +0x20/+0x24
+8016AE88,Mission::CountMission::Reset,mission,PROVEN,RTTI CountMission::vf0A; counts = initial +0x10/+0x14
+801F3C00,Mission::GoalMission::GetType,mission,PROVEN,RTTI GoalMission::vf01 returns 1
+801F3C9C,Mission::EnemyMission::GetType,mission,PROVEN,RTTI EnemyMission::vf01 returns 3
+801F3CA4,Mission::EnemyMission::SyncFromEnemyManager,mission,PROVEN,RTTI EnemyMission::vf0B; SetCount(EnemyManager+0x34[this+0x58];0); Mission-view slot 0xF via thunk 801F3E28
+802C9228,Mission::TimerMission::GetType,mission,PROVEN,RTTI TimerMission::vf01 returns 4
+802C9054,Mission::TimerMission::HasTimeLimit,mission,STRONG,RTTI TimerMission::vf02 returns 1; used by fn_8016E4EC time aggregation
+802C904C,Mission::TimerMission::GetTimeLimit,mission,PROVEN,RTTI TimerMission::vf03 lfs f1 +0x8
+802C92B4,Mission::TimerMission::Update,mission,STRONG,RTTI TimerMission::vf07 (Mission-view slot 0xF); remaining time bss 8057E800 ~0 -> Mission_Fail
+802C905C,Mission::TimerGoalMission::GetType,mission,PROVEN,RTTI TimerGoalMission::vf01 returns 5
+802EBC24,Mission::TimerCountMission::GetType,mission,PROVEN,RTTI TimerCountMission::vf01 returns 6
+8016F0D4,Mission::RingMission::GetType,mission,PROVEN,RTTI RingMission::vf01 returns 7
+8016F0DC,Mission::RingMission::SyncRingCount,mission,STRONG,RTTI RingMission::vf0B; SetCount(player ring count;0)
+802EC3E0,Mission::BasicMessageManage_Post,mission,LIKELY,called with 1 on clear and 2 on fail on Mission+0x18
+802EDA58,Mission::CountMessageManage_OnCount,mission,LIKELY,dispatches queued CountMessages with threshold<=count and slot==current
+802EF79C,Mission::TimerMessageManage_OnTime,mission,LIKELY,time-threshold dispatch analogous to CountMessageManage
+80176FC8,StageTable_GetMissionKey,stage_flow,PROVEN,u32(0x804C5AE8 + idx*0x50 + slot*0xC + 0x20)
+80177020,StageTable_FindById,stage_flow,PROVEN,linear search of 0x3B records by id; -1 = current id bss 8057E808
+80176FE8,StageTable_IndexOfId,stage_flow,PROVEN,returns record index for stage id or -1
+80074598,StageState_Get,stage_flow,PROVEN,lazy static bss 80577038 (ctor fn_8017635C)
+801762D0,StageState_RequestAction,stage_flow,PROVEN,sets +0xC=req unless +0x17+req disabled or +0x14 locked
+80174974,StageState_DispatchAction,stage_flow,PROVEN,switch on +0xC via jump table 8052CC68 -> StageAction::* ctors (6 GoalAction; 15 TimeupAction)
+802053B0,GoalAction_DetermineClearedSlot,stage_flow,PROVEN,called by GoalAction ctor; slot = last mission with state 1 (default 1); stores GoalAction+0x10 and bss 8057E824
+80205010,GoalAction_RecordRoute,stage_flow,PROVEN,called by GoalAction::vf00; route history in save object; next = stage table +0x1C+0xC*slot
+802D1EC8,Story_ResolveNextStage,stage_flow,STRONG,result 3/4/5 -> stage table +0x1C/+0x28/+0x34; 6 -> save +0x98; boss flag forces 6
+800BC74C,Hud_FormatMissionCounter,mission,STRONG,sprintf %d/%d of GetCount/GetRequired of current mission
+80107330,GoalRing_NotifyMissionManager,mission,STRONG,sets flag then MissionManager_OnGoalRing; registered by fn_80106824
+80106824,GoalRing_OnContact,mission,LIKELY,dataptr 80527278 next to GOALRING SET desc 805272CC; registers fn_80107330
+80073BF8,NpcPartner_ActivateMission,mission,STRONG,called from Player::Npc executors; SetCurrentMission and mission+0x14=1
+80354484,CsdOneShot_Play,stage_flow,STRONG,creates CsdOneShot(path;scene;anim) if file exists; used for MissionFailed
+80337D9C,StageTimer_SetTime,stage_flow,PROVEN,stores f1 to +0x14/+0x18/+0x1C of timer object bss 8057E7E8
+8000A950,Float_IsNearZero,runtime,PROVEN,fabs(f1) < 0.0001
+801E258C,Game_BootInit,stage_flow,LIKELY,called from RW init callback fn_80048EFC; loads nukkoro.inf and nukkoro2.inf among other setup
+801E04EC,TGameDefaultParam_LoadInf,stage_flow,PROVEN,loads file then fn_801E030C per line
+801E030C,TGameDefaultParam_ParseLine,stage_flow,PROVEN,[ALL]/[stage name] sections (+0x2C50); 27 commands at +0x2C54
+801E0144,TGameDefaultParam_ParseInts,stage_flow,PROVEN,parses N integers after ':' via fn_801E01D0
+801E01D0,TGameDefaultParam_ParseInt,stage_flow,PROVEN,decimal / '-' / 0x prefix
+801E0C68,TGameDefaultParam_RegisterCommands,stage_flow,STRONG,builds boost::bind command table from .data 8053E700 with names ROM..MISSIONCOUNT_HARD
+801DF470,TGameDefaultParam_SetMissionCount,mission,PROVEN,key from stage table slot (or +0x40); desc.count/failCount = parsed ints; fn_8016C690
+801DF3F8,TGameDefaultParam_Cmd_MISSIONCOUNT_D,mission,PROVEN,fn_801DF470(this;slot 0;0x15); table entry 8053E804
+801DF420,TGameDefaultParam_Cmd_MISSIONCOUNT_N,mission,PROVEN,fn_801DF470(this;slot 1;0x14); table entry 8053E7F8
+801DF448,TGameDefaultParam_Cmd_MISSIONCOUNT_H,mission,PROVEN,fn_801DF470(this;slot 2;0x13); table entry 8053E7EC
+801DF3D0,TGameDefaultParam_Cmd_MISSIONCOUNT_HARD,mission,PROVEN,fn_801DF470(this;slot 1;0x1A) -> stage table +0x40 key; table entry 8053E840
+80119560,EnemyManager_Get,enemy,PROVEN,lazy static bss 80580BD8 (ctor fn_801A2EB0)
+801A2EB0,EnemyManager_Construct,enemy,PROVEN,ctor of bss 80580BD8; ends with fn_801A2E24
+801A2E24,EnemyManager_ResetCounters,enemy,PROVEN,clears map +0x10; +0x24; arrays +0x28/+0x34/+0x40/+0x4C/+0x58
+801A2CFC,EnemyManager_InitStage,enemy,PROVEN,called from StageManager_InitStage @80178724; +0x20=0; fn_801A2BA0
+801A2BA0,EnemyManager_ScanSetEnemies,enemy,PROVEN,SET ids 0x64-0x95 -> placed per team +0x28 and link-group counts
+801A2A30,EnemyManager_RecountGroups,enemy,PROVEN,rebuilds link-group alive counts (checkpoint restore)
+801A24FC,EnemyManager_GetDefeatedCount,enemy,PROVEN,returns +0x34[team]; used by EnemyMission sync
+801A250C,EnemyManager_OnEnemyLifeEvent,enemy,PROVEN,flags 1 death -> fn_801A2930; flags 2 revive -> defeated--; link-group alive count and fn_80169460 link event
+801A2930,EnemyManager_CountDefeat,enemy,PROVEN,+0x34[team]++; flags&4 -> +0x40[team]++ and Player::Npc::EnemyDeadByPlayerCommand
+801A27B0,EnemyManager_SaveCheckpoint,enemy,PROVEN,+0x34/+0x40 -> +0x4C/+0x58
+801A26B8,EnemyManager_RestoreCounts,enemy,PROVEN,+0x4C/+0x58 -> +0x34/+0x40
+801A28A8,EnemyManager_RestoreCheckpoint,enemy,PROVEN,called by ContinueAction::vf00; fn_801A26B8 + fn_801A2A30
+801A2420,Enemy_GetStageDataVariant,enemy,LIKELY,switch on stage id bss 8057E808 -> 0..7; result indexes the GunSoldierData_%s suffix table 80539440 in GunSoldier_LoadResources
+801A8998,EnemyStatusCommon::ReportLifeEvent,enemy,STRONG,RTTI EnemyStatusCommon::vf23; flags 1 death (|4 by player) / 2 revive -> fn_801A250C(team)
+801A68A0,EnemyParamCommon::GetTeam,enemy,PROVEN,RTTI EnemyParamCommon::vf00; table 0x804CD310[kind] -> 0 GUN / 1 Eggman / 2 Black Arms
+80009548,CameraManager_Get,camera,STRONG,lazy static bss 8056FED4; dtor fn_8000DB9C in camera-core TU (CameraManagerUnit shared_ptr code)
+80010244,CameraManager_GetUnitPos,camera,STRONG,returns camera unit[i]+8 position; used by SetManager_Update for spawn range
+80169FC8,Range_IsAnyCameraWithin,camera,PROVEN,compares |pos - camera unit 0/1|^2 against radius^2 (used by SetSlot_IsOutOfFadeRange)
+8019FD00,EnemyAISM_ChangeState,enemy_ai,PROVEN,if sm+0xC locked: no-op; else cur.vf01(owner)+vf04(exit); prev=cur; cur=new; new.vf01+vf02(enter)
+8019FC54,EnemyAISM_RevertToPrevious,enemy_ai,PROVEN,ChangeState with new = sm+8 (previous); used by WaitFinishFalling/Idle updates
+8019FDB8,EnemyAISM_Lock,enemy_ai,PROVEN,sm+0xC = 1 (AI+0x34)
+8019FDAC,EnemyAISM_Unlock,enemy_ai,PROVEN,sm+0xC = 0 (AI+0x34)
+8019F528,EnemyAISM_Init,enemy_ai,STRONG,called by EnemyBaseAI ctor 0x8019F248 with (AI+0x28; AI); requests EnemyBaseAI_None via fn_8019F5E4
+8019F8F8,EnemyAI_TurnTowards,enemy_ai,STRONG,helper at AI+0x60; target yaw atan2(-x;-z); step min(rate*dt; |d|/2) >= 1 deg; returns |d| < 1 deg
+8019FA18,EnemyAITarget_GetPosition,enemy_ai,STRONG,tracker AI+0x38; recomputes via fn_8019FB08 unless cached (+8); returns +0xC
+8019FACC,EnemyAITarget_GetDistance,enemy_ai,LIKELY,result compared with 15/20 in GunSoldier ChaseTarget/NearAttack
+8019EACC,EnemyBaseAI::Update,enemy_ai,PROVEN,RTTI EnemyBaseAI::vf01; AI+0x20=dt; vf09; cur.vf01(bind)+vf03(update); vf0A
+8019EB54,EnemyBaseAI::PreUpdate,enemy_ai,PROVEN,RTTI vf09; IsDead edge -> slot 0x14; global 0x8057E828 -> Idle; status bit5 -> slot 0x12; flinch -> slot 0x13; airborne -> WaitFinishFalling
+8019E058,EnemyBaseAI::HandleMessage,enemy_ai,PROVEN,RTTI vf08; CharCommand id switch 0x10-0x1B (table 8053B73C) and 0x201-0x20C (8053B76C); bound as PMF 8053B6B8 in ctor
+8019DF7C,EnemyBaseAI::GetTargetPosition,enemy_ai,STRONG,RTTI vf02; nearest player position via fn_800742BC/fn_800A8E64 else own position
+8019EEC4,EnemyBaseAI::Init,enemy_ai,STRONG,RTTI vf00; calls AI slot 0xC (initial state) at 0x8019EED4; run in lifecycle state 2
+801885CC,GunSoldier::GunSoldierAI::EnterInitialState,enemy_ai,PROVEN,RTTI vf0C; rescued -> Thanks; AppearType 0 Standing; 1-3 Moving; 4 AppearHome; 5 Hinshi
+801883E0,GunSoldier::GunSoldierAI::ReturnToWait,enemy_ai,PROVEN,RTTI vf0D; as vf0C but AppearType 4 -> Standing
+801882B0,GunSoldier::GunSoldierAI::OnTargetFound,enemy_ai,PROVEN,RTTI vf0F; ChangeState(GunSoldierAI_Caution)
+801884E8,GunSoldier::GunSoldierAI::OnDead,enemy_ai,PROVEN,RTTI vf14; ChangeState(ToHinshi); called from PreUpdate death edge 0x8019EBE0
+801882E8,GunSoldier::GunSoldierAI::OnRescued,enemy_ai,PROVEN,RTTI vf16; E+0x356=1; unlock; ChangeState(Thanks); called by RecoverCommand case 0x8019E600
+801881A0,GunSoldierAI_StartCombat,enemy_ai,PROVEN,WeaponType E+0x278 0/1 -> ChaseTarget else Attack
+80186D50,GunSoldierAI_GetState_Caution,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_Caution at 0x805F06B0
+80188204,GunSoldierAI_GetState_Attack,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_Attack at 0x805F06D4
+801874BC,GunSoldierAI_GetState_ChaseTarget,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_ChaseTarget at 0x805F06BC
+801876B4,GunSoldierAI_GetState_NearAttack,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_NearAttack at 0x805F06C8
+80187204,GunSoldierAI_GetState_GoHome,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_GoHome at 0x805F06E0
+801880F4,GunSoldierAI_GetState_AppearHome,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_AppearHome at 0x805F06EC
+80188520,GunSoldierAI_GetState_ToHinshi,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_ToHinshi at 0x805F068C
+80187FC0,GunSoldierAI_GetState_Hinshi,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_Hinshi at 0x805F0698
+80188334,GunSoldierAI_GetState_Thanks,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_Thanks at 0x805F06A4
+8019D970,EnemyBaseAI_GetState_Idle,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_Idle at 0x805F0400
+8019D3D8,EnemyBaseAI_GetState_Guard,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_Guard at 0x805F0430
+8019D27C,EnemyBaseAI_GetState_WaitFinishDamaged,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_WaitFinishDamaged at 0x805F0454
+8019EE18,EnemyBaseAI_GetState_WaitFinishFalling,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_WaitFinishFalling at 0x805F0460
+8019D120,EnemyBaseAI_GetState_Dead,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_Dead at 0x805F046C
+8019D534,EnemyBaseAI_GetState_Wait,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_Wait; requested by base AI slots 0xD/0xE/0x10/0x11
+8019D6E4,EnemyBaseAI_GetState_Caution,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_Caution; requested by EnemyBaseAI::vf0F
+8019CFC0,EnemyBaseAI_GetState_Recover,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_Recover; requested by EnemyBaseAI::vf16
+8019E974,EnemyBaseAI_GetState_CaptureWait,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_CaptureWait; BindCommand case 0x8019E37C
+8019EA20,EnemyBaseAI_GetState_WarpWait,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_WarpWait; GenerateCommand case 0x8019E24C
+8019F5E4,EnemyBaseAI_GetState_None,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_None; used by EnemyAISM_Init
+8019C014,EnemyBaseAI_GetState_GoHome,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_GoHome; requested by base Caution update
+801A6DB8,EnemySensor_SetupFromSetParams,enemy,PROVEN,sensor E+0xA8 from raw SET misc: MoveRange (+0x18/+0x1C); centre = pos+rotY(rot.y+180+SearchAngle)*(0;0;SearchRange)+(0;SearchHeightOffset;0); SearchWidth (+0x38/+0x3C); SearchHeight (+0x40)
+801A6C7C,EnemySensor_IsInSearchArea,enemy,PROVEN,abs(y - sensor+0x30) < +0x40 and distXZ^2(pos; sensor+0x20) < +0x3C
+801A6D00,EnemySensor_IsInsideMoveRange,enemy,STRONG,distXZ^2(pos; home) < sensor+0x1C (MoveRange^2); used by EnemyMoveCommon::vf01 0x801A5C44
+801A6C38,EnemySensor_SetHome,enemy,PROVEN,copies vec to sensor+0xC and XZ to +0/+8
+801A7608,TEnemySetBase_InitFromSetSlot,enemy,PROVEN,called by TEnemySetBase::vf06 0x801A7748; SET pos/rot -> enemy transform; EnemySensor_SetupFromSetParams(E+0xA8; SetSlot_GetParamPtr)
+801A7718,Enemy_SetSpawnPosition,enemy,PROVEN,Vec3_Copy to E+0x48
+8017E1C4,Enemy_SetHomePosition,enemy,PROVEN,Vec3_Copy to E+0x6C; called on Standing/GoHome/AppearHome enter with E+0x48
+8017CA44,Enemy_GetPosition,enemy,PROVEN,returns [E+0x30] (vec3 position)
+8017CA38,Enemy_GetRotation,enemy,PROVEN,returns [E+0x30]+0xC (vec3 rotation; yaw at +4)
+8017C764,Enemy_GetDeltaTime,enemy,LIKELY,returns f32 [[E+0x30]+0x60]; used as dt by TEnemySetTask::Update and turn code
+80198D90,SoldierCommon_ReadSetParams,enemy,PROVEN,called by GunSoldierBase::vf24 and BkSoldierBase::vf21; HaveShield -> +0x270; AppearType -> +0x274; WeaponType -> +0x278; patrol table +0x288
+8018F0B4,SoldierSetParams_InitDefaults,enemy,PROVEN,writes 200;0;0;100;100;0;1;0... = GUN_SOLDIER catalog defaults into the 0x5C param block
+80198530,GunSoldier::GunSoldierBase::InitFromSet,enemy,PROVEN,RTTI vf24 (TEnemySetBase slot 6); SetSlot_GetParams(0x5C); clamps; STemporaryData read/create; HINSHI/OFFSETPOS handling
+80198340,GunSoldier::GunSoldierBase::InitStatus,enemy,PROVEN,RTTI vf0E (Status slot 0); EnemyStatusCommon::vf00; AppearType 5 -> HP 0 and IsDead/WasDead = 1
+801982FC,GunSoldier::GunSoldierBase::UpdateStatus,enemy,PROVEN,RTTI vf0F (Status slot 2); EnemyStatusCommon::vf02 then GunSoldier::WriteTempState
+80197700,GunSoldier::GunSoldierBase::TakeHit,enemy,PROVEN,RTTI vf12 (Status slot 0x1A); AppearType 5 immune; shield frontal block / absorb (SE 0x6074/0x6075); EnemyStatusCommon::ApplyHit
+80198184,GunSoldier::GunSoldierBase::BecomeInjured,enemy,STRONG,RTTI vf14 (Status slot 0x26) at death edge; drop shield; throw weapon (ScatteringWeapon); AppearType=5; SE 0x600E
+8019813C,GunSoldier::GunSoldierBase::OnRevived,enemy,STRONG,RTTI vf15 (Status slot 0x27) at revive edge; +0x356=1; AppearType=0
+801982E4,GunSoldier::GunSoldierBase::GetScoreId,enemy,PROVEN,RTTI vf13 (Status slot 0x2C); HaveShield (+0x304) ? 0x50 GunSoldierShield : 0x4F GunSoldier
+80198450,GunSoldier::GunSoldierBase::UpdateActivation,enemy,PROVEN,RTTI vf11 (Status slot 0xC); AppearType 4 stays hidden/inactive (status vf0D/vf0A) until EnemySensor_IsInSearchArea
+801980D0,GunSoldier::GunSoldierBase::SetupCollision,enemy,PROVEN,RTTI vf10 (Status slot 1); EnemyStatusCommon::vf01; HINSHI -> collision mask 0x200201
+80197F64,GunSoldier::GunSoldierBase::InitDisplay,enemy,PROVEN,RTTI vf17 (Disp slot 0); EnemyDispCommon::vf00; new(0x68) EnemyWeapon -> +0x350
+80197D64,GunSoldier::GunSoldierBase::UpdateWeaponAndLook,enemy,STRONG,RTTI vf0B (Disp slot 2 per frame); look-at controller +0x35C; weapon placement; SE 0x600D
+80197CF4,GunSoldier::GunSoldierBase::OnMotionEvent,enemy,STRONG,RTTI vf18 (Disp slot 0xE); event 0x5000 data 2 -> weapon[0]=+0x358; fn_801AB790 (fire)
+80197938,GunSoldier::GunSoldierBase::GetPatrolMode,enemy,PROVEN,RTTI vf0D; AppearType 1/2/3 -> 1/2/3 else 0
+801975DC,GunSoldier::GunSoldier::WriteTempState,enemy,PROVEN,primary vf25; STemporaryData(slot+0x14)+4 = 1 injured / 2 rescued / 0; called per status update and from dtor
+8019765C,GunSoldier_SetInjuredCollision,enemy,STRONG,EnemyCharaColliModule::SetAttributeMask(E+0x118; 0x200201); Hinshi enter
+80197634,GunSoldier_RestoreCollision,enemy,STRONG,EnemyCharaColliModule::SetAttributeMask(E+0x118; [805F6778]); Hinshi exit
+801A83B0,EnemyStatusCommon::ApplyHit,enemy,PROVEN,RTTI vf1A; ApplyDamage; kill latch +0x76; AwardKillScore; bit 0xC if player; flinch at 0.5*MaxHP; hit side +0x84
+801A8718,EnemyStatusCommon::ApplyDamage,enemy,PROVEN,RTTI vf1C; dmg>0: +0x74=1; +0x94+=1; HP(+0x7C)-=dmg; clamp 0; returns HP<=0
+8017BC08,EnemyStatusCommon::AddHP,enemy,PROVEN,RTTI vf2B; HP += f1 clamped to MaxHP (vf2A); used by RecoverCommand
+801A8A38,EnemyStatusCommon::Update,enemy,PROVEN,RTTI vf02; latches +0x8A..+0x91; flinch -> Move slot 0xB; IsDead(+0x90)=HP<=0; death edge vf23(1)+vf26; revive edge vf23(2)+vf27
+801A86CC,EnemyStatusCommon::EndFrame,enemy,PROVEN,RTTI vf05; +0x74=+0x75=0; +0x84=-1
+801A9560,EnemyStatusCommon::InitHP,enemy,PROVEN,RTTI vf00; HP=MaxHP=Param slot 0x19 (EnemyParamCommon::vf19 table 0x804CD678)
+801A8944,EnemyStatusCommon::AwardKillScore,enemy,PROVEN,RTTI vf24; Score_Award(attacker; status slot 0x2C score id)
+801A8894,EnemyStatusCommon::AwardRecoveryScore,enemy,PROVEN,RTTI vf25; team 0 -> 0x57 GunRecovery; 1 -> 0x68/0x6E EggRecovery; 2 -> 0x62 BkRecovery
+801A9088,EnemyStatusCommon::SetupCollision,enemy,STRONG,RTTI vf01; EnemyCharaColliModule::Setup(S+8) and callback binding
+8017B9D0,EnemyStatusCommon::SetMotion,enemy,STRONG,RTTI vf06; +0x70=id; motion module at +0x20
+801A8824,EnemyStatusCommon::IsRecentlyHit,enemy,PROVEN,RTTI vf0F; +0x94 > 0
+8017BB04,EnemyStatusCommon::IsDead,enemy,PROVEN,RTTI vf14; returns +0x90 (HP<=0)
+8017BB2C,EnemyStatusCommon::WasDead,enemy,PROVEN,RTTI vf19; returns +0x91
+8017BAF4,EnemyStatusCommon::IsFlinching,enemy,PROVEN,RTTI vf12; returns +0x8C
+8017BAFC,EnemyStatusCommon::IsAirborne,enemy,PROVEN,RTTI vf13; returns +0x8E (= !EnemyMoveCommon::IsGrounded)
+8017BAEC,EnemyStatusCommon::WasDamaged,enemy,PROVEN,RTTI vf11; returns +0x8A
+8017BBF0,EnemyStatusCommon::GetStateBits,enemy,PROVEN,RTTI vf28; returns &+0x80 bitset
+8017BB34,EnemyStatusCommon::GetHitSide,enemy,PROVEN,RTTI vf1B; returns +0x84
+8017BBF8,EnemyStatusCommon::GetHP,enemy,PROVEN,RTTI vf29; returns f32 +0x7C
+8017BC00,EnemyStatusCommon::GetMaxHP,enemy,PROVEN,RTTI vf2A; returns f32 +0x78
+8017BAC4,EnemyStatusCommon::SetActive,enemy,PROVEN,RTTI vf0A; +0x6C = r4 (lifecycle 3 waits for it)
+8017BAD4,EnemyStatusCommon::IsActive,enemy,PROVEN,RTTI vf0B; returns +0x6C
+8017BACC,EnemyStatusCommon::SetHidden,enemy,PROVEN,RTTI vf0D; +0x6D = r4 (TEnemySetTask::Update fades out)
+8017BADC,EnemyStatusCommon::IsHidden,enemy,PROVEN,RTTI vf0E; returns +0x6D
+8017BAB4,EnemyStatusCommon::GetMotionFlagA,enemy,LIKELY,RTTI vf09; returns +0x3A; used as motion-end test by AI states
+8017BABC,EnemyStatusCommon::GetMotionFlagB,enemy,LIKELY,RTTI vf08; returns +0x3B; used by Caution/Attack
+8017BC88,EnemyStatus_GetFlinchThreshold,enemy,PROVEN,status slot 0x31 (appended slot); 0.5 * MaxHP
+801A883C,EnemyStatus_IsFlinchOrKilled,enemy,PROVEN,status slot 0x30; +0x75 || +0x76
+801A8D6C,EnemyStatus_SetCollisionEnabled,enemy,LIKELY,fn_801A9BE4(S+8; a; b); (0;1) at death; (1;1) at revive
+801AA010,EnemyCharaColliModule::Setup,enemy,STRONG,builds body collision; binds PMFs 0x8053BCCC (0x801A978C -> reaction+0x10) and 0x8053BCD8 (0x801A9750 -> reaction+0x1C); class name from bind_t typeinfo 0x805E9318
+801A9750,EnemyCharaColliModule::OnDamaged,enemy,STRONG,AttackCallbackParam+0x54 = 5; Status slot 0x1A (GunSoldierBase::TakeHit)
+801A978C,EnemyCharaColliModule::OnContact,enemy,LIKELY,if IsRecentlyHit and attacker+0x5C==1 -> param+0x30 = 1
+801A9918,EnemyCharaColliModule::SetAttributeMask,enemy,LIKELY,called with 0x100000 (dead); 0x200201 (injured); default word 805F6778
+801A59C8,EnemyMoveCommon::Knockback,enemy,STRONG,RTTI vf0B; +0x5D=+0x5E=1; velocity +0x50 = rotY(yaw)*(0;0;+-1)*param[0]; y = param[1]*ParamVf18
+801A5B1C,EnemyMoveCommon::IsGrounded,enemy,PROVEN,RTTI vf04; +0x38 < 5.0
+801A5B34,EnemyMoveCommon::Update,enemy,STRONG,RTTI vf01; movement; clamps to EnemySensor_IsInsideMoveRange
+8017B8EC,TEnemySetBase::IsDeleteRequested,enemy,PROVEN,RTTI vf00; returns +0x14; TEnemySetTask::Update kills task
+8017B8F4,TEnemySetBase::IsDetached,enemy,PROVEN,RTTI vf01; returns +0x15; ~TEnemySetTask skips SetSlot_Detach
+8017B8FC,TEnemySetBase::RequestDelete,enemy,PROVEN,RTTI vf02; +0x14 = 1
+801A7240,TEnemySetBase::DetachKilled,enemy,PROVEN,RTTI vf03; +0x15=1; SetSlot_MarkKilledAndDetach (flag 0x8); not called for enemy type 0 death
+801A7200,TEnemySetBase::DetachRespawnable,enemy,PROVEN,RTTI vf04; +0x15=1; SetSlot_MarkRespawnableAndDetach (flag 0x10000)
+800C9EEC,SetSlot_MarkKilledAndDetach,set,PROVEN,flags |= 0x8; SetSlot_DisableAndDetach
+800C9EBC,SetSlot_MarkRespawnableAndDetach,set,PROVEN,flags |= 0x10000; SetSlot_DisableAndDetach
+800C9F1C,SetSlot_DisableAndDetach,set,PROVEN,flags &= ~1; SetSlot_Detach; SetData_UnlinkSlotFromLinkList(link id)
+800C9FD0,SetSlot_Detach,set,PROVEN,flags &= ~0x6; if flags&0x40000000 delete slot+0x14 and misc; slot+0xC = 0
+800CADB0,SetData_UnlinkSlotFromLinkList,set,PROVEN,removes slot from list head SetData+0x1C+4*link (prev +4 / next +8)
+800CA268,SetSlot_TestFlags,set,PROVEN,(rec+0x18 & mask) == mask
+800CA284,SetSlot_ClearFlags,set,PROVEN,rec+0x18 &= ~mask
+800CA298,SetSlot_SetFlags,set,PROVEN,rec+0x18 |= mask
+800CA10C,SetSlot_GetObjectId,set,PROVEN,returns u16 rec+0x20
+801A2D6C,EnemyManager_RegisterEnemy,enemy,STRONG,finds free id in map (+0; counter +0x20); stores enemy; id kept at E+0x28 by Enemy::Enemy
+801AAC40,EnemyWeapon_Drop,enemy,STRONG,spawns ScatteringWeapon via fn_80221F2C with velocity
+80221F2C,ScatteringWeapon_Spawn,weapon,STRONG,"new(0x80) task on layer 0xB; ctor 0x802224B0 names it ""ScatteringWeapon"""
+8019ADFC,Enemy_PlaySE,enemy,LIKELY,sound manager fn_8005328C then fn_801D5894 (positional) / fn_801D59AC
+8019AD10,Enemy_PlaySEOncePerFrame,enemy,LIKELY,as Enemy_PlaySE but deduplicated by frame stamp E+0xFC
+8007300C,Player::Npc::EnemyDeadByPlayerCommand::Execute,player_npc,STRONG,RTTI vf01; resolves NPC and calls fn_802F2E20(npc; +0x14 group; +0x18 count)
+80072F90,Player::Npc::EnemyDeadByPlayerCommand::DebugString,player_npc,PROVEN,"RTTI vf02; sprintf "" Group %d Count %d"""
+802F2E20,NpcPartner_OnEnemyDefeated,player_npc,LIKELY,acts when (count-1)%3==0; picks line by group/NPC type
+80108294,HealingBlast_SendRecover,weapon,STRONG,new RecoverCommand(amount=[r4+8]) sent via target +0x38 vslot 0x10; inside HealingUnit::HealingBlast code range
+8021CCDC,Attacker_IsPlayerAttack,enemy,LIKELY,obj+0x5C==1 and +0x50 in {1;2;3}; gates status bit 0xC (killed by player)
+80169460,LinkEvent_Set,set,LIKELY,table[link*8] = value; BitSet(table+link*8+4; 0); called when a link group's alive count reaches 0
+800AF7B8,Player_CheckChaosPowerReady,player,STRONG,gauge1 full -> fn_800A2FE8 / gauge0 full -> fn_800A2FC0 unless flags 0x10/0x22/0x23; called from ShadowExecuter::vf01
+801773CC,StageInit_SpawnPlayers,player,STRONG,called by TStageInitalizeTask::vf01 @801775CC/801775F8; 1P -> fn_800AD680(0xE;0;0); 2P -> two calls with char ids from bss 8057E89C/8057E8A0
+800AD680,Player_CreatePlayerShadow,player,PROVEN,new PlayerShadow via fn_800AE3F0; vslot1(index); input pad bind fn_800A8B04; stores player+0x298 to sbss 805EF630 (P1) / sdata 805E5A28 (P2)
+800AE3F0,PlayerShadow_New,player,PROVEN,operator_new(0x29C) + Player::PlayerShadow::PlayerShadow(charId) then vslot 0xA (vf0A setup)
+80228958,CharacterId_GetName,player,PROVEN,"returns ptr table 80547870[id] (""Sonic""..""Shadow""=0xE..""2PCannonGreen""=0x13)"
+800AD7E0,Player::PlayerShadow::Setup,player,PROVEN,"RTTI PlayerShadow::vf0A; creates Watch(layer7)/""Shadow""(layer13) tasks; Controller; CharaColliMove; ShadowExecuter; ShadowMotion; Attack; ShadowWeapon; Effect; SoundBase; factories"
+80079BE4,Player::PlayerBase::SetupBase,player,STRONG,RTTI PlayerBase::vf0A; creates +0x250 (fn_800A87B8) and +0x254 (fn_800AB34C)
+80079A1C,Player::PlayerBase::SetPlayerIndex,player,PROVEN,RTTI PlayerBase::vf01; +0x54 = r4
+80079B04,Player::PlayerBase::SendCommand,player,PROVEN,RTTI PlayerBase::vf02; enqueues command into CharCommandUnit +0x21C (fn_801D9FAC)
+800798A4,Player_ShouldDieOnDamage,player,PROVEN,vtable slot 0x12 of Player::PlayerShadow (RTTI-listed as Npc::vf12); false if flag 0x24/0x20; else rings(record+0x28)==0
+80076EBC,Player::Player::OnDamaged,player,STRONG,RTTI Player::vf10; called from Damage/Dead Enter; sends CastCommand to held object (+0x290) then vslot 0xF
+800B8748,PlayerWatchTask_Create,player,PROVEN,new(0x30) + fn_800B89AC under layer 7 task; stored player+0x268
+800B89AC,PlayerWatchTask_Construct,player,PROVEN,"Task ctor; vtbl 805234E0; name ""Player::Watch"""
+800B86F8,PlayerWaitTask_Create,player,PROVEN,new(0x30) + fn_800B88C4 under Watch task
+800B88C4,PlayerWaitTask_Construct,player,PROVEN,"Task ctor; vtbl 805234C4; name ""Wait""; registers with fn_8025D580 (""Player"")"
+800B8798,PlayerWaitTask_Update,player,PROVEN,Task slot1 of vtbl 805234C4; sets own kill flag if player ref null or flags 0x46 and 0x47
+80094378,CharaColliMove_Create,player,PROVEN,new(0x30) Player::CharaColliMove(parent;playerRef)
+80094E88,CharaColliMove_Update,player,STRONG,called by CharaColliMove::vf01; displacement pos-prevPos -> +0x8C; displacement/dt -> +0x98
+800AF5BC,ShadowExecuter_Create,player,PROVEN,new(0x58) Player::Shadow::ShadowExecuter(parent;playerRef)
+800B14B4,ShadowMotion_Create,player,PROVEN,new(0x868) Player::Shadow::ShadowMotion
+8023A334,ShadowWeapon_Create,player,PROVEN,new(0x60) Player::Shadow::ShadowWeapon
+802DBD6C,PlayerSound_Create,player,PROVEN,new(0x40) Player::SoundBase
+800AE718,ShadowBehaviorFactory_Create,player,PROVEN,new(0xC) Player::Shadow::ShadowBehavior
+800AEEF8,ShadowControlFactory_Create,player,PROVEN,new(0xC) Player::Shadow::ShadowControl
+800A8460,Executer_SetBehaviorFactory,player,LIKELY,called from PlayerShadow::vf0A with factory ref; executer+0x38 is read as factory by fn_800A82FC
+8009EF70,PlayerController_ChangeControl,player,LIKELY,called with Control::InitializeArgs id 0 at setup (UserInput)
+8009EF94,PlayerController_SetControlFactory,player,LIKELY,called from PlayerShadow::vf0A with ShadowControl ref
+8006F9F8,Player_GetInput,input,PROVEN,returns player+0x218
+800A8BA8,PlayerInput_Construct,input,PROVEN,clears state; copies 22 logical masks from rodata 804B3C00 to +0x2C
+800A8998,PlayerInput_Update,input,PROVEN,prev=held; held from pad record masks; sticks clamped <=1; +0x20 pressed; +0x24 released; +0x84 idle time
+800A8B04,PlayerInput_BindPad,input,PROVEN,pad index = [fn_8005185C()+0x11C+4*playerIndex]; record = fn_8040EBBC(padMgr;idx)
+80009208,PadManager_Get,input,PROVEN,lazy static bss 8056FE0C (ctor fn_8040ECAC); used by GamePeripheralTask
+8040EA3C,PadManager_Update,input,PROVEN,reads implementor vslot3 buffer; record +0 held; +4 ~held; +8 pressed; +0xC released; sticks via fn_8040EDB0
+8040EBBC,PadManager_GetRecord,input,PROVEN,mgr + 0x2C*index
+80359798,PJSPeripheral::ManagerImpGc::ReadPads,input,PROVEN,RTTI ManagerImpGc::vf03; PADRead fn_80381008; remaps buttons via table 80513D48 (12 x u16 pad/u16 game)
+8009EFF8,Player::Controller::Update,player,PROVEN,RTTI Controller::vf01 (Task slot1); fn_8009F9A4(impl+0x28)
+8009F9A4,PlayerController_Update,player,PROVEN,input sample; contact checks; loop-path/grind commands; control vslot3(dt)
+8009FD14,PlayerControllerImpl_Construct,player,PROVEN,0x20 impl: +0 player ref; +8 control; +0x10 loop-path tracker; +0x18
+8009F29C,PlayerController_CheckDamageContact,player,PROVEN,+0xA4 bit1 -> clear + DamageCommand(power 10)
+8009F17C,PlayerController_CheckDeathContact,player,PROVEN,+0xA4 bit2 (clears flag 0x13) or bit3 (sets 0x13) -> DeadCommand
+800A1D70,Player::Control::UserInput::Update,input,PROVEN,RTTI UserInput::vf03 (Control slot 3 called by controller); stick -> AccelerateInputCommand; buttons -> commands
+800A0130,UserInput_BuildButtonCommands,input,PROVEN,context-dependent press/release command pairs for B (r8) A (r9) X (r10) Y (stack arg)
+800A1790,UserInput_StickToWorld,input,PROVEN,(sx;0;sy) -> camera frame (fn_800940C0) -> player ground frame (+0x1E4/+0x11C); clamp <=1
+800940C0,Player_CameraRelativeInput,input,STRONG,uses camera manager fn_80009548 entry matrix (+0x9C via fn_80094264)
+800A1A30,UserInput_FindHomingTarget,input,STRONG,returns 1 when a lock-on target is available; result feeds HomingAttackCommand
+8009FE58,UserInput_UpdateButtonPrompts,input,LIKELY,maps chosen command ids to icon indices -> fn_8016F2D4 on per-player record
+80206B98,PlayerTarget_SearchTargets,player,STRONG,range sbss 805F0CE0 (150); cone 45 deg (stick pushed) / 90 deg
+80207274,HomingSearch_StaticInit,player,PROVEN,.ctors 804AAE74; sbss 805F0CE0=150; 805F0CE4=40 deg; 805F0CE8=200 deg (radians)
+800AF0B0,Player::Shadow::ShadowControl::Create,player,PROVEN,RTTI ShadowControl::vf01; id 0 UserInput (0x1C); 1 Approach (0x2C); 5 Bukuu (0x20)
+801D9FAC,CharCommandUnit_Enqueue,command,STRONG,called by PlayerBase::vf02; fn_801DA2DC(mgr;cmd;unit;4;0xFE)
+801DA2DC,CharCommandManager_Queue,command,STRONG,stores cmd in bucket (cmd+8)*0xC of current/next buffer; sets cmd+7 bits
+801DA5A4,CharCommandManager_Dispatch,command,STRONG,called by CharCommandManagerTask::vf01; 7 buckets; delivers to receiver via fn_801A02B4; deletes cmd
+80099B58,CharCommandManager_Get,command,PROVEN,lazy static bss 805778B4 (ctor fn_801DA960)
+800AF924,ShadowExecuter_OnCommand,player,PROVEN,PMF 80522F68 bound in ShadowExecuter ctor; behavior vslot4 -> Player_HandleCommand -> Damage/Dead/JumpDash/weapon -> cmd vslot1
+8009CC1C,Player::StartJumpCommand::Execute,command,PROVEN,RTTI StartJumpCommand::vf01; if A0.1 -> InitializeArgsJump(cmd+0x14) -> fn_800A82FC
+800AFD28,Player::Shadow::ShadowExecuter::Update,player,PROVEN,RTTI ShadowExecuter::vf01; fn_800AF868; fn_800AF7B8; fn_800AF6A4; fn_800AF60C; fn_800A8160
+800A8160,Executer_Update,player,PROVEN,idle timer; invincibility; gravity; behavior vslot5(dt); rotation; end-of-frame resets
+800A82FC,Executer_ChangeBehavior,player,PROVEN,factory vslot1(args->id); new->CanEnter(prev;args); cur->Leave(newId); cur=new; new->Enter(prev;args)
+800A76CC,Executer_UpdateIdleTalk,player,LIKELY,+0x48 countdown (20 s) while A0.9 and pad idle -> WaitTalkingCommand 0x132
+800A7AE8,Player_ApplyGravity,physics,PROVEN,up frame; gravity -320 air / -800 ground / -0.0625 idle (flag 0) -> +0x100 -> acc +0x24
+800A78F4,Player_SmoothRotation,physics,STRONG,rotation +0xC toward target with factor min(30*dt;1); skipped when flag 0x38
+800AE8D0,Player::Shadow::ShadowBehavior::Create,player,PROVEN,RTTI ShadowBehavior::vf01; table 80522DE8[id] creator; Super flag 0x25 remaps ids 0/2/3 -> 0x22
+800AF868,ShadowExecuter_UpdateHeldObject,player,LIKELY,flag 0x1E -> player vslot 0x11 / 0x0F
+800AF6A4,ShadowExecuter_UpdateSuperRingDrain,player,PROVEN,flag 0x24: -1 ring per second; rings<=0 and flag 0x25 -> Dead (0x1F)
+800AF60C,ShadowExecuter_UpdateSlowEnd,player,LIKELY,flag 0x15: gauge empty or flag 0x22 clear -> Effect fn_800A2DCC
+80079854,Player_Integrate,physics,PROVEN,fn_800939E4(playerRef;dt); called by 31 behavior Update functions
+800939E4,PlayerRef_Integrate,physics,PROVEN,fn_80093A18(pos;vel+0x18;acc+0x24;up+0xF4;flags+0xA8;dt)
+80093A18,Physics_IntegrateWithStateDrag,physics,PROVEN,drag k: flags 7/9 1.0; grounded 20; flag 0x1D 10; air horiz 3 / vert 1 (sdata 805E5640..50)
+80093BBC,Physics_IntegrateLinearDrag,physics,PROVEN,exact solution of v'=a-kv (e^-k dt via fn_803B2D0C); k<=0 -> Euler-exact
+803B2D0C,Math_Pow,math,LIKELY,wrapper of fn_803B0444; called with f1=e (2.71828) f2=k*dt
+80097658,Player_TerrainCollide,physics,STRONG,uses prevPos +0xD0; ray/sweep fn_80097DB4 / fn_80098ABC(mask 0x40000); sets flag 2 grounded; updates ground normal +0x1C8
+80093DE8,Player_TurnTowardInput,physics,STRONG,rotates heading toward move input (+0xB8) or velocity by rate arg
+80079810,Player_GetForward,physics,PROVEN,fn_8007975C(out;player;(0;0;-1))
+800797CC,Player_GetUp,physics,PROVEN,fn_8007975C(out;player;(0;1;0))
+8007975C,Player_LocalToWorldDir,physics,STRONG,ground-frame matrix +0x1E4 rotated by heading +0x10 applied to local vector
+80082E0C,Ground_UpdateAccelLimits,physics,PROVEN,+0x24=1000; +0x28=15000*charTable(804F2904)[id].+4 (carrying: 1000/3000)
+8008331C,Ground_UpdateRun,physics,STRONG,accel ramp (0.81/0.9/0.766/0.234/0.25); |acc|<=+0x28; integrate; turn rate 15..2; anim level
+800841E0,Ground_StaticInitThresholds,physics,PROVEN,.ctors; sbss 805EF4B0=0.2 (->Idle); 805EF4B4=200 (slide); 805EF4B8=30
+8008F26C,SpinDash_UpdateCharge,physics,STRONG,charge +0x24 (10 s max -> Idle); release: vel = forward*(150+850*min(charge;1))
+80084FF4,HomingAttack_SteerToTarget,physics,STRONG,per-axis rotation toward target at rate +0x28*dt (fn_800853EC)
+80084FA0,HomingAttack_OnHit,player,LIKELY,PMF 80521844 registered in HomingAttack::Enter; sets state +0x1C=1 on contact
+8008726C,Jump_PlaySound,player,LIKELY,SoundBase/Effect cue with char table +0x18 id
+800877E0,Player_GetCharId,player,PROVEN,returns +0x64
+800880C8,Player_GetDtPtr,player,PROVEN,returns +0x60
+8007915C,Player_SetInvincibleTime,player,PROVEN,+0x27C = max(+0x27C;t); flag 0x18 if >0 (Damage::Leave passes 2.0)
+80079098,Player_UpdateInvincibility,player,PROVEN,+0x27C -= dt; flag 0x18 cleared at <=0
+800B8130,Player_LoseRings,player,PROVEN,n=min(arg;rings); ring scatter fn_8011B614; rings -= n; skipped for flag 0x24 / +0x214 bit1; flag 0x20 -> Effect
+80178ED4,PlayerRecord_AddRings,player,STRONG,fn_8016F66C(record+0x28;n) overflow -> fn_8016F370(record+0x20)
+80178F10,GameState_GetPlayerRecord,player,PROVEN,gs + 0x728 + 0x4C*index (null if index<0)
+8007993C,GameState_Get,stage_flow,PROVEN,lazy static bss 8057707C (ctor fn_80179114); holds karma gauges +0x70C/+0x718 and player records
+8016F66C,Counter_AddWrap1000,runtime,PROVEN,*p+=n; clamp >=0; >=1000 wraps and returns quotient
+8016F664,Counter_Get,runtime,PROVEN,returns *p
+8007D158,Damage_StaticInitSuperKnockback,player,PROVEN,sbss 805EF458 = 700
+800795FC,Player_ClearChaosFlags,player,PROVEN,clears state flags 0x23 and 0x22
+80076DDC,PlayerFlags_Set,player,PROVEN,multiword bitset: word[n>>5] |= 1<<(n&31) (player+0xA8)
+80076DFC,PlayerFlags_Clear,player,PROVEN,multiword bitset clear (player+0xA8)
+8006CEA0,PlayerFlags_Test,player,PROVEN,multiword bitset test (player+0xA8)
+80014E1C,BitSet32,runtime,PROVEN,*p |= 1<<n
+800613A4,BitClear32,runtime,PROVEN,*p &= ~(1<<n)
+800A4AB4,SlowTask_Construct,player,PROVEN,"Task ""Slow"" vtbl 80522A78; sets flag 0x15"
+800A4830,SlowTask_Update,player,PROVEN,ramp over 0.5 s; bss 8057E784/8057E790 = 0.125*ramp; KarmaGauge_Add(gs+0x70C;-2000*dt)
+800A492C,SlowTask_Destruct,player,STRONG,vtbl 80522A78 slot 0 (dataptr 80522A84); clears flag 0x15; 8057E784/8057E790 = 1.0
+80086D3C,BehaviorCreate_Idle,player,PROVEN,factory 80522DE8[0x00] creator; new(0x20) Player::Behavior::Idle
+80082D44,BehaviorCreate_Ground,player,PROVEN,factory [0x01]; new(0x40) Ground
+80080724,BehaviorCreate_Fall,player,PROVEN,factory [0x02]; new(0x60) Fall
+80088E58,BehaviorCreate_Landing,player,PROVEN,factory [0x03]; new(0x24) Landing
+8008BE48,BehaviorCreate_Ottotto,player,PROVEN,factory [0x04]; new(0x20) Ottotto
+80087220,BehaviorCreate_Jump,player,PROVEN,factory [0x05]; new(0x44) Jump
+800881F4,BehaviorCreate_JumpDash,player,PROVEN,factory [0x06]; new(0x28) JumpDash
+8008DA28,BehaviorCreate_Sliding,player,PROVEN,factory [0x07]; new(0x28) Sliding
+80084F58,BehaviorCreate_HomingAttack,player,PROVEN,factory [0x08]; new(0x30) HomingAttack
+800868E0,BehaviorCreate_HomingJump,player,PROVEN,factory [0x09]; new(0x30) HomingJump
+8008FD40,BehaviorCreate_Throw,player,PROVEN,factory [0x0A]; new(0x24) Throw
+8009067C,BehaviorCreate_TurnOver,player,PROVEN,factory [0x0B]; new(0x2C) TurnOver
+8007F154,BehaviorCreate_EdgeHang,player,PROVEN,factory [0x0C]; new(0x50) EdgeHang
+800914D0,BehaviorCreate_WallHang,player,PROVEN,factory [0x0D]; new(0x50) WallHang
+8008A7FC,BehaviorCreate_LineHang,player,PROVEN,factory [0x0E]; new(0x5C) LineHang
+8008E310,BehaviorCreate_SomethingHang,player,PROVEN,factory [0x0F]; new(0x34) SomethingHang
+800927A8,BehaviorCreate_WallJump,player,PROVEN,factory [0x10]; new(0x3C) WallJump
+80081178,BehaviorCreate_Grind,player,PROVEN,factory [0x11]; new(0x70) Grind
+8008EDA4,BehaviorCreate_SpinDash,player,PROVEN,factory [0x12]; new(0x58) SpinDash
+8007D168,BehaviorCreate_DarkSpin,player,PROVEN,factory [0x13]; new(0x68) DarkSpin
+8008985C,BehaviorCreate_LightDash,player,PROVEN,factory [0x14]; new(0x60) LightDash
+8008C084,BehaviorCreate_PickupObject,player,PROVEN,factory [0x15]; new(0x2C) PickupObject
+8008CE94,BehaviorCreate_PickupWeapon,player,PROVEN,factory [0x16]; new(0x2C) PickupWeapon
+800891FC,BehaviorCreate_Launch,player,PROVEN,factory [0x17]; new(0x2C) Launch
+8008FABC,BehaviorCreate_Stream,player,PROVEN,factory [0x18]; new(0x1C) Stream
+80084200,BehaviorCreate_GroundAttack,player,PROVEN,factory [0x19]; new(0x24) GroundAttack
+8007A6A0,BehaviorCreate_AirAttack,player,PROVEN,factory [0x1A]; new(0x28) AirAttack
+8007DD5C,BehaviorCreate_DriveVehicle,player,PROVEN,factory [0x1B]; new(0x48) DriveVehicle
+8007AD94,BehaviorCreate_ChaosBlast,player,PROVEN,factory [0x1C]; new(0x2C) ChaosBlast
+8007BA94,BehaviorCreate_ChaosControl,player,PROVEN,factory [0x1D]; new(0x3C) ChaosControl
+8007CAE0,BehaviorCreate_Damage,player,PROVEN,factory [0x1E]; new(0x28) Damage
+8007D8E4,BehaviorCreate_Dead,player,PROVEN,factory [0x1F]; new(0x28) Dead
+80080218,BehaviorCreate_ExternalControl,player,PROVEN,factory [0x20]; new(0x34) ExternalControl
+80076400,BehaviorCreate_ElectricCircuit,player,PROVEN,factory [0x21]; new(0x44) ElectricCircuit
+802EB590,BehaviorCreate_Super,player,PROVEN,factory [0x22]; new(0x2C) Super
+80086D84,Player::Behavior::Idle::Update,player,PROVEN,RTTI Idle::vf05 (Behavior slot 5 = Update; called by Executer_Update @800A81F4)
+80083A38,Player::Behavior::Ground::Update,player,PROVEN,RTTI Ground::vf05; accel limits; run sub-states; ground/slope/idle transitions
+8008096C,Player::Behavior::Fall::Update,player,PROVEN,RTTI Fall::vf05; acc += input*220; integrate; landing/edge-hang
+80088EA0,Player::Behavior::Landing::Update,player,PROVEN,RTTI Landing::vf05
+8008BE90,Player::Behavior::Ottotto::Update,player,PROVEN,RTTI Ottotto::vf05
+8008731C,Player::Behavior::Jump::Update,player,PROVEN,RTTI Jump::vf05; hold thrust table 804B1628+4 for 0.75 s; air steer 220
+800883E8,Player::Behavior::JumpDash::Update,player,PROVEN,RTTI JumpDash::vf05; +180 impulse; 430 thrust; 0.4 s
+8008DEC0,Player::Behavior::Sliding::Update,player,PROVEN,RTTI Sliding::vf05
+80085628,Player::Behavior::HomingAttack::Update,player,PROVEN,RTTI HomingAttack::vf05; thrust 1000 along forward; 10 s timeout
+80086928,Player::Behavior::HomingJump::Update,player,PROVEN,RTTI HomingJump::vf05
+8008FDD8,Player::Behavior::Throw::Update,player,PROVEN,RTTI Throw::vf05
+800909D4,Player::Behavior::TurnOver::Update,player,PROVEN,RTTI TurnOver::vf05
+8007F810,Player::Behavior::EdgeHang::Update,player,PROVEN,RTTI EdgeHang::vf05
+80091C98,Player::Behavior::WallHang::Update,player,PROVEN,RTTI WallHang::vf05
+8008B274,Player::Behavior::LineHang::Update,player,PROVEN,RTTI LineHang::vf05
+8008E54C,Player::Behavior::SomethingHang::Update,player,PROVEN,RTTI SomethingHang::vf05
+800929FC,Player::Behavior::WallJump::Update,player,PROVEN,RTTI WallJump::vf05
+80081A94,Player::Behavior::Grind::Update,player,PROVEN,RTTI Grind::vf05
+8008F41C,Player::Behavior::SpinDash::Update,player,PROVEN,RTTI SpinDash::vf05
+8007D3EC,Player::Behavior::DarkSpin::Update,player,PROVEN,RTTI DarkSpin::vf05
+80089D64,Player::Behavior::LightDash::Update,player,PROVEN,RTTI LightDash::vf05
+8008C11C,Player::Behavior::PickupObject::Update,player,PROVEN,RTTI PickupObject::vf05
+8008CEF8,Player::Behavior::PickupWeapon::Update,player,PROVEN,RTTI PickupWeapon::vf05
+80089244,Player::Behavior::Launch::Update,player,PROVEN,RTTI Launch::vf05
+8008FB04,Player::Behavior::Stream::Update,player,PROVEN,RTTI Stream::vf05
+800842B4,Player::Behavior::GroundAttack::Update,player,PROVEN,RTTI GroundAttack::vf05
+8007A774,Player::Behavior::AirAttack::Update,player,PROVEN,RTTI AirAttack::vf05
+8007E6D0,Player::Behavior::DriveVehicle::Update,player,PROVEN,RTTI DriveVehicle::vf05
+8007AE10,Player::Behavior::ChaosBlast::Update,player,PROVEN,RTTI ChaosBlast::vf05
+8007BB8C,Player::Behavior::ChaosControl::Update,player,PROVEN,RTTI ChaosControl::vf05; drains gauge gs+0x70C (full gauge in 4.5 s)
+8007CCEC,Player::Behavior::Damage::Update,player,PROVEN,RTTI Damage::vf05; airborne >=1.5 s -> Fall
+8007D92C,Player::Behavior::Dead::Update,player,PROVEN,RTTI Dead::vf05; StageState_RequestAction(9) = StageAction::DeadAction
+80080264,Player::Behavior::ExternalControl::Update,player,PROVEN,RTTI ExternalControl::vf05
+800765B0,Player::Behavior::ElectricCircuit::Update,player,PROVEN,RTTI ElectricCircuit::vf05
+802EB96C,Player::Behavior::Super::Update,player,PROVEN,RTTI Super::vf05
+80087904,Player::Behavior::Jump::Enter,player,PROVEN,RTTI Jump::vf02; initial speed table 804B1628 (100); hold 0.75 s; flags 0/4 set; 2 cleared
+800877E8,Player::Behavior::Jump::Leave,player,PROVEN,RTTI Jump::vf03; clears flags 0/4/0x35/0x38/0x43/0x45 and A0 bits 2/3/6/7
+800880D8,Player::Behavior::Jump::OnCommand,player,PROVEN,RTTI Jump::vf04; EndJumpCommand 0x105 clears hold bit and timer
+8007CE74,Player::Behavior::Damage::Enter,player,PROVEN,RTTI Damage::vf02; knockback up*100-forward*100 (Super -forward*700); Player_LoseRings(10)
+8007CE10,Player::Behavior::Damage::Leave,player,PROVEN,RTTI Damage::vf03; Player_SetInvincibleTime(2.0)
+8007DAA4,Player::Behavior::Dead::Enter,player,PROVEN,RTTI Dead::vf02; flags 0/0x12; clears chaos flags; anim 0x2A
+80085FE0,Player::Behavior::HomingAttack::Enter,player,PROVEN,RTTI HomingAttack::vf02; steer rate +0x28=8; flags 6/0x38/0x31/0x35; hit callback PMF 80521844
+8008F8D0,Player::Behavior::SpinDash::Enter,player,PROVEN,RTTI SpinDash::vf02
+80083EE8,Player::Behavior::Ground::Enter,player,PROVEN,RTTI Ground::vf02; sets flags 0/0x3E and A0 bits 1/3/5/6/7
+80080ED4,Player::Behavior::Fall::Enter,player,PROVEN,RTTI Fall::vf02
+80072548,Player_Behavior_OnCommandDefault,player,STRONG,shared vslot 4 of Landing/Ottotto/JumpDash/HomingAttack/PickupWeapon
+800CBA84,LinkEventTable_Get,set,PROVEN,lazy singleton sbss 0x805EF7A0 (fn_800CBAB8); arg of LinkEvent_Set/Get
+80169430,LinkEvent_Get,set,PROVEN,returns table[link*8] (0..0xFF) or 0; 59 call sites in gimmicks (Door; Elevator; SetGenerator; ...)
+801694B4,LinkEvent_SetValue,set,PROVEN,table[link*8] = value without touching the flag word
+8017BC80,EnemyStatusCommon::SuppressLifeReport,enemy,LIKELY,Status slot 0x2F default returns 0 (mislabelled BkChaos::vf2F); nonzero would skip ReportLifeEvent(1) at the death edge
+8017BCA8,EggPawn_GetSetParamLabel,enemy,STRONG,dataptr; param idx 8 table 0x8052D048 (Weapon); idx 9 0x8052D038 (AppearType); idx 10-12 OffsetPos; else EggPawn_GetSetParamLabel2
+8017BD90,EggPawn_Create,enemy,PROVEN,SET desc 0x8052D4C4 hook+0C; new(0x3B0); EggPawn ctor on layer 0xE
+8017BDE8,EggPawn_ReleaseResources,enemy,PROVEN,desc hook+08; ResourceManager slot 0x13 (type 12 + 7)
+8017BE10,EggPawn_LoadResources,enemy,PROVEN,desc hook+04; enemy/EggPawnData.one -> slot 0x13
+8017C168,EggPawnBase::TakeHit,enemy,PROVEN,RTTI vf19 (Status slot 0x1A); shield E+0x2E4 block/absorb (SE 0x6074/0x6075); ApplyHit
+8017C5C4,EggPawnBase::UpdateActivation,enemy,PROVEN,RTTI vf18 (Status slot 0xC); AppearType != 0 hidden+inactive until detected; E+0x2EC delay; Disp slot 0x12 once
+8017C780,EggPawnBase::GetPatrolMode,enemy,PROVEN,RTTI vf12; returns WaitActMoveType E+0x2A8
+8017C788,EggPawnBase::GetPointWaitMotion,enemy,STRONG,RTTI vf11; point ActionType 1 -> attack motion (vf1E) else wait motion (vf1A)
+8017C848,EggPawnBase::GetPatrolPoint,enemy,PROVEN,RTTI vf0F; point 0 = SET pos; 1/2 = SET pos + (PosN_X;PosN_Z)
+8017C938,EggPawnBase::GetPointActionTime,enemy,PROVEN,RTTI vf0E; Pos0/1/2_ActionTime (params 14/19/24)
+8017C95C,EggPawnBase::GetPointActionType,enemy,PROVEN,RTTI vf0D; Pos0/1/2_ActionType (params 15/20/25)
+8017C980,EggPawnBase::GetPointMoveSpeedRatio,enemy,PROVEN,RTTI vf0C; Pos0/1/2_MoveSpeedRatio (params 16/21/26); no caller found
+8017C9A4,EggPawnBase::ReinitFromSet,enemy,LIKELY,RTTI vf17 (SB slot 5); re-runs InitFromSet + Disp slot 0xC + AI slot 6; no caller found
+8017CA4C,EggPawnBase::GetMoveSpeed,enemy,STRONG,RTTI vf22 (param slot 6); EnemyParamCommon::vf06 x2 while current motion == dash motion (vf13 = 4)
+8017CAC0,EggPawnBase::GetDashMotion,enemy,PROVEN,RTTI vf13; returns 4
+8017CC80,EggPawnBase::OnMotionEvent,enemy,STRONG,RTTI vf26 (Disp slot 0xE); event 0x5000 data 2 -> fn_801AB790 (weapon fire)
+8017CCE8,EggPawnBase::OnMotionSoundEvent,enemy,LIKELY,RTTI vf25 (Disp slot 0xF); motion events 0xB/0xC/0x22/0x23 -> SE 0x6017/0x6018 and effect
+8017CE84,EggPawnBase::UpdateWeaponAndSound,enemy,STRONG,RTTI vf0B (Disp slot 2); weapon placement/alpha; loop SE 0x601A
+8017D09C,EggPawnBase::InitDisplay,enemy,PROVEN,RTTI vf23 (Disp slot 0); shield model; EnemyWeapon kind 0x804C7374[WeaponType] -> E+0x2E0
+8017D4BC,EggPawnBase::OnDeath,enemy,STRONG,RTTI vf15 (Status slot 0x26); vf26 collision; release shield; EnemyWeapon_Drop; E+0x2E0=0; E+0x294=0
+8017D7C0,EggPawnBase::InitFromSet,enemy,PROVEN,RTTI vf16 (SB slot 6); SetSlot_GetParams(E+0x274;0x6C) unclamped; OffsetPos; HaveShield -> E+0x270; WARP -> E+0x2EC=1.0
+8017D880,EggPawnBase::GetScoreId,enemy,PROVEN,RTTI vf14 (Status slot 0x2C); Enemy_IsEggmanSpecificStage ? 0x69/0x6A : 0x63/0x64 by HaveShield
+8017DBC4,EggPawn_GetSetParamLabel2,enemy,LIKELY,label tables 0x8052D058 (ActionType NONE/ATTACK/HIDE) and 0x8052E3E0 (WaitActMoveType STAND/LINEAR/TRIANGLE/RANDOM)
+8017DF84,EnemyAIState_EggPawnAI_WeaponAttack::Update,enemy_ai,PROVEN,slot 3; fire; reposition 15-30 u (2 s); face target; not in area -> AI slot 0xD
+8017E1F8,EnemyAIState_EggPawnAI_WeaponAttack::Enter,enemy_ai,PROVEN,state vt 0x8052E88C slot 2; attack motion
+8017E270,EnemyAIState_EggPawnAI_TukiAttack::Update,enemy_ai,PROVEN,slot 3; distance < 15 or arrived -> thrust motion 0xE; pause 1 s; not in area -> AI slot 0xD
+8017E508,EnemyAIState_EggPawnAI_TukiAttack::Enter,enemy_ai,PROVEN,state vt 0x8052E8B8 slot 2; charge motion 0xC/0xD; target point AI vf05; timer 3 s
+8017E5E8,EnemyAIState_EggPawnAI_DashAttack::Update,enemy_ai,PROVEN,slot 3; charge <= 3 s; pause 1 s; not in area -> AI slot 0xD
+8017E7F8,EnemyAIState_EggPawnAI_DashAttack::Enter,enemy_ai,PROVEN,state vt 0x8052E8E4 slot 2
+8017E8D4,EggPawnAI::StartAttack,enemy_ai,PROVEN,RTTI vf10 (AI slot 0x10 from EnemyWalkerAI_Caution); WeaponType 0 DashAttack; 3 LANCE TukiAttack; else WeaponAttack
+8017E954,EggPawnAI_GetState_WeaponAttack,enemy_ai,PROVEN,static at 0x805F04EC
+8017EA00,EggPawnAI_GetState_TukiAttack,enemy_ai,PROVEN,static at 0x805F04E0
+8017EAAC,EggPawnAI_GetState_DashAttack,enemy_ai,PROVEN,static at 0x805F04D4
+8017EB58,EggPawnAI::ReturnToWait,enemy_ai,PROVEN,RTTI vf0D; WaitActMoveType 0 -> Standing else Moving
+8017ECD0,EggPawnAI::EnterInitialState,enemy_ai,PROVEN,RTTI vf0C; AppearType 0 -> Standing/Moving by WaitActMoveType; 1/2 -> ReturnHome; 3 -> ReturnHomeDash
+8017F258,EnemyAIState_BkSoldierAI_AppearHome::Update,enemy_ai,PROVEN,slot 3; XZ < 10 -> BkSoldierAI_StartCombat
+8017F2EC,EnemyAIState_BkSoldierAI_AppearHome::Enter,enemy_ai,PROVEN,state vt 0x8052EDB0 slot 2
+8017F374,EnemyAIState_BkSoldierAI_GoHome::Update,enemy_ai,PROVEN,slot 3; in area -> Caution; XZ < 10 -> AI slot 0xD
+8017F460,BkSoldierAI_GetState_Caution,enemy_ai,PROVEN,static EnemyAIState_BkSoldierAI_Caution at 0x805F0514
+8017F50C,EnemyAIState_BkSoldierAI_GoHome::Enter,enemy_ai,PROVEN,state vt 0x8052EDDC slot 2; home := SET pos
+8017F590,EnemyAIState_BkSoldierAI_AttackVacuum::Exit,enemy_ai,PROVEN,slot 4; BkSoldier_WeaponEndAttack
+8017F5EC,EnemyAIState_BkSoldierAI_AttackVacuum::Update,enemy_ai,PROVEN,slot 3; motion 0xD; weapon begin/end; not in area -> GoHome
+8017F8D4,BkSoldierAI_GetState_GoHome,enemy_ai,PROVEN,static EnemyAIState_BkSoldierAI_GoHome at 0x805F0550
+8017F980,EnemyAIState_BkSoldierAI_AttackVacuum::Enter,enemy_ai,PROVEN,state vt 0x8052EE08 slot 2
+8017FA30,EnemyAIState_BkSoldierAI_Attack::Exit,enemy_ai,PROVEN,slot 4; E+0x359=0
+8017FA80,EnemyAIState_BkSoldierAI_Attack::Update,enemy_ai,PROVEN,slot 3; aim/fire cycle; not in search area -> BkSoldierAI_GoHome
+8017FE34,EnemyAIState_BkSoldierAI_Attack::Enter,enemy_ai,PROVEN,state vt 0x8052EE34 slot 2
+8017FF00,EnemyAIState_BkSoldierAI_NearAttack::Update,enemy_ai,PROVEN,slot 3; not in area -> EnemyBaseAI_GoHome; motion end and distance > 30 -> ChaseTarget
+8018009C,BkSoldierAI_GetState_ChaseTarget,enemy_ai,PROVEN,static at 0x805F0520
+801801A4,EnemyAIState_BkSoldierAI_NearAttack::Enter,enemy_ai,PROVEN,state vt 0x8052EE60 slot 2
+80180234,EnemyAIState_BkSoldierAI_ChaseTarget::Update,enemy_ai,PROVEN,slot 3; not in area -> EnemyBaseAI_GoHome; distance < 30 -> NearAttack
+8018031C,BkSoldierAI_GetState_NearAttack,enemy_ai,PROVEN,static at 0x805F052C
+801803C8,EnemyAIState_BkSoldierAI_ChaseTarget::Enter,enemy_ai,PROVEN,state vt 0x8052EE8C slot 2
+8018043C,EnemyAIState_BkSoldierAI_Caution::Update,enemy_ai,PROVEN,slot 3; WeaponType 0/1 -> ChaseTarget; motion flag B -> StartCombat
+801804E0,EnemyAIState_BkSoldierAI_Caution::Enter,enemy_ai,PROVEN,state vt 0x8052EEB8 slot 2
+80180560,BkSoldierAI_StartCombat,enemy_ai,PROVEN,WeaponType 0/1 -> ChaseTarget; 6 VACUUM_POD -> AttackVacuum; else Attack
+801805E0,BkSoldierAI_GetState_Attack,enemy_ai,PROVEN,static at 0x805F0538
+8018068C,BkSoldierAI_GetState_AttackVacuum,enemy_ai,PROVEN,static at 0x805F0544
+80180738,BkSoldierAI::OnTargetFound,enemy_ai,PROVEN,RTTI vf0F; ChangeState(BkSoldierAI_Caution)
+80180770,BkSoldierAI::ReturnToWait,enemy_ai,PROVEN,RTTI vf0D (also initial state via EnemyBaseAI::vf0C); AppearType 0 Standing; 1-3 Moving; 4/5 AppearHome once (AI+0x7C) then Standing
+801808E8,BkSoldierAI_GetState_AppearHome,enemy_ai,PROVEN,static at 0x805F055C
+80183CB0,EnemyAIState_FlyerCommonAI_MoveOnPath::Exit,enemy_ai,PROVEN,slot 4; E+0x30C=0
+80183CC4,EnemyAIState_FlyerCommonAI_MoveOnPath::Update,enemy_ai,PROVEN,slot 3; attack window -> Start/StopFiring; FlyerCommon_AdvanceOnPath
+80183E8C,EnemyAIState_FlyerCommonAI_MoveOnPath::Enter,enemy_ai,PROVEN,state vt 0x80530044 slot 2; E+0x30C=1
+80183F30,EnemyAIState_FlyerCommonAI_WaitFloating::Update,enemy_ai,PROVEN,slot 3; in area: turn; HasAttackWindow -> AI slot 0xF; else hover pattern (FloatWidth)
+80184270,EnemyAIState_FlyerCommonAI_WaitFloating::Enter,enemy_ai,PROVEN,state vt 0x80530070 slot 2
+80184318,FlyerCommonAI::OnDead,enemy_ai,PROVEN,RTTI vf14 (AI slot 0x14); Disp slot 0x11 death effect + SB slot 2 RequestDelete immediately (no Dead state)
+80184540,EnemyAIState_GunBeetleAI_Attack::Exit,enemy_ai,PROVEN,slot 4; StopFiring
+80184574,EnemyAIState_GunBeetleAI_Attack::Update,enemy_ai,PROVEN,slot 3; not in search area -> WaitFloating; timer<0 -> Caution
+80184684,GunBeetleAI_GetState_Caution,enemy_ai,PROVEN,static at 0x805F0624
+80184730,EnemyAIState_GunBeetleAI_Attack::Enter,enemy_ai,PROVEN,state vt 0x805304D4 slot 2; timer 3 s; StartFiring
+80184784,EnemyAIState_GunBeetleAI_Caution::Update,enemy_ai,PROVEN,slot 3; aim at target+(0;10;0); timer<0 -> Attack
+8018481C,GunBeetleAI_GetState_Attack,enemy_ai,PROVEN,static at 0x805F0630
+801848C8,EnemyAIState_GunBeetleAI_Caution::Enter,enemy_ai,PROVEN,state vt 0x80530500 slot 2; timer 1 s
+801848DC,GunBeetleAI::OnTargetFound,enemy_ai,PROVEN,RTTI vf0F; ChangeState(GunBeetleAI_Caution)
+80184914,GunBeetleAI::ReturnToWait,enemy_ai,PROVEN,RTTI vf0D; UsesPath ? FlyerCommonAI_MoveOnPath : FlyerCommonAI_WaitFloating
+801849D4,GunBeetleBase::UsesPath,enemy,PROVEN,RTTI vf0C (primary slot 0x238); AppearType == 1
+8018CAD0,BkSoldier_Create,enemy,PROVEN,SET desc 0x80531E70 hook+0C; new(0x438); BkSoldier ctor on layer 0xE
+8018CB28,BkSoldier_ReleaseResources,enemy,PROVEN,desc hook+08; ResourceManager slot 0xC (type 5 + 7)
+8018CB50,BkSoldier_LoadResources,enemy,PROVEN,desc hook+04; ResourceOneFile enemy/BkSoldierData.one -> slot 0xC
+8018CEA8,BkSoldier_GetSetParamLabel,enemy,STRONG,dataptr; TNumEditHex; jump table 0x80532778 on param idx 8..22; label tables 0x80531A40 (Weapon) 0x80531A64 (AppearType) 0x80531A7C (WaitType)
+8018D204,BkSoldierBase::UpdateMove,enemy,STRONG,RTTI vf1F (Move slot 1); RideAirSaucer: AccelerateInputCommand(kind 4) to vehicle E+0x368 and copy pose; else EnemyMoveCommon::Update
+8018D360,BkSoldierBase::OnKnockback,enemy,LIKELY,RTTI vf12 (Status slot 0x2E; called by EnemyStatusCommon::Update when S+0x75 before Knockback); dismounts AirSaucer (fn_8018D52C) if handle E+0x368 valid
+8018D3A0,BkSoldierBase::OnDeath,enemy,STRONG,RTTI vf11 (Status slot 0x26) at death edge; EnemyStatusCommon::vf26; SE 0x6016; drop shield; EnemyWeapon_Drop; E+0x354=0; E+0x308=0
+8018D4D4,BkSoldier_IsTargetInSearchArea,enemy,PROVEN,EnemySensor_IsInSearchArea(E+0xA8; AI GetTargetPosition)
+8018D52C,BkSoldier_DismountAirSaucer,enemy,LIKELY,E+0x344=0; releases vehicle handle E+0x368; zero pitch/roll
+8018D684,BkSoldier_ReleaseAirSaucer,enemy,LIKELY,fn_801B6CE4 on vehicle handle E+0x368 then reset; called from ~BkSoldierBase
+8018D700,BkSoldier_WeaponEndAttack,enemy,LIKELY,EnemyWeapon helpers fn_801AAF08/fn_801AAC8C on E+0x354; AttackVacuum Exit and fire-phase end
+8018D764,BkSoldier_WeaponBeginAttack,enemy,LIKELY,EnemyWeapon helpers fn_801AAF74/fn_801AAD88 on E+0x354; AttackVacuum fire-phase start
+8018D7C8,BkSoldierBase::PlayWarpInEffect,enemy,LIKELY,RTTI vf22; EnemyDispCommon::vf12 + positional SE 0x6012; called once by UpdateActivation for WARP/OFFSETPOS
+8018D81C,BkSoldierBase::TakeHit,enemy,PROVEN,RTTI vf10 (Status slot 0x1A); shield E+0x34C frontal block/absorb (SE 0x6076/0x6077); always ApplyHit; E+0x358 = hit from front
+8018DA48,BkSoldierBase::GetPatrolMode,enemy,PROVEN,RTTI vf0D; AppearType 1/2/3 -> 1/2/3 else 0
+8018DA98,BkSoldierBase::GetPointWaitMotion,enemy,STRONG,RTTI vf0C; per-point WaitType 0 ATTACK / 1 HIDE (motion 0xF) / 2 KAMAE
+8018DC94,BkSoldierBase::OnMotionSoundEvent,enemy,LIKELY,RTTI vf16 (Disp slot 0xF); events 3/4/7 -> SE 0x6011/0x6010/0x2005 and effects
+8018DD6C,BkSoldierBase::OnMotionEvent,enemy,STRONG,RTTI vf15 (Disp slot 0xE); event 0x5000 data 2 -> fn_801AB790 (weapon fire); event 0xD000 -> E+0x365
+8018DE04,BkSoldierBase::UpdateWeaponAndVoice,enemy,STRONG,RTTI vf0B (Disp slot 2); shield break check; weapon placement; SE 0x6013/0x6014 every rand(8;12) s while player in search area
+8018E0A4,BkSoldierBase::InitDisplay,enemy,PROVEN,RTTI vf14 (Disp slot 0); shield model; new(0x68) EnemyWeapon kind 0x804C9B18[WeaponType] -> E+0x354; RideAirSaucer -> Vehicle_Create(7)
+8018E478,BkSoldierBase::UpdateActivation,enemy,PROVEN,RTTI vf0F (Status slot 0xC); AppearType 4/5 hidden+inactive until EnemySensor_IsInSearchArea; delay E+0x360; warp effect vf22 once
+8018E618,BkSoldierBase::InitFromSet,enemy,PROVEN,RTTI vf21 (SB slot 6); TEnemySetBase::vf06; SetSlot_GetParams(0x60); clamps; SoldierCommon_ReadSetParams; OFFSETPOS/WARP spawn offset; WARP delay 1.0
+8018E964,BkSoldierBase::ReinitFromSet,enemy,LIKELY,RTTI vf20 (SB slot 5); re-runs InitFromSet + Disp slot 0xC + AI slot 6; no caller found
+8018E9F4,BkSoldierBase::GetScoreId,enemy,PROVEN,RTTI vf0E (Status slot 0x2C); HaveShield(E+0x304) ? 0x59 BkSoldierShield : 0x58 BkSoldier
+80193814,FlyerCommon_AdvanceOnPath,enemy,STRONG,E+0x2E4 += speed*dt; sample path fn_801A6944; velocity E+0x300 clamped; attack-window aiming
+80193AD4,FlyerCommon_IsInAttackWindow,enemy,PROVEN,HasAttackWindow && E+0x2E8 <= E+0x2E4 <= E+0x2EC
+80193B44,FlyerCommonBase_ReadSetParams,enemy,STRONG,path mode (UsesPath): EnemyPath_Setup(pathId=param9; PathMirror); speed = MoveSpeedRatio x param vf06; attack window; else float pattern/FloatWidth
+80193CAC,FlyerCommonBase::UpdateActivation,enemy,PROVEN,RTTI vf0B; path flyers hidden+inactive until EnemySensor_IsInSearchArea; others active
+80193DC0,GunBeetleBase::HasAttackWindow,enemy,PROVEN,RTTI vf0D (primary slot 0x23C); ActionType == 2
+80193DD4,GunBeetle_Create,enemy,PROVEN,SET desc 0x80537158 hook+0C; new(0x470); GunBeetle ctor on layer 0xE
+80193E2C,GunBeetle_ReleaseResources,enemy,PROVEN,desc hook+08; ResourceManager slot 8 (type 1 + 7)
+80193E54,GunBeetle_LoadResources,enemy,PROVEN,desc hook+04; enemy/GunBeetleData.one -> slot 8
+80194258,GunBeetleBase::GetMaxHP,enemy,PROVEN,RTTI vf14 (param slot 0x19 override); BodyType 0 -> 2.0 else 4.0
+80194274,GunBeetleBase::StopFiring,enemy,PROVEN,RTTI vf10 (primary slot 0x248); weapon mount+0x10 = 0
+8019428C,GunBeetleBase::StartFiring,enemy,PROVEN,RTTI vf0F (primary slot 0x244); weapon mount+0x10 = 1
+801942A4,GunBeetleBase::UpdateActivation,enemy,PROVEN,RTTI vf0B (Status slot 0xC); FlyerCommonBase::UpdateActivation + weapon hide/show by IsActive
+80194328,GunBeetleBase::InitFromSet,enemy,PROVEN,RTTI vf1D (SB slot 6); SetSlot_GetParams(E+0x310;0x48); FlyerCommonBase_ReadSetParams
+80194378,GunBeetleBase::ReinitFromSet,enemy,LIKELY,RTTI vf1C (SB slot 5); re-init; rebuild weapon mount; model reload when BodyType changed
+80194538,GunBeetleBase::UpdateWeaponAndSpark,enemy,STRONG,RTTI vf20 (Disp slot 2); mount update; hover SE 0x6036; ActionType 1 spark cycle (SparkWait/SparkDischarge; status slot 0x1F; effect 0x7E; SE 0x603A)
+80194848,GunBeetleBase::InitDisplay,enemy,PROVEN,RTTI vf1F (Disp slot 0); WeaponType != 4 -> GunBeetle_CreateWeaponMount; WeaponType 2 -> mount+0x18 = SparkDischarge
+801948DC,GunBeetleBase::LoadBodyModel,enemy,LIKELY,RTTI vf1E (Disp slot 0x17); model resource selected by BodyType (fn_802CE060)
+80194984,GunBeetleBase::OnDeath,enemy,STRONG,RTTI vf13 (Status slot 0x26); vf26 collision; EnemyWeapon_Drop velocity (0;0;5); delete weapon mount
+80194A78,GunBeetleBase::GetScoreId,enemy,PROVEN,RTTI vf12 (Status slot 0x2C); BodyType ? 0x52 GunBeetleG : 0x51 GunBeetle
+80194A90,GunBeetleBase::TakeHit,enemy,PROVEN,RTTI vf11 (Status slot 0x1A); while spark state 2 ignore hits without attack flag 0x10; else ApplyHit
+80194DBC,GunBeetle_UpdateWeaponMount,enemy,LIKELY,per frame; firing -> fn_801AB790 or (kind 0) spawns fn_80209EDC object on layer 0xE + SE 0x6037
+80195038,GunBeetle_CreateWeaponMount,enemy,STRONG,new(0x1C); +8 -> 0x804CAD20+0xC*type; EnemyWeapon kind 0x804CAD5C[type] (3;0x13;0;2) if nonzero
+80199D28,EnemyAIState_EnemyWalkerAI_Caution::Update,enemy_ai,PROVEN,slot 3; not in search area -> AI slot 0xD; timer<0 -> AI slot 0x10
+80199E0C,EnemyAIState_EnemyWalkerAI_Caution::Enter,enemy_ai,PROVEN,state vt 0x8053B3FC slot 2; motion param 0x13; timer 1 s
+80199E90,EnemyAIState_EnemyWalkerAI_WaitAction_Moving::Update,enemy_ai,PROVEN,slot 3; Enemy_DetectNearestPlayer -> AI slot 0xF; patrol points
+8019A218,EnemyAIState_EnemyWalkerAI_WaitAction_Moving::Enter,enemy_ai,PROVEN,state vt 0x8053B428 slot 2
+8019A300,EnemyAIState_EnemyWalkerAI_WaitAction_Standing::Update,enemy_ai,PROVEN,slot 3; Enemy_DetectNearestPlayer -> AI slot 0xF
+8019A60C,EnemyAIState_EnemyWalkerAI_WaitAction_Standing::Enter,enemy_ai,PROVEN,state vt 0x8053B454 slot 2
+8019A6A0,EnemyAIState_EnemyWalkerAI_ReturnHomeDash::Update,enemy_ai,PROVEN,slot 3; arrived -> AI slot 0xD
+8019A6FC,EnemyAIState_EnemyWalkerAI_ReturnHomeDash::Enter,enemy_ai,PROVEN,state vt 0x8053B480 slot 2; dash motion (primary slot 0x254)
+8019A77C,EnemyAIState_EnemyWalkerAI_ReturnHome::Update,enemy_ai,PROVEN,slot 3; Enemy::MoveTowardHome arrived -> AI slot 0xD
+8019A7D8,EnemyAIState_EnemyWalkerAI_ReturnHome::Enter,enemy_ai,PROVEN,state vt 0x8053B4AC slot 2; home := SET pos
+8019A85C,EnemyWalkerAI::OnTargetFound,enemy_ai,PROVEN,RTTI vf0F; ChangeState(EnemyWalkerAI_Caution)
+8019A894,EnemyWalkerAI_GetState_Caution,enemy_ai,PROVEN,static EnemyAIState_EnemyWalkerAI_Caution at 0x805F04B4
+8019AE98,Enemy_PickRandomPointNear,enemy,STRONG,random distance rand(0.5r;r) at random angle; clamped into MoveRange (EnemySensor_IsInsideMoveRange); EggPawn WeaponAttack r=30
+8019AFB0,Enemy::TurnToTargetYaw,enemy,LIKELY,RTTI Enemy::vf02; rotates yaw toward E+0x88; returns aligned (< 1 deg)
+8019B0C8,Enemy::MoveTowardHome,enemy,STRONG,RTTI Enemy::vf01; XZ dist to E+0x6C < 10 -> return 1; else steer/move toward home
+8019B2C0,Enemy_DetectNearestPlayer,enemy,STRONG,nearest player (fn_800742BC/fn_800A8E64); EnemySensor_IsInSearchArea; stores player ref at E+0x40; used by EnemyWalkerAI wait states
+8019B8BC,EnemyAIState_EnemyBaseAI_Recover::Exit,enemy_ai,PROVEN,slot 4; status slot 0x1D(1;1) (collision on LIKELY); clear S bit 0xD
+8019B934,EnemyAIState_EnemyBaseAI_Recover::Update,enemy_ai,PROVEN,slot 3; timer<0 or WasDamaged -> AI slot 0xD
+8019BA2C,EnemyAIState_EnemyBaseAI_Recover::Enter,enemy_ai,PROVEN,state vt 0x8053B7A8 slot 2; S bit 0xD; status slot 0x1D(0;1) (collision off LIKELY); timer 60 s
+8019BB48,EnemyAIState_EnemyBaseAI_Dead::Exit,enemy_ai,PROVEN,slot 4; unlock
+8019BB58,EnemyAIState_EnemyBaseAI_Dead::Update,enemy_ai,PROVEN,slot 3; timer<0 or motion flag A -> Disp slot 0x11 death effect + SB slot 2 RequestDelete
+8019BC30,EnemyAIState_EnemyBaseAI_Dead::Enter,enemy_ai,PROVEN,state vt 0x8053B7D4 slot 2; lock; death motion = param slot 0x16; timer 0.5 s
+8019BF30,EnemyAIState_EnemyBaseAI_GoHome::Update,enemy_ai,PROVEN,slot 3; Enemy::MoveTowardHome arrived -> AI slot 0xD; no sensor test
+8019BF90,EnemyAIState_EnemyBaseAI_GoHome::Enter,enemy_ai,PROVEN,state vt 0x8053B858 slot 2; home := SET pos
+8019C8D4,EnemyAIState_EnemyBaseAI_WarpWait::Update,enemy_ai,PROVEN,slot 3; timer<0 -> unlock; AI slot 0xC (initial state)
+8019C944,EnemyAIState_EnemyBaseAI_WarpWait::Enter,enemy_ai,PROVEN,state vt 0x8053B908 slot 2; alpha 0; status slot 0x1D(0;0) (collision off LIKELY); status slot 0x22(0); S bit 0xA; timer 0.5 s; lock
+8019CF08,EnemyBaseAI::OnRecovered,enemy_ai,PROVEN,RTTI vf16 (AI slot 0x16); unlock; ChangeState(EnemyBaseAI_Recover); RecoverCommand 0x8019E600
+8019D070,EnemyBaseAI::OnDead,enemy_ai,PROVEN,RTTI vf14 (AI slot 0x14); ChangeState(EnemyBaseAI_Dead) unless locked; used by BkSoldier/EggPawn
+8019D894,EnemyBaseAI::EnterInitialState,enemy_ai,PROVEN,RTTI vf0C (AI slot 0xC); default = call AI slot 0xD
+8019D8C0,EnemyBaseAI::ToIdle,enemy_ai,PROVEN,RTTI vf0B (AI slot 0xB); ChangeState(Idle); CharCommand 0x201
+8019DA1C,EnemyBaseAI::GetAttackPoint,enemy_ai,LIKELY,RTTI vf05 (AI slot 5); nearest player + camera NDC tests (fn_8000F57C); used as charge/hold target by Pawn and BkSoldier attacks
+801A09A8,EnemyDispCommon::PlayDeathEffect,enemy,STRONG,RTTI vf11 (Disp slot 0x11); team 0 (type!=0): effect 0x72 + SE 0x6007 (type 2: 0x6008); team 1: SE 0x6007 + 0x72; team 2: SE 0x6009 + effect 0x78
+801A238C,EnemyPath_LoadResources,enemy,PROVEN,hook+04 of SET marker 0x258E EnemyEntryStart (desc 0x8053BAB0); enemy/EnemyPath.one -> ResourceManager slot 6
+801A23EC,Enemy_IsEggmanSpecificStage,enemy,PROVEN,stage id [0x8057E808] in {300 HorrorCastle; 402 canyon2; 403 eWorld}; selects EggPawn*Specific / EggRecoverySpecific score ids
+801A6A44,EnemyPath_Setup,enemy,STRONG,path follower init: entry EnemyPath_GetEntry(pathId) of resource slot 6 (EnemyPath.one); mirror transform when PathMirror
+801A6B4C,EnemyPath_GetEntry,enemy,PROVEN,index table 0x804CD8D8 {2..10}[pathId] -> fn_8001277C(mgr; slot 6; idx)
+801A8864,EnemyStatusCommon::OnKnockback,enemy,LIKELY,default nop for Status slot 0x2E (mislabelled BkChaos::vf2E); called by EnemyStatusCommon::Update 0x801A8B08 when S+0x75
+801B4C74,Vehicle_Create,vehicle,PROVEN,kind table 0x8053C890[kind] create fn; Vehicle::CharaColliMove + Vehicle::VehicleTask on layer 0xC; kind 7 = Vehicle::AirSaucer (fn_801AF9EC)
+801B4EFC,Vehicle_IsKindAvailable,vehicle,PROVEN,returns u8 0x8053C890[kind].enabled
+8027CBD0,SetGenerator_UpdateState,set,STRONG,state machine at obj+0; finds target slot (FindArgs; predicate fn_8027CFB8); re-arms record flag 0x40; sends GenerateCommand via fn_800C9B24; num counter +0xC; delay +0x10
+8027CFB8,SetGenerator_MatchSlot,set,LIKELY,predicate for fn_800CB864: record flag 0x40000 -> store slot in args+8
+80051BF0,BulletType_GetRange,weapon,PROVEN,table 8051E840[w]+0x10; =WeaponBase::vf05; BulletGun deletes after travelling this far
+80051C18,BulletType_CreateAlt,weapon,PROVEN,table 8051E840[w]+0xC else fn_80051C80
+80051D5C,BulletType_Spawn,weapon,PROVEN,table 8051E840[w]+8(shot)
+80051DA8,BulletType_Release,weapon,PROVEN,table 8051E840[w]+4()
+80051DF0,BulletType_Init,weapon,PROVEN,table 8051E840[w]+0(); called by each weapon resource hook with its index
+80052A94,BulletCreate_Cannon_HealCannon02,weapon,PROVEN,Cannon type 8 (power 0); row 8051EAB0 (idx 66)
+80052ADC,BulletCreate_Cannon_HealCannon01,weapon,PROVEN,Cannon type 7 (power 0); row 8051EA9C (idx 65)
+80052B24,BulletCreate_Cannon_EggBazooka,weapon,PROVEN,Cannon type 5 (power 8); row 8051EA88 (idx 17)
+80052B6C,BulletCreate_Cannon_BigBarrel,weapon,PROVEN,Cannon type 4 (power 8); row 8051EA74 (idx 16)
+80052BB4,BulletCreate_Cannon_BlackBarrel,weapon,PROVEN,Cannon type 3 (power 4); row 8051EA60 (idx 15)
+80052BFC,BulletCreate_Cannon_TankCannon,weapon,PROVEN,Cannon type 2 (power 16); row 8051EA4C (idx 14)
+80052C44,BulletCreate_Cannon_Bazooka,weapon,PROVEN,Cannon type 1 (power 8); row 8051EA38 (idx 13)
+80052C8C,BulletCreate_Cannon_Grenade,weapon,PROVEN,Cannon type 0 (power 4); row 8051EA24 (idx 12)
+80053138,Cannon_Explode,weapon,PROVEN,types 7/8 -> HealingBlast fn_80107448(level 0/1) + SE 0xE02E; else CannonBomb_Create(type)
+8005328C,SoundManager_Get,sound,STRONG,lazy global object bss 80571C34; used before every PlaySE
+80053FC0,Weapon::Bullet::Cannon::Cannon,weapon,PROVEN,(this;shot;type r5); table 8051E9A0[type]: power -> Bullet_CreateCharaColliAttack @8005414C; +4 -> +0x3C
+80054534,CannonTable_StaticInit,weapon,PROVEN,.ctors; cannon +4 speeds 200/300/300/200/200/300/9990/300/300; bullet-type ranges 8051EA34..8051EAC0
+800545D0,CannonBomb_Create,weapon,PROVEN,new(0x58) Weapon::Bullet::CannonBomb(shell;type;..)
+80054B04,CannonBomb_CreateAttack,damage,PROVEN,SetAttack(level 5;attr 0x200;power table+0) @80054D14
+80054EF8,CharaColliAttack_SetAttack,damage,PROVEN,(attack;level r4;attr r5;onAttack r6;after r7;power f1): +0x54=1 +0x38 +0x40 +0x34; binds lists +0x10/+0x28
+80055360,Weapon::Bullet::CannonBomb::CannonBomb,weapon,PROVEN,table 8051EB48[type] stride 0x14: power; radius; SE; effect; 0.5
+80055564,CannonBombTable_StaticInit,weapon,PROVEN,.ctors; +4 = 30/50/100/40/70/50/40/0/0 (radius LIKELY)
+80055804,BulletCreate_Gun_ShadowRifle,weapon,PROVEN,power 32; type 7; range 600; row 8051ED58 (idx 67)
+80055860,BulletCreate_Gun_Katana02,weapon,PROVEN,power 8; type 6; range 200; row 8051ED44 (idx 58)
+800558BC,BulletCreate_Gun_Katana01,weapon,PROVEN,power 4; type 5; range 100; row 8051ED30 (idx 57)
+80055918,BulletCreate_Gun_BKBattery,weapon,PROVEN,power 8; type 3 (impact CannonBomb 6); range 2000; row 8051ED1C (idx 29)
+80055974,BulletCreate_Gun_GunBattery,weapon,PROVEN,power 6; type 2; range 2000; row 8051ED08 (idx 28)
+800559D0,BulletCreate_Gun_HeavyShot,weapon,PROVEN,power 5; type 1; effect 0x282; row 8051ECF4 (idx 11)
+80055A2C,BulletCreate_Gun_FlashShot,weapon,PROVEN,power 2; type 1; row 8051ECE0 (idx 9)
+80055A88,BulletCreate_Gun_LightShot,weapon,PROVEN,power 2; type 1; row 8051ECCC (idx 8)
+80055AE4,BulletCreate_Gun_EggGun,weapon,PROVEN,power 2; effect 0x185; row 8051ECB8 (idx 7)
+80055B40,BulletCreate_Gun_AntiAircraftRifle,weapon,PROVEN,power 6; row 8051EC90; also the factory of row 8051ECA4 (Vulcan idx 5)
+80055B9C,BulletCreate_Gun_AutoRifle,weapon,PROVEN,power 4; row 8051EC7C (idx 3)
+80055BF8,BulletCreate_Gun_SubMachineGun,weapon,PROVEN,power 2; type 0; effect 0x1C3; row 8051EC68 (idx 2)
+80055C54,BulletCreate_Gun_HandGun,weapon,PROVEN,BulletGun(power 2;range 8051EC64;type 0;effect 0xE2); bullet-type row 8051EC54 (idx 1)
+80055E28,BulletGun_OnAttackResult,damage,PROVEN,contact+0x38 = result; results 1/3/5 -> bullet+0x48=1 and contact+0x34=1 (jump table 8051ED88)
+80055EB4,BulletGun_OnAttack,damage,PROVEN,param+0x34 = normalize(bullet+0x10 velocity); param+0x4C = bullet+0x44 (500)
+80055F00,BulletGun_SpawnImpactEffect,weapon,STRONG,switch bullet type +0x4C (table 8051EDAC); type 3 spawns CannonBomb type 6
+80056170,BulletGun_UpdateFlight,weapon,PROVEN,+0x38 += travelled distance; terrain ray fn_8005B10C; delete when +0x38 >= +0x40 range
+800566C4,Weapon::Bullet::BulletGun::BulletGun,weapon,PROVEN,(this;shot;effect r5;type r6;power f1;range f2;speed f3); power -> Bullet_CreateCharaColliAttack
+80056BB0,BulletGunTable_StaticInit,weapon,PROVEN,.ctors; writes range +0x10 of rows 8051EC54..8051ED58; 805EF2F4=500 speed; 805EF2F8=300
+80056DA4,BulletCreate_Homing_AirBolt,targeting,PROVEN,Homing(kind 4) type 8051EEAC
+80056EE4,BulletCreate_Homing_RL8,targeting,PROVEN,Homing(kind 1;300) idx 0x14
+80056F2C,BulletCreate_Homing_RL4,targeting,PROVEN,Homing(kind 1;300) idx 0x13
+80056F74,BulletCreate_Homing_ATM,targeting,PROVEN,Homing(kind 0;300) bullet idx 0x12
+80057310,Weapon::Bullet::Homing::Update,targeting,PROVEN,RTTI vf01 steer; sweep; self-destruct after +0x44
+80057644,Homing_Steer,targeting,PROVEN,turn toward target <= rate*dt; speed kept
+800579BC,Vec3_RotateTowardsLimited,targeting,PROVEN,acos compare; axis-angle rotate by max
+80057E24,Weapon::Bullet::Homing::Homing,weapon,PROVEN,(this;shot;kind r5;row r6); power .rodata 804AD4C0[kind]+0x10 -> Bullet_CreateCharaColliAttack @80058190; attr |= 0x800
+80058A98,BulletParams_StaticInit_Homing,targeting,PROVEN,.ctors; homing speeds 150/150/500; ranges 300/2000/1500
+80059510,BulletCreate_Ring_RingShot,weapon,PROVEN,Ring(power 4;speed 400;effect 0x123); row 8051EFD0 (idx 10)
+80059984,Ring_CreateAttack,damage,PROVEN,SetAttack(level 5;attr 0x40;power) @80059BD4
+8005A164,Weapon::Bullet::Ring::Ring,weapon,PROVEN,(this;shot;effect r5;power f1;speed f2)
+8005A32C,RingTable_StaticInit,weapon,PROVEN,.ctors; bullet-type 8051EFE0 range = 400
+8005A350,Bullet_ComputeLaunchVelocity,weapon,STRONG,dir=normalize(shot+0x1C); velocity=dir*(f1+max(0;dot(shot+0x28 shooter vel;dir)))
+8005A428,Bullet_CreateCharaColliAttack,damage,PROVEN,new CharaColliAttack; SetAttack(level 5;attr 0x40;power f1); owner weak ref at +8; used by BulletGun/Cannon/Homing/Laser/ChaosSpear/ThrowObject
+8005A968,SonicteamUSA::System::CharaColli::CharaColliAttack::CharaColliAttack,damage,PROVEN,0x58 bytes; lists +0x10/+0x1C/+0x28; power 0; level 3; defense 0; attr 0; +0x54/+0x55=0; sp_counted_base_impl<CharaColliAttack*> at 8005A934
+8005AFD4,CharaColliAttack_IsIgnored,damage,LIKELY,walks attack+0x44 weak-ref list; true skips the pair in the dispatchers
+8005B888,WeaponRegistry_MarkLoaded,weapon,PROVEN,registry 8051F058[w]+4 = 1; called by every weapon resource hook
+8005B8A4,WeaponRegistry_ResetLoaded,weapon,PROVEN,clears +4 of all 72 rows and of list 8051F4D8 (0x44..0x47); WeaponDataEnd release hook
+8005B944,WeaponRegistry_GetFlagC,weapon,PROVEN,returns row+0xC byte (1 ranged / 0 melee+special); single reader fn_801C0A1C
+8005B95C,WeaponRegistry_GetFireRumble,weapon,PROVEN,row+8; ShadowWeapon::Update -> fn_8034ED50(pattern;pad) on shot frames
+8005B974,WeaponRegistry_CreateExtra,weapon,PROVEN,info+0xC(arg); callers HeavyDog RocketLauncher; fn_800E9348; fn_800EB444; fn_80348BE0
+8005B9C0,WeaponInfo_GetPickupColliSize,weapon,PROVEN,info+0x10/+0x14 (1.0/5.0) -> SetWeapon::Arms pickup collision
+8005BA04,WeaponInfo_GetFireSlowdown,weapon,PROVEN,info+0x2C; Ground::Update multiplies vel and accel by (1-w) on shot frames
+8005BA2C,WeaponInfo_GetRecoil,weapon,PROVEN,info+0x28; added to ShadowWeapon+0x40 on shot frames
+8005BA54,WeaponInfo_GetHoldAngle,weapon,PROVEN,info+0x24; x90 deg -> ShadowWeapon+0x58 (arm IK)
+8005BA7C,WeaponInfo_GetPickupSE,weapon,PROVEN,info+0x20 low 16 bits (0x2001..0x2004); ShadowWeapon::AddWeapon -> SoundManager_PlaySE
+8005BAAC,WeaponInfo_GetHoldType,weapon,PROVEN,info+0x1C (1/2/3) -> ShadowMotion vslot 4 in ShadowWeapon_Equip
+8005BAD4,WeaponInfo_GetDefaultAmmo,weapon,PROVEN,info+0x18; used when AddWeapon/Equip ammo < 0
+8005BAFC,WeaponRegistry_CreateItem,weapon,PROVEN,(out;w;ammo): if row loaded: item = info+8(); item+8 = w; item.SetAmmo(ammo)
+8005BD14,Weapon::Item::SetAmmo,weapon,PROVEN,RTTI vf01; +0xC = ammo (-1 = weapon default)
+8005C014,WeaponRegistry_GetName,weapon,PROVEN,[info+0] else empty string 805F2EDC
+8005C03C,WeaponRegistry_IsLoaded,weapon,PROVEN,row+4 byte
+8005C298,WeaponItem_Create_AntiAircraftRifle,weapon,PROVEN,SET 00CB info+8; new(0x10) Weapon::Item
+8005C2D8,Weapon_Create_AntiAircraftRifle,weapon,PROVEN,SET 00CB info+4 (desc 8051F530); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::AntiAircraftRifle
+8005C394,Weapon_InitResources_AntiAircraftRifle,weapon,PROVEN,SET 00CB hook04; '%s::Initialize' with name AntiAircraftRifle; BulletType_Init/WeaponRegistry_MarkLoaded(4)
+8005C464,Weapon::AntiAircraftRifle::FireAt,weapon,PROVEN,RTTI vf0B; returns 1/6 s
+8005C5A0,Weapon::AntiAircraftRifle::Fire,weapon,PROVEN,RTTI vf0A; returns 1/6 s (805F2EF4)
+8005C78C,WeaponItem_Create_AntiTankMissile,weapon,PROVEN,SET 00E6 info+8; new(0x10) Weapon::Item
+8005C7CC,Weapon_Create_AntiTankMissile,weapon,PROVEN,SET 00E6 info+4 (desc 8051F5E8); new(0x3C) Weapon::WeaponLockonBase::WeaponLockonBase; vptr Weapon::AntiTankMissile
+8005C91C,Weapon::AntiTankMissile::OnLockAcquired,targeting,STRONG,RTTI vf0A sound 0x201D
+8005C94C,Weapon::AntiTankMissile::FireAtTarget,targeting,PROVEN,RTTI vf0B fn_8006920C; returns 0.25
+8005C9C8,Weapon::AntiTankMissile::Update,targeting,PROVEN,RTTI vf02 prune; cone range; update
+8005CB2C,Weapon_InitResources_AntiTankMissile,weapon,PROVEN,SET 00E6 hook04; '%s::Initialize' with name AntiTankMissile; BulletType_Init/WeaponRegistry_MarkLoaded(18)
+8005CBAC,WeaponItem_Create_AutoRifle,weapon,PROVEN,SET 00CA info+8; new(0x10) Weapon::Item
+8005CBEC,Weapon_Create_AutoRifle,weapon,PROVEN,SET 00CA info+4 (desc 8051F698); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::AutoRifle
+8005CCA8,Weapon_InitResources_AutoRifle,weapon,PROVEN,SET 00CA hook04; '%s::Initialize' with name AutoRifle; BulletType_Init/WeaponRegistry_MarkLoaded(3)
+8005CDBC,Weapon::AutoRifle::FireAt,weapon,PROVEN,RTTI vf0B; returns 0.1 s
+8005CE40,Weapon::AutoRifle::Fire,weapon,PROVEN,RTTI vf0A; returns 0.1 s (805F2F28)
+8005CFD8,Weapon::WeaponBase::GetFireSlowdown,weapon,PROVEN,RTTI vf08; WeaponInfo_GetFireSlowdown(+0x14)
+8005CFFC,Weapon::WeaponBase::GetRecoil,weapon,PROVEN,RTTI vf07; WeaponInfo_GetRecoil(+0x14)
+8005D020,Weapon::WeaponBase::GetHoldOffset,weapon,LIKELY,RTTI vf06; constant (x;-1;-2.703) -> ShadowWeapon+0x4C
+8005D03C,Weapon::WeaponBase::GetRange,targeting,PROVEN,RTTI vf05 BulletType_GetRange(+0x14)
+8005D060,Weapon::WeaponBase::HideModel,weapon,LIKELY,RTTI vf04; fn_8006327C(+0x1C)
+8005D08C,Weapon::WeaponBase::ShowModel,weapon,LIKELY,RTTI vf03; fn_80063258(+0x1C)
+8005D118,Weapon::WeaponBase::SetMuzzle,weapon,PROVEN,RTTI vf01; +0x20 = pos; +0x2C = dir
+8005D21C,Weapon::WeaponBase::WeaponBase,weapon,PROVEN,(this;owner;index r5;kind r6): +0xC owner; +0x14 index; +0x18 kind; +0x1C model 0
+8005D58C,WeaponItem_Create_BigBarrel,weapon,PROVEN,SET 00E0 info+8; new(0x10) Weapon::Item
+8005D5CC,Weapon_Create_BigBarrel,weapon,PROVEN,SET 00E0 info+4 (desc 8051F830); new(0x3C) Weapon::WeaponCannonBase::WeaponCannonBase; vptr Weapon::BigBarrel
+8005D660,Weapon_InitResources_BigBarrel,weapon,PROVEN,SET 00E0 hook04; '%s::Initialize' with name BigBarrel; BulletType_Init/WeaponRegistry_MarkLoaded(16)
+8005D804,WeaponItem_Create_BlackBarrel,weapon,PROVEN,SET 00DF info+8; new(0x10) Weapon::Item
+8005D844,Weapon_Create_BlackBarrel,weapon,PROVEN,SET 00DF info+4 (desc 8051F8E0); new(0x3C) Weapon::WeaponCannonBase::WeaponCannonBase; vptr Weapon::BlackBarrel
+8005D8D8,Weapon_InitResources_BlackBarrel,weapon,PROVEN,SET 00DF hook04; '%s::Initialize' with name BlackBarrel; BulletType_Init/WeaponRegistry_MarkLoaded(15)
+8005DA24,WeaponItem_Create_BlackSword,weapon,PROVEN,SET 00FB info+8; new(0x10) Weapon::Item
+8005DA64,Weapon_Create_BlackSword,weapon,PROVEN,SET 00FB info+4 (desc 8051F990); new(0xB0) Weapon::BlackSword::BlackSword
+8005E0B8,Weapon_InitResources_BlackSword,weapon,PROVEN,SET 00FB hook04; '%s::Initialize' with name BlackSword; BulletType_Init/WeaponRegistry_MarkLoaded(31)
+8005E13C,Weapon::WeaponCannonBase::CreateAltProjectile,weapon,LIKELY,RTTI vf0B; BulletType_CreateAlt(index) with f1 2.0; not called by ControlCannon
+8005E1A4,Weapon::WeaponCannonBase::Fire,weapon,PROVEN,RTTI vf0A; spawn shell; +0x38++; returns 0.5 s (805F300C)
+8005E394,WeaponDataEnd_ReleaseResources,weapon,STRONG,hook08 of SET marker 0x2585; WeaponRegistry_ResetLoaded
+8005E428,WeaponDataStart_LoadResources,weapon,STRONG,hook04 of SET marker 0x2584; fn_8005B924 + SpecialWeapons_LoadAll
+8005E654,WeaponItem_Create_FlashShot,weapon,PROVEN,SET 00D0 info+8; new(0x10) Weapon::Item
+8005E694,Weapon_Create_FlashShot,weapon,PROVEN,SET 00D0 info+4 (desc 8051FAD0); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::FlashShot
+8005E750,Weapon_InitResources_FlashShot,weapon,PROVEN,SET 00D0 hook04; '%s::Initialize' with name FlashShot; BulletType_Init/WeaponRegistry_MarkLoaded(9)
+8005E868,Weapon::FlashShot::FireAt,weapon,PROVEN,RTTI vf0B; returns 1/12 s
+8005E8EC,Weapon::FlashShot::Fire,weapon,PROVEN,RTTI vf0A; returns 1/12 s (805F301C)
+8005EAD8,WeaponItem_Create_Grenade,weapon,PROVEN,SET 00DC info+8; new(0x10) Weapon::Item
+8005EB18,Weapon_Create_Grenade,weapon,PROVEN,SET 00DC info+4 (desc 8051FB88); new(0x3C) Weapon::WeaponCannonBase::WeaponCannonBase; vptr Weapon::Grenade
+8005EBAC,Weapon_InitResources_Grenade,weapon,PROVEN,SET 00DC hook04; '%s::Initialize' with name Grenade; BulletType_Init/WeaponRegistry_MarkLoaded(12)
+8005ECBC,WeaponGun_AddShots,weapon,PROVEN,+0x38 += n; read by controls for ammo and recoil
+8005ECCC,Weapon::WeaponGunBase::BeginFrame,weapon,PROVEN,RTTI vf02; +0x38 (shots this frame) = 0
+8005ED78,WeaponItem_Create_HandGun,weapon,PROVEN,SET 00C8 info+8; new(0x10) Weapon::Item
+8005EDB8,Weapon_Create_HandGun,weapon,PROVEN,SET 00C8 info+4 (desc 8051FC88); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::HandGun
+8005EE3C,HandGun_MuzzleEffect,weapon,STRONG,SE 0x2008 at muzzle; effects 0x147/0xD1
+8005EF10,Weapon::HandGun::FireAt,weapon,PROVEN,RTTI vf0B; aimed shot; returns -1.0
+8005EF94,Weapon::HandGun::Fire,weapon,PROVEN,RTTI vf0A; spawn bullet; returns -1.0 (semi-automatic)
+8005F138,Weapon_InitResources_HandGun,weapon,PROVEN,SET 00C8 hook04; '%s::Initialize' with name HandGun; BulletType_Init/WeaponRegistry_MarkLoaded(1)
+8005F538,WeaponItem_Create_LightShot,weapon,PROVEN,SET 00CF info+8; new(0x10) Weapon::Item
+8005F578,Weapon_Create_LightShot,weapon,PROVEN,SET 00CF info+4 (desc 8051FD58); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::LightShot
+8005F634,Weapon_InitResources_LightShot,weapon,PROVEN,SET 00CF hook04; '%s::Initialize' with name LightShot; BulletType_Init/WeaponRegistry_MarkLoaded(8)
+8005F740,Weapon::LightShot::FireAt,weapon,PROVEN,RTTI vf0B; returns 0.5 s
+8005F7C4,Weapon::LightShot::Fire,weapon,PROVEN,RTTI vf0A; returns 0.5 s (805F308C)
+8005F958,WeaponLockon_SetDebugColor,targeting,LIKELY,wrapper fn_8006024C
+8005F97C,WeaponLockon_SetCone,targeting,PROVEN,wrapper fn_80060270
+8005F9A0,WeaponLockon_NotifyShot,targeting,PROVEN,+0x48+=n; +0x4C++
+8005F9F0,WeaponLockon_IsLocking,targeting,PROVEN,bit1
+8005FAC8,WeaponLockon_GetShotsThisFrame,targeting,PROVEN,+0x48 (ammo decrement)
+8005FAF0,WeaponLockon_GetLockCount,targeting,PROVEN,wrapper
+8005FB14,WeaponLockon_GetMaxLocks,targeting,PROVEN,+0x44
+8005FB3C,WeaponLockon_Cancel,targeting,PROVEN,wrapper
+8005FB60,WeaponLockon_StopLocking,targeting,PROVEN,clear bit0
+8005FB90,WeaponLockon_StartLocking,targeting,PROVEN,set bit0
+8005FBC0,WeaponLockon_BeginVolley,targeting,PROVEN,set bit2; returns 0.25
+8005FBF4,WeaponLockon_Update,targeting,PROVEN,wrapper LockonState_Update
+8005FC18,WeaponLockon_BeginFrame,targeting,PROVEN,wrapper fn_800606A0
+8005FD8C,LockonState_SearchNext,targeting,PROVEN,mask 0x1800; cone 0.93969; range +0x20; exclude locked; nearest; lock timer 0.1
+80060180,TargetManager_Get,targeting,PROVEN,singleton bss 80576F54 ctor fn_801E7F68; cached sbss 805EF2A0
+8006024C,LockonState_SetDebugColor,targeting,LIKELY,+0x24..+0x27 RGBA
+80060270,LockonState_SetConeFromMuzzle,targeting,PROVEN,+8=M.t; +0x14=M*(0;0;range); +0x20=range
+800602F4,LockonState_GetLockCount,targeting,PROVEN,locked vector size
+80060318,LockonState_Cancel,targeting,PROVEN,clear bit0; clear list
+80060354,LockonState_Update,targeting,PROVEN,lock every 0.1 s up to +0x44; volley via weapon vf0B
+800606A0,LockonState_BeginFrame,targeting,PROVEN,+0x48=0; prune invalid locks
+800606CC,LockonState_SetWeapon,targeting,PROVEN,+0=+0x34=weapon
+80060784,LockonState_Construct,targeting,PROVEN,0x58 bytes; +0x44=maxLocks; debug color C8/FF/00/00
+800608B0,LockonList_UpdateMarks,targeting,PROVEN,drop dead marks; fn_80061E38 per mark
+800609A8,LockonList_PruneInvalid,targeting,PROVEN,erase expired or disabled targets
+80060A5C,LockonList_ExcludeFromSearch,targeting,PROVEN,TargetSearchList_ExcludeTarget per lock
+80060AB4,LockonList_Add,targeting,PROVEN,weapon vf0A; new LockonTarget + LockonMark; push
+800612B4,LockonTarget_Construct,targeting,STRONG,0xC bytes {weak Target; LockonMark*}
+80061E38,LockonMark_SetOrigin,targeting,STRONG,impl+8=v
+80061E60,Weapon::LockonMark::Update,targeting,PROVEN,RTTI vf01 kills task when impl update false
+80062034,LockonTarget_GetTargetPosition,targeting,PROVEN,expired -> zero vector
+800620D4,LockonMarkImpl_Draw,targeting,LIKELY,bound RednerDrawArgs callback; size 32
+800625B8,LockonMarkImpl_Track,targeting,STRONG,position = target position
+8006261C,LockonMarkImpl_LockIn,targeting,PROVEN,t+=10dt; scale 1-0.25t -> 0.75
+800626D4,LockonMarkImpl_AnnounceReleased,targeting,STRONG,AnnounceAttackCommand kind 2
+800627C4,LockonMarkImpl_AnnounceLocked,targeting,STRONG,AnnounceAttackCommand kind 1 to owner
+800628B4,LockonMarkImpl_Update,targeting,PROVEN,states 0 lock-in/1 track/2 fade
+80062C9C,LockonMarkImpl_Construct,targeting,STRONG,textures am_tgt0/am_tgt1; AnnounceAttack kind 1
+80064838,WeaponItem_Create_RingShot,weapon,PROVEN,SET 00D1 info+8; new(0x10) Weapon::Item
+80064878,Weapon_Create_RingShot,weapon,PROVEN,SET 00D1 info+4 (desc 8051FEC8); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::RingShot
+80064934,Weapon_InitResources_RingShot,weapon,PROVEN,SET 00D1 hook04; '%s::Initialize' with name RingShot; BulletType_Init/WeaponRegistry_MarkLoaded(10)
+80064A4C,Weapon::RingShot::FireAt,weapon,PROVEN,RTTI vf0B; returns 1.0 s
+80064AD0,Weapon::RingShot::Fire,weapon,PROVEN,RTTI vf0A; returns 1.0 s (805F3104)
+80064C6C,WeaponItem_Create_RocketLauncher8,weapon,PROVEN,SET 00E8 info+8; new(0x10) Weapon::Item
+80064CAC,Weapon_Create_RocketLauncher8,weapon,PROVEN,SET 00E8 info+4 (desc 8051FFF8); new(0x3C) Weapon::WeaponLockonBase::WeaponLockonBase; vptr Weapon::RocketLauncher
+80064D6C,Weapon_InitResources_RocketLauncher8,weapon,PROVEN,SET 00E8 hook04; '%s::Initialize' with name RocketLauncher8; BulletType_Init/WeaponRegistry_MarkLoaded(20)
+80064E54,WeaponItem_Create_RocketLauncher4,weapon,PROVEN,SET 00E7 info+8; new(0x10) Weapon::Item
+80064E94,Weapon_Create_RocketLauncher4,weapon,PROVEN,SET 00E7 info+4 (desc 8051FFA4); new(0x3C) Weapon::WeaponLockonBase::WeaponLockonBase; vptr Weapon::RocketLauncher
+80064F54,Weapon_InitResources_RocketLauncher4,weapon,PROVEN,SET 00E7 hook04; '%s::Initialize' with name RocketLauncher4; BulletType_Init/WeaponRegistry_MarkLoaded(19)
+80065084,Weapon::RocketLauncher::OnLockAcquired,targeting,STRONG,RTTI vf0A sound 0x201D
+800650B4,Weapon::RocketLauncher::FireAtTarget,targeting,PROVEN,RTTI vf0B returns .sdata 805E4DD8 0.25
+80065180,Weapon::RocketLauncher::Update,targeting,PROVEN,RTTI vf02
+80065300,WeaponItem_Create_Stick0700,weapon,PROVEN,SET 0114 info+8; new(0x10) Weapon::Item
+80065344,Weapon_Create_Stick0700,weapon,PROVEN,SET 0114 info+4 (desc 8052081C); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80065428,Weapon_InitResources_Stick0700,weapon,PROVEN,SET 0114 hook04; '%s::Initialize' with name Stick0700; BulletType_Init/WeaponRegistry_MarkLoaded(56)
+8006546C,WeaponItem_Create_Stick0604,weapon,PROVEN,SET 0113 info+8; new(0x10) Weapon::Item
+800654B0,Weapon_Create_Stick0604,weapon,PROVEN,SET 0113 info+4 (desc 805207C8); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80065594,Weapon_InitResources_Stick0604,weapon,PROVEN,SET 0113 hook04; '%s::Initialize' with name Stick0604; BulletType_Init/WeaponRegistry_MarkLoaded(55)
+800655D8,WeaponItem_Create_Stick0603,weapon,PROVEN,SET 0112 info+8; new(0x10) Weapon::Item
+8006561C,Weapon_Create_Stick0603,weapon,PROVEN,SET 0112 info+4 (desc 80520774); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80065700,Weapon_InitResources_Stick0603,weapon,PROVEN,SET 0112 hook04; '%s::Initialize' with name Stick0603; BulletType_Init/WeaponRegistry_MarkLoaded(54)
+80065750,WeaponItem_Create_Stick0602,weapon,PROVEN,SET 0111 info+8; new(0x10) Weapon::Item
+80065794,Weapon_Create_Stick0602,weapon,PROVEN,SET 0111 info+4 (desc 80520720); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80065878,Weapon_InitResources_Stick0602,weapon,PROVEN,SET 0111 hook04; '%s::Initialize' with name Stick0602; BulletType_Init/WeaponRegistry_MarkLoaded(53)
+800658BC,WeaponItem_Create_Stick0601,weapon,PROVEN,SET 0110 info+8; new(0x10) Weapon::Item
+80065900,Weapon_Create_Stick0601,weapon,PROVEN,SET 0110 info+4 (desc 805206CC); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+800659E4,Weapon_InitResources_Stick0601,weapon,PROVEN,SET 0110 hook04; '%s::Initialize' with name Stick0601; BulletType_Init/WeaponRegistry_MarkLoaded(52)
+80065A28,WeaponItem_Create_Stick0600,weapon,PROVEN,SET 010F info+8; new(0x10) Weapon::Item
+80065A6C,Weapon_Create_Stick0600,weapon,PROVEN,SET 010F info+4 (desc 80520678); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80065B50,Weapon_InitResources_Stick0600,weapon,PROVEN,SET 010F hook04; '%s::Initialize' with name Stick0600; BulletType_Init/WeaponRegistry_MarkLoaded(51)
+80065B94,WeaponItem_Create_Stick0504,weapon,PROVEN,SET 010E info+8; new(0x10) Weapon::Item
+80065BD8,Weapon_Create_Stick0504,weapon,PROVEN,SET 010E info+4 (desc 80520624); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80065CBC,Weapon_InitResources_Stick0504,weapon,PROVEN,SET 010E hook04; '%s::Initialize' with name Stick0504; BulletType_Init/WeaponRegistry_MarkLoaded(50)
+80065D0C,WeaponItem_Create_Stick0503,weapon,PROVEN,SET 010D info+8; new(0x10) Weapon::Item
+80065D50,Weapon_Create_Stick0503,weapon,PROVEN,SET 010D info+4 (desc 805205D0); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80065E34,Weapon_InitResources_Stick0503,weapon,PROVEN,SET 010D hook04; '%s::Initialize' with name Stick0503; BulletType_Init/WeaponRegistry_MarkLoaded(49)
+80065E84,WeaponItem_Create_Stick0502,weapon,PROVEN,SET 010C info+8; new(0x10) Weapon::Item
+80065EC8,Weapon_Create_Stick0502,weapon,PROVEN,SET 010C info+4 (desc 8052057C); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80065FAC,Weapon_InitResources_Stick0502,weapon,PROVEN,SET 010C hook04; '%s::Initialize' with name Stick0502; BulletType_Init/WeaponRegistry_MarkLoaded(48)
+80065FF0,WeaponItem_Create_Stick0501,weapon,PROVEN,SET 010B info+8; new(0x10) Weapon::Item
+80066034,Weapon_Create_Stick0501,weapon,PROVEN,SET 010B info+4 (desc 80520528); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80066118,Weapon_InitResources_Stick0501,weapon,PROVEN,SET 010B hook04; '%s::Initialize' with name Stick0501; BulletType_Init/WeaponRegistry_MarkLoaded(47)
+8006615C,WeaponItem_Create_Stick0404,weapon,PROVEN,SET 0109 info+8; new(0x10) Weapon::Item
+800661A0,Weapon_Create_Stick0404,weapon,PROVEN,SET 0109 info+4 (desc 805204D4); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80066284,Weapon_InitResources_Stick0404,weapon,PROVEN,SET 0109 hook04; '%s::Initialize' with name Stick0404; BulletType_Init/WeaponRegistry_MarkLoaded(45)
+800662D4,WeaponItem_Create_Stick0403,weapon,PROVEN,SET 0108 info+8; new(0x10) Weapon::Item
+80066318,Weapon_Create_Stick0403,weapon,PROVEN,SET 0108 info+4 (desc 80520480); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+800663FC,Weapon_InitResources_Stick0403,weapon,PROVEN,SET 0108 hook04; '%s::Initialize' with name Stick0403; BulletType_Init/WeaponRegistry_MarkLoaded(44)
+8006644C,WeaponItem_Create_Stick0402,weapon,PROVEN,SET 0107 info+8; new(0x10) Weapon::Item
+80066490,Weapon_Create_Stick0402,weapon,PROVEN,SET 0107 info+4 (desc 8052042C); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80066574,Weapon_InitResources_Stick0402,weapon,PROVEN,SET 0107 hook04; '%s::Initialize' with name Stick0402; BulletType_Init/WeaponRegistry_MarkLoaded(43)
+800665B8,WeaponItem_Create_Stick0401,weapon,PROVEN,SET 0106 info+8; new(0x10) Weapon::Item
+800665FC,Weapon_Create_Stick0401,weapon,PROVEN,SET 0106 info+4 (desc 805203D8); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+800666E0,Weapon_InitResources_Stick0401,weapon,PROVEN,SET 0106 hook04; '%s::Initialize' with name Stick0401; BulletType_Init/WeaponRegistry_MarkLoaded(42)
+80066730,WeaponItem_Create_Stick0400,weapon,PROVEN,SET 0105 info+8; new(0x10) Weapon::Item
+80066774,Weapon_Create_Stick0400,weapon,PROVEN,SET 0105 info+4 (desc 80520384); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80066858,Weapon_InitResources_Stick0400,weapon,PROVEN,SET 0105 hook04; '%s::Initialize' with name Stick0400; BulletType_Init/WeaponRegistry_MarkLoaded(41)
+8006689C,WeaponItem_Create_Stick0302,weapon,PROVEN,SET 0104 info+8; new(0x10) Weapon::Item
+800668E0,Weapon_Create_Stick0302,weapon,PROVEN,SET 0104 info+4 (desc 80520330); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+800669C4,Weapon_InitResources_Stick0302,weapon,PROVEN,SET 0104 hook04; '%s::Initialize' with name Stick0302; BulletType_Init/WeaponRegistry_MarkLoaded(40)
+80066A08,WeaponItem_Create_Stick0301,weapon,PROVEN,SET 0103 info+8; new(0x10) Weapon::Item
+80066A4C,Weapon_Create_Stick0301,weapon,PROVEN,SET 0103 info+4 (desc 805202DC); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80066B30,Weapon_InitResources_Stick0301,weapon,PROVEN,SET 0103 hook04; '%s::Initialize' with name Stick0301; BulletType_Init/WeaponRegistry_MarkLoaded(39)
+80066B80,WeaponItem_Create_Stick0202,weapon,PROVEN,SET 0101 info+8; new(0x10) Weapon::Item
+80066BC4,Weapon_Create_Stick0202,weapon,PROVEN,SET 0101 info+4 (desc 80520288); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80066CA8,Weapon_InitResources_Stick0202,weapon,PROVEN,SET 0101 hook04; '%s::Initialize' with name Stick0202; BulletType_Init/WeaponRegistry_MarkLoaded(37)
+80066CEC,WeaponItem_Create_Stick0201,weapon,PROVEN,SET 0100 info+8; new(0x10) Weapon::Item
+80066D30,Weapon_Create_Stick0201,weapon,PROVEN,SET 0100 info+4 (desc 80520234); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80066E14,Weapon_InitResources_Stick0201,weapon,PROVEN,SET 0100 hook04; '%s::Initialize' with name Stick0201; BulletType_Init/WeaponRegistry_MarkLoaded(36)
+80066E58,WeaponItem_Create_Stick0200,weapon,PROVEN,SET 00FF info+8; new(0x10) Weapon::Item
+80066E9C,Weapon_Create_Stick0200,weapon,PROVEN,SET 00FF info+4 (desc 805201E0); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+80066F80,Weapon_InitResources_Stick0200,weapon,PROVEN,SET 00FF hook04; '%s::Initialize' with name Stick0200; BulletType_Init/WeaponRegistry_MarkLoaded(35)
+80066FD0,WeaponItem_Create_Stick0100,weapon,PROVEN,SET 00FE info+8; new(0x10) Weapon::Item
+80067014,Weapon_Create_Stick0100,weapon,PROVEN,SET 00FE info+4 (desc 8052018C); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+800670F8,Weapon_InitResources_Stick0100,weapon,PROVEN,SET 00FE hook04; '%s::Initialize' with name Stick0100; BulletType_Init/WeaponRegistry_MarkLoaded(34)
+8006713C,WeaponItem_Create_EggSpear,weapon,PROVEN,SET 00FD info+8; new(0x10) Weapon::Item
+8006717C,Weapon_Create_EggSpear,weapon,PROVEN,SET 00FD info+4 (desc 80520138); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+8006725C,Weapon_InitResources_EggSpear,weapon,PROVEN,SET 00FD hook04; '%s::Initialize' with name EggSpear; BulletType_Init/WeaponRegistry_MarkLoaded(33)
+800672A0,WeaponItem_Create_SurvivalKnife,weapon,PROVEN,SET 00FA info+8; new(0x10) Weapon::Item
+800672E0,Weapon_Create_SurvivalKnife,weapon,PROVEN,SET 00FA info+4 (desc 805200E4); new(0x5C) Weapon::WeaponStickBase::WeaponStickBase; vptr Weapon::Stick
+800673C0,Weapon_InitResources_SurvivalKnife,weapon,PROVEN,SET 00FA hook04; '%s::Initialize' with name SurvivalKnife; BulletType_Init/WeaponRegistry_MarkLoaded(30)
+80068060,StickAttack_CreateAttack,damage,PROVEN,SetAttack(level +0x50;attr 0x80;power +0x48) @800681B8
+80068978,StickAttack_Construct,weapon,PROVEN,0x54 component of WeaponStickBase; +0x48 power; owner+0x5C==1 -> level 3 else 4 (+0x50)
+80068B70,WeaponItem_Create_SubMachineGun,weapon,PROVEN,SET 00C9 info+8; new(0x10) Weapon::Item
+80068BB0,Weapon_Create_SubMachineGun,weapon,PROVEN,SET 00C9 info+4 (desc 80520930); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::SubMachineGun
+80068CFC,Weapon::SubMachineGun::FireAt,weapon,PROVEN,RTTI vf0B; returns 1/12 s
+80068D80,Weapon::SubMachineGun::Fire,weapon,PROVEN,RTTI vf0A; returns 1/12 s (805F32E0)
+80068F24,Weapon_InitResources_SubMachineGun,weapon,PROVEN,SET 00C9 hook04; '%s::Initialize' with name SubMachineGun; BulletType_Init/WeaponRegistry_MarkLoaded(2)
+80068FF8,WeaponItem_Create_TankCannon,weapon,PROVEN,SET 00DE info+8; new(0x10) Weapon::Item
+80069038,Weapon_Create_TankCannon,weapon,PROVEN,SET 00DE info+4 (desc 805209E8); new(0x3C) Weapon::WeaponCannonBase::WeaponCannonBase; vptr Weapon::TankCannon
+800690CC,Weapon_InitResources_TankCannon,weapon,PROVEN,SET 00DE hook04; '%s::Initialize' with name TankCannon; BulletType_Init/WeaponRegistry_MarkLoaded(14)
+8006920C,BulletShot_BuildMuzzleForwardWithTarget,targeting,PROVEN,dir=muzzle rot*(0;0;1); team; shooter vel; target
+800693C0,BulletShot_BuildAimedAtPoint,targeting,PROVEN,dir=normalize(point-muzzle); team from owner+0x5C
+8006954C,BulletShot_BuildMuzzleForward,weapon,PROVEN,dir = muzzle rot * (0;0;1); team 0 if owner+0x5C==1 else 1
+8006977C,WeaponItem_Create_Vulcan,weapon,PROVEN,SET 00CC info+8; new(0x10) Weapon::Item
+800697BC,Weapon_Create_Vulcan,weapon,PROVEN,SET 00CC info+4 (desc 80520A98); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::Vulcan
+80069878,Weapon_InitResources_Vulcan,weapon,PROVEN,SET 00CC hook04; '%s::Initialize' with name Vulcan; BulletType_Init/WeaponRegistry_MarkLoaded(5)
+800699B0,Weapon::Vulcan::FireAt,weapon,PROVEN,RTTI vf0B; returns 1/12 s
+80069A34,Weapon::Vulcan::Fire,weapon,PROVEN,RTTI vf0A; returns 1/12 s (805F3328)
+80077A34,Player::Attack::GetImpl,damage,LIKELY,returns [this+0]
+80077A3C,Player::Attack::SetRadius,damage,STRONG,wrapper -> PlayerAttackImpl_SetRadius; ChaosBlast grows 10->200
+80077A84,Player::Attack::SetAttackType,damage,PROVEN,wrapper on +0x28 impl; callers: Jump/Fall/HomingJump/Launch 4; JumpDash/LightDash/SpinDash 5; Sliding 6; HomingAttack 7; ChaosBlast 0xA; ChaosControl 0xB
+80077AA8,Player::Attack::SetComboAttack,damage,STRONG,event 0..6 via jump table 80521370 -> types 0;1;2;3;4;8;9; +0x30 scale; caller motion-event handler fn_800AA4BC
+80078098,PlayerAttack_ApplyType,damage,PROVEN,row = 8052124C + 0x14*type: attach id; radius; attr; power; mode -> SetAttack(level 3;attr;power) @80078324
+80078830,PlayerAttackImpl_SetRadius,damage,STRONG,colli vslot 0x10 (+0x48)(-2;r;..)
+800788A0,PlayerAttack_SetType,damage,PROVEN,impl+0x20=type (if changed) then PlayerAttack_ApplyType
+8007DDA4,DriveVehicle_UpdateBoarding,vehicle,PROVEN,0.5 s arc to ride point then StartDriving
+8007DEE8,DriveVehicle_Detach,vehicle,PROVEN,vehicle vslot 0x11; ReleaseRider; clears player+0x258
+8007E23C,VehicleRef_IsExpired,vehicle,PROVEN,weak ref count == 0
+8007E268,DriveVehicle_StartDriving,vehicle,PROVEN,vehicle vslot 0x10 OnRideStart; bit1; flag 0x28
+8007E3D0,DriveVehicle_GetSeatPose,vehicle,PROVEN,vehicle vslot 0xB + R*(0;player+0x274;0); AirSaucer bones
+8007E660,DriveVehicle_SnapToSeat,vehicle,PROVEN,player pos/rot = seat pose
+8007E8B8,Player::Behavior::DriveVehicle::OnCommand,vehicle,PROVEN,RTTI vf04; re-sends AccelerateInput/ControlVehicle to vehicle
+8007EA1C,Player::Behavior::DriveVehicle::Leave,vehicle,PROVEN,RTTI vf03; clears flags/A0 bits; Detach
+8007EB0C,Player::Behavior::DriveVehicle::Enter,vehicle,PROVEN,RTTI vf02; TryRide; flags 0x10/0x31/0x38/0x40/0x43; A0 bits
+8007EEF0,Player::Behavior::DriveVehicle::CanEnter,vehicle,PROVEN,RTTI vf01; vehicle valid and no rider
+80093F50,Player_ClassifyInputDirection,targeting,PROVEN,0 fwd(dot>0.707) 3 back(<-0.707) 1/2 sides via cross(fwd;groundNormal)
+80095F14,PlayerCharaColli_OnDamaged,damage,PROVEN,bound {0;-1;80095F14} at 80521D64; team/proxy filters (result 8); power>0 -> DamageCommand(dir param+0x34;prio 4;power 10.0) result 1
+80096C44,PlayerCharaColli_Setup,damage,STRONG,player body collision; CharaColliAttack_SetDefense(defense 0;PlayerCharaColli_OnDamaged)
+80096E54,CharaColliAttack_SetDefense,damage,PROVEN,(attack;defense r4;onDamaged r5): +0x55=1 +0x3C; binds list +0x1C
+8009AE40,Player::GetOnVehicleCommand::Execute,vehicle,PROVEN,RTTI vf01; InitializeArgsDriveVehicle -> ChangeBehavior(0x1B)
+8009BAD8,Player::AddWeaponCommand::Execute,weapon,PROVEN,RTTI vf01; different weapon -> ShadowWeapon vslot 0xB; ShadowWeapon::AddWeapon(+0x14;+0x18); rumble 6
+8009BD98,Player::PickupWeaponCommand::Execute,weapon,PROVEN,RTTI vf01; grounded -> PickupWeapon behavior; else throw current + UseCommand to object
+800A18B0,UserInput_FindLightDashTarget,targeting,PROVEN,A0.3; nearest target flag 0x8; dist<50; LOS ray
+800A29BC,LightDashRange_StaticInit,targeting,PROVEN,sbss 805EF608=50
+800AB18C,PlayerBase_GetRiderProxy,vehicle,STRONG,player+0x254 proxy[i]; 0 = vehicle rider ref; 1 = vehicle+0x88
+800B6A88,PlayerTarget_Create,targeting,PROVEN,new(0x1C) Player::Shadow::PlayerTarget; stored player+0x24C
+800B6AD0,Player::Shadow::PlayerTarget::AimLocalToWorld,targeting,STRONG,RTTI vf09 rotate by impl+0x38/+0x3C then world
+800B6B9C,Player::Shadow::PlayerTarget::GetNearestTarget,targeting,STRONG,RTTI vf08 impl+0x4C; LightDash/UserInput use
+800B6BC4,Player::Shadow::PlayerTarget::GetAimTarget,targeting,STRONG,RTTI vf07 impl+0x44
+800B6BEC,Player::Shadow::PlayerTarget::GetAimPoint,targeting,STRONG,RTTI vf06 impl+0x20 smoothed
+800B6C1C,Player::Shadow::PlayerTarget::GetLookPoint,targeting,STRONG,RTTI vf05 impl+0x14
+800B6C4C,Player::Shadow::PlayerTarget::SetLookPoint,targeting,STRONG,RTTI vf04 impl+8=v; +4=duration
+800B6C70,Player::Shadow::PlayerTarget::HasAimTarget,targeting,STRONG,RTTI vf03 impl bit0; ControlGun chooses aimed fire
+800B6C98,Player::Shadow::PlayerTarget::HasLookTarget,targeting,STRONG,RTTI vf02 impl bit1
+800B6CC0,Player::Shadow::PlayerTarget::Update,targeting,PROVEN,RTTI vf01 base update then fn_800B76B0
+800B6E38,PlayerTargetImpl_Search,targeting,PROVEN,nearest front target +0x4C; 0x2000 look; 0x800 aim (flag 0x41; 45deg; +-20deg; weapon range)
+800B73C8,PlayerTargetImpl_SmoothAimPoint,targeting,PROVEN,max turn 360deg*dt (805F3E2C)
+800B759C,PlayerTargetImpl_AimDirToWorld,targeting,STRONG,flag 0x40 Player_LocalToWorldDir else heading+player+0x198
+800B7670,PlayerTargetImpl_SetLookPoint,targeting,PROVEN,+8=v; +4=t
+800B76B0,PlayerTargetImpl_Update,targeting,PROVEN,timers +4/+0x54; search; look point selection
+800B77C8,PlayerTargetImpl_Init,targeting,PROVEN,own Target flags|=0x90080; |=0x2C00 if stage row+8 bit0/bit2
+800B7920,PlayerTargetImpl_Construct,targeting,PROVEN,0x64 object from PlayerTarget ctor
+800C4414,AttackCallbackList_IsEmpty,damage,PROVEN,returns first word == 0
+800C475C,CharaColliAttack_CreateForColli,damage,PROVEN,dynamic_cast colli to CharaColliBaseCharInfo; new(0x58) CharaColliAttack stored as weak ptr colli+0x38
+800C6608,CharaColli_DispatchAttackOneWay,damage,LIKELY,same enable/level test and param build for one contact; callers are shape tests 0x800C44AC..0x800C615C
+800C6920,AttackCallbackList_Invoke,damage,STRONG,calls fn_80078B9C(list;param) when list non-empty
+800C694C,AttackCallbackParam_SetColliRef,damage,STRONG,copies a shared_ptr<CharaColliAttack> into param+0 (attacker) / param+8 (target)
+800C698C,SonicteamUSA::System::CharaColli::AttackCallbackParam::~AttackCallbackParam,damage,LIKELY,called with -1 at the end of both dispatchers
+800C69E8,SonicteamUSA::System::CharaColli::AttackCallbackParam::AttackCallbackParam,damage,PROVEN,zeroes +0x34..+0x50 and +0x54; smart ptrs +0/+8; stack object of the dispatchers
+800C6A4C,CharaColli_DispatchAttackPair,damage,PROVEN,both directions: attacker+0x54 && target+0x55 && level(+0x38)>defense(+0x3C) (0x800C6C30) -> param.power=+0x34; invokes lists +0x10/+0x1C/+0x28
+800C6F6C,CharaColli_GetContactNormal,damage,STRONG,contact+0x14 normal; default (0;1;0); -> param+0x24
+800C6FE0,CharaColli_GetContactPoint,damage,STRONG,contact+0x14 position or contact+0xC+4; default zero; -> param+0x18
+800C9D20,SetSlot_GetRangeDistance,vehicle,PROVEN,returns 100*(rec+0x23)+100
+800CD220,Target_SetPosition,targeting,PROVEN,Vec3_Copy(this+8;v)
+800E8C80,BatteryArmy_Create,vehicle,PROVEN,type 10; new(0x1F4)
+800E8CF8,BatteryArmy_LoadResources,vehicle,PROVEN,catalog 0x18 hook04; MarkLoaded(10)
+800E9348,BatteryArmy_Fire,vehicle,PROVEN,bullet type 0x1C; returns 0.2 s
+800EA15C,Vehicle::BatteryArmy::OnCommand,vehicle,STRONG,RTTI vf0D; aim; X eject; B fire (sub-report)
+800EA8B4,Vehicle::BatteryArmy::Setup,vehicle,PROVEN,RTTI vf0C; HP 10
+800EAD10,BatteryArmy_StaticInit,vehicle,PROVEN,name BatteryArmy into desc 0x80525960 and registry
+800EAD3C,BatteryBlackKiller_Create,vehicle,PROVEN,type 11; new(0x1EC)
+800EADB4,BatteryBlackKiller_LoadResources,vehicle,PROVEN,catalog 0x39 hook04; MarkLoaded(11)
+800EB444,BatteryBlackKiller_Fire,vehicle,STRONG,bullet type 0x1D; 1.0 s cooldown (sub-report)
+800EC880,Vehicle::BatteryBlackKiller::Setup,vehicle,PROVEN,RTTI vf0C; HP 10
+800ECD18,BatteryBlackKiller_StaticInit,vehicle,PROVEN,name BatteryBlackKiller into desc 0x80525A40 and registry
+8011E508,SetVehicle_Create,vehicle,PROVEN,SET_VEHICLE 0x4F create hook: new(0x60) SetVehicleTask on layer 0xB
+8011E564,SetVehicleTask_ReleaseVehicle,vehicle,PROVEN,VehicleTask+4 |= 1 and clears +0x30; called by dtor/TrySpawn/CheckLink
+8011E588,SetVehicleTask_TrySpawn,vehicle,PROVEN,CheckLink; Vehicle_Spawn(+0x34); despawn dist = (range+1)*100
+8011E624,SetVehicleTask_CheckLink,vehicle,PROVEN,link byte +0x59; fn_80169430(link table) must be 1 else release + MarkRespawnable
+8011E690,SetVehicle::SetVehicleTask::Reset,vehicle,PROVEN,RTTI vf04; re-read slot pos/rot/params; TrySpawn; place
+8011E778,SetVehicle::SetVehicleTask::Update,vehicle,PROVEN,RTTI vf02; deferred spawn; hand over ridden vehicle; MarkRespawnable when none
+8011ED20,WeaponPickup_SpawnAtGround,weapon,STRONG,ray down 1000 then WeaponRegistry_CreateItem(w;-1) + pickup task; callers STICK (Stick::Stick::vf02) and fn_800DC878
+8011EF70,SetWeapon_GetParamLabel,weapon,LIKELY,returns registry name or 'Not Used'
+8011F010,SetWeapon_Create,weapon,PROVEN,SET 0x0020 create hook: new(0x48) SetWeapon::SetWeaponTask on layer 0xB
+8011F0C8,SetWeaponTask_ReadSetParams,weapon,PROVEN,pos/rot; param -> +0x40/+0x44 (weapon index) and model+0x34
+8011F764,SetWeapon_OnCommand,weapon,PROVEN,UseCommand (0xD) from player -> AddWeaponCommand(index;ammo) and hide pickup
+8011FDC0,SetWeapon::Arms::Arms,weapon,LIKELY,0x1C object (checked_deleter<SetWeapon::Arms> typeinfo); model + pickup collision from WeaponInfo_GetPickupColliSize
+8017B5CC,BossTarget_RegisterParts,targeting,STRONG,Target_Create per boss part mask list
+801A65EC,EnemyParamCommon::GetTargetPartMasks,targeting,STRONG,RTTI vf1B; table 8053BB48[type] of (part;mask) pairs -1 terminated
+801ACC84,Vehicle::Walker::HasOwnControls,vehicle,PROVEN,RTTI vf12; type == 6
+801ACCB8,WalkerCannon_Create,vehicle,PROVEN,type 6; new(0x118) Walker
+801ACD30,WalkerCannon_LoadResources,vehicle,PROVEN,catalog 0x4B hook04; MarkLoaded(6)
+801ACD84,Walker_Create,vehicle,PROVEN,type 5; new(0x118) Walker
+801ACDFC,Walker_LoadResources,vehicle,PROVEN,catalog 0x4A hook04; MarkLoaded(5)
+801ADB7C,Walker_ApplyDamage,vehicle,PROVEN,AddHP(-power); 2 s invulnerability; SE 0x2052
+801AE994,Vehicle::Walker::Update,vehicle,PROVEN,RTTI vf0F; states 0-5; X exit; death
+801AEE10,Vehicle::Walker::OnCommand,vehicle,PROVEN,RTTI vf0D; A jump/hover; X exit; B cannon; Damage
+801AF2F0,Vehicle::Walker::Setup,vehicle,PROVEN,RTTI vf0C; HP 8 (40 in 2P); cannon for type 6
+801AF9B0,Walker_StaticInit,vehicle,PROVEN,names Walker/WalkerCannon into desc 0x4A/0x4B and registry
+801AF9EC,AirSaucer_Create,vehicle,PROVEN,type 7; new(0x180) AirSaucer
+801AFA64,AirSaucer_LoadResources,vehicle,PROVEN,catalog 0x4C hook04; MarkLoaded(7)
+801AFDBC,AirSaucer_ApplyDamage,vehicle,STRONG,HP -= floor(dmg); 2 s; SE 0x2048 (sub-report)
+801B2370,Vehicle::AirSaucer::OnCommand,vehicle,PROVEN,RTTI vf0D; A jump/Use; X boost or exit
+801B296C,Vehicle::AirSaucer::Setup,vehicle,PROVEN,RTTI vf0C; HP 10
+801B3014,AirSaucer_StaticInit,vehicle,PROVEN,name AirSaucer; sbss floats 7.25/7/8
+801B3040,AirWing_Create,vehicle,PROVEN,type 8; new(0x120) BirdBase + AirWing vtable
+801B30C8,AirWing_LoadResources,vehicle,PROVEN,catalog 0x4D hook04; MarkLoaded(8)
+801B31E4,Vehicle::BirdBase::AirWing::Setup,vehicle,PROVEN,RTTI vf0C; HP 14
+801B3404,AirWing_StaticInit,vehicle,PROVEN,name AirWing; params 0x8053C6F0 +0/+4
+801B4BF0,VehicleRegistry_MarkLoaded,vehicle,PROVEN,0x8053C890[type].loaded = 1; called by every vehicle load hook
+801B4C0C,VehicleRegistry_Reset,vehicle,PROVEN,clears 14 loaded flags; VehicleDataEnd release hook
+801B4ED4,VehicleRegistry_GetName,vehicle,PROVEN,returns registry[type]->name
+801B5E44,VehicleTask_IsReleasableBySet,vehicle,PROVEN,vehicle vslot 0x14
+801B5E74,VehicleTask_HasRider,vehicle,PROVEN,vehicle+0x80 not empty
+801B5EA8,VehicleTask_GetType,vehicle,PROVEN,vehicle impl+0 type
+801B5ECC,Vehicle::VehicleTask::Update,vehicle,PROVEN,RTTI vf01; vehicle vslot 0xF(dt); far-despawn; 25/30 s abandon timer
+801B60BC,VehicleTask_SetDespawnDistance,vehicle,PROVEN,stores f1 at +0x30
+801B60C4,VehicleTask_SetTransform,vehicle,PROVEN,vehicle vslot 0xA(pos;rot)
+801B6284,Vehicle_IsFarFromCameras,vehicle,PROVEN,dist to camera unit 0 (and 1 in 2P) >= f1
+801B63D0,Vehicle_EjectRider,vehicle,PROVEN,sends Player::StartJumpCommand(dir;4) to rider +0x80
+801B65F4,TVehicleBase_SetUnoccupied,vehicle,PROVEN,flags +0x70: clr bit0; set bits 2/3; abandon timer 0; player index -1
+801B6664,TVehicleBase_SetOccupied,vehicle,PROVEN,flags +0x70 bit0 set; bit3 clr; player index = rider+0x54
+801B6888,Vehicle_RestoreHP,vehicle,PROVEN,impl+8 = impl+4; used by GetItemCommand item 5
+801B6898,Vehicle_GetHP,vehicle,PROVEN,returns impl+8
+801B68A4,Vehicle_SetHP,vehicle,PROVEN,impl+8 = f1
+801B68B0,Vehicle_AddHP,vehicle,PROVEN,impl+8 += f1 clamped to [0;max]
+801B6904,Vehicle_GetMaxHP,vehicle,PROVEN,returns impl+4
+801B6910,Vehicle_SetMaxHP,vehicle,PROVEN,impl+4 = f1
+801B691C,Vehicle::TVehicleBase::GetRidePoint,vehicle,PROVEN,RTTI vf0B; out pos/rot
+801B69DC,Vehicle::TVehicleBase::SetTransform,vehicle,PROVEN,RTTI vf0A; pos and rot copy
+801B6A4C,Vehicle_SetRiderFlagBit4,vehicle,PROVEN,+0x70 bit4 = arg (DriveVehicle passes player flag 0x2A)
+801B6A94,Vehicle_SetRiderProxy2,vehicle,PROVEN,+0x88 = ref
+801B6AB8,Vehicle_ReleaseRider,vehicle,PROVEN,if +0x80 == ref: reset +0x80/+0x88; dt source = 0x8057E780
+801B6B64,Vehicle_GetRiderRef,vehicle,PROVEN,returns this+0x80
+801B6B6C,Vehicle_TryRide,vehicle,PROVEN,if no rider: +0x80 = ref; dt source taken from the rider; returns bool
+801B6C00,Vehicle_DefaultOnCommand,vehicle,PROVEN,drops 0xB/0xC/0x101/0x121/0x122/0x12B/0x12C; executes the rest on the rider (vslot 3)
+801B6CD8,Vehicle_GetType,vehicle,PROVEN,impl+0
+801B6CE4,Vehicle_KillTask,vehicle,PROVEN,VehicleTask(+0x78)+4 |= 1
+801B6CF8,Vehicle_Init,vehicle,PROVEN,flags init; self ref +0x90; impl owner; vslot 0xC
+801B6D60,Vehicle::TVehicleBase::ForwardQuery8ToRider,vehicle,PROVEN,RTTI vf08; rider vslot 8 or 0
+801B6DE4,Vehicle::TVehicleBase::ForwardQuery5ToRider,vehicle,PROVEN,RTTI vf05; rider vslot 5 or 0
+801B6E58,Vehicle::TVehicleBase::ForwardQuery4ToRider,vehicle,PROVEN,RTTI vf04; rider vslot 4 or 0
+801B6ECC,Vehicle::TVehicleBase::SendCommand,vehicle,PROVEN,RTTI vf02; impl command unit enqueue
+801B727C,VehicleBaseImpl_OnCommandThunk,vehicle,PROVEN,bound PMF 0x8053C950; owner vslot 0xD(cmd)
+801B733C,VehicleBaseImpl_SendCommand,vehicle,PROVEN,CharCommandUnit +0x20 enqueue fn_801D9FAC
+801B76D8,VehicleBaseImpl_ctor,vehicle,PROVEN,new(0x2C) in TVehicleBase ctor; +0 type +4 maxHP +8 HP +0x20 CharCommandUnit
+801B8364,TVehicleCamera_ctor,vehicle,STRONG,target/rot ptrs; offset row+0x88 at +0x20; |offset| at +0x2C
+801B8B24,Vehicle::TVehicleCar::AbandonTimerEnabled,vehicle,PROVEN,RTTI vf15 returns 1
+801B8B2C,VehicleCar_Create,vehicle,PROVEN,info+0x28 of catalog 0x46-0x49; new(0x174) TVehicleCar(type)
+801B8B74,VehicleCar_ReleaseResources,vehicle,PROVEN,prints %s::Finalize
+801B8C18,Bike_ReleaseResources,vehicle,PROVEN,catalog 0x49 hook08
+801B8C3C,ArmedCar_ReleaseResources,vehicle,PROVEN,catalog 0x48 hook08
+801B8C60,OpenCar_ReleaseResources,vehicle,PROVEN,catalog 0x47 hook08
+801B8C84,NormalCar_ReleaseResources,vehicle,PROVEN,catalog 0x46 hook08
+801B8CA8,VehicleCar_LoadResources,vehicle,PROVEN,prints %s::Initialize; MarkLoaded(type); resource row 0x804CEBA8+(type-1)*0x188
+801B8DEC,Bike_LoadResources,vehicle,PROVEN,catalog 0x49 hook04 -> (4)
+801B8E18,ArmedCar_LoadResources,vehicle,PROVEN,catalog 0x48 hook04 -> (3)
+801B8E44,OpenCar_LoadResources,vehicle,PROVEN,catalog 0x47 hook04 -> (2)
+801B8E70,NormalCar_LoadResources,vehicle,PROVEN,catalog 0x46 hook04 -> (1)
+801B9590,Vehicle::TVehicleCar::OnRideEnd,vehicle,PROVEN,RTTI vf11; SetUnoccupied + CarMove SetState(1)
+801B95CC,Vehicle::TVehicleCar::OnRideStart,vehicle,PROVEN,RTTI vf10; SetOccupied + CarMove SetState(2;0)
+801B9608,Vehicle::TVehicleCar::GetRidePoint,vehicle,PROVEN,RTTI vf0B; CarMove+0x284
+801B9688,Vehicle::TVehicleCar::Update,vehicle,PROVEN,RTTI vf0F; first-frame init; CarMove update; SetTransform
+801B9700,Vehicle::TVehicleCar::SetTransform,vehicle,PROVEN,RTTI vf0A; base + CarMove Reset (HP = row+8)
+801B9744,Vehicle::TVehicleCar::OnCommand,vehicle,PROVEN,RTTI vf0D; CarMove OnCommand then DefaultOnCommand
+801B9EB8,TVehicleCarMove_IsAxleOnDrivableGround,vehicle,PROVEN,contact bit and n.up >= cos(row+0xA4)
+801BA8F8,VehicleCar_TypeToRow,vehicle,PROVEN,type 1..4 -> 0..3
+801BA948,TVehicleCarMove_ExitCar,vehicle,PROVEN,EjectRider + SetState(1) + unmanned collision body
+801BAF98,TVehicleCarMove_Reset,vehicle,PROVEN,SetMaxHP/SetHP = row+8
+801BB16C,TVehicleCarMove_CopyState,vehicle,PROVEN,copies current record +0x4 to previous +0x120
+801BB3BC,TVehicleCarMove_UpdateDamageLevel,vehicle,STRONG,+0x3C = 2 - int(HP/max/(1/3)); effects
+801BB858,TVehicleCarMove_OnAttackResult,vehicle,PROVEN,PMF 0x8053CEC0; victim result 1 -> car HP -= ram damage
+801BB8F4,TVehicleCarMove_OnAttack,vehicle,PROVEN,PMF 0x8053CEB4; hit+0x50 = ram damage
+801BB994,TVehicleCarMove_OnDamaged,vehicle,PROVEN,PMF 0x8053CEA8; HP -= hit+0x50; SE 0x202F; 60-tick invulnerability
+801BBA38,TVehicleCarMove_GetRamDamage,vehicle,PROVEN,int(row+4*2|v|/row+0x18)+(|v|>5)
+801BCCAC,TVehicleCarMove_Drive,vehicle,PROVEN,exit check; spin-turn or normal drive; axle forces
+801BD1F8,TVehicleCarMove_GetYawRate,vehicle,PROVEN,-steer*lerp(row+0x10;row+0x0C by |v|/row+0x1C)/30
+801BD294,TVehicleCarMove_ApplyAxleGrip,vehicle,STRONG,approach rates row+0x28/+0x2C; brake row+0x30
+801BD694,TVehicleCarMove_GetAxleAccel,vehicle,PROVEN,A: row+0x20 up to row+0x18; reverse row+0x24; gravity row+0x34
+801BD8FC,TVehicleCarMove_UpdateSpinTurn,vehicle,LIKELY,timers +0x70/+0x74/+0x78; gauge +0x7C; row+0x64..+0x78
+801BDBA0,TVehicleCarMove_ReadPad,vehicle,PROVEN,pad record 0x80576DF4+0x28*slot: steer; A throttle; X brake; stickY reverse; X exit
+801BE124,TVehicleCarMove_OnCommand,vehicle,PROVEN,handles SetAngle/ClrVelocity/SetVelocity only
+801BEC50,TVehicleCarMove_Update,vehicle,PROVEN,state 1/2 chains; HP<=0 -> SE 0x202E; eject; kill
+801BF1F8,TVehicleCarMove_SetState,vehicle,PROVEN,2: pad slot; TVehicleCamera; collision callbacks; 1/3: camera reset
+801BF8CC,TVehicleCarMove_FirstUpdate,vehicle,PROVEN,SetState(1); Reset
+801BF9B0,TVehicleCarMove_ctor,vehicle,PROVEN,new(0x2F0) in TVehicleCar ctor; (this; car; row)
+801BFD84,VehicleCar_StaticInit,vehicle,PROVEN,Vec3 params bss 0x80582140..; row+0xA4 = 45/60 deg
+801C096C,VehicleDataEnd_ReleaseResources,vehicle,PROVEN,release slot 3; VehicleRegistry_Reset
+801C0998,VehicleDataEnd_LoadResources,vehicle,PROVEN,ResourceOneFileReq common/vehicleResource.one -> ResourceManager slot 3
+801C09F8,VehicleDataStart_LoadResources,vehicle,PROVEN,catalog 0x258C hook04
+801D5894,SoundManager_PlaySEAt,sound,LIKELY,(mgr;id;pos;..) positional variant (explosions; Enemy_PlaySE)
+801D59AC,SoundManager_PlaySE,sound,STRONG,(mgr;id;..) id 0xFFFF = none; ids 0x201D missile; 0xE0xx item pickups; weapon pickup SE
+801DBC04,DamageCommand::DamageCommand,damage,PROVEN,second ctor (this;priority r4;power f1); direction = zero vector 805E1860; used by PlayerController_CheckDamageContact/Grind::Update/fn_8012C928
+801E4470,Target_CreateInteractable,targeting,PROVEN,mask|0x2020; stores at obj+0x6C; Target+0x20=f1 (30 for Bomb/Container/HealingUnit)
+801E7438,Target_Create,targeting,PROVEN,new(0x38) Target(owner;mask); deleter fn_801E7680; TargetManager_Register
+801E75EC,Target_CreateNoOwner,targeting,PROVEN,Target(mask) ctor 801E783C then TargetManager_Register
+801E7680,Target_Deleter,targeting,PROVEN,virtual dtor then TargetManager_PruneExpired
+801E76C0,Target_SetApproachDirection,targeting,STRONG,+0x14=dir; flags|=2 (approach cone uses cos at +0x24)
+801E76FC,Target::GetPosition,targeting,PROVEN,RTTI Target::vf00; returns this+8; used by all distance predicates
+801E79AC,TargetManageTask_Create,targeting,PROVEN,new(0x28) Task 'TargetManager'; StageManager_InitStage @801785EC layer 15
+801E7A08,TargetManageTask::DebugDrawUpdate,targeting,STRONG,RTTI vf01; for_each target fn_801E7B5C only if manager+0 byte set
+801E7B5C,TargetManager_DebugDrawTarget,targeting,LIKELY,marker radius 11 color 80/FF/FF/FF via fn_802E1494
+801E7C40,TargetManager_CreateSearchList,targeting,PROVEN,new(0x14) TargetSearchList(mgr+4); remove_if !(flags&1)
+801E7D30,TargetManager_PruneExpired,targeting,PROVEN,erases expired weak_ptr nodes
+801E7E04,TargetManager_Register,targeting,PROVEN,flags|=0x800000 once; push weak_ptr into manager list
+801E7F68,TargetManager_Construct,targeting,PROVEN,+0 u8 debug flag; +4 TargetList (weak_ptr<Target> list at +8)
+801E7FA4,TargetSearchList_ExcludeOwner,targeting,PROVEN,remove_if fn_801E8F84 owner(+0x28)==given
+801E8158,TargetSearchList_ExcludeTarget,targeting,PROVEN,remove_if fn_801E906C pointer equality
+801E82C4,TargetSearchList_KeepCone,targeting,PROVEN,fn_801E90F0 removes dot(dir;n(t-origin))<=cos
+801E8358,TargetSearchList_KeepOwnerKind,targeting,PROVEN,remove_if fn_801E91A4 owner+0x5C!=value or no owner
+801E83D0,TargetSearchList_KeepMask,targeting,PROVEN,remove_if fn_801E926C (flags&mask)==0
+801E8448,TargetSearchList_ExcludeMask,targeting,PROVEN,remove_if fn_801E92CC flags&mask
+801E84C0,TargetSearchList_KeepApproachable,targeting,PROVEN,fn_801E9324 flag-2 targets need dot(n(origin-t);+0x14)>=+0x24
+801E8528,TargetSearchList_KeepWithinRange,targeting,PROVEN,caches dist2 in Target+4 (fn_801E94E8); removes dist2>r*r (fn_801E9430)
+801E879C,TargetSearchList_FindNearest,targeting,PROVEN,min 3D dist2 from origin; strict <; first wins ties
+801E8F84,TargetPred_OwnedBy,targeting,PROVEN,owner pointer equal
+801E906C,TargetPred_IsSame,targeting,PROVEN,locked pointers equal
+801E90F0,TargetPred_OutsideCone,targeting,PROVEN,returns !(dot>cos)
+801E91A4,TargetPred_OwnerKindMismatch,targeting,PROVEN,owner+0x5C!=value or no owner
+801E926C,TargetPred_LacksMask,targeting,PROVEN,(flags&mask)==0
+801E92CC,TargetPred_HasMask,targeting,PROVEN,(flags&mask)!=0
+801E9324,TargetPred_NotApproachable,targeting,PROVEN,flag 2 and dot(n(origin-t);+0x14)<+0x24
+801E9430,TargetPred_OutOfRange,targeting,PROVEN,Target+4 > r2
+801E9498,TargetPred_Disabled,targeting,PROVEN,!(flags&1)
+801E94E8,TargetOp_CacheDistSq,targeting,PROVEN,Target+4=|pos-origin|^2
+801F3F70,WeaponItem_Create_EggBazooka,weapon,PROVEN,SET 00E1 info+8; new(0x10) Weapon::Item
+801F3FB0,Weapon_Create_EggBazooka,weapon,PROVEN,SET 00E1 info+4 (desc 80542EB0); new(0x3C) Weapon::WeaponCannonBase::WeaponCannonBase; vptr Weapon::EggBazooka
+801F4044,Weapon_InitResources_EggBazooka,weapon,PROVEN,SET 00E1 hook04; '%s::Initialize' with name EggBazooka; BulletType_Init/WeaponRegistry_MarkLoaded(17)
+801F41D0,Weapon_InitResources_EggGun,weapon,PROVEN,SET 00CE hook04; '%s::Initialize' with name EggGun; BulletType_Init/WeaponRegistry_MarkLoaded(7)
+801F4228,WeaponItem_Create_EggGun,weapon,PROVEN,SET 00CE info+8; new(0x10) Weapon::Item
+801F4268,Weapon_Create_EggGun,weapon,PROVEN,SET 00CE info+4 (desc 80542F60); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::EggGun
+801F43C0,Weapon::EggGun::FireAt,weapon,PROVEN,RTTI vf0B; returns -1.0
+801F4444,Weapon::EggGun::Fire,weapon,PROVEN,RTTI vf0A; returns -1.0 (805F7558)
+8020695C,PlayerTarget_SearchInCone,targeting,STRONG,mask r7; cone f1; exclude self; approach; nearest; used by LightDash chain fn_80089B90
+80206E58,PlayerTargetBase_GetAimYawOffset,targeting,PROVEN,returns +0x14; read by fn_800B6E38 and ShadowWeapon IK
+80206E60,Player::PlayerTargetBase::AimLocalToWorld,targeting,STRONG,RTTI vf09 Player_LocalToWorldDir
+80206E90,Player::PlayerTargetBase::GetNearestTarget,targeting,STRONG,RTTI vf08 empty ptr
+80206EB0,Player::PlayerTargetBase::GetAimTarget,targeting,STRONG,RTTI vf07 empty ptr
+80206ED0,Player::PlayerTargetBase::GetAimPoint,targeting,STRONG,RTTI vf06 default zero vec
+80206EF8,Player::PlayerTargetBase::GetLookPoint,targeting,STRONG,RTTI vf05 default zero vec 805E1860
+80206F34,Player::PlayerTargetBase::Update,targeting,PROVEN,RTTI vf01; own Target pos/enable (flags 0x45/0x10/0x27/0x44); grind aim-yaw +-40deg at 200deg/s
+802204FC,BulletCreate_Laser_OmochaoGun02,weapon,PROVEN,Laser type 4 (power 10); row 80547170 (idx 64)
+80220540,BulletCreate_Laser_OmochaoGun01,weapon,PROVEN,Laser type 3 (power 6); row 8054715C (idx 63)
+80220584,BulletCreate_Laser_Reflector,weapon,PROVEN,Laser type 2 (power 5); row 80547148 (idx 27)
+802205C8,BulletCreate_Laser_Splitter,weapon,PROVEN,Laser type 1 (power 4); row 80547134 (idx 26)
+8022060C,BulletCreate_Laser_LaserRifle,weapon,PROVEN,Laser type 0 (power 3); bullet-type row 80547120 (idx 25)
+80220BB8,BulletLaser_CreateAttack,damage,PROVEN,power = 8054707C[type]+0 (lfsx @80220CCC) -> Bullet_CreateCharaColliAttack
+802213A0,@unnamed@BulletLaser_cpp@::Laser::Laser,weapon,STRONG,writes vtbl .data 80547190; table 8054707C[type] stride 0x1C (power; speed; range)
+802217E0,LaserTable_StaticInit,weapon,PROVEN,.ctors; speed 1000/500/1000/300/300 and range 300/400/800/800/800
+80221864,WeaponItem_Create_LaserRifle,weapon,PROVEN,SET 00F1 info+8; new(0x10) Weapon::Item
+802218A4,Weapon_Create_LaserRifle,weapon,PROVEN,SET 00F1 info+4 (desc 80547248); new(0x48) ?
+8022192C,Weapon_InitResources_LaserRifle,weapon,PROVEN,SET 00F1 hook04; '%s::Initialize' with name LaserRifle; BulletType_Init/WeaponRegistry_MarkLoaded(25)
+8022564C,WeaponItem_Create_Reflector,weapon,PROVEN,SET 00F3 info+8; new(0x10) Weapon::Item
+8022568C,Weapon_Create_Reflector,weapon,PROVEN,SET 00F3 info+4 (desc 805474B0); new(0x48) ?
+80225714,Weapon_InitResources_Reflector,weapon,PROVEN,SET 00F3 hook04; '%s::Initialize' with name Reflector; BulletType_Init/WeaponRegistry_MarkLoaded(27)
+80225B38,WeaponItem_Create_Splitter,weapon,PROVEN,SET 00F2 info+8; new(0x10) Weapon::Item
+80225B78,Weapon_Create_Splitter,weapon,PROVEN,SET 00F2 info+4 (desc 80547588); new(0x48) ?
+80225C00,Weapon_InitResources_Splitter,weapon,PROVEN,SET 00F2 hook04; '%s::Initialize' with name Splitter; BulletType_Init/WeaponRegistry_MarkLoaded(26)
+80226028,WeaponItem_Create_VacuumPod,weapon,PROVEN,SET 00F0 info+8; new(0x10) Weapon::Item
+80226068,Weapon_Create_VacuumPod,weapon,PROVEN,SET 00F0 info+4 (desc 80547660); new(0x90) Weapon::VacuumPod::VacuumPod
+802260E8,Weapon_InitResources_VacuumPod,weapon,PROVEN,SET 00F0 hook04; '%s::Initialize' with name VacuumPod; BulletType_Init/WeaponRegistry_MarkLoaded(24)
+80239988,VacuumPod_SearchTarget,targeting,STRONG,mask 0x80; cone cos 0.5 or 0.866; owner-kind 1 filter
+8023A384,ShadowWeapon_ComputeArmIKTarget,targeting,STRONG,IK callback bound in ShadowWeapon_Equip; angle = 90deg*info+0x24 + aim yaw; adds recoil +0x40
+8023A490,ShadowWeapon_RemoveWeapon,weapon,PROVEN,release weapon/control; clear player flag 0x1F; HUD record +0x10/+0x14 = 0
+8023A5CC,ShadowWeapon_CreateAndEquip,weapon,PROVEN,fn_8005BD1C(w) create via info+4 then ShadowWeapon_Equip(ammo)
+8023A92C,ShadowWeapon_Equip,weapon,PROVEN,ammo; control by kind (1/6 gun;2 cannon;3 lockon;4 vacuum;5 stick); hold type/angle; IK bind; flag 0x1F; HUD record
+8023ADAC,ShadowWeapon_UpdateMuzzleFromHand,weapon,STRONG,motion locator 5 -> weapon SetMuzzle
+8023AE38,ShadowWeapon_HasAmmo,targeting,PROVEN,flag 0x3F or record+0x1C > 0
+8023AEB4,ShadowWeapon_AddAmmo,targeting,PROVEN,record+0x1C += n unless infinite (0x3F) for n<=0
+8023AF24,ShadowWeapon_SetAmmo,weapon,PROVEN,player record+0x1C = n (fn_8016F358)
+8023AF74,ShadowWeapon_GetAmmo,targeting,PROVEN,record+0x1C
+8023B08C,ShadowWeapon_ThrowWeapon,weapon,PROVEN,spawns thrown pickup with remaining ammo (fn_80221E8C); SE 0x3025; RemoveWeapon
+8023B260,Player::Shadow::ShadowWeapon::ShotFiredThisFrame,weapon,PROVEN,RTTI vf11; +0x30 bit 3; Ground::Update fire slowdown
+8023B288,Player::Shadow::ShadowWeapon::IsFiring,weapon,PROVEN,RTTI vf10; +0x30 bit 2
+8023B2B8,Player::Shadow::ShadowWeapon::ShowWeaponModel,weapon,LIKELY,RTTI vf0E; weapon slot 3
+8023B2F0,Player::Shadow::ShadowWeapon::HideWeaponModel,weapon,LIKELY,RTTI vf0D; weapon slot 4
+8023B328,Player::Shadow::ShadowWeapon::DiscardWeapon,weapon,PROVEN,RTTI vf0C; clear bit0/flag 0x19; RemoveWeapon
+8023B374,Player::Shadow::ShadowWeapon::ThrowWeaponIfAllowed,weapon,PROVEN,RTTI vf0B; unless flag 0x33: clear bit0/flag 0x19; ShadowWeapon_ThrowWeapon
+8023B3D8,Player::Shadow::ShadowWeapon::EndUse,targeting,PROVEN,RTTI vf0A bit0 clr; flag 0x19 clr
+8023B41C,Player::Shadow::ShadowWeapon::CancelUse,targeting,PROVEN,RTTI vf09 bit1 set; bit0 clr
+8023B46C,Player::Shadow::ShadowWeapon::StartUse,targeting,PROVEN,RTTI vf08 +0x30 bit0 set; flag 0x19
+8023B4BC,Player::Shadow::ShadowWeapon::GetWeaponRange,targeting,PROVEN,RTTI vf07 weapon vf05; 0 if none
+8023B4FC,Player::Shadow::ShadowWeapon::GetWeaponKind,targeting,PROVEN,RTTI vf06 weapon+0x18 (1 gun;2 cannon;3 lock-on;4 vacuum;5 stick)
+8023B538,Player::Shadow::ShadowWeapon::GetWeaponIndex,weapon,PROVEN,RTTI vf05; weapon+0x14 or 0
+8023B574,Player::Shadow::ShadowWeapon::GetWeapon,weapon,PROVEN,RTTI vf04; copies shared_ptr +0x34
+8023B598,Player::Shadow::ShadowWeapon::EquipWeaponObject,weapon,PROVEN,RTTI vf03; same-index -> AddAmmo else Remove + Equip
+8023B620,Player::Shadow::ShadowWeapon::AddWeapon,weapon,PROVEN,RTTI vf02 (AddWeaponCommand); pickup SE; same weapon -> AddAmmo; else Remove + CreateAndEquip
+8023B6D0,Player::Shadow::ShadowWeapon::Update,weapon,PROVEN,RTTI vf01; weapon Update + control Update; recoil (+0x40) and fire rumble on shot frames; decay x0.859375
+8023BAB8,ControlCannon_Create,weapon,PROVEN,new(0x20) ControlCannon (ctor 8023C188) for weapon kind 2
+8023BE44,@unnamed@PlayerShadowWeaponCannon_cpp@::ControlCannon::Update,targeting,STRONG,vtbl 80548CB4 slot 1
+8023C0A8,@unnamed@PlayerShadowWeaponCannon_cpp@::ControlCannon::~ControlCannon,targeting,PROVEN,vtbl 80548CB4 slot 0
+8023C188,@unnamed@PlayerShadowWeaponCannon_cpp@::ControlCannon::ControlCannon,targeting,PROVEN,writes vtbl 80548CB4 @8023C1B0
+8023C260,ControlGun_Create,weapon,PROVEN,new(0x18) ControlGun (ctor 8023CF48) for weapon kind 1/6
+8023C2B0,ControlGun_OnLaserReflect,targeting,STRONG,PMF; mask 0x800; front half-space; range 805F0FD4
+8023C688,ControlGun_AnnounceShotToAimTarget,targeting,PROVEN,AnnounceAttackCommand(src;4;4) to aim target owner
+8023C814,@unnamed@PlayerShadowWeaponGun_cpp@::ControlGun::Update,targeting,PROVEN,slot 1; HasAimTarget -> weapon vf0B(aimPoint) else vf0A
+8023CB84,@unnamed@PlayerShadowWeaponGun_cpp@::ControlGun::~ControlGun,targeting,PROVEN,clears flag 0x41 @8023CBA4
+8023CF48,@unnamed@PlayerShadowWeaponGun_cpp@::ControlGun::ControlGun,targeting,PROVEN,writes vtbl 80548CF8; sets player flag 0x41 @8023D150
+8023D4C8,LaserReflectRange_StaticInit,targeting,PROVEN,805F0FD4=100
+8023D4D4,ControlLockon_Create,weapon,PROVEN,new(0x18) ControlLockon (ctor 8023D80C) for weapon kind 3
+8023D524,@unnamed@PlayerShadowWeaponLockon_cpp@::ControlLockon::Update,targeting,PROVEN,slot 1; locks limited by ammo record+0x1C
+8023D784,@unnamed@PlayerShadowWeaponLockon_cpp@::ControlLockon::~ControlLockon,targeting,PROVEN,vtbl 80548DB4 slot 0
+8023D80C,@unnamed@PlayerShadowWeaponLockon_cpp@::ControlLockon::ControlLockon,targeting,PROVEN,writes vtbl 80548DB4 (typeinfo 805EB000)
+8023D8E4,ControlStick_Create,weapon,PROVEN,new(0x10) ControlStick (ctor 8023DA8C) for weapon kind 5
+8023D934,@unnamed@PlayerShadowWeaponStick_cpp@::ControlStick::Update,targeting,STRONG,vtbl 80548DD4 slot 1
+8023DA1C,@unnamed@PlayerShadowWeaponStick_cpp@::ControlStick::~ControlStick,targeting,PROVEN,vtbl 80548DD4 slot 0
+8023DA8C,@unnamed@PlayerShadowWeaponStick_cpp@::ControlStick::ControlStick,targeting,PROVEN,writes vtbl 80548DD4
+8023DB54,ControlVacuum_Create,weapon,PROVEN,new(0x18) ControlVacuum (ctor 8023DF84) for weapon kind 4
+8023DBA4,@unnamed@PlayerShadowWeaponVacuum_cpp@::ControlVacuum::Update,targeting,STRONG,slot 1; sets/clears flag 0x41
+8023DEE8,@unnamed@PlayerShadowWeaponVacuum_cpp@::ControlVacuum::~ControlVacuum,targeting,PROVEN,clears flag 0x41
+8023DF84,@unnamed@PlayerShadowWeaponVacuum_cpp@::ControlVacuum::ControlVacuum,targeting,PROVEN,writes vtbl 80548DF4
+8023E068,WeaponItem_Create_Torch0300,weapon,PROVEN,SET 0102 info+8; new(0x10) Weapon::Item
+8023E0AC,Weapon_Create_Torch0300,weapon,PROVEN,SET 0102 info+4 (desc 80548E20); new(0x90) ?
+8023E138,Weapon_InitResources_Torch0300,weapon,PROVEN,SET 0102 hook04; '%s::Initialize' with name Torch0300; BulletType_Init/WeaponRegistry_MarkLoaded(38)
+8023E7D4,Torch_CreateFireAttack,damage,PROVEN,SetAttack(level 5;attr 0x400;power 0.0 805F83FC)
+8023F308,@unnamed@WeaponTorch_cpp@::Torch::Torch,weapon,STRONG,WeaponStickBase(power 1.0) + fire attack; created by Torch0300 factory 8023E0AC
+80275288,WeaponItem_Create_BigWormShooter,weapon,PROVEN,SET 00EB info+8; new(0x10) Weapon::Item
+802752C8,Weapon_Create_BigWormShooter,weapon,PROVEN,SET 00EB info+4 (desc 8054E244); new(0x44) ?
+80275360,Weapon_InitResources_BigWormShooter,weapon,PROVEN,SET 00EB hook04; '%s::Initialize' with name BigWormShooter; BulletType_Init/WeaponRegistry_MarkLoaded(23)
+80275420,WeaponItem_Create_WideWormShooter,weapon,PROVEN,SET 00EA info+8; new(0x10) Weapon::Item
+80275460,Weapon_Create_WideWormShooter,weapon,PROVEN,SET 00EA info+4 (desc 8054E1F0); new(0x44) ?
+802754F8,Weapon_InitResources_WideWormShooter,weapon,PROVEN,SET 00EA hook04; '%s::Initialize' with name WideWormShooter; BulletType_Init/WeaponRegistry_MarkLoaded(22)
+802755B8,WeaponItem_Create_WormShooter,weapon,PROVEN,SET 00E9 info+8; new(0x10) Weapon::Item
+802755F8,Weapon_Create_WormShooter,weapon,PROVEN,SET 00E9 info+4 (desc 8054E19C); new(0x44) ?
+80275690,Weapon_InitResources_WormShooter,weapon,PROVEN,SET 00E9 hook04; '%s::Initialize' with name WormShooter; BulletType_Init/WeaponRegistry_MarkLoaded(21)
+80275AA0,@unnamed@WeaponWormShooter_cpp@::WormShooterBase::WormShooterBase,targeting,PROVEN,vtbl 8054E2B8 typeinfo 805EBB10; WeaponLockonBase(maxLocks;idx)
+80275C40,WeaponItem_Create_HealCannon02,weapon,PROVEN,weapon registry idx 66 info 8054E338 +8
+80275C80,Weapon_Create_HealCannon02,weapon,PROVEN,weapon registry idx 66 info 8054E338 +4
+80275CDC,WeaponItem_Create_HealCannon01,weapon,PROVEN,weapon registry idx 65 info 8054E308 +8
+80275D1C,Weapon_Create_HealCannon01,weapon,PROVEN,weapon registry idx 65 info 8054E308 +4
+80275EEC,SpecialWeapons_LoadAll,weapon,PROVEN,loads Katana/Satellite/VacuumEgg/Omochao/HealCannon/ShadowRifle resources and marks idx 57..67
+80275F20,WeaponItem_Create_Katana02,weapon,PROVEN,weapon registry idx 58 info 8054E3F8 +8
+80275F60,Weapon_Create_Katana02,weapon,PROVEN,weapon registry idx 58 info 8054E3F8 +4
+80276014,WeaponItem_Create_Katana01,weapon,PROVEN,weapon registry idx 57 info 8054E3C8 +8
+80276054,Weapon_Create_Katana01,weapon,PROVEN,weapon registry idx 57 info 8054E3C8 +4
+80276678,WeaponItem_Create_OmochaoGun02,weapon,PROVEN,weapon registry idx 64 info 8054E4B8 +8
+802766B8,Weapon_Create_OmochaoGun02,weapon,PROVEN,weapon registry idx 64 info 8054E4B8 +4
+8027670C,WeaponItem_Create_OmochaoGun01,weapon,PROVEN,weapon registry idx 63 info 8054E488 +8
+8027674C,Weapon_Create_OmochaoGun01,weapon,PROVEN,weapon registry idx 63 info 8054E488 +4
+80276D80,WeaponItem_Create_SatelliteLaser02,weapon,PROVEN,weapon registry idx 60 info 8054E598 +8
+80276DC0,Weapon_Create_SatelliteLaser02,weapon,PROVEN,weapon registry idx 60 info 8054E598 +4
+80276E54,WeaponItem_Create_SatelliteLaser01,weapon,PROVEN,weapon registry idx 59 info 8054E568 +8
+80276E94,Weapon_Create_SatelliteLaser01,weapon,PROVEN,weapon registry idx 59 info 8054E568 +4
+802771EC,WeaponItem_Create_ShadowRifle,weapon,PROVEN,weapon registry idx 67 info 8054E620 +8
+8027722C,Weapon_Create_ShadowRifle,weapon,PROVEN,weapon registry idx 67 info 8054E620 +4
+802775F8,WeaponItem_Create_VacuumEgg02,weapon,PROVEN,weapon registry idx 62 info 8054E6E8 +8
+80277648,Weapon_Create_VacuumEgg02,weapon,PROVEN,weapon registry idx 62 info 8054E6E8 +4
+8027769C,WeaponItem_Create_VacuumEgg01,weapon,PROVEN,weapon registry idx 61 info 8054E6B8 +8
+802776EC,Weapon_Create_VacuumEgg01,weapon,PROVEN,weapon registry idx 61 info 8054E6B8 +4
+8027D968,ThrowObject_CreateAttack,damage,PROVEN,Bullet_CreateCharaColliAttack(power 6.0 805F91C8); ThrowObject ctors 8027D58C/8027D5A8
+8027F3B8,SuperShadow_Setup,player,STRONG,caller Player::Shadow::Super::Super; flags 0x24/0x25 (stage 0x2C6)/0x33; equips ChaosSpear with 999 ammo via ShadowWeapon vslot 3
+802CB16C,BirdBase_ApplyDamage,vehicle,STRONG,AddHP(-floor(power)); 2 s; SE 0x205A (sub-report)
+802CC3D4,Vehicle::BirdBase::BirdBase::OnCommand,vehicle,STRONG,RTTI vf0D; A boost; X eject (sub-report + spot check)
+802CC7F0,AirBolt_Create,vehicle,PROVEN,type 9; new(0x284) AirBolt
+802CC868,AirBolt_LoadResources,vehicle,PROVEN,catalog 0x4E hook04; MarkLoaded(9)
+802CCDF8,Vehicle::BirdBase::AirBolt::OnCommand,vehicle,STRONG,RTTI vf0D; B lock/fire bit (sub-report)
+802CCE90,Vehicle::BirdBase::AirBolt::Setup,vehicle,PROVEN,RTTI vf0C; HP 20
+802CD134,AirBolt_StaticInit,vehicle,PROVEN,name AirBolt; params 0x80559060 +0/+4
+802CD384,Weapon::AirBolt::AirBolt::OnLockAcquired,targeting,STRONG,RTTI vf0A sound 0x2020
+802CD3B4,Weapon::AirBolt::AirBolt::FireAtTarget,targeting,PROVEN,RTTI vf0B bullet type 8051EEAC; 0.25
+802CD43C,Weapon::AirBolt::AirBolt::Update,targeting,PROVEN,RTTI vf02 range 8051EEBC (2000)
+802CD610,Weapon::AirBolt::AirBolt::AirBolt,vehicle,PROVEN,WeaponLockonBase(this;owner;6;0x44)
+802F0CB8,Weapon_Create_ChaosSpear,weapon,PROVEN,only caller SuperShadow_Setup 0x8027F4E4
+802F1194,Weapon::ChaosSpear::ChaosSpear::FireCharged,weapon,PROVEN,RTTI vf0C (trigger release); charge = t/3 -> BulletCreate_ChaosSpear; power 6+14c
+802F1504,Weapon::ChaosSpear::ChaosSpear::Update,weapon,PROVEN,RTTI vf02; charge +0x7C += dt clamp 3.0; >= 2.4 -> +0x80 and cue 0xF
+802F17A8,WeaponItem_Create_DarkHammer,weapon,PROVEN,SET 00FC info+8; new(0x10) Weapon::Item
+802F17E8,Weapon_Create_DarkHammer,weapon,PROVEN,SET 00FC info+4 (desc 8055AEB8); new(0x74) Weapon::DarkHammer::DarkHammer
+802F1860,Weapon_InitResources_DarkHammer,weapon,PROVEN,SET 00FC hook04; '%s::Initialize' with name DarkHammer; BulletType_Init/WeaponRegistry_MarkLoaded(32)
+802F1D08,WeaponItem_Create_HeavyShot,weapon,PROVEN,SET 00D2 info+8; new(0x10) Weapon::Item
+802F1D48,Weapon_Create_HeavyShot,weapon,PROVEN,SET 00D2 info+4 (desc 8055AF68); new(0x3C) Weapon::WeaponGunBase::WeaponGunBase; vptr Weapon::HeavyShot
+802F1E04,Weapon_InitResources_HeavyShot,weapon,PROVEN,SET 00D2 hook04; '%s::Initialize' with name HeavyShot; BulletType_Init/WeaponRegistry_MarkLoaded(11)
+802F1F10,Weapon::HeavyShot::FireAt,weapon,PROVEN,RTTI vf0B; returns 0.125 s
+802F1F94,Weapon::HeavyShot::Fire,weapon,PROVEN,RTTI vf0A; returns 0.125 s (805FA474)
+802F2128,BulletCreate_ChaosSpear,weapon,PROVEN,new(0x64) Weapon::Bullet::ChaosSpear::ChaosSpear(shot;..;charge f1); caller ChaosSpear weapon vf0C
+8031766C,GunLiftLocal_Create,vehicle,PROVEN,type 13; new(0x1E0) GunLift(1)
+803176B8,GunLiftExpress_Create,vehicle,PROVEN,type 12; new(0x1E0) GunLift(0)
+80317708,GunLift_LoadResources,vehicle,PROVEN,catalog 0x1518 hook04; MarkLoaded(12;13)
+803178F4,Vehicle::GunLift::OnCommand,vehicle,STRONG,RTTI vf0D; A accelerate; X eject; B fire (sub-report)
+80317DB8,Vehicle::GunLift::Update,vehicle,STRONG,RTTI vf0F; path speed p0..p3; fire 0.0625 s (sub-report)
+80319DBC,GunLift_StaticInit,vehicle,PROVEN,names GunLiftExpress/GunLiftLocal; muzzle/eye offsets bss 0x80586000/0x8058600C
+8031B1DC,EnemyTarget_Construct,targeting,STRONG,category 0x10000/0x40000/0x20000 from enemy vslot2; one Target per (part;mask) pair
+8031B3A4,EnemyTarget_Create,targeting,STRONG,new(0x1C) EnemyTarget; called from EnemyStatusCommon::SetupCollision
+8033F77C,SpecialWeapon_SpawnUnlocked,weapon,STRONG,save bits (save+0x1710) pairs -> level -> table 8055EC98 {57..66}; bit 10 -> 67; ScatteringWeapon_Spawn
+8034ED50,Pad_Rumble,input,LIKELY,(out;pattern;padIndex); patterns 4 damage; 6 AddWeapon; registry+8 on fire
+80350210,VehicleEffect_UpdateDamageSmoke,vehicle,PROVEN,HP/max 0.55/0.30 -> effect table 0x80512C38[type][level]
+800A2FE8,Player_SpawnDarkAwakeEffect,player effects,STRONG,gauge 1 full path 0x800AF814-0x800AF830; calls 0x800A3830 and Awake ctor mode 0
+800A2FC0,Player_SpawnHeroAwakeEffect,player effects,STRONG,gauge 0 full path 0x800AF838-0x800AF850; calls 0x800A37A4 and Awake ctor mode 1
+800A51F0,Awake_Constructor,player effects,PROVEN,RTTI @unnamed@PlayerEffect_cpp@::Awake 0x805E59D0; vtable 0x80522A94; sets flag from table 0x804B39D4
+800A4D2C,Awake_Update,player effects,PROVEN,Awake vtable Update slot 0x80522AA0; clears table selected flag when gauge empty 0x800A4E14-0x800A4E20
+801899E0,BkLarvaGenerator_LoadSet,enemy,STRONG,SET position rotation params and sensor initialized at 801899F8-80189A30
+80189B70,BkLarvaGenerator_Update,enemy,STRONG,RTTI vtable slot 2 and state switch at 80189B94-80189BBC
+8018A7D0,BkLarva_ReportCollisionDefeat,enemy,STRONG,life event at 8018A9CC team 2 flags 1 or 5
+8018AA84,BkLarva_HandleCommand,enemy,STRONG,command 14 check at 8018AA9C and life event at 8018ABE0
+8018AF18,BkLarva_Update,enemy,STRONG,RTTI Task update slot and state switch at 8018AF40-8018AF74
+8017CB50,EggPawnBase::GetWeaponAttackMotion,enemy/eggpawn,PROVEN,EggPawnAI_WeaponAttack Enter 0x8017E210..0x8017E248 and loop 0x8017E164..0x8017E1A0 call SB vslot +0x280; getter returns weapon/shield motion IDs
+8017CBD8,EggPawnBase::GetWeaponAimMotion,enemy/eggpawn,PROVEN,EggPawnAI_WeaponAttack Update 0x8017DFE8..0x8017E024 calls SB vslot +0x274; getter returns weapon/shield motion IDs
+8017CC20,EggPawnBase::GetChargePauseMotion,enemy/eggpawn,STRONG,TukiAttack Update 0x8017E374..0x8017E3B8 and DashAttack Update 0x8017E668..0x8017E6AC call param vslot +0x48 through EggPawnBase thunk; getter returns weapon/shield motion IDs
+801952F8,GunRobot_Create,enemy/gunrobot,PROVEN,SET descriptor 0x805384AC create hook; allocates 0x3B0 and constructs GunRobotTask at 0x80195338
+8018684C,GunRobotAI::EnterInitialState,enemy/gunrobot,PROVEN,AI slot 0x0C; AppearType E+0x28C selects wait or ReturnHome at 0x80186868..0x8018698C
+8018678C,GunRobotAI::ReturnToWait,enemy/gunrobot,PROVEN,AI slot 0x0D; WaitActMoveType accessor 0x8019575C selects standing or moving
+801866CC,GunRobotAI::OnTargetFound,enemy/gunrobot,PROVEN,AI slot 0x0F; enters EnemyBaseAI_Caution singleton at 0x80186710..0x80186718
+801865E8,GunRobotAI::StartAttack,enemy/gunrobot,PROVEN,AI slot 0x10; enters GunRobotAI_WeaponAttack state at 0x80186604..0x80186608
+80186588,GunRobotAI::OnDeadPresentation,enemy/gunrobot,PROVEN,AI slot 0x14; invokes display and status component services without changing AI state
+80195A50,GunRobot::GetWeaponAttackMotion,enemy/gunrobot,PROVEN,weapon E+0x290 maps 0;1;5 to 4 and 2;3;4 to 5; other values to 2
+80186514,GunRobotAI_WeaponAttack::Enter,enemy/gunrobot,PROVEN,state enter plays attack motion and zeros AI+0x24
+80186308,GunRobotAI_WeaponAttack::Update,enemy/gunrobot,PROVEN,state update dispatches substeps 0;1;2 with motion; target search; movement; turn gates
+8019162C,BkWingSmallBase_HasAttackWindow,enemy.bkwingsmall,PROVEN,tests E+0x330 == 1; vtable +0x23C
+80181D3C,BkWingSmallAI_MoveOnPath_Update,enemy.bkwingsmall,PROVEN,AI+0x24 substep and inclusive FlyerCommon attack window then advances path
+80181E68,BkWingSmallAI_MoveOnPath_Enter,enemy.bkwingsmall,PROVEN,sets AI+0x24=0; requests motion; sets E+0x2F8/+0x2FC=1.0
+801822E4,BkWingSmallBase_UsesPath,enemy.bkwingsmall,PROVEN,tests E+0x32C == 1; vtable +0x238
+801823EC,BkWingSmallAI_Caution_Update,enemy.bkwingsmall,PROVEN,turns toward target; status motion flag A selects Attack
+80182518,BkWingSmallAI_Caution_Enter,enemy.bkwingsmall,PROVEN,requests motion and SE 0x603F
+80182598,BkWingSmallAI_OnTargetFound,enemy.bkwingsmall,PROVEN,selects Caution through EnemyAISM_ChangeState
+801825D0,BkWingSmallAI_ReturnToWait,enemy.bkwingsmall,PROVEN,AppearType path predicate chooses MoveOnPath else WaitFloating
+801838E4,BkWormAI_EnterInitialState,enemy.bkworm,PROVEN,display setup then WaitAppear singleton
+8018388C,BkWormAI_ReturnToWait,enemy.bkworm,PROVEN,AI+0x7C selects WaitAppear or WaitStanding
+8018342C,BkWormAI_WaitAppear_Update,enemy.bkworm,PROVEN,sensor and strict timer substeps
+801831D0,BkWormAI_Appear_Update,enemy.bkworm,PROVEN,turn and motion-end transition
+801830BC,BkWormAI_WaitStanding_Update,enemy.bkworm,PROVEN,strict timer then attack count load
+80182F48,BkWormAI_Attack_Update,enemy.bkworm,PROVEN,motion-end to AfterAttack
+80182CBC,BkWormAI_AfterAttack_Update,enemy.bkworm,PROVEN,predecrement count then Move or Attack
+80182964,BkWormAI_Move_Update,enemy.bkworm,PROVEN,two substeps with turn and motion-end

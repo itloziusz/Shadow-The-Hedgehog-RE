@@ -1,0 +1,130 @@
+address,current_name,subsystem,confidence,evidence
+8019FD00,EnemyAISM_ChangeState,enemy_ai,PROVEN,if sm+0xC locked: no-op; else cur.vf01(owner)+vf04(exit); prev=cur; cur=new; new.vf01+vf02(enter)
+8019FC54,EnemyAISM_RevertToPrevious,enemy_ai,PROVEN,ChangeState with new = sm+8 (previous); used by WaitFinishFalling/Idle updates
+8019FDB8,EnemyAISM_Lock,enemy_ai,PROVEN,sm+0xC = 1 (AI+0x34)
+8019FDAC,EnemyAISM_Unlock,enemy_ai,PROVEN,sm+0xC = 0 (AI+0x34)
+8019F528,EnemyAISM_Init,enemy_ai,STRONG,called by EnemyBaseAI ctor 0x8019F248 with (AI+0x28; AI); requests EnemyBaseAI_None via fn_8019F5E4
+8019F8F8,EnemyAI_TurnTowards,enemy_ai,STRONG,helper at AI+0x60; target yaw atan2(-x;-z); step min(rate*dt; |d|/2) >= 1 deg; returns |d| < 1 deg
+8019FA18,EnemyAITarget_GetPosition,enemy_ai,STRONG,tracker AI+0x38; recomputes via fn_8019FB08 unless cached (+8); returns +0xC
+8019FACC,EnemyAITarget_GetDistance,enemy_ai,LIKELY,result compared with 15/20 in GunSoldier ChaseTarget/NearAttack
+8019EACC,EnemyBaseAI::Update,enemy_ai,PROVEN,RTTI EnemyBaseAI::vf01; AI+0x20=dt; vf09; cur.vf01(bind)+vf03(update); vf0A
+8019EB54,EnemyBaseAI::PreUpdate,enemy_ai,PROVEN,RTTI vf09; IsDead edge -> slot 0x14; global 0x8057E828 -> Idle; status bit5 -> slot 0x12; flinch -> slot 0x13; airborne -> WaitFinishFalling
+8019E058,EnemyBaseAI::HandleMessage,enemy_ai,PROVEN,RTTI vf08; CharCommand id switch 0x10-0x1B (table 8053B73C) and 0x201-0x20C (8053B76C); bound as PMF 8053B6B8 in ctor
+8019DF7C,EnemyBaseAI::GetTargetPosition,enemy_ai,STRONG,RTTI vf02; nearest player position via fn_800742BC/fn_800A8E64 else own position
+8019EEC4,EnemyBaseAI::Init,enemy_ai,STRONG,RTTI vf00; calls AI slot 0xC (initial state) at 0x8019EED4; run in lifecycle state 2
+801885CC,GunSoldier::GunSoldierAI::EnterInitialState,enemy_ai,PROVEN,RTTI vf0C; rescued -> Thanks; AppearType 0 Standing; 1-3 Moving; 4 AppearHome; 5 Hinshi
+801883E0,GunSoldier::GunSoldierAI::ReturnToWait,enemy_ai,PROVEN,RTTI vf0D; as vf0C but AppearType 4 -> Standing
+801882B0,GunSoldier::GunSoldierAI::OnTargetFound,enemy_ai,PROVEN,RTTI vf0F; ChangeState(GunSoldierAI_Caution)
+801884E8,GunSoldier::GunSoldierAI::OnDead,enemy_ai,PROVEN,RTTI vf14; ChangeState(ToHinshi); called from PreUpdate death edge 0x8019EBE0
+801882E8,GunSoldier::GunSoldierAI::OnRescued,enemy_ai,PROVEN,RTTI vf16; E+0x356=1; unlock; ChangeState(Thanks); called by RecoverCommand case 0x8019E600
+801881A0,GunSoldierAI_StartCombat,enemy_ai,PROVEN,WeaponType E+0x278 0/1 -> ChaseTarget else Attack
+80186D50,GunSoldierAI_GetState_Caution,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_Caution at 0x805F06B0
+80188204,GunSoldierAI_GetState_Attack,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_Attack at 0x805F06D4
+801874BC,GunSoldierAI_GetState_ChaseTarget,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_ChaseTarget at 0x805F06BC
+801876B4,GunSoldierAI_GetState_NearAttack,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_NearAttack at 0x805F06C8
+80187204,GunSoldierAI_GetState_GoHome,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_GoHome at 0x805F06E0
+801880F4,GunSoldierAI_GetState_AppearHome,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_AppearHome at 0x805F06EC
+80188520,GunSoldierAI_GetState_ToHinshi,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_ToHinshi at 0x805F068C
+80187FC0,GunSoldierAI_GetState_Hinshi,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_Hinshi at 0x805F0698
+80188334,GunSoldierAI_GetState_Thanks,enemy_ai,PROVEN,static EnemyAIState_GunSoldierAI_Thanks at 0x805F06A4
+8019D970,EnemyBaseAI_GetState_Idle,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_Idle at 0x805F0400
+8019D3D8,EnemyBaseAI_GetState_Guard,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_Guard at 0x805F0430
+8019D27C,EnemyBaseAI_GetState_WaitFinishDamaged,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_WaitFinishDamaged at 0x805F0454
+8019EE18,EnemyBaseAI_GetState_WaitFinishFalling,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_WaitFinishFalling at 0x805F0460
+8019D120,EnemyBaseAI_GetState_Dead,enemy_ai,PROVEN,static EnemyAIState_EnemyBaseAI_Dead at 0x805F046C
+8019D534,EnemyBaseAI_GetState_Wait,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_Wait; requested by base AI slots 0xD/0xE/0x10/0x11
+8019D6E4,EnemyBaseAI_GetState_Caution,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_Caution; requested by EnemyBaseAI::vf0F
+8019CFC0,EnemyBaseAI_GetState_Recover,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_Recover; requested by EnemyBaseAI::vf16
+8019E974,EnemyBaseAI_GetState_CaptureWait,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_CaptureWait; BindCommand case 0x8019E37C
+8019EA20,EnemyBaseAI_GetState_WarpWait,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_WarpWait; GenerateCommand case 0x8019E24C
+8019F5E4,EnemyBaseAI_GetState_None,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_None; used by EnemyAISM_Init
+8019C014,EnemyBaseAI_GetState_GoHome,enemy_ai,PROVEN,ctor call EnemyAIState_EnemyBaseAI_GoHome; requested by base Caution update
+801A6DB8,EnemySensor_SetupFromSetParams,enemy,PROVEN,sensor E+0xA8 from raw SET misc: MoveRange (+0x18/+0x1C); centre = pos+rotY(rot.y+180+SearchAngle)*(0;0;SearchRange)+(0;SearchHeightOffset;0); SearchWidth (+0x38/+0x3C); SearchHeight (+0x40)
+801A6C7C,EnemySensor_IsInSearchArea,enemy,PROVEN,abs(y - sensor+0x30) < +0x40 and distXZ^2(pos; sensor+0x20) < +0x3C
+801A6D00,EnemySensor_IsInsideMoveRange,enemy,STRONG,distXZ^2(pos; home) < sensor+0x1C (MoveRange^2); used by EnemyMoveCommon::vf01 0x801A5C44
+801A6C38,EnemySensor_SetHome,enemy,PROVEN,copies vec to sensor+0xC and XZ to +0/+8
+801A7608,TEnemySetBase_InitFromSetSlot,enemy,PROVEN,called by TEnemySetBase::vf06 0x801A7748; SET pos/rot -> enemy transform; EnemySensor_SetupFromSetParams(E+0xA8; SetSlot_GetParamPtr)
+801A7718,Enemy_SetSpawnPosition,enemy,PROVEN,Vec3_Copy to E+0x48
+8017E1C4,Enemy_SetHomePosition,enemy,PROVEN,Vec3_Copy to E+0x6C; called on Standing/GoHome/AppearHome enter with E+0x48
+8017CA44,Enemy_GetPosition,enemy,PROVEN,returns [E+0x30] (vec3 position)
+8017CA38,Enemy_GetRotation,enemy,PROVEN,returns [E+0x30]+0xC (vec3 rotation; yaw at +4)
+8017C764,Enemy_GetDeltaTime,enemy,LIKELY,returns f32 [[E+0x30]+0x60]; used as dt by TEnemySetTask::Update and turn code
+80198D90,SoldierCommon_ReadSetParams,enemy,PROVEN,called by GunSoldierBase::vf24 and BkSoldierBase::vf21; HaveShield -> +0x270; AppearType -> +0x274; WeaponType -> +0x278; patrol table +0x288
+8018F0B4,SoldierSetParams_InitDefaults,enemy,PROVEN,writes 200;0;0;100;100;0;1;0... = GUN_SOLDIER catalog defaults into the 0x5C param block
+80198530,GunSoldier::GunSoldierBase::InitFromSet,enemy,PROVEN,RTTI vf24 (TEnemySetBase slot 6); SetSlot_GetParams(0x5C); clamps; STemporaryData read/create; HINSHI/OFFSETPOS handling
+80198340,GunSoldier::GunSoldierBase::InitStatus,enemy,PROVEN,RTTI vf0E (Status slot 0); EnemyStatusCommon::vf00; AppearType 5 -> HP 0 and IsDead/WasDead = 1
+801982FC,GunSoldier::GunSoldierBase::UpdateStatus,enemy,PROVEN,RTTI vf0F (Status slot 2); EnemyStatusCommon::vf02 then GunSoldier::WriteTempState
+80197700,GunSoldier::GunSoldierBase::TakeHit,enemy,PROVEN,RTTI vf12 (Status slot 0x1A); AppearType 5 immune; shield frontal block / absorb (SE 0x6074/0x6075); EnemyStatusCommon::ApplyHit
+80198184,GunSoldier::GunSoldierBase::BecomeInjured,enemy,STRONG,RTTI vf14 (Status slot 0x26) at death edge; drop shield; throw weapon (ScatteringWeapon); AppearType=5; SE 0x600E
+8019813C,GunSoldier::GunSoldierBase::OnRevived,enemy,STRONG,RTTI vf15 (Status slot 0x27) at revive edge; +0x356=1; AppearType=0
+801982E4,GunSoldier::GunSoldierBase::GetScoreId,enemy,PROVEN,RTTI vf13 (Status slot 0x2C); HaveShield (+0x304) ? 0x50 GunSoldierShield : 0x4F GunSoldier
+80198450,GunSoldier::GunSoldierBase::UpdateActivation,enemy,PROVEN,RTTI vf11 (Status slot 0xC); AppearType 4 stays hidden/inactive (status vf0D/vf0A) until EnemySensor_IsInSearchArea
+801980D0,GunSoldier::GunSoldierBase::SetupCollision,enemy,PROVEN,RTTI vf10 (Status slot 1); EnemyStatusCommon::vf01; HINSHI -> collision mask 0x200201
+80197F64,GunSoldier::GunSoldierBase::InitDisplay,enemy,PROVEN,RTTI vf17 (Disp slot 0); EnemyDispCommon::vf00; new(0x68) EnemyWeapon -> +0x350
+80197D64,GunSoldier::GunSoldierBase::UpdateWeaponAndLook,enemy,STRONG,RTTI vf0B (Disp slot 2 per frame); look-at controller +0x35C; weapon placement; SE 0x600D
+80197CF4,GunSoldier::GunSoldierBase::OnMotionEvent,enemy,STRONG,RTTI vf18 (Disp slot 0xE); event 0x5000 data 2 -> weapon[0]=+0x358; fn_801AB790 (fire)
+80197938,GunSoldier::GunSoldierBase::GetPatrolMode,enemy,PROVEN,RTTI vf0D; AppearType 1/2/3 -> 1/2/3 else 0
+801975DC,GunSoldier::GunSoldier::WriteTempState,enemy,PROVEN,primary vf25; STemporaryData(slot+0x14)+4 = 1 injured / 2 rescued / 0; called per status update and from dtor
+8019765C,GunSoldier_SetInjuredCollision,enemy,STRONG,EnemyCharaColliModule::SetAttributeMask(E+0x118; 0x200201); Hinshi enter
+80197634,GunSoldier_RestoreCollision,enemy,STRONG,EnemyCharaColliModule::SetAttributeMask(E+0x118; [805F6778]); Hinshi exit
+801A83B0,EnemyStatusCommon::ApplyHit,enemy,PROVEN,RTTI vf1A; ApplyDamage; kill latch +0x76; AwardKillScore; bit 0xC if player; flinch at 0.5*MaxHP; hit side +0x84
+801A8718,EnemyStatusCommon::ApplyDamage,enemy,PROVEN,RTTI vf1C; dmg>0: +0x74=1; +0x94+=1; HP(+0x7C)-=dmg; clamp 0; returns HP<=0
+8017BC08,EnemyStatusCommon::AddHP,enemy,PROVEN,RTTI vf2B; HP += f1 clamped to MaxHP (vf2A); used by RecoverCommand
+801A8A38,EnemyStatusCommon::Update,enemy,PROVEN,RTTI vf02; latches +0x8A..+0x91; flinch -> Move slot 0xB; IsDead(+0x90)=HP<=0; death edge vf23(1)+vf26; revive edge vf23(2)+vf27
+801A86CC,EnemyStatusCommon::EndFrame,enemy,PROVEN,RTTI vf05; +0x74=+0x75=0; +0x84=-1
+801A9560,EnemyStatusCommon::InitHP,enemy,PROVEN,RTTI vf00; HP=MaxHP=Param slot 0x19 (EnemyParamCommon::vf19 table 0x804CD678)
+801A8944,EnemyStatusCommon::AwardKillScore,enemy,PROVEN,RTTI vf24; Score_Award(attacker; status slot 0x2C score id)
+801A8894,EnemyStatusCommon::AwardRecoveryScore,enemy,PROVEN,RTTI vf25; team 0 -> 0x57 GunRecovery; 1 -> 0x68/0x6E EggRecovery; 2 -> 0x62 BkRecovery
+801A9088,EnemyStatusCommon::SetupCollision,enemy,STRONG,RTTI vf01; EnemyCharaColliModule::Setup(S+8) and callback binding
+8017B9D0,EnemyStatusCommon::SetMotion,enemy,STRONG,RTTI vf06; +0x70=id; motion module at +0x20
+801A8824,EnemyStatusCommon::IsRecentlyHit,enemy,PROVEN,RTTI vf0F; +0x94 > 0
+8017BB04,EnemyStatusCommon::IsDead,enemy,PROVEN,RTTI vf14; returns +0x90 (HP<=0)
+8017BB2C,EnemyStatusCommon::WasDead,enemy,PROVEN,RTTI vf19; returns +0x91
+8017BAF4,EnemyStatusCommon::IsFlinching,enemy,PROVEN,RTTI vf12; returns +0x8C
+8017BAFC,EnemyStatusCommon::IsAirborne,enemy,PROVEN,RTTI vf13; returns +0x8E (= !EnemyMoveCommon::IsGrounded)
+8017BAEC,EnemyStatusCommon::WasDamaged,enemy,PROVEN,RTTI vf11; returns +0x8A
+8017BBF0,EnemyStatusCommon::GetStateBits,enemy,PROVEN,RTTI vf28; returns &+0x80 bitset
+8017BB34,EnemyStatusCommon::GetHitSide,enemy,PROVEN,RTTI vf1B; returns +0x84
+8017BBF8,EnemyStatusCommon::GetHP,enemy,PROVEN,RTTI vf29; returns f32 +0x7C
+8017BC00,EnemyStatusCommon::GetMaxHP,enemy,PROVEN,RTTI vf2A; returns f32 +0x78
+8017BAC4,EnemyStatusCommon::SetActive,enemy,PROVEN,RTTI vf0A; +0x6C = r4 (lifecycle 3 waits for it)
+8017BAD4,EnemyStatusCommon::IsActive,enemy,PROVEN,RTTI vf0B; returns +0x6C
+8017BACC,EnemyStatusCommon::SetHidden,enemy,PROVEN,RTTI vf0D; +0x6D = r4 (TEnemySetTask::Update fades out)
+8017BADC,EnemyStatusCommon::IsHidden,enemy,PROVEN,RTTI vf0E; returns +0x6D
+8017BAB4,EnemyStatusCommon::GetMotionFlagA,enemy,LIKELY,RTTI vf09; returns +0x3A; used as motion-end test by AI states
+8017BABC,EnemyStatusCommon::GetMotionFlagB,enemy,LIKELY,RTTI vf08; returns +0x3B; used by Caution/Attack
+8017BC88,EnemyStatus_GetFlinchThreshold,enemy,PROVEN,status slot 0x31 (appended slot); 0.5 * MaxHP
+801A883C,EnemyStatus_IsFlinchOrKilled,enemy,PROVEN,status slot 0x30; +0x75 || +0x76
+801A8D6C,EnemyStatus_SetCollisionEnabled,enemy,LIKELY,fn_801A9BE4(S+8; a; b); (0;1) at death; (1;1) at revive
+801AA010,EnemyCharaColliModule::Setup,enemy,STRONG,builds body collision; binds PMFs 0x8053BCCC (0x801A978C -> reaction+0x10) and 0x8053BCD8 (0x801A9750 -> reaction+0x1C); class name from bind_t typeinfo 0x805E9318
+801A9750,EnemyCharaColliModule::OnDamaged,enemy,STRONG,AttackCallbackParam+0x54 = 5; Status slot 0x1A (GunSoldierBase::TakeHit)
+801A978C,EnemyCharaColliModule::OnContact,enemy,LIKELY,if IsRecentlyHit and attacker+0x5C==1 -> param+0x30 = 1
+801A9918,EnemyCharaColliModule::SetAttributeMask,enemy,LIKELY,called with 0x100000 (dead); 0x200201 (injured); default word 805F6778
+801A59C8,EnemyMoveCommon::Knockback,enemy,STRONG,RTTI vf0B; +0x5D=+0x5E=1; velocity +0x50 = rotY(yaw)*(0;0;+-1)*param[0]; y = param[1]*ParamVf18
+801A5B1C,EnemyMoveCommon::IsGrounded,enemy,PROVEN,RTTI vf04; +0x38 < 5.0
+801A5B34,EnemyMoveCommon::Update,enemy,STRONG,RTTI vf01; movement; clamps to EnemySensor_IsInsideMoveRange
+8017B8EC,TEnemySetBase::IsDeleteRequested,enemy,PROVEN,RTTI vf00; returns +0x14; TEnemySetTask::Update kills task
+8017B8F4,TEnemySetBase::IsDetached,enemy,PROVEN,RTTI vf01; returns +0x15; ~TEnemySetTask skips SetSlot_Detach
+8017B8FC,TEnemySetBase::RequestDelete,enemy,PROVEN,RTTI vf02; +0x14 = 1
+801A7240,TEnemySetBase::DetachKilled,enemy,PROVEN,RTTI vf03; +0x15=1; SetSlot_MarkKilledAndDetach (flag 0x8); not called for enemy type 0 death
+801A7200,TEnemySetBase::DetachRespawnable,enemy,PROVEN,RTTI vf04; +0x15=1; SetSlot_MarkRespawnableAndDetach (flag 0x10000)
+800C9EEC,SetSlot_MarkKilledAndDetach,set,PROVEN,flags |= 0x8; SetSlot_DisableAndDetach
+800C9EBC,SetSlot_MarkRespawnableAndDetach,set,PROVEN,flags |= 0x10000; SetSlot_DisableAndDetach
+800C9F1C,SetSlot_DisableAndDetach,set,PROVEN,flags &= ~1; SetSlot_Detach; SetData_UnlinkSlotFromLinkList(link id)
+800C9FD0,SetSlot_Detach,set,PROVEN,flags &= ~0x6; if flags&0x40000000 delete slot+0x14 and misc; slot+0xC = 0
+800CADB0,SetData_UnlinkSlotFromLinkList,set,PROVEN,removes slot from list head SetData+0x1C+4*link (prev +4 / next +8)
+800CA268,SetSlot_TestFlags,set,PROVEN,(rec+0x18 & mask) == mask
+800CA284,SetSlot_ClearFlags,set,PROVEN,rec+0x18 &= ~mask
+800CA298,SetSlot_SetFlags,set,PROVEN,rec+0x18 |= mask
+800CA10C,SetSlot_GetObjectId,set,PROVEN,returns u16 rec+0x20
+801A2D6C,EnemyManager_RegisterEnemy,enemy,STRONG,finds free id in map (+0; counter +0x20); stores enemy; id kept at E+0x28 by Enemy::Enemy
+801AAC40,EnemyWeapon_Drop,enemy,STRONG,spawns ScatteringWeapon via fn_80221F2C with velocity
+80221F2C,ScatteringWeapon_Spawn,weapon,STRONG,"new(0x80) task on layer 0xB; ctor 0x802224B0 names it ""ScatteringWeapon"""
+8019ADFC,Enemy_PlaySE,enemy,LIKELY,sound manager fn_8005328C then fn_801D5894 (positional) / fn_801D59AC
+8019AD10,Enemy_PlaySEOncePerFrame,enemy,LIKELY,as Enemy_PlaySE but deduplicated by frame stamp E+0xFC
+8007300C,Player::Npc::EnemyDeadByPlayerCommand::Execute,player_npc,STRONG,RTTI vf01; resolves NPC and calls fn_802F2E20(npc; +0x14 group; +0x18 count)
+80072F90,Player::Npc::EnemyDeadByPlayerCommand::DebugString,player_npc,PROVEN,"RTTI vf02; sprintf "" Group %d Count %d"""
+802F2E20,NpcPartner_OnEnemyDefeated,player_npc,LIKELY,acts when (count-1)%3==0; picks line by group/NPC type
+80108294,HealingBlast_SendRecover,weapon,STRONG,new RecoverCommand(amount=[r4+8]) sent via target +0x38 vslot 0x10; inside HealingUnit::HealingBlast code range
+8021CCDC,Attacker_IsPlayerAttack,enemy,LIKELY,obj+0x5C==1 and +0x50 in {1;2;3}; gates status bit 0xC (killed by player)
+80169460,LinkEvent_Set,set,LIKELY,table[link*8] = value; BitSet(table+link*8+4; 0); called when a link group's alive count reaches 0

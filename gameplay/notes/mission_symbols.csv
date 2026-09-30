@@ -1,0 +1,99 @@
+address,current_name,subsystem,confidence,evidence
+8006D7D0,MissionManager_Get,mission,PROVEN,lazy static bss 80576FBC; ctor fn_8016E7B8; dtor fn_8016E750 registered via __register_global_object
+8016E7B8,MissionManager_Construct,mission,PROVEN,+0=0; +4=-1; shared_ptr[3] at +8; +0x20=1; map at +0x30 filled by fn_8016CB48
+8016E750,MissionManager_Destruct,mission,STRONG,destroys map +0x30 (fn_8016CA24) and shared_ptr array +8; registered dtor of bss 80576FBC
+8016E4EC,MissionManager_InitStage,mission,PROVEN,called by StageManager_InitStage @80178604 with stage index bss 8057E80C; creates 3 missions via fn_8016B768 and MissionManagerTask
+8016DC80,MissionManager_Shutdown,mission,STRONG,called from MissionManagerTask dtor; +4=-1; resets 3 shared_ptrs; fn_80337DAC(stage timer bss 8057E7E8); +0=0
+8016DD58,MissionManager_Update,mission,PROVEN,called by MissionManagerTask::vf01; fn_8016B5B4 for each of 3 missions
+8016DDBC,MissionManager_CheckAllFailed,mission,PROVEN,all slots null or state 2 -> fn_801762D0(StageState;15=TimeupAction)
+8016DE18,MissionManager_OnGoalRing,mission,STRONG,clears first TimerGoalMission (type 5) else GoalMission (type 1); caller fn_80107330 registered by GoalRing handler fn_80106824
+8016E220,MissionManager_SetCurrentMission,mission,PROVEN,+0x20=slot; fn_80074B24(fn_8006F87C();slot); bss 8057E8AA = HasTimeLimit of that mission
+8016E1A8,MissionManager_IsMissionActivated,mission,STRONG,slot 1 always true; else mission+0x14; 0 when bss 8057E811 set
+8016E454,MissionManager_AutoActivateKey1C,mission,PROVEN,mission key (+4)==0x1C -> +0x14=+0x15=1 and made current
+8016E2D8,MissionManager_ResetAll,mission,PROVEN,called by StageAction::RestartAction::vf00; fn_8016B490 per mission; restart timer; current=1
+8016E360,MissionManager_RestoreCheckpoint,mission,PROVEN,called by StageAction::ContinueAction::vf00; fn_8016B4F4 per mission; current=+0x24
+8016E3DC,MissionManager_SaveCheckpoint,mission,PROVEN,called by checkpoint fn_80119350; fn_8016B554 per mission; +0x24=+0x20
+8007420C,MissionManager_GetMission,mission,PROVEN,returns shared_ptr copy of mgr+8+8*slot; used by all mission-progress gadgets
+8016B768,Mission_Create,mission,PROVEN,factory: fn_8016C7BC(map;key) then switch desc.type via jump table 8052C930 -> 8 Mission classes
+8016C7BC,MissionDescMap_Find,mission,STRONG,std::map lower_bound + end compare; returns node+0x10 or 0
+8016C8EC,MissionDescMap_InsertDefault,mission,PROVEN,inserts key -> {type;param;1;0}
+8016CB48,MissionDescMap_InitDefaults,mission,PROVEN,41 fn_8016C8EC calls keys 0x00-0x28
+8016D798,MissionDescMap_Clear,mission,STRONG,erases tree and resets header; only caller fn_8016CB48
+8016C690,MissionDescMap_Assign,mission,STRONG,map[key]=desc; only caller fn_801DF470
+8016B5B4,Mission_Update,mission,PROVEN,state not 1/2 -> vslot 0xF [[m]+0x44]
+8016B688,Mission_Clear,mission,PROVEN,state=1; fn_8016B43C; callers CountMission vf05/vf06; MissionClearCollision; goal ring; ElecCoreProgram
+8016B654,Mission_Fail,mission,PROVEN,state=2 unless already 1; fn_8016B330
+8016B43C,Mission_OnClear,mission,PROVEN,BasicMessageManage post(1); fn_801762D0(StageState;6=GoalAction) unless mode 9
+8016B330,Mission_OnFail,mission,PROVEN,post(2); CsdFiles/MissionFailed%s scene mf anim Dark/Hero; fn_8016DDBC
+8016B490,Mission_Reset,mission,PROVEN,state=0; flags 0; message reset; vslot 0xE
+8016B4F4,Mission_RestoreCheckpoint,mission,PROVEN,state=+0x10; +0x14=+0x15; vslot 0xD
+8016B554,Mission_SaveCheckpoint,mission,PROVEN,+0x10=state; +0x15=+0x14; vslot 0xC
+8016B31C,Mission::Mission::GetType,mission,PROVEN,RTTI Mission::vf01 (Mission-view slot 1) returns 0
+8016B624,Mission::Mission::GetCount,mission,PROVEN,RTTI Mission::vf04; idx0 state==1; idx1 state==2
+8016E824,Mission::MissionManagerTask::Update,mission,STRONG,RTTI MissionManagerTask::vf01 (Task slot 1); calls MissionManager_Update(dt)
+8016AE80,Mission::CountMission::GetType,mission,PROVEN,RTTI CountMission::vf01 returns 2
+8016B0DC,Mission::CountMission::GetCount,mission,PROVEN,RTTI CountMission::vf02; idx0 +0x18 else +0x1C
+8016B0D4,Mission::CountMission::GetRequired,mission,PROVEN,RTTI CountMission::vf03 returns +0x8
+8016B0CC,Mission::CountMission::GetFailCount,mission,PROVEN,RTTI CountMission::vf04 returns +0xC
+8016B00C,Mission::CountMission::AddCount,mission,PROVEN,RTTI CountMission::vf05; count+=delta; >=+0x8 -> Mission_Clear; idx1 vs +0xC -> Mission_Fail
+8016AF74,Mission::CountMission::SetCount,mission,PROVEN,RTTI CountMission::vf06; count=value; >=+0x8 -> Mission_Clear
+8016AF5C,Mission::CountMission::SetRequired,mission,PROVEN,RTTI CountMission::vf07; idx0 +0x8 else +0xC
+8016AF18,Mission::CountMission::SaveCheckpoint,mission,PROVEN,RTTI CountMission::vf08; +0x20/+0x24 = +0x18/+0x1C
+8016AED4,Mission::CountMission::RestoreCheckpoint,mission,PROVEN,RTTI CountMission::vf09; +0x18/+0x1C = +0x20/+0x24
+8016AE88,Mission::CountMission::Reset,mission,PROVEN,RTTI CountMission::vf0A; counts = initial +0x10/+0x14
+801F3C00,Mission::GoalMission::GetType,mission,PROVEN,RTTI GoalMission::vf01 returns 1
+801F3C9C,Mission::EnemyMission::GetType,mission,PROVEN,RTTI EnemyMission::vf01 returns 3
+801F3CA4,Mission::EnemyMission::SyncFromEnemyManager,mission,PROVEN,RTTI EnemyMission::vf0B; SetCount(EnemyManager+0x34[this+0x58];0); Mission-view slot 0xF via thunk 801F3E28
+802C9228,Mission::TimerMission::GetType,mission,PROVEN,RTTI TimerMission::vf01 returns 4
+802C9054,Mission::TimerMission::HasTimeLimit,mission,STRONG,RTTI TimerMission::vf02 returns 1; used by fn_8016E4EC time aggregation
+802C904C,Mission::TimerMission::GetTimeLimit,mission,PROVEN,RTTI TimerMission::vf03 lfs f1 +0x8
+802C92B4,Mission::TimerMission::Update,mission,STRONG,RTTI TimerMission::vf07 (Mission-view slot 0xF); remaining time bss 8057E800 ~0 -> Mission_Fail
+802C905C,Mission::TimerGoalMission::GetType,mission,PROVEN,RTTI TimerGoalMission::vf01 returns 5
+802EBC24,Mission::TimerCountMission::GetType,mission,PROVEN,RTTI TimerCountMission::vf01 returns 6
+8016F0D4,Mission::RingMission::GetType,mission,PROVEN,RTTI RingMission::vf01 returns 7
+8016F0DC,Mission::RingMission::SyncRingCount,mission,STRONG,RTTI RingMission::vf0B; SetCount(player ring count;0)
+802EC3E0,Mission::BasicMessageManage_Post,mission,LIKELY,called with 1 on clear and 2 on fail on Mission+0x18
+802EDA58,Mission::CountMessageManage_OnCount,mission,LIKELY,dispatches queued CountMessages with threshold<=count and slot==current
+802EF79C,Mission::TimerMessageManage_OnTime,mission,LIKELY,time-threshold dispatch analogous to CountMessageManage
+80176FC8,StageTable_GetMissionKey,stage_flow,PROVEN,u32(0x804C5AE8 + idx*0x50 + slot*0xC + 0x20)
+80177020,StageTable_FindById,stage_flow,PROVEN,linear search of 0x3B records by id; -1 = current id bss 8057E808
+80176FE8,StageTable_IndexOfId,stage_flow,PROVEN,returns record index for stage id or -1
+80074598,StageState_Get,stage_flow,PROVEN,lazy static bss 80577038 (ctor fn_8017635C)
+801762D0,StageState_RequestAction,stage_flow,PROVEN,sets +0xC=req unless +0x17+req disabled or +0x14 locked
+80174974,StageState_DispatchAction,stage_flow,PROVEN,switch on +0xC via jump table 8052CC68 -> StageAction::* ctors (6 GoalAction; 15 TimeupAction)
+802053B0,GoalAction_DetermineClearedSlot,stage_flow,PROVEN,called by GoalAction ctor; slot = last mission with state 1 (default 1); stores GoalAction+0x10 and bss 8057E824
+80205010,GoalAction_RecordRoute,stage_flow,PROVEN,called by GoalAction::vf00; route history in save object; next = stage table +0x1C+0xC*slot
+802D1EC8,Story_ResolveNextStage,stage_flow,STRONG,result 3/4/5 -> stage table +0x1C/+0x28/+0x34; 6 -> save +0x98; boss flag forces 6
+800BC74C,Hud_FormatMissionCounter,mission,STRONG,sprintf %d/%d of GetCount/GetRequired of current mission
+80107330,GoalRing_NotifyMissionManager,mission,STRONG,sets flag then MissionManager_OnGoalRing; registered by fn_80106824
+80106824,GoalRing_OnContact,mission,LIKELY,dataptr 80527278 next to GOALRING SET desc 805272CC; registers fn_80107330
+80073BF8,NpcPartner_ActivateMission,mission,STRONG,called from Player::Npc executors; SetCurrentMission and mission+0x14=1
+80354484,CsdOneShot_Play,stage_flow,STRONG,creates CsdOneShot(path;scene;anim) if file exists; used for MissionFailed
+80337D9C,StageTimer_SetTime,stage_flow,PROVEN,stores f1 to +0x14/+0x18/+0x1C of timer object bss 8057E7E8
+8000A950,Float_IsNearZero,runtime,PROVEN,fabs(f1) < 0.0001
+801E258C,Game_BootInit,stage_flow,LIKELY,called from RW init callback fn_80048EFC; loads nukkoro.inf and nukkoro2.inf among other setup
+801E04EC,TGameDefaultParam_LoadInf,stage_flow,PROVEN,loads file then fn_801E030C per line
+801E030C,TGameDefaultParam_ParseLine,stage_flow,PROVEN,[ALL]/[stage name] sections (+0x2C50); 27 commands at +0x2C54
+801E0144,TGameDefaultParam_ParseInts,stage_flow,PROVEN,parses N integers after ':' via fn_801E01D0
+801E01D0,TGameDefaultParam_ParseInt,stage_flow,PROVEN,decimal / '-' / 0x prefix
+801E0C68,TGameDefaultParam_RegisterCommands,stage_flow,STRONG,builds boost::bind command table from .data 8053E700 with names ROM..MISSIONCOUNT_HARD
+801DF470,TGameDefaultParam_SetMissionCount,mission,PROVEN,key from stage table slot (or +0x40); desc.count/failCount = parsed ints; fn_8016C690
+801DF3F8,TGameDefaultParam_Cmd_MISSIONCOUNT_D,mission,PROVEN,fn_801DF470(this;slot 0;0x15); table entry 8053E804
+801DF420,TGameDefaultParam_Cmd_MISSIONCOUNT_N,mission,PROVEN,fn_801DF470(this;slot 1;0x14); table entry 8053E7F8
+801DF448,TGameDefaultParam_Cmd_MISSIONCOUNT_H,mission,PROVEN,fn_801DF470(this;slot 2;0x13); table entry 8053E7EC
+801DF3D0,TGameDefaultParam_Cmd_MISSIONCOUNT_HARD,mission,PROVEN,fn_801DF470(this;slot 1;0x1A) -> stage table +0x40 key; table entry 8053E840
+80119560,EnemyManager_Get,enemy,PROVEN,lazy static bss 80580BD8 (ctor fn_801A2EB0)
+801A2EB0,EnemyManager_Construct,enemy,PROVEN,ctor of bss 80580BD8; ends with fn_801A2E24
+801A2E24,EnemyManager_ResetCounters,enemy,PROVEN,clears map +0x10; +0x24; arrays +0x28/+0x34/+0x40/+0x4C/+0x58
+801A2CFC,EnemyManager_InitStage,enemy,PROVEN,called from StageManager_InitStage @80178724; +0x20=0; fn_801A2BA0
+801A2BA0,EnemyManager_ScanSetEnemies,enemy,PROVEN,SET ids 0x64-0x95 -> placed per team +0x28 and link-group counts
+801A2A30,EnemyManager_RecountGroups,enemy,PROVEN,rebuilds link-group alive counts (checkpoint restore)
+801A24FC,EnemyManager_GetDefeatedCount,enemy,PROVEN,returns +0x34[team]; used by EnemyMission sync
+801A250C,EnemyManager_OnEnemyLifeEvent,enemy,PROVEN,flags 1 death -> fn_801A2930; flags 2 revive -> defeated--; link-group alive count and fn_80169460 link event
+801A2930,EnemyManager_CountDefeat,enemy,PROVEN,+0x34[team]++; flags&4 -> +0x40[team]++ and Player::Npc::EnemyDeadByPlayerCommand
+801A27B0,EnemyManager_SaveCheckpoint,enemy,PROVEN,+0x34/+0x40 -> +0x4C/+0x58
+801A26B8,EnemyManager_RestoreCounts,enemy,PROVEN,+0x4C/+0x58 -> +0x34/+0x40
+801A28A8,EnemyManager_RestoreCheckpoint,enemy,PROVEN,called by ContinueAction::vf00; fn_801A26B8 + fn_801A2A30
+801A2420,Enemy_GetStageDataVariant,enemy,LIKELY,switch on stage id bss 8057E808 -> 0..7; result indexes the GunSoldierData_%s suffix table 80539440 in GunSoldier_LoadResources
+801A8998,EnemyStatusCommon::ReportLifeEvent,enemy,STRONG,RTTI EnemyStatusCommon::vf23; flags 1 death (|4 by player) / 2 revive -> fn_801A250C(team)
+801A68A0,EnemyParamCommon::GetTeam,enemy,PROVEN,RTTI EnemyParamCommon::vf00; table 0x804CD310[kind] -> 0 GUN / 1 Eggman / 2 Black Arms

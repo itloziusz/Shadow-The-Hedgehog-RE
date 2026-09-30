@@ -1,0 +1,2174 @@
+AccelerateCommand
+AccelerateInputCommand
+AdvReal::AdvBase
+AdvReal::AdvFolder
+AdvReal::BattleMode::Phase
+AdvReal::Logo::Phase
+AdvReal::MemoryCheck::Phase
+AdvReal::Movie::Phase
+AdvReal::Option::Phase
+AdvReal::SelectMode::Phase
+AdvReal::StaffRoll::StaffRollDrawTask
+AdvReal::StaffRoll::StaffRollTask
+AdvReal::StoryLibrary::Phase
+AdvReal::Synopsis::Phase
+AdvReal::Title::Phase
+Advertise
+AirBolt
+AirWing
+AnnounceAttackCommand
+ArkCannon
+ArkLaser
+ArtWork::BreakableOrnament
+ArtWork::Ornament
+AttackCallbackContainer
+AttackObject
+AudioController::ActStageController
+AudioGCN
+AudioLoopManagerTask
+AudioManagerTask
+BAGunShip::BAGunShip
+BAMine::BAMine
+BAShield::BAShield
+BASwitch::BASwitch
+BDHologram::BDHologram
+BDTrue::BDTrue
+BKBattery
+BKTank::SetBKTank
+BKTankController::Controller
+BackDrop
+Balloon::Balloon
+Balloon::VacuumBalloon
+BindCommand
+BkChaos::BkChaos
+BkChaos::BkChaosAI
+BkChaos::BkChaosTask
+BkChaos::EnemyAIState_BkChaosAI_AttackRolling
+BkChaos::EnemyAIState_BkChaosAI_AttackStrech
+BkChaos::EnemyAIState_BkChaosAI_Caution
+BkChaos::EnemyAIState_BkChaosAI_Wait
+BkChaos::EnemyAIState_BkChaosAI_WaitChibi
+BkGiant::BkGiant
+BkGiant::BkGiantAI
+BkGiant::BkGiantTask
+BkGiant::EnemyAIState_BkGiantAI_ChaseTarget
+BkGiant::EnemyAIState_BkGiantAI_GunAttack
+BkGiant::EnemyAIState_BkGiantAI_RejectAttack
+BkGiant::EnemyAIState_BkGiantAI_StickAttack
+BkLarva
+BkLarvaGenerator
+BkNinja::BkNinja
+BkNinja::BkNinjaAI
+BkNinja::BkNinjaTask
+BkNinja::EnemyAIState_BkNinjaAI_AppearHome
+BkNinja::EnemyAIState_BkNinjaAI_GunAttack
+BkNinja::EnemyAIState_BkNinjaAI_MoveDisappear
+BkNinja::EnemyAIState_BkNinjaAI_WaitWarp
+BkSoldier
+BkSoldierAI
+BkSoldierBase
+BkWingLarge
+BkWingLargeAI
+BkWingLargeAirCutter
+BkWingLargeBase
+BkWingSmall
+BkWingSmallAI
+BkWingSmallBase
+BkWorm
+BkWormAI
+BkWormBase
+BlackBull0210
+BlackBull0210CtrlUnit
+BlackBull0210CtrlUnit_FixLookCharCamera
+BlackBull0210CtrlUnit_MoveMotion
+BlackBull0210ModeCtrlUnit
+BlackBull0210ModeCtrlUnit_ATK_BREATH
+BlackBull0210ModeCtrlUnit_ATK_CLOSERANGE
+BlackBull0210ModeCtrlUnit_ATK_WAVERING
+BlackBull0210ModeCtrlUnit_BELOW_HALF
+BlackBull0210ModeCtrlUnit_CHASE
+BlackBull0210ModeCtrlUnit_DEATH
+BlackBull0210ModeCtrlUnit_DIZZY
+BlackBull0210ModeCtrlUnit_EDIT
+BlackBull0210ModeCtrlUnit_ESCAPE
+BlackBull0210ModeCtrlUnit_GET_ATK
+BlackBull0210ModeCtrlUnit_GET_COMBO
+BlackBull0210ModeCtrlUnit_MOVETEST
+BlackBull0210ModeCtrlUnit_START
+BlackBull0210ModeCtrlUnit_WAIT
+BlackBull0210VarParam
+BlackBull0412
+BlackBull0412CtrlUnit
+BlackBull0412CtrlUnit_FixLookCharCamera
+BlackBull0412CtrlUnit_MoveMotion
+BlackBull0412ModeCtrlUnit
+BlackBull0412ModeCtrlUnit_ATK_BREATH
+BlackBull0412ModeCtrlUnit_ATK_CHARGE
+BlackBull0412ModeCtrlUnit_ATK_CLOSERANGE
+BlackBull0412ModeCtrlUnit_ATK_WAVERING
+BlackBull0412ModeCtrlUnit_BELOW_HALF
+BlackBull0412ModeCtrlUnit_DEATH
+BlackBull0412ModeCtrlUnit_EDIT
+BlackBull0412ModeCtrlUnit_ESCAPE
+BlackBull0412ModeCtrlUnit_GET_ATK
+BlackBull0412ModeCtrlUnit_GET_COMBO
+BlackBull0412ModeCtrlUnit_START
+BlackBull0412ModeCtrlUnit_WAIT
+BlackBull0412VarParam
+BlackBullCtrlUnit
+BlackBullCtrlUnit_AdjustEye
+BlackBullCtrlUnit_AdjustNeck
+BlackBullCtrlUnit_AttackCallback
+BlackBullCtrlUnit_AttackCallbackBody
+BlackBullCtrlUnit_AttackCallbackEye
+BlackBullCtrlUnit_AttackCallbackOther
+BlackBullCtrlUnit_CheckMotionAttribute
+BlackBullCtrlUnit_Dizzy
+BlackBullCtrlUnit_FireBall
+BlackBullCtrlUnit_FireExplosion
+BlackBullCtrlUnit_GetStatus
+BlackBullCtrlUnit_KnockOff
+BlackBullCtrlUnit_Move
+BlackBullCtrlUnit_WallFire
+BlackBullCtrlUnit_WaveRingFire
+BlackBullVarParam
+BlackDoom
+BlackDoomCtrlUnit
+BlackDoomCtrlUnit_AlterEgo
+BlackDoomCtrlUnit_AttackCallback
+BlackDoomCtrlUnit_Boomerang
+BlackDoomCtrlUnit_CheckMotionAttribute
+BlackDoomCtrlUnit_Disk
+BlackDoomCtrlUnit_DispAura
+BlackDoomCtrlUnit_DispEye
+BlackDoomCtrlUnit_FixLookCharCamera
+BlackDoomCtrlUnit_GetStatus
+BlackDoomCtrlUnit_Meteor
+BlackDoomCtrlUnit_Move
+BlackDoomModeCtrlUnit
+BlackDoomModeCtrlUnit_ATK_BOOMERANG
+BlackDoomModeCtrlUnit_ATK_DISK
+BlackDoomModeCtrlUnit_ATK_METEOR
+BlackDoomModeCtrlUnit_ATK_READY
+BlackDoomModeCtrlUnit_BELOW_HALF
+BlackDoomModeCtrlUnit_DEATH
+BlackDoomModeCtrlUnit_EDIT
+BlackDoomModeCtrlUnit_GET_ATK
+BlackDoomModeCtrlUnit_GET_COMBO
+BlackDoomModeCtrlUnit_MOVETEST
+BlackDoomModeCtrlUnit_START
+BlackDoomModeCtrlUnit_WAIT
+BlackDoomVarParam
+BlastBreak
+BlockChange
+Bomb::Bomb
+Bomb::BombBlast
+BombServer
+BombingWall
+Boss::Desire::DesireBase
+Boss::Diablon::Behavior::Beam
+Boss::Diablon::Behavior::BehaviorBase
+Boss::Diablon::Behavior::Bomb
+Boss::Diablon::Behavior::Event
+Boss::Diablon::Behavior::Idle
+Boss::Diablon::Behavior::InitializeArgs
+Boss::Diablon::Behavior::InitializeArgsEvent
+Boss::Diablon::Behavior::Move
+Boss::Diablon::Behavior::Wipe
+Boss::Diablon::Controller
+Boss::Diablon::Desire::Beam
+Boss::Diablon::Desire::Bomb
+Boss::Diablon::Desire::DiablonDesireBase
+Boss::Diablon::Desire::Event
+Boss::Diablon::Desire::Move
+Boss::Diablon::Desire::Wipe
+Boss::Diablon::Diablon
+Boss::Diablon::Effect
+Boss::Diablon::Executer
+Boss::Diablon::Parts::Action
+Boss::Diablon::Parts::ActionDamage
+Boss::Diablon::Parts::ActionMove
+Boss::Diablon::Parts::Barrier
+Boss::Diablon::Parts::Beam
+Boss::Diablon::Parts::Body
+Boss::Diablon::Parts::Bomb
+Boss::Diablon::Parts::CameraControl
+Boss::Diablon::Parts::Charge
+Boss::Diablon::Parts::ChargeMeter
+Boss::Diablon::Parts::HPGauge
+Boss::Diablon::Parts::Head
+Boss::Diablon::Parts::ModelBase
+Boss::Diablon::Parts::PartsBase
+Boss::Diablon::Parts::Shoulder
+Boss::Diablon::ToUnderCommand
+BossAfterCtrl
+BossCharInfo
+BossCharaColli
+BossCtrl
+BossCtrlUnit
+BossCtrlUnit_CheckEvent
+BossCtrlUnit_CheckFirstDamage
+BossCtrlUnit_CheckMotionAttribute
+BossCtrlUnit_DamageEff
+BossCtrlUnit_DispGauge
+BossCtrlUnit_FixLookCharCamera
+BossCtrlUnit_PlayCameraMotion
+BossCtrlUnit_Shadow
+BossCtrlUnit_StageObject
+BossForceClear
+BossModeCtrlUnit
+BossMotion
+BossRender
+BossRootTask
+BossTarget
+BossVarParam
+BreakObj
+BreakRoad
+BreakWall::BreakWall
+BulletSatelliteLaser::SatelliteLaser
+CLONE
+CNowLoadingThread
+Cage::Cage
+CameraEnd
+CameraMatrixChangeFor2D
+CameraRender
+CameraRenderClose
+CameraStart
+CancelCommand
+CandleStick
+CandleStickSetState
+CaptureCage::CaptureCage
+CastCommand
+Catapult::Catapult
+CatchStick
+Chao::CSD::CBase
+Chao::CSD::CMemoryAlloc
+Chao::CSD::CResourceBase<Chao::CSD::Project>
+Chao::CSD::RCPtr<Chao::CSD::CNode>::RCObject<Chao::CSD::CNode>
+Chao::CSD::RCPtr<Chao::CSD::CScene>::RCObject<Chao::CSD::CScene>
+Chao::CSD::RCPtr<Chao::CSD::CSceneList>::RCObject<Chao::CSD::CSceneList>
+Chao::CSD::RCPtr<Chao::CSD::CTexList>::RCObject<Chao::CSD::CTexList>
+Chao::CSD::RCPtr<unsigned char>::RCObject<unsigned char>
+ChaoData
+ChaoHolder
+CharCommand
+CharCommandManagerTask
+CharCommandUnit
+CharInfo
+CircusBall::CircusBall
+CircusPole
+CityBombBig
+CityBombSmall
+CityChaosEmerald
+CityGadget
+CityGadgetState
+CityLaserHolder
+CloseWall::SetCloseWall
+ClrVelocityCommand
+Coaster
+ColliDetectArgs
+CommandCollision::CommandCollision
+Container::ContainerHard
+Container::ContainerNormal
+Container::ContainerSecret
+Container::ContainerUnbreak
+Container::ContainerWeapon
+ContainerBehavior
+ControlVehicleCommand
+Cream
+CreamSetState
+CsdOneShot
+DamageBlock
+DamageCommand
+DarkSpinEntrance
+DashPanel::DashPanel
+DashRing::DashRing
+DeadCommand
+DebugMissionClearCollision
+DefenseShield
+DefenseShieldSetState
+DefenseSystem
+DefenseSystemSetState
+DefenseWall::SetDefenseWall
+DeltaMorphAnimManagerTask
+DevilDoom
+DevilDoomCtrlUnit
+DevilDoomCtrlUnit_AdjustEye
+DevilDoomCtrlUnit_AdjustNeck
+DevilDoomCtrlUnit_AdjustTarget
+DevilDoomCtrlUnit_AttackCallback
+DevilDoomCtrlUnit_AttackCallbackChest
+DevilDoomCtrlUnit_AttackCallbackEye
+DevilDoomCtrlUnit_AttackCallbackEyeL
+DevilDoomCtrlUnit_AttackCallbackEyeR
+DevilDoomCtrlUnit_BallControl
+DevilDoomCtrlUnit_Bit
+DevilDoomCtrlUnit_BitAttackControl
+DevilDoomCtrlUnit_BitGroupControl
+DevilDoomCtrlUnit_BitLaser
+DevilDoomCtrlUnit_CheckInterrupt
+DevilDoomCtrlUnit_CheckMotionAttribute
+DevilDoomCtrlUnit_Cloud
+DevilDoomCtrlUnit_DoomsEye
+DevilDoomCtrlUnit_FireBreath
+DevilDoomCtrlUnit_FixLookCharCamera
+DevilDoomCtrlUnit_GetStatus
+DevilDoomCtrlUnit_Move
+DevilDoomCtrlUnit_PsychoObject
+DevilDoomCtrlUnit_PsychoObjectControl
+DevilDoomCtrlUnit_WingControl
+DevilDoomModeCtrlUnit
+DevilDoomModeCtrlUnit_ATK_BIT1
+DevilDoomModeCtrlUnit_ATK_BIT2
+DevilDoomModeCtrlUnit_ATK_BIT3
+DevilDoomModeCtrlUnit_ATK_FIRE
+DevilDoomModeCtrlUnit_ATK_PSYCHO_PREPARE
+DevilDoomModeCtrlUnit_ATK_PSYCHO_THROW
+DevilDoomModeCtrlUnit_BELOW_HALF
+DevilDoomModeCtrlUnit_CHAOS_CONTROL
+DevilDoomModeCtrlUnit_DEATH
+DevilDoomModeCtrlUnit_EDIT
+DevilDoomModeCtrlUnit_GET_ATK
+DevilDoomModeCtrlUnit_INVERSE
+DevilDoomModeCtrlUnit_START
+DevilDoomModeCtrlUnit_WAIT
+DevilDoomVarParam
+Door::SetBaseDoor
+Door::SetDoor
+Door::SetMorphDoor
+EBN
+Effect::PJS::EffectArrangerPJS
+Effect::PJS::EffectDeleteResourceTask
+Effect::PJS::EffectDrawAddTask
+Effect::PJS::EffectDrawBlurTask
+Effect::PJS::EffectDrawFullScreenShimmerSubTask
+Effect::PJS::EffectDrawFullScreenShimmerTask
+Effect::PJS::EffectDrawGlareTask
+Effect::PJS::EffectDrawGlobalLensFlareAnotherTask
+Effect::PJS::EffectDrawGlobalLensFlareTask
+Effect::PJS::EffectDrawOpaqTask
+Effect::PJS::EffectDrawPunchTask
+Effect::PJS::EffectDrawScreenColorTask
+Effect::PJS::EffectDrawShimmerTask
+Effect::PJS::EffectDrawSubTask
+Effect::PJS::EffectDrawTransTask
+Effect::PJS::EffectGlobalParamPJS
+Effect::PJS::EffectLensFlarePJS
+Effect::PJS::EffectLocusPJS
+Effect::PJS::EffectManagerPJS
+Effect::PJS::EffectObjectPJS
+Effect::PJS::EffectParticle3DPJS
+Effect::PJS::EffectParticlePJS
+Effect::PJS::EffectPostGlareTask
+Effect::PJS::EffectPreGlareTask
+Effect::PJS::EffectRayPJS
+Effect::PJS::EffectSaveScreenTask
+Effect::PJS::EffectShimmerPJS
+Effect::PJS::EffectSystemPJS
+Effect::PJS::EffectTask
+Effect::PJS::Launcher
+Effect::PJS::Loader
+Effect::RW3::EffectArrangerRW3
+Effect::RW3::EffectGlobalParamRW3
+Effect::RW3::EffectLaunchInfoRW3
+Effect::RW3::EffectLensFlareRW3
+Effect::RW3::EffectLocusRW3
+Effect::RW3::EffectManagerRW3
+Effect::RW3::EffectObjectRW3
+Effect::RW3::EffectParticle3DRW3
+Effect::RW3::EffectParticleRW3
+Effect::RW3::EffectRayRW3
+Effect::RW3::EffectShimmerRW3
+Effect::RW3::EffectSystemRW3
+Effect::System::EffCmd2DAmplitudeExec
+Effect::System::EffCmd2DCycleExec
+Effect::System::EffCmd2DRotExec
+Effect::System::EffCmd2DSclExec
+Effect::System::EffCmd2DWaveLengthExec
+Effect::System::EffCmd3DPosExec
+Effect::System::EffCmd3DRotExec
+Effect::System::EffCmd3DSclExec
+Effect::System::EffCmd3DVelExec
+Effect::System::EffCmdAmplitudeExec
+Effect::System::EffCmdCallbackExec
+Effect::System::EffCmdCycleExec
+Effect::System::EffCmdFrictionExec
+Effect::System::EffCmdGenQuantityExec
+Effect::System::EffCmdGlareSWExec
+Effect::System::EffCmdGravityExec
+Effect::System::EffCmdLastAlphaExec
+Effect::System::EffCmdLastColorExec
+Effect::System::EffCmdLaunchExec
+Effect::System::EffCmdLengthExec
+Effect::System::EffCmdLoopEndExec
+Effect::System::EffCmdLoopStartExec
+Effect::System::EffCmdMatAlphaExec
+Effect::System::EffCmdMatColorExec
+Effect::System::EffCmdPtnAnimExec
+Effect::System::EffCmdRequestStopExec
+Effect::System::EffCmdSingleExec
+Effect::System::EffCmdTopAlphaExec
+Effect::System::EffCmdTopColorExec
+Effect::System::EffCmdVector2Exec
+Effect::System::EffCmdVector3Exec
+Effect::System::EffCmdWaitExec
+Effect::System::EffCmdWaveLengthExec
+Effect::System::EffCmdWidthExec
+Effect::System::EffectArranger
+Effect::System::EffectCommandExec
+Effect::System::EffectElement
+Effect::System::EffectGlobalParam
+Effect::System::EffectLaunchInfo
+Effect::System::EffectLensFlare
+Effect::System::EffectLocus
+Effect::System::EffectLocusExecUnit
+Effect::System::EffectManager
+Effect::System::EffectObject
+Effect::System::EffectParticle
+Effect::System::EffectParticleExecUnit
+Effect::System::EffectRay
+Effect::System::EffectRayExecUnit
+Effect::System::EffectShimmer
+Effect::System::EffectSystem
+EggBalloon::SetEggBalloon
+EggBalloonController::Controller
+EggCannonBullet
+EggFleetData
+EggLastMech::AIState::Brake
+EggLastMech::AIState::BreakTime
+EggLastMech::AIState::End
+EggLastMech::AIState::Event
+EggLastMech::AIState::EventStart
+EggLastMech::AIState::FeverBomb
+EggLastMech::AIState::FeverBombFailed
+EggLastMech::AIState::FeverMissile
+EggLastMech::AIState::FeverPawn
+EggLastMech::AIState::FeverRing
+EggLastMech::AIState::FeverShadow
+EggLastMech::AIState::Flee
+EggLastMech::AIState::Idle
+EggLastMech::AIState::Nop
+EggLastMech::AIState::Pursuit
+EggLastMech::AIState::Start
+EggLastMech::CameraTask
+EggLastMech::EggLastMech
+EggLastMech::EggLastMechAIStateBase
+EggLastMech::EggLastMechTask
+EggLastMechFeverRing::EggLastMechFeverRing
+EggLastMechFeverRing::EggLastMechFeverRingGenerator
+EggMeca310
+EggMeca411
+EggMeca511
+EggMecaCtrlUnit
+EggMecaCtrlUnit_AdjustCircleArea
+EggMecaCtrlUnit_AttackCallback
+EggMecaCtrlUnit_Bomb
+EggMecaCtrlUnit_CheckMotionAttribute
+EggMecaCtrlUnit_DispAura
+EggMecaCtrlUnit_DispCanopy
+EggMecaCtrlUnit_DispEggman
+EggMecaCtrlUnit_DispEye
+EggMecaCtrlUnit_DispGuideCircle
+EggMecaCtrlUnit_FixLookCharCamera
+EggMecaCtrlUnit_GetStatus
+EggMecaCtrlUnit_IronBall
+EggMecaCtrlUnit_Laser
+EggMecaCtrlUnit_Move
+EggMecaCtrlUnit_RollUpper
+EggMecaCtrlUnit_ShockWave
+EggMecaModeCtrlUnit
+EggMecaModeCtrlUnit_ATK_BOMB
+EggMecaModeCtrlUnit_ATK_HAMMER
+EggMecaModeCtrlUnit_ATK_JUMP
+EggMecaModeCtrlUnit_ATK_LASER
+EggMecaModeCtrlUnit_ATK_MOVE
+EggMecaModeCtrlUnit_ATK_SHOOT
+EggMecaModeCtrlUnit_BELOW_HALF
+EggMecaModeCtrlUnit_DASH
+EggMecaModeCtrlUnit_DEATH
+EggMecaModeCtrlUnit_EDIT
+EggMecaModeCtrlUnit_GET_ATK
+EggMecaModeCtrlUnit_GET_COMBO
+EggMecaModeCtrlUnit_MOVE
+EggMecaModeCtrlUnit_START
+EggMecaModeCtrlUnit_WAIT
+EggMecaVarParam
+EggPawn
+EggPawnAI
+EggPawnBase
+EggPierrot::EggPierrot
+EggPierrot::EggPierrotAI
+EggPierrot::EggPierrotTask
+EggPierrot::EnemyAIState_EggPierrotAI_BakudanAttack
+EggPierrot::EnemyAIState_EggPierrotAI_DashAttack
+EggPierrot::EnemyAIState_EggPierrotAI_GoHome
+EggPierrot::EnemyAIState_EggPierrotAI_Ottoto
+EggPierrot::EnemyAIState_EggPierrotAI_Wait
+EggShadowAndroid::Belt
+EggShadowAndroid::EggShadowAndroid
+EggShadowAndroid::EggShadowAndroidAI
+EggShadowAndroid::EggShadowAndroidTask
+EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_Falling
+EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_HomingJump
+EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_Jump
+EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_MissileAttack
+EggShadowAndroid::EnemyAIState_EggShadowAndroidAI_RejectHoming
+ElecAccessPanel
+ElecAccessPanelData
+ElecBar
+ElecBarrier
+ElecBlock
+ElecBomb
+ElecBombData
+ElecCircuit
+ElecCircuitColli
+ElecCircuitEntrance
+ElecCircuitExit
+ElecCoreProgram
+ElecCoreWall
+ElecCristalWall
+ElecCristalWallSwitch
+ElecCube
+ElecFan
+ElecFanDraw
+ElecFireWall
+ElecFootingRotate
+ElecKyuu
+ElecPanel
+ElecPanelData
+ElecPanelManagerTask
+ElecPillar
+ElecRollHexa
+ElecSearchLight
+ElecSecurityCodeGenerator
+ElecSmallCube
+ElecSmallPillar
+ElecWakka
+Elevator::Elevator
+EmbeddedBazooka::Bazooka
+EmbeddedGun::AutoRifle
+Enemy
+EnemyAIState_BkSoldierAI_AppearHome
+EnemyAIState_BkSoldierAI_Attack
+EnemyAIState_BkSoldierAI_AttackVacuum
+EnemyAIState_BkSoldierAI_Caution
+EnemyAIState_BkSoldierAI_ChaseTarget
+EnemyAIState_BkSoldierAI_GoHome
+EnemyAIState_BkSoldierAI_NearAttack
+EnemyAIState_BkWingLargeAI_Attack
+EnemyAIState_BkWingLargeAI_Caution
+EnemyAIState_BkWingLargeAI_DeadToAirWing
+EnemyAIState_BkWingLargeAI_ResistVacuum
+EnemyAIState_BkWingSmallAI_Attack
+EnemyAIState_BkWingSmallAI_Caution
+EnemyAIState_BkWingSmallAI_MoveOnPath
+EnemyAIState_BkWormAI_AfterAttack
+EnemyAIState_BkWormAI_Appear
+EnemyAIState_BkWormAI_Attack
+EnemyAIState_BkWormAI_Move
+EnemyAIState_BkWormAI_WaitAppear
+EnemyAIState_BkWormAI_WaitStanding
+EnemyAIState_EggPawnAI_DashAttack
+EnemyAIState_EggPawnAI_TukiAttack
+EnemyAIState_EggPawnAI_WeaponAttack
+EnemyAIState_EnemyBaseAI_CaptureWait
+EnemyAIState_EnemyBaseAI_Caution
+EnemyAIState_EnemyBaseAI_Dead
+EnemyAIState_EnemyBaseAI_GoHome
+EnemyAIState_EnemyBaseAI_Guard
+EnemyAIState_EnemyBaseAI_Idle
+EnemyAIState_EnemyBaseAI_None
+EnemyAIState_EnemyBaseAI_Recover
+EnemyAIState_EnemyBaseAI_Wait
+EnemyAIState_EnemyBaseAI_WaitFinishDamaged
+EnemyAIState_EnemyBaseAI_WaitFinishFalling
+EnemyAIState_EnemyBaseAI_WarpWait
+EnemyAIState_EnemyWalkerAI_Caution
+EnemyAIState_EnemyWalkerAI_ReturnHome
+EnemyAIState_EnemyWalkerAI_ReturnHomeDash
+EnemyAIState_EnemyWalkerAI_WaitAction_Moving
+EnemyAIState_EnemyWalkerAI_WaitAction_Standing
+EnemyAIState_FlyerCommonAI_MoveOnPath
+EnemyAIState_FlyerCommonAI_WaitFloating
+EnemyAIState_GunBeetleAI_Attack
+EnemyAIState_GunBeetleAI_Caution
+EnemyAIState_GunRobotAI_WeaponAttack
+EnemyAIState_SoldierCommonAI_WaitAction_Moving
+EnemyAIState_SoldierCommonAI_WaitAction_Standing
+EnemyBaseAI
+EnemyCharInfo
+EnemyCtrlFunc
+EnemyCtrlObjBase
+EnemyDispCommon
+EnemyDispFunc
+EnemyDispObjBase
+EnemyFlyerCommon
+EnemyMotionSequenceModule
+EnemyMoveCommon
+EnemyMoveFlyer
+EnemyMoveFunc
+EnemyMoveObjBase
+EnemyMoveWalker
+EnemyParaFunc
+EnemyParamCommon
+EnemyParamObjBase
+EnemyRefBase
+EnemyReferer
+EnemySetFunc
+EnemySetObjBase
+EnemyShieldTask
+EnemyStatFunc
+EnemyStatusCommon
+EnemyStatusObjBase
+EnemyTemplate<BkChaos::BkChaos, BkChaos::BkChaosAI>
+EnemyTemplate<BkGiant::BkGiant, BkGiant::BkGiantAI>
+EnemyTemplate<BkNinja::BkNinja, BkNinja::BkNinjaAI>
+EnemyTemplate<BkSoldierBase, BkSoldierAI>
+EnemyTemplate<BkWingLargeBase, BkWingLargeAI>
+EnemyTemplate<BkWingSmallBase, BkWingSmallAI>
+EnemyTemplate<BkWormBase, BkWormAI>
+EnemyTemplate<EggPawnBase, EggPawnAI>
+EnemyTemplate<EggPierrot::EggPierrot, EggPierrot::EggPierrotAI>
+EnemyTemplate<EggShadowAndroid::EggShadowAndroid, EggShadowAndroid::EggShadowAndroidAI>
+EnemyTemplate<GunBeetleBase, GunBeetleAI>
+EnemyTemplate<GunBigfoot::GunBigfoot, GunBigfoot::GunBigfootAI>
+EnemyTemplate<GunRobot, GunRobotAI>
+EnemyTemplate<GunSoldier::GunSoldierBase, GunSoldier::GunSoldierAI>
+EnemyWalker
+EnemyWalkerAI
+EnemyWalkerCommon
+EnemyWeapon
+EnergyCore::EnergyCoreTask
+EnergyCore::SetEnergyCoreTask
+EscapePlane::SetEscapePlane
+EscapePlaneController::Controller
+EscapePlaneRail::EscapePlaneRail
+FallBuildingData
+FallBuildingHolder
+FallRoad
+FallingStone
+FallingStoneHard
+FallingStoneSoft
+Fan::Fan
+Fire::Fire
+FireRing::FireRing
+FleetHolder
+FlyerCommonAI
+FlyerCommonBase
+FlyingObject
+Footing
+FootingBreak
+FootingMovable::FootingMovable
+FootingRoll
+Fruit::FruitTask
+Gadget
+GadgetCharInfo
+GadgetColliDetectArgs
+GadgetCommand::AttackEndCommand
+GadgetCommand::AttackStartCommand
+GadgetCommand::GadgetCommand
+GadgetCommand::MoveEndCommand
+GadgetCommand::MoveStartCommand
+GadgetCrash3D::TObjEffCrash3D
+GadgetCrash3D::TObjEffCrash3DChildObj
+GadgetCrash3D::TObjEffCrash3DR
+GadgetCrash3D::TObjEffCrash3DRChildObj
+GadgetModelInfo
+GadgetParticle::GadgetParticleCtrl
+GadgetPickup::PickupBase
+GadgetPickup::PickupBaseTask
+GadgetPickup::SetPickupBaseTask
+GamePeripheralTask
+GameSystem
+GenerateCommand
+GiGameOver
+GiantLantern
+GiantLanternSetState
+GoalRing::GoalRing
+Gong::CSD::GongCSD
+Gong::Gong
+GravityChangeCollision
+GravityChangeSwitch
+GravityChangeZone
+GravitySignBoard
+GrindGadget
+GunBattery
+GunBeetle
+GunBeetleAI
+GunBeetleBase
+GunBigfoot::EnemyAIState_GunBigfootAI_GunAttack
+GunBigfoot::EnemyAIState_GunBigfootAI_HoverAttack
+GunBigfoot::EnemyAIState_GunBigfootAI_WaitActAttack
+GunBigfoot::EnemyAIState_GunBigfootAI_WaitCrouching
+GunBigfoot::EnemyAIState_GunBigfootAI_WaitHovering
+GunBigfoot::GunBigfoot
+GunBigfoot::GunBigfootAI
+GunBigfoot::GunBigfootTask
+GunBuilding
+GunRobot
+GunRobotAI
+GunRobotTask
+GunSoldier::EnemyAIState_GunSoldierAI_AppearHome
+GunSoldier::EnemyAIState_GunSoldierAI_Attack
+GunSoldier::EnemyAIState_GunSoldierAI_Caution
+GunSoldier::EnemyAIState_GunSoldierAI_ChaseTarget
+GunSoldier::EnemyAIState_GunSoldierAI_GoHome
+GunSoldier::EnemyAIState_GunSoldierAI_Hinshi
+GunSoldier::EnemyAIState_GunSoldierAI_NearAttack
+GunSoldier::EnemyAIState_GunSoldierAI_Thanks
+GunSoldier::EnemyAIState_GunSoldierAI_ToHinshi
+GunSoldier::GunSoldier
+GunSoldier::GunSoldierAI
+GunSoldier::GunSoldierBase
+GunSoldier::STemporaryData
+HandleUser
+HealingUnit::HealingBlast
+HealingUnit::HealingUnit
+HeavyDog0410
+HeavyDog0410CtrlUnit
+HeavyDog0410CtrlUnit_Dust
+HeavyDog0410CtrlUnit_Mine
+HeavyDog0410CtrlUnit_Move
+HeavyDog0410ModeCtrlUnit
+HeavyDog0410ModeCtrlUnit_ATK_BARRIER
+HeavyDog0410ModeCtrlUnit_ATK_MINE
+HeavyDog0410ModeCtrlUnit_ATK_ROCKET
+HeavyDog0410ModeCtrlUnit_BELOW_HALF
+HeavyDog0410ModeCtrlUnit_CHASE
+HeavyDog0410ModeCtrlUnit_DESTROY
+HeavyDog0410ModeCtrlUnit_EDIT
+HeavyDog0410ModeCtrlUnit_ESCAPE
+HeavyDog0410ModeCtrlUnit_GET_ATK
+HeavyDog0410ModeCtrlUnit_MOVETEST
+HeavyDog0410ModeCtrlUnit_START
+HeavyDog0410ModeCtrlUnit_WAIT
+HeavyDog0410VarParam
+HeavyDog0510
+HeavyDog0510CtrlUnit
+HeavyDog0510CtrlUnit_Bomb
+HeavyDog0510CtrlUnit_FixLookCharCamera
+HeavyDog0510CtrlUnit_Move
+HeavyDog0510ModeCtrlUnit
+HeavyDog0510ModeCtrlUnit_ATK_BARRIER
+HeavyDog0510ModeCtrlUnit_ATK_MINE
+HeavyDog0510ModeCtrlUnit_ATK_ROCKET
+HeavyDog0510ModeCtrlUnit_BELOW_HALF
+HeavyDog0510ModeCtrlUnit_CHASE
+HeavyDog0510ModeCtrlUnit_DESTROY
+HeavyDog0510ModeCtrlUnit_EDIT
+HeavyDog0510ModeCtrlUnit_ESCAPE
+HeavyDog0510ModeCtrlUnit_GET_ATK
+HeavyDog0510ModeCtrlUnit_MOVETEST
+HeavyDog0510ModeCtrlUnit_START
+HeavyDog0510ModeCtrlUnit_WAIT
+HeavyDog0510VarParam
+HeavyDogCtrlUnit
+HeavyDogCtrlUnit_AttackCallback
+HeavyDogCtrlUnit_AttackCallbackBody
+HeavyDogCtrlUnit_AttackCallbackCanopy
+HeavyDogCtrlUnit_Barrier
+HeavyDogCtrlUnit_CheckLauncherNum
+HeavyDogCtrlUnit_CheckMotionAttribute
+HeavyDogCtrlUnit_DestroyEffect
+HeavyDogCtrlUnit_DispCanopy
+HeavyDogCtrlUnit_DispEnergy
+HeavyDogCtrlUnit_Engine
+HeavyDogCtrlUnit_GetStatus
+HeavyDogCtrlUnit_RocketLauncher
+HeavyDogCtrlUnit_Rotate
+HeavyDogVarParam
+Helicopter
+HintCollision::SetHintCollision
+HintController::HintController
+HintRing::SetHintRing
+IAudio
+ItemIcon::ManagerTask
+JumpBoard::JumpBoard
+LandALoadMananger
+LandDispManager
+LeaveCommand
+LightColli
+LightColliMasterTask
+LineTarget
+LongSpring::LongSpring
+Magma::SetMagma
+MagmaGuard::SetMagmaGuard
+MessageTask
+Meteor
+MeteorsHolder
+MeteorsTask
+Mission::BasicMessage
+Mission::BasicMessageManage
+Mission::CountMessage
+Mission::CountMessageManage
+Mission::CountMission
+Mission::EnemyMission
+Mission::GoalMission
+Mission::Message
+Mission::MessageManage
+Mission::Mission
+Mission::MissionManagerTask
+Mission::RingMission
+Mission::TimerCountMission
+Mission::TimerGoalMission
+Mission::TimerMessage
+Mission::TimerMessageManage
+Mission::TimerMission
+MissionClearCollision
+Monster
+MonsterCharInfo
+MonsterControl
+MotionCallbackContainer
+MotionSequenceModule
+NowLoading
+NpcFlyType
+NpcNameDisplay
+NpcSonicType
+NpcWatch::Watch
+PJSCamera::AdjustCosRot
+PJSCamera::AdjustLinerLocal
+PJSCamera::AdjustLinerWorld
+PJSCamera::AdjustOnlyAov
+PJSCamera::CameraModeFixEye
+PJSCamera::CameraModeFixEye2
+PJSCamera::CameraModeFixLook
+PJSCamera::CameraModeFixLook2
+PJSCamera::CameraModeFixLookChar
+PJSCamera::CameraModeFree
+PJSCamera::CameraModeGeneral
+PJSCamera::CameraModeLookFront
+PJSCamera::CameraModeSetCamEdit
+PJSCamera::CameraModeSetEditor
+PJSCamera::CameraModeTestPlayer
+PJSCamera::CameraModeTestPlayerNoRot
+PJSCamera::Collision::ProcessBase
+PJSCamera::Collision::ProcessDeltaMoveNoLook
+PJSCamera::Collision::ProcessRay2Eye
+PJSCamera::PJSCameraFactory
+PJSCamera::PJSCameraMode
+PJSCamera::PJSCameraPostTask
+PJSCamera::PJSCameraPreTask
+PJSCamera::PJSCameraTargetInfo
+PJSCamera::StageCameraManager
+PJSCamera::StageCameraPostProcess
+PJSPeripheral::ManagerImpGc
+Parachute::Parachute
+PathObject
+PickupCharInfo
+PickupCommand
+Player::ActingAccelerateCommand
+Player::AddWeaponCommand
+Player::ApproachControlCommand
+Player::Attack
+Player::Barrier
+Player::Behavior::AirAttack
+Player::Behavior::Behavior
+Player::Behavior::ChaosBlast
+Player::Behavior::ChaosControl
+Player::Behavior::Damage
+Player::Behavior::DarkSpin
+Player::Behavior::Dead
+Player::Behavior::DriveVehicle
+Player::Behavior::EdgeHang
+Player::Behavior::ElectricCircuit
+Player::Behavior::ExternalControl
+Player::Behavior::Factory
+Player::Behavior::Fall
+Player::Behavior::FirstMeet
+Player::Behavior::Fly
+Player::Behavior::Grind
+Player::Behavior::Ground
+Player::Behavior::GroundAttack
+Player::Behavior::Hide
+Player::Behavior::HomingAttack
+Player::Behavior::HomingJump
+Player::Behavior::Idle
+Player::Behavior::InitializeArgs
+Player::Behavior::InitializeArgsDamage
+Player::Behavior::InitializeArgsDarkSpin
+Player::Behavior::InitializeArgsDriveVehicle
+Player::Behavior::InitializeArgsEdgeHang
+Player::Behavior::InitializeArgsElectricCircuit
+Player::Behavior::InitializeArgsExternalControl
+Player::Behavior::InitializeArgsGrind
+Player::Behavior::InitializeArgsGround
+Player::Behavior::InitializeArgsHomingAttack
+Player::Behavior::InitializeArgsHomingJump
+Player::Behavior::InitializeArgsJump
+Player::Behavior::InitializeArgsLaunch
+Player::Behavior::InitializeArgsLineHang
+Player::Behavior::InitializeArgsPickupObject
+Player::Behavior::InitializeArgsPickupWeapon
+Player::Behavior::InitializeArgsSomethingHang
+Player::Behavior::InitializeArgsThrow
+Player::Behavior::InitializeArgsTurnOver
+Player::Behavior::InitializeArgsWallHang
+Player::Behavior::InitializeArgsWallJump
+Player::Behavior::Jump
+Player::Behavior::JumpDash
+Player::Behavior::Landing
+Player::Behavior::Launch
+Player::Behavior::LightDash
+Player::Behavior::LineHang
+Player::Behavior::Ottotto
+Player::Behavior::PickupObject
+Player::Behavior::PickupWeapon
+Player::Behavior::Sliding
+Player::Behavior::SomethingHang
+Player::Behavior::SpinDash
+Player::Behavior::Stream
+Player::Behavior::Super
+Player::Behavior::Throw
+Player::Behavior::TurnOver
+Player::Behavior::WallHang
+Player::Behavior::WallJump
+Player::CancelActingCommand
+Player::CancelBehaviorCommand
+Player::CancelUseWeaponCommand
+Player::CastWeaponCommand
+Player::ChaosBlastCommand
+Player::ChaosControlCommand
+Player::CharaColliMove
+Player::Control::Approach
+Player::Control::Bukuu
+Player::Control::ControlBase
+Player::Control::Factory
+Player::Control::InitializeArgs
+Player::Control::InitializeArgsApproach
+Player::Control::UserInput
+Player::Controller
+Player::DarkSpinCommand
+Player::Effect
+Player::ElectricCircuitCommand
+Player::EndActionCommand
+Player::EndAttackCommand
+Player::EndExternalControlCommand
+Player::EndJumpCommand
+Player::EndParallelMoveCommand
+Player::EndUseWeaponCommand
+Player::Executer
+Player::ExternalOption
+Player::GetItemCommand
+Player::GetOnVehicleCommand
+Player::GrindCommand
+Player::HomingAttackCommand
+Player::HomingJumpCommand
+Player::IgnoreInputCommand
+Player::InternalOption
+Player::InvincibleCommand
+Player::JumpDashCommand
+Player::LaunchCommand
+Player::LightDashCommand
+Player::Npc::Amy::MotionImpl
+Player::Npc::Amy::NpcAmy
+Player::Npc::Bee::Feather
+Player::Npc::Bee::MotionImpl
+Player::Npc::Bee::NpcBee
+Player::Npc::BossSonic::BossSonic
+Player::Npc::BossSonic::BossSonicExecuter
+Player::Npc::BossSonic::Desire::Attack
+Player::Npc::BossSonic::Desire::BossSonicDesireBase
+Player::Npc::BossSonic::Desire::CounterAttack
+Player::Npc::BossSonic::Desire::Dodge
+Player::Npc::BossSonic::Desire::Move
+Player::Npc::BossSonic::SonicTypeControl
+Player::Npc::BossSonic::SubControlDodge
+Player::Npc::BossSonic::SubControlJump
+Player::Npc::BossSonicTarget
+Player::Npc::DoomsEye::MotionImpl
+Player::Npc::DoomsEye::NpcDoomsEye
+Player::Npc::EggMonitor::MotionImpl
+Player::Npc::EggMonitor::NpcEggMonitor
+Player::Npc::EnemyDeadByPlayerCommand
+Player::Npc::Espio::MotionImpl
+Player::Npc::Espio::NpcEspio
+Player::Npc::FlyType::FlyTypeBehaviorFactory
+Player::Npc::FlyType::FlyTypeControlFactory
+Player::Npc::FlyType::FlyTypeExecuter
+Player::Npc::HideCommand
+Player::Npc::Knuckles::MotionImpl
+Player::Npc::Knuckles::NpcKnuckles
+Player::Npc::Maria::MotionImpl
+Player::Npc::Maria::NpcMaria
+Player::Npc::Npc
+Player::Npc::NpcCommand
+Player::Npc::NpcHand
+Player::Npc::NpcMotion
+Player::Npc::NpcTarget
+Player::Npc::Omega::MotionImpl
+Player::Npc::Omega::NpcOmega
+Player::Npc::Rouge::MotionImpl
+Player::Npc::Rouge::NpcRouge
+Player::Npc::ShowCommand
+Player::Npc::Sonic::MotionImpl
+Player::Npc::Sonic::NpcSonic
+Player::Npc::SonicType::SonicTypeBehaviorFactory
+Player::Npc::SonicType::SonicTypeControlFactory
+Player::Npc::SonicType::SonicTypeExecuter
+Player::Npc::Sound
+Player::Npc::Tails::MotionImpl
+Player::Npc::Tails::NpcTails
+Player::Npc::Tails::Tail
+Player::Npc::Vector::MotionImpl
+Player::Npc::Vector::NpcVector
+Player::PickupObjectCommand
+Player::PickupWeaponCommand
+Player::Player
+Player::PlayerBase
+Player::PlayerCommand
+Player::PlayerMotion
+Player::PlayerObject
+Player::PlayerShadow
+Player::PlayerTargetBase
+Player::PressGroundCommand
+Player::ResetCameraCommand
+Player::ResetCommand
+Player::SetExternalMotionCommand
+Player::SetGravityCommand
+Player::SetLookAtPositionCommand
+Player::SetLoopPathCommand
+Player::SetMotionCommand
+Player::Shadow::ControlWeaponBase
+Player::Shadow::Electric
+Player::Shadow::MotionEye
+Player::Shadow::MotionHand
+Player::Shadow::MotionSub
+Player::Shadow::PlayerTarget
+Player::Shadow::ShadowBehavior
+Player::Shadow::ShadowControl
+Player::Shadow::ShadowExecuter
+Player::Shadow::ShadowMotion
+Player::Shadow::ShadowWeapon
+Player::Shadow::Sound
+Player::Shadow::Super
+Player::SlidingCommand
+Player::SoundBase
+Player::SpinDashCommand
+Player::StartActionCommand
+Player::StartAttackCommand
+Player::StartExternalControlCommand
+Player::StartJumpCommand
+Player::StartParallelMoveCommand
+Player::StartUseWeaponCommand
+Player::StreamCommand
+Player::ThrowCommand
+Player::ToSuperCommand
+Player::TouchHangCommand
+Player::TouchLineCommand
+Player::TurnOverCommand
+Player::WaitTalkingCommand
+Player::WeaponBase
+PoisonGas::PoisonGas
+PoleHolder
+PopFooting::SetPopFooting
+PowerDeviceCage
+PowerDeviceCageSetState
+PowerDeviceNaked
+PowerDeviceNakedSetState
+RailSwitch::SetRailSwitch
+RainEffect
+ReadyCommand
+RecoverCommand
+RegularRing::Ring
+RegularRing::RingState
+ReleaseCommand
+RenderDiv
+RenderLevel_PostEffect
+RenderLevel_PreRender
+RenderStart
+RenderStatic
+RenderStop
+RenderUnit
+Researcher
+ResearcherCharInfo
+Resource
+ResourceManagerTask
+ResourceOneFile
+ResourceOneFileReq
+ResultTask
+RideCommand
+Rocket::RocketBase
+Rocket::RocketTask
+RollCircle
+RollCircleSetState
+SBkLarvaStateData
+SETCOLLISION
+SET_SE_LOOP
+SET_SE_ONESHOT
+Sample
+SaveCycle::Check::Phase
+SaveCycle::CheckModule::Phase
+SaveCycle::CycleBase
+SaveCycle::CycleTask
+SaveCycle::Load::Phase
+SaveCycle::MessageDrawTask
+SaveCycle::Save::Phase
+SavePoint::PauseWatch
+SavePoint::SavePoint
+SavePointSelect::EventArgs
+SavePointSelect::SavePointSelectTask
+ScatteringRing::ScatteringRing
+ScoreCommand
+SecretDisk::SecretDisk
+SecretDoor::SecretDoor
+SecretKey::SecretKey
+SecurityLaser::SetSecurityLaser
+SetAdapterEventArgs
+SetAdapterState
+SetAngleCommand
+SetCollision::SetCollision
+SetControl::WakeupByRangeEventArgs
+SetEnemyBase
+SetGenerator::FindArgs
+SetGenerator::SetGenerator
+SetGenerator::SetGeneratorState
+SetItem::ItemBoxTask
+SetItem::SetItemBoxTask
+SetItem::VacuumItemBox
+SetLightCommand
+SetManagerTask
+SetParticle
+SetPositionCommand
+SetSeLoop
+SetSeOneShot
+SetTransparentCommand
+SetVehicle::SetVehicleTask
+SetVelocityCommand
+SetWeapon::SetWeaponTask
+SetWeapon::WeaponTask
+ShootingGame::Balloon
+ShootingGame::BalloonGenerator
+ShootingGame::ManagerTask
+ShootingGame::Score
+SoldierCommonAI
+SoldierCommonBase
+SonicUSA::System::Random
+Sonicteam::Gindows::Object
+Sonicteam::Gindows::Utility::VariableEditor::Variable
+Sonicteam::System::Diagnostics::DebugListener
+Sonicteam::System::Diagnostics::DefaultDebugListener
+Sonicteam::System::Heap
+Sonicteam::System::IHeap
+Sonicteam::System::Peripheral::IKeyboardManagerImp
+Sonicteam::System::Peripheral::IManagerImp
+Sonicteam::System::Peripheral::IMouseManagerImp
+Sonicteam::System::Peripheral::Pad2Keyboard::Implementor
+Sonicteam::System::Peripheral::Pad2MouseImplementor
+Sonicteam::System::Singleton<Effect::PJS::EffectManagerPJS, Sonicteam::System::CreateStatic<Effect::PJS::EffectManagerPJS>>
+Sonicteam::System::Singleton<Sonicteam::System::Diagnostics::DefaultDebugListener, Sonicteam::System::CreateStatic<Sonicteam::System::Diagnostics::DefaultDebugListener>>
+Sonicteam::System::Singleton<TCsdSystem, Sonicteam::System::CreateStatic<TCsdSystem>>
+SonicteamUSA::System::BitTable
+SonicteamUSA::System::Camera::CameraAdjust
+SonicteamUSA::System::Camera::CameraFactory
+SonicteamUSA::System::Camera::CameraMode
+SonicteamUSA::System::Camera::CameraModeMtnViewer
+SonicteamUSA::System::Camera::CameraModeStop
+SonicteamUSA::System::Camera::CameraModeUser
+SonicteamUSA::System::Camera::CameraTargetInfo
+SonicteamUSA::System::CharaColli::CharaColliBase
+SonicteamUSA::System::CharaColli::CharaColliBaseCharInfo
+SonicteamUSA::System::CharaColli::CharaColliBody
+SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo
+SonicteamUSA::System::CharaColli::CharaColliGeneral
+SonicteamUSA::System::CharaColli::CharaColliGeneralBone
+SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo
+SonicteamUSA::System::CharaColli::CharaColliManageTask
+SonicteamUSA::System::DebugDisp
+SonicteamUSA::System::DebugDispBase
+SonicteamUSA::System::DebugDispBox
+SonicteamUSA::System::DebugDispCapsule
+SonicteamUSA::System::DebugDispCylinder
+SonicteamUSA::System::DebugDispLine
+SonicteamUSA::System::DebugDispSphere
+SonicteamUSA::System::Effect::EffectArrangerUSA
+SonicteamUSA::System::Effect::EffectGlobalParamUSA
+SonicteamUSA::System::Effect::EffectLaunchInfoUSA
+SonicteamUSA::System::Effect::EffectLocusUSA
+SonicteamUSA::System::Effect::EffectManagerUSA
+SonicteamUSA::System::Effect::EffectObjectUSA
+SonicteamUSA::System::Effect::EffectParticle3DUSA
+SonicteamUSA::System::Effect::EffectParticleUSA
+SonicteamUSA::System::Effect::EffectRayUSA
+SonicteamUSA::System::Effect::EffectShimmerUSA
+SonicteamUSA::System::Effect::EffectSystemUSA
+SonicteamUSA::System::Fade::FadeDrawTask
+SonicteamUSA::System::Fade::FadeTask
+SonicteamUSA::System::Range::RangeBase
+SonicteamUSA::System::Range::RangeBox
+SonicteamUSA::System::Range::RangeCapsule
+SonicteamUSA::System::Range::RangeCylinder
+SonicteamUSA::System::Range::RangePlane
+SonicteamUSA::System::Range::RangeSphere
+SonicteamUSA::System::Range::RangeTriangle
+SonicteamUSA::System::Thread
+SpaceGadget
+Spring::Spring
+SpringCommand
+SpringPanel
+StageAction::ContinueAction
+StageAction::DeadAction
+StageAction::EndAction
+StageAction::EventAction
+StageAction::FlashbackAction
+StageAction::GoalAction
+StageAction::IAction
+StageAction::InitAction
+StageAction::PauseAction
+StageAction::PlayAction
+StageAction::RestartAction
+StageAction::Result2PAction
+StageAction::SaveAction
+StageAction::ShowAction
+StageAction::TimeupAction
+StageAction::TryAgainAction
+StageBase::Base
+StageManager
+StageMovie
+StageRouteDisplay
+StageSequence::Manager
+StageSequence::MovieTest::Phase
+StageSequence::Play2POnce::Phase
+StageSequence::Play2PThree::Phase
+StageSequence::PlayEvent::Phase
+StageSequence::PlayFlashback::Phase
+StageSequence::PlayHard::Phase
+StageSequence::PlayOnce::Phase
+StageSequence::PlayStory::Phase
+StageSequence::StageSequenceBase
+StageStaffroll
+StageTitleTask
+StageTriggerEventTask
+Star
+Stick::Stick
+StonePole
+StonePoleAir
+StonePoleFlat
+StonePoleSlope
+StoneStatue
+StoneStatueSetState
+StretchGrass::SetStretchGrass
+SuctionPillar::SuctionPillar
+SuperComputer::SetSuperComputer
+Switch::Switch
+SwitchCommand
+TBGRead
+TBGReadManager
+TBlockManage
+TCsdSystem
+TDestroyManager
+TEnemyAIState
+TEnemyCommonBase
+TEnemySetBase
+TEnemySetTask
+TExpandBG
+TExpandNotice
+TFileControlAsycManager
+TFogSet
+TGameInfomation
+TGiCommandWindow
+TGiHPGaugeBoss
+TGiHdGage
+TGiHissatu
+TGiPause
+TGiRingChallenge
+TGiScoreDisplay
+TMemoryCardCtrl
+TMovieManager
+TNumEdit
+TObjBGM
+TObjSERIF
+TOneFileAsync
+TOneFileAsync<RpClump>
+TOneFileAsync<RpDMorphAnimation>
+TOneFileAsync<RpWorld>
+TOneFileAsync<RtDict>
+TOneFileAsync<RwTexDictionary>
+TOneFileAsync<void>
+TOneFileNotice
+TPauseManager
+TPjsCsd
+TPjsEventActionData
+TPjsEventActionFade
+TPjsEventActionManager
+TPjsEventActionScene
+TPjsEventFolder
+TStageInitalizeTask
+TStageKeyNoInput
+TTextureChange
+Target
+TargetList
+TargetManageTask
+TargetSearchList
+TargetSwitch
+Task
+Test::EffBelt
+Test::EffLocusMultiVtx
+TestNakazawa
+TextureUVAnimManagerTask
+ThreatObjHolder
+ThrowBomb
+ThrowBombImpl
+ThrowBombTask
+ThrowCommand
+ThrowContainer::Container
+ThrowObject
+ThrowVacuumBomb::Bomb
+Tornado
+TornadoCharInfo
+TornadoCollision
+TornadoTowing
+TurnOver::TurnOverTask
+UpDownReel::UpDownReel
+UseCommand
+VacuumBomb::Bomb
+VacuumCityBombSmall
+VacuumCommand
+VacuumContainer::Container
+VacuumObject
+VacuumObjectTask
+VacuumPod
+VacuumThrowBomb
+Vehicle::AirBoltModel
+Vehicle::AirSaucer
+Vehicle::AirWingModel
+Vehicle::BatteryArmy
+Vehicle::BatteryBlackKiller
+Vehicle::BirdBase::AirBolt
+Vehicle::BirdBase::AirWing
+Vehicle::BirdBase::BirdBase
+Vehicle::BirdBase::BirdModelBase
+Vehicle::CharaColliMove
+Vehicle::Effect
+Vehicle::GunLift
+Vehicle::TVehicleBase
+Vehicle::TVehicleCar
+Vehicle::VehicleTask
+Vehicle::Walker
+Vibration::ManagerTask
+Vibration::Request
+Vibration::RequestWithPos
+Vibration::Server
+Vibration::ServerGC
+Vine::FireBall
+Vine::FireBallBlast
+Vine::Vine
+WaitInitialize
+Walker
+WalkerCannon
+WallJumpCommand
+WarpHole::ManagerTask
+WarpHole::SetWarpHole
+WatchCamera::SetWatchCamera
+Weapon::AirBolt::AirBolt
+Weapon::AntiAircraftRifle
+Weapon::AntiTankMissile
+Weapon::AutoRifle
+Weapon::Bazooka
+Weapon::BigBarrel
+Weapon::BlackBarrel
+Weapon::BlackSword
+Weapon::Bullet::BulletBase
+Weapon::Bullet::BulletGun
+Weapon::Bullet::BulletManagerTask
+Weapon::Bullet::Cannon
+Weapon::Bullet::CannonBomb
+Weapon::Bullet::ChaosSpear::ChaosSpear
+Weapon::Bullet::Homing
+Weapon::Bullet::Ring
+Weapon::ChaosSpear::ChaosSpear
+Weapon::DarkHammer
+Weapon::EggBazooka
+Weapon::EggGun
+Weapon::FlashShot
+Weapon::Grenade
+Weapon::HandGun
+Weapon::HeavyShot
+Weapon::Item
+Weapon::LightShot
+Weapon::LockonMark
+Weapon::RingShot
+Weapon::RocketLauncher
+Weapon::Stick
+Weapon::SubMachineGun
+Weapon::TankCannon
+Weapon::VacuumPod
+Weapon::Vulcan
+Weapon::WeaponBase
+Weapon::WeaponCannonBase
+Weapon::WeaponGunBase
+Weapon::WeaponLaserBase
+Weapon::WeaponLockonBase
+Weapon::WeaponStickBase
+Weapon::WeaponVacuumBase
+WeaponSpecialSatelliteLaser::SatelliteLaser
+Weight::Weight
+_CT
+boost::_bi::bind_t<SonicteamUSA::System::JointPathData *, boost::_mfi::mf1<SonicteamUSA::System::JointPathData *, Player::PathImpl, SonicteamUSA::System::BranchCallBackParam &>, boost::_bi::list2<boost::_bi::value<Player::PathImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<Weapon::Bullet::BulletPosition, boost::_mfi::mf1<Weapon::Bullet::BulletPosition, @unnamed@PlayerShadowWeaponGun_cpp@::ControlGun, Weapon::Bullet::LaserReflectEventArgs &>, boost::_bi::list2<boost::_bi::value<@unnamed@PlayerShadowWeaponGun_cpp@::ControlGun *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::cmf1<void, TGiHPGaugeBossImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<TGiHPGaugeBossImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::cmf1<void, TGiHdGage, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<TGiHdGage *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, @unnamed@BulletLaser_cpp@::Laser, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<@unnamed@BulletLaser_cpp@::Laser *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, @unnamed@CommonBomb_cpp@::Bomb, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<@unnamed@CommonBomb_cpp@::Bomb *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, @unnamed@EffectKage_cpp@::KageTask, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<@unnamed@EffectKage_cpp@::KageTask *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, @unnamed@PlayerBarrierHeatEffect_cpp@::HeatEffect, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<@unnamed@PlayerBarrierHeatEffect_cpp@::HeatEffect *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, @unnamed@PlayerEffect_cpp@::CameraDemo, SonicteamUSA::System::Camera::CameraModeUser::SwitchEventArgs &>, boost::_bi::list2<boost::_bi::value<@unnamed@PlayerEffect_cpp@::CameraDemo *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, @unnamed@PlayerEffect_cpp@::CameraDemo, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<@unnamed@PlayerEffect_cpp@::CameraDemo *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, @unnamed@VacuumRing_cpp@::Ring, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<@unnamed@VacuumRing_cpp@::Ring *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, @unnamed@WeaponTorch_cpp@::Torch, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<@unnamed@WeaponTorch_cpp@::Torch *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ArkCannon, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ArkCannon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ArkLaser, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ArkLaser *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ArtWork::BreakableOrnament, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ArtWork::BreakableOrnament *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, AttackCallbackContainer, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<AttackCallbackContainer *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, AttackObject, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<AttackObject *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BAGunShip::BAGunShip, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<BAGunShip::BAGunShip *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BAGunShip::BAGunShip, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BAGunShip::BAGunShip *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BAMine::BAMine, CharCommand &>, boost::_bi::list2<boost::_bi::value<BAMine::BAMine *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BAMine::BAMine, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BAMine::BAMine *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BASwitch::BASwitch, CharCommand &>, boost::_bi::list2<boost::_bi::value<BASwitch::BASwitch *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BASwitch::BASwitch, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BASwitch::BASwitch *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BKTank::SetBKTank, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BKTank::SetBKTank *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BKTankController::Controller, CharCommand &>, boost::_bi::list2<boost::_bi::value<BKTankController::Controller *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Balloon::Balloon, CharCommand &>, boost::_bi::list2<boost::_bi::value<Balloon::Balloon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Balloon::Balloon, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Balloon::Balloon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Balloon::Balloon, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Balloon::Balloon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BkChaos::BkChibiChaos, CharCommand &>, boost::_bi::list2<boost::_bi::value<BkChaos::BkChibiChaos *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BkChaos::BkChibiChaos, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BkChaos::BkChibiChaos *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BkLarva, CharCommand &>, boost::_bi::list2<boost::_bi::value<BkLarva *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BkLarva, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BkLarva *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BkLarvaGenerator, CharCommand &>, boost::_bi::list2<boost::_bi::value<BkLarvaGenerator *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BlastBreak, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BlastBreak *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Bomb::Bomb, CharCommand &>, boost::_bi::list2<boost::_bi::value<Bomb::Bomb *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Bomb::Bomb, PickupCharInfo::SetGrabPositionArgs &>, boost::_bi::list2<boost::_bi::value<Bomb::Bomb *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Bomb::Bomb, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Bomb::Bomb *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Bomb::BombBlast, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Bomb::BombBlast *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BombServer, CharCommand &>, boost::_bi::list2<boost::_bi::value<BombServer *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BombingWall, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BombingWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Boss::Camera::LamborghiniImpl, SonicteamUSA::System::Camera::CameraModeUser::SwitchEventArgs &>, boost::_bi::list2<boost::_bi::value<Boss::Camera::LamborghiniImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Boss::Camera::LamborghiniImpl, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<Boss::Camera::LamborghiniImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Boss::Diablon::Behavior::Event, SonicteamUSA::System::Camera::CameraModeUser::SwitchEventArgs &>, boost::_bi::list2<boost::_bi::value<Boss::Diablon::Behavior::Event *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Boss::Diablon::Behavior::Event, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<Boss::Diablon::Behavior::Event *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Boss::Diablon::Parts::Barrier, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Boss::Diablon::Parts::Barrier *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Boss::Diablon::Parts::Beam, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Boss::Diablon::Parts::Beam *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Boss::Diablon::Parts::Body, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Boss::Diablon::Parts::Body *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Boss::Diablon::Parts::Bomb, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Boss::Diablon::Parts::Bomb *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BossCtrlUnit_PlayCameraMotion, SonicteamUSA::System::Camera::CameraModeUser::SwitchEventArgs &>, boost::_bi::list2<boost::_bi::value<BossCtrlUnit_PlayCameraMotion *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BossCtrlUnit_PlayCameraMotion, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<BossCtrlUnit_PlayCameraMotion *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BreakObj, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BreakObj *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BreakRoad, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BreakRoad *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BreakWall::BreakWall, CharCommand &>, boost::_bi::list2<boost::_bi::value<BreakWall::BreakWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, BreakWall::BreakWall, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<BreakWall::BreakWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Cage::Cage, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Cage::Cage *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CandleStick, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<CandleStick *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CaptureCage::CaptureCage, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<CaptureCage::CaptureCage *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CaptureCage::CaptureCage, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<CaptureCage::CaptureCage *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Catapult::Catapult, CharCommand &>, boost::_bi::list2<boost::_bi::value<Catapult::Catapult *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CatchStick, CharCommand &>, boost::_bi::list2<boost::_bi::value<CatchStick *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CatchStick, GadgetColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<CatchStick *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Chao, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Chao *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CircusBall::CircusBall, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<CircusBall::CircusBall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CircusPole, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<CircusPole *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CityBombBig, CharCommand &>, boost::_bi::list2<boost::_bi::value<CityBombBig *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CityBombBig, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<CityBombBig *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CityBombSmall, CharCommand &>, boost::_bi::list2<boost::_bi::value<CityBombSmall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CityBombSmall, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<CityBombSmall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CityChaosEmerald, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<CityChaosEmerald *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CityGadget, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<CityGadget *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CloseWall::SetCloseWall, CharCommand &>, boost::_bi::list2<boost::_bi::value<CloseWall::SetCloseWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Coaster, CharCommand &>, boost::_bi::list2<boost::_bi::value<Coaster *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Coaster, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Coaster *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Coaster, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<Coaster *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CommandCollision::CommandCollision, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<CommandCollision::CommandCollision *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerHard, CharCommand &>, boost::_bi::list2<boost::_bi::value<Container::ContainerHard *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerHard, PickupCharInfo::SetGrabPositionArgs &>, boost::_bi::list2<boost::_bi::value<Container::ContainerHard *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerHard, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Container::ContainerHard *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerNormal, CharCommand &>, boost::_bi::list2<boost::_bi::value<Container::ContainerNormal *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerNormal, PickupCharInfo::SetGrabPositionArgs &>, boost::_bi::list2<boost::_bi::value<Container::ContainerNormal *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerNormal, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Container::ContainerNormal *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerSecret, CharCommand &>, boost::_bi::list2<boost::_bi::value<Container::ContainerSecret *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerSecret, PickupCharInfo::SetGrabPositionArgs &>, boost::_bi::list2<boost::_bi::value<Container::ContainerSecret *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerSecret, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Container::ContainerSecret *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerUnbreak, CharCommand &>, boost::_bi::list2<boost::_bi::value<Container::ContainerUnbreak *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerWeapon, CharCommand &>, boost::_bi::list2<boost::_bi::value<Container::ContainerWeapon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerWeapon, PickupCharInfo::SetGrabPositionArgs &>, boost::_bi::list2<boost::_bi::value<Container::ContainerWeapon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Container::ContainerWeapon, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Container::ContainerWeapon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Cream, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Cream *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, CsdOneShot, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<CsdOneShot *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, DashPanel::DashPanel, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<DashPanel::DashPanel *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, DashRing::DashRing, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<DashRing::DashRing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, DefenseShield, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<DefenseShield *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, DefenseSystem, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<DefenseSystem *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, DefenseWall::SetDefenseWall, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<DefenseWall::SetDefenseWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, DefenseWall::SetDefenseWall, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<DefenseWall::SetDefenseWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, DevilDoomCtrlUnit_WingControl, CharCommand &>, boost::_bi::list2<boost::_bi::value<DevilDoomCtrlUnit_WingControl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Door::SetBaseDoor, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Door::SetBaseDoor *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Door::SetDoor, CharCommand &>, boost::_bi::list2<boost::_bi::value<Door::SetDoor *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Door::SetMorphDoor, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<Door::SetMorphDoor *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggBalloon::SetEggBalloon, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggBalloon::SetEggBalloon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggBalloonController::Controller, CharCommand &>, boost::_bi::list2<boost::_bi::value<EggBalloonController::Controller *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggCannon, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggCannon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggCannonBullet, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<EggCannonBullet *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggCannonBullet, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggCannonBullet *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggFleet, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggFleet *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggLastMech::EggLastMech, CharCommand &>, boost::_bi::list2<boost::_bi::value<EggLastMech::EggLastMech *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggLastMech::EggLastMech, EnemyMotionEventArg &>, boost::_bi::list2<boost::_bi::value<EggLastMech::EggLastMech *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggLastMech::EggLastMech, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggLastMech::EggLastMech *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggLastMech::EggLastMechCamera, SonicteamUSA::System::Camera::CameraModeUser::SwitchEventArgs &>, boost::_bi::list2<boost::_bi::value<EggLastMech::EggLastMechCamera *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggLastMech::EggLastMechCamera, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<EggLastMech::EggLastMechCamera *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggLastMech::EggLastMechSlotDisp2D::Impl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<EggLastMech::EggLastMechSlotDisp2D::Impl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggLastMech::SlotSwitch, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggLastMech::SlotSwitch *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggLastMechFeverRing::EggLastMechFeverRing, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<EggLastMechFeverRing::EggLastMechFeverRing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggMecaCtrlUnit_AttackCallback, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggMecaCtrlUnit_AttackCallback *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggMecaCtrlUnit_Bomb, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggMecaCtrlUnit_Bomb *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggMecaCtrlUnit_DispEye, _stMtnCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggMecaCtrlUnit_DispEye *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggMecaCtrlUnit_IronBall, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggMecaCtrlUnit_IronBall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggMecaCtrlUnit_Laser, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggMecaCtrlUnit_Laser *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggMecaCtrlUnit_RollUpper, _stMtnCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggMecaCtrlUnit_RollUpper *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggMecaCtrlUnit_ShockWave, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggMecaCtrlUnit_ShockWave *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EggPierrot::PierrotBall, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EggPierrot::PierrotBall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecAccessPanel, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<ElecAccessPanel *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecBarSub, CharCommand &>, boost::_bi::list2<boost::_bi::value<ElecBarSub *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecBarSub, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<ElecBarSub *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecCircuitColli, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<ElecCircuitColli *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecCircuitEntrance, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<ElecCircuitEntrance *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecCoreProgram, CharCommand &>, boost::_bi::list2<boost::_bi::value<ElecCoreProgram *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecCoreProgram, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ElecCoreProgram *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecCoreWall, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<ElecCoreWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecCoreWall, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<ElecCoreWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecCristalWall, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ElecCristalWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecFanDraw, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<ElecFanDraw *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecFireWall, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ElecFireWall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecKyuu, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<ElecKyuu *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecPanel, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<ElecPanel *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecPanel, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ElecPanel *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecRollHexa, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ElecRollHexa *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecSearchLight, CharCommand &>, boost::_bi::list2<boost::_bi::value<ElecSearchLight *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecSearchLight, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<ElecSearchLight *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecSearchLight, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<ElecSearchLight *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecSecurityCode, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ElecSecurityCode *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ElecSmallCube, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ElecSmallCube *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Elevator::Elevator, CharCommand &>, boost::_bi::list2<boost::_bi::value<Elevator::Elevator *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Elevator::Elevator, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Elevator::Elevator *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EnemyAttack, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EnemyAttack *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EnemyBaseAI, CharCommand &>, boost::_bi::list2<boost::_bi::value<EnemyBaseAI *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EnemyCharaColliModule, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EnemyCharaColliModule *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EnemyDispCommon, EnemyMotionEventArg &>, boost::_bi::list2<boost::_bi::value<EnemyDispCommon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EnemyStatusCommon, EnemyColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<EnemyStatusCommon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EnergyCore::EnergyCore, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<EnergyCore::EnergyCore *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EscapePlane::SetEscapePlane, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<EscapePlane::SetEscapePlane *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, EscapePlaneController::Controller, CharCommand &>, boost::_bi::list2<boost::_bi::value<EscapePlaneController::Controller *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, FallBuilding, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<FallBuilding *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, FallingStoneHard, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<FallingStoneHard *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, FallingStoneSoft, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<FallingStoneSoft *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Fan::Fan, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Fan::Fan *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Fire::Fire, CharCommand &>, boost::_bi::list2<boost::_bi::value<Fire::Fire *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Fire::Fire, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Fire::Fire *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, FireRing::FireRing, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<FireRing::FireRing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, FireRing::FireRing, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<FireRing::FireRing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, FootingBreak, CharCommand &>, boost::_bi::list2<boost::_bi::value<FootingBreak *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, FootingMovable::FootingMovable, CharCommand &>, boost::_bi::list2<boost::_bi::value<FootingMovable::FootingMovable *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, FootingMovable::FootingMovable, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<FootingMovable::FootingMovable *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, FootingRoll, CharCommand &>, boost::_bi::list2<boost::_bi::value<FootingRoll *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Fruit::FruitTask, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Fruit::FruitTask *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, GiGameOver, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<GiGameOver *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, GiHPGaugeEnemyImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<GiHPGaugeEnemyImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, GiMissionTargetImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<GiMissionTargetImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, GiantLantern, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<GiantLantern *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, GoalRing::GoalRing, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<GoalRing::GoalRing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Gong::CSD::GongCSD, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<Gong::CSD::GongCSD *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Gong::Gong, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Gong::Gong *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, GravityChangeSwitch, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<GravityChangeSwitch *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, GravityChangeZone, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<GravityChangeZone *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, GunBuilding, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<GunBuilding *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, HealingUnit::HealingBlast, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<HealingUnit::HealingBlast *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, HealingUnit::HealingUnit, CharCommand &>, boost::_bi::list2<boost::_bi::value<HealingUnit::HealingUnit *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, HealingUnit::HealingUnit, PickupCharInfo::SetGrabPositionArgs &>, boost::_bi::list2<boost::_bi::value<HealingUnit::HealingUnit *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, HeavyDogCtrlUnit_Engine, _stMtnCallbackParam &>, boost::_bi::list2<boost::_bi::value<HeavyDogCtrlUnit_Engine *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Helicopter, CharCommand &>, boost::_bi::list2<boost::_bi::value<Helicopter *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Helicopter, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Helicopter *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Helicopter, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Helicopter *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, HintCollision::SetHintCollision, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<HintCollision::SetHintCollision *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, HintRing::SetHintRing, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<HintRing::SetHintRing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, HintRing::SetHintRing, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<HintRing::SetHintRing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ItemIcon::Icon, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<ItemIcon::Icon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, JumpBoard::JumpBoard, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<JumpBoard::JumpBoard *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, LightColli, CharCommand &>, boost::_bi::list2<boost::_bi::value<LightColli *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, LongSpring::LongSpring, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<LongSpring::LongSpring *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, MagmaGuard::SetMagmaGuard, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<MagmaGuard::SetMagmaGuard *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Meteor, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Meteor *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Meteors, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Meteors *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Meteors, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Meteors *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Monster, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Monster *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, MonsterControl, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<MonsterControl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, MotionCallbackContainer, _stMtnCallbackParam &>, boost::_bi::list2<boost::_bi::value<MotionCallbackContainer *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, NpcNameDisplay, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<NpcNameDisplay *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Parachute::Parachute, CharCommand &>, boost::_bi::list2<boost::_bi::value<Parachute::Parachute *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::AttackImpl, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Player::AttackImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::ChaosBlast, Player::MotionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::ChaosBlast *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::ChaosControl, Player::MotionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::ChaosControl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::EdgeHang, CharaColliMoveArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::EdgeHang *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::FirstMeet, SonicteamUSA::System::Camera::CameraModeUser::SwitchEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::FirstMeet *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::FirstMeet, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::FirstMeet *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::Grind, Player::MotionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::Grind *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::GroundAttack, Player::MotionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::GroundAttack *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::HomingAttack, Player::CollisionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::HomingAttack *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::HomingAttack, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::HomingAttack *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::JumpDash, Player::CollisionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::JumpDash *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::PickupObject, Player::MotionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::PickupObject *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::PickupWeapon, Player::MotionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::PickupWeapon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::Throw, Player::MotionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::Throw *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::TurnOver, Player::MotionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::TurnOver *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::WallHang, Player::CollisionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::WallHang *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Behavior::WallJump, Player::CollisionEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Behavior::WallJump *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Npc::BossSonic::BossSonicExecuter, CharCommand &>, boost::_bi::list2<boost::_bi::value<Player::Npc::BossSonic::BossSonicExecuter *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Npc::FlyType::FlyTypeExecuter, CharCommand &>, boost::_bi::list2<boost::_bi::value<Player::Npc::FlyType::FlyTypeExecuter *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Npc::SonicType::SonicTypeExecuter, CharCommand &>, boost::_bi::list2<boost::_bi::value<Player::Npc::SonicType::SonicTypeExecuter *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::PlayerCharaColliImpl, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Player::PlayerCharaColliImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Shadow::ShadowExecuter, CharCommand &>, boost::_bi::list2<boost::_bi::value<Player::Shadow::ShadowExecuter *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Shadow::ShadowMotion, Player::IKEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Shadow::ShadowMotion *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Player::Shadow::ShadowWeapon, Player::IKEventArgs &>, boost::_bi::list2<boost::_bi::value<Player::Shadow::ShadowWeapon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, PoisonGas::PoisonGas, CharCommand &>, boost::_bi::list2<boost::_bi::value<PoisonGas::PoisonGas *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, PoisonGas::PoisonGas, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<PoisonGas::PoisonGas *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, PoisonGas::PoisonGas, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<PoisonGas::PoisonGas *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, PowerDeviceCage, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<PowerDeviceCage *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, PowerDeviceCage, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<PowerDeviceCage *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, PowerDeviceNaked, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<PowerDeviceNaked *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, RailSwitch::SetRailSwitch, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<RailSwitch::SetRailSwitch *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, RegularRing::Ring, CharCommand &>, boost::_bi::list2<boost::_bi::value<RegularRing::Ring *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, RegularRing::Ring, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<RegularRing::Ring *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Researcher, CharCommand &>, boost::_bi::list2<boost::_bi::value<Researcher *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Rocket::Rocket, CharCommand &>, boost::_bi::list2<boost::_bi::value<Rocket::Rocket *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Rocket::Rocket, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Rocket::Rocket *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Rocket::RocketBase, CharCommand &>, boost::_bi::list2<boost::_bi::value<Rocket::RocketBase *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, RollCircleObj, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<RollCircleObj *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SavePoint::SavePoint, CharCommand &>, boost::_bi::list2<boost::_bi::value<SavePoint::SavePoint *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SavePoint::SavePoint, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<SavePoint::SavePoint *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SavePoint::SavePoint, SavePointSelect::Args &>, boost::_bi::list2<boost::_bi::value<SavePoint::SavePoint *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SavePointSelect::SavePointSelectImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<SavePointSelect::SavePointSelectImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ScatteringRing::ScatteringRing, CharCommand &>, boost::_bi::list2<boost::_bi::value<ScatteringRing::ScatteringRing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ScatteringRing::ScatteringRing, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<ScatteringRing::ScatteringRing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SecretDisk::SecretDisk, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<SecretDisk::SecretDisk *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SecretKey::SecretKey, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<SecretKey::SecretKey *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SecurityLaser::SetSecurityLaser, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<SecurityLaser::SetSecurityLaser *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SetCollision::SetCollision, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<SetCollision::SetCollision *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SetItem::ItemBox, CharCommand &>, boost::_bi::list2<boost::_bi::value<SetItem::ItemBox *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SetItem::ItemBox, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<SetItem::ItemBox *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SetItem::ItemBox, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<SetItem::ItemBox *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SetItem::ItemBox, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<SetItem::ItemBox *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SetWeapon::Arms, CharCommand &>, boost::_bi::list2<boost::_bi::value<SetWeapon::Arms *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ShootingGame::Balloon, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ShootingGame::Balloon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ShootingGame::BalloonGenerator, CharCommand &>, boost::_bi::list2<boost::_bi::value<ShootingGame::BalloonGenerator *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ShootingGame::Score, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ShootingGame::Score *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SpaceGadget, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<SpaceGadget *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Spring::Spring, CharCommand &>, boost::_bi::list2<boost::_bi::value<Spring::Spring *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Spring::Spring, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Spring::Spring *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SpringPanel, CharCommand &>, boost::_bi::list2<boost::_bi::value<SpringPanel *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SpringPanel, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<SpringPanel *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, StageAction::Result2PAction, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<StageAction::Result2PAction *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, StageAction::ShowAction, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<StageAction::ShowAction *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, StageMovie, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<StageMovie *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, StageRouteDisplay, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<StageRouteDisplay *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, StageSequence::MovieTest::phaseImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<StageSequence::MovieTest::phaseImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Stick::Stick, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Stick::Stick *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, StonePole, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<StonePole *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, StoneStatue, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<StoneStatue *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, StretchGrass::SetStretchGrass, CharCommand &>, boost::_bi::list2<boost::_bi::value<StretchGrass::SetStretchGrass *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, StretchGrass::SetStretchGrass, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<StretchGrass::SetStretchGrass *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SuctionPillar::SuctionPillar, CharCommand &>, boost::_bi::list2<boost::_bi::value<SuctionPillar::SuctionPillar *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, SuperComputer::SetSuperComputer, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<SuperComputer::SetSuperComputer *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Switch::Switch, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Switch::Switch *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Switch::Switch, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Switch::Switch *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TGameDefaultParam, TGameDefaultParam *>, boost::_bi::list2<boost::_bi::value<TGameDefaultParam *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TGiCommandWindowImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<TGiCommandWindowImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TGiHissatu, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<TGiHissatu *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TGiPause, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<TGiPause *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TGiRingChallengeImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<TGiRingChallengeImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TGiScoreDisplayImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<TGiScoreDisplayImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TPjsEventActionFade, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<TPjsEventActionFade *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TargetSwitch, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<TargetSwitch *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ThreatObj, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ThreatObj *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ThrowBombImpl, CharCommand &>, boost::_bi::list2<boost::_bi::value<ThrowBombImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ThrowBombImpl, PickupCharInfo::SetGrabPositionArgs &>, boost::_bi::list2<boost::_bi::value<ThrowBombImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ThrowBombImpl, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ThrowBombImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, ThrowObjectImpl, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<ThrowObjectImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TurnOver::TurnOverTask, CharCommand &>, boost::_bi::list2<boost::_bi::value<TurnOver::TurnOverTask *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, TurnOver::TurnOverTask, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<TurnOver::TurnOverTask *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, UpDownReel::UpDownReel, CharCommand &>, boost::_bi::list2<boost::_bi::value<UpDownReel::UpDownReel *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, UpDownReel::UpDownReel, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<UpDownReel::UpDownReel *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::AirSaucer, CharaColliMoveArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::AirSaucer *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::AirSaucer, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vehicle::AirSaucer *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::AirWingCameraImpl, SonicteamUSA::System::Camera::CameraModeUser::SwitchEventArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::AirWingCameraImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::AirWingCameraImpl, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::AirWingCameraImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::AttackImpl, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vehicle::AttackImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::BatteryArmy, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::BatteryArmy *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::BatteryArmy, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vehicle::BatteryArmy *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::BatteryBlackKiller, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::BatteryBlackKiller *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::BatteryBlackKiller, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vehicle::BatteryBlackKiller *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::BirdBase::BirdBase, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vehicle::BirdBase::BirdBase *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::GunLift, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::GunLift *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::GunLift, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vehicle::GunLift *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::TVehicleCamera, SonicteamUSA::System::Camera::CameraModeUser::SwitchEventArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::TVehicleCamera *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::TVehicleCamera, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::TVehicleCamera *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::TVehicleCarMove, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vehicle::TVehicleCarMove *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::VehicleBaseImpl, CharCommand &>, boost::_bi::list2<boost::_bi::value<Vehicle::VehicleBaseImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::Walker, CharaColliMoveArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::Walker *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::Walker, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vehicle::Walker *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vehicle::WalkerModelImpl, Vehicle::MotionEventArgs &>, boost::_bi::list2<boost::_bi::value<Vehicle::WalkerModelImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, VehicleArrowImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<VehicleArrowImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vine::FireBall, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Vine::FireBall *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vine::FireBallBlast, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vine::FireBallBlast *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Vine::Vine, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Vine::Vine *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, WarpHole::SetWarpHole, CharCommand &>, boost::_bi::list2<boost::_bi::value<WarpHole::SetWarpHole *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, WatchCamera::SetWatchCamera, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<WatchCamera::SetWatchCamera *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, WatchCamera::SetWatchCamera, SonicteamUSA::System::Camera::CameraModeUser::UpdateEventArgs &>, boost::_bi::list2<boost::_bi::value<WatchCamera::SetWatchCamera *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weapon::Bullet::BulletGun, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Weapon::Bullet::BulletGun *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weapon::Bullet::Cannon, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Weapon::Bullet::Cannon *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weapon::Bullet::CannonBomb, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Weapon::Bullet::CannonBomb *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weapon::Bullet::ChaosSpear::ChaosSpear, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Weapon::Bullet::ChaosSpear::ChaosSpear *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weapon::Bullet::Homing, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Weapon::Bullet::Homing *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weapon::Bullet::Ring, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Weapon::Bullet::Ring *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weapon::LockonMarkImpl, RednerDrawArgs &>, boost::_bi::list2<boost::_bi::value<Weapon::LockonMarkImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weapon::WeaponStickBaseImpl, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Weapon::WeaponStickBaseImpl *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weight::Weight, ColliDetectArgs &>, boost::_bi::list2<boost::_bi::value<Weight::Weight *>, boost::arg<1>>>
+boost::_bi::bind_t<void, boost::_mfi::mf1<void, Weight::Weight, SonicteamUSA::System::CharaColli::AttackCallbackParam &>, boost::_bi::list2<boost::_bi::value<Weight::Weight *>, boost::arg<1>>>
+boost::_bi::bind_t<void, void (*)(CharaColliMoveArgs &), boost::_bi::list1<boost::arg<1>>>
+boost::_bi::bind_t<void, void (*)(CommandCollision::Args &), boost::_bi::list1<boost::arg<1>>>
+boost::bad_function_call
+boost::bad_weak_ptr
+boost::checked_deleter<@unnamed@EnemyVacuumObject_cpp@::CEnemyVacuumObject>
+boost::checked_deleter<@unnamed@VacuumRing_cpp@::Ring>
+boost::checked_deleter<AdvReal::AdvCsdEffect>
+boost::checked_deleter<AdvReal::BattleMode::Phase>
+boost::checked_deleter<AdvReal::Logo::Phase>
+boost::checked_deleter<AdvReal::MemoryCheck::Phase>
+boost::checked_deleter<AdvReal::Movie::Phase>
+boost::checked_deleter<AdvReal::Option::Phase>
+boost::checked_deleter<AdvReal::SelectMode::Phase>
+boost::checked_deleter<AdvReal::StoryLibrary::Phase>
+boost::checked_deleter<AdvReal::Synopsis::Phase>
+boost::checked_deleter<AdvReal::Title::Phase>
+boost::checked_deleter<BKTank::SetBKTank>
+boost::checked_deleter<Balloon::VacuumBalloon>
+boost::checked_deleter<Bomb::Bomb>
+boost::checked_deleter<Boss::Diablon::Behavior::Beam>
+boost::checked_deleter<Boss::Diablon::Behavior::Bomb>
+boost::checked_deleter<Boss::Diablon::Behavior::Event>
+boost::checked_deleter<Boss::Diablon::Behavior::Idle>
+boost::checked_deleter<Boss::Diablon::Behavior::Move>
+boost::checked_deleter<Boss::Diablon::Behavior::Wipe>
+boost::checked_deleter<Boss::Diablon::Desire::Beam>
+boost::checked_deleter<Boss::Diablon::Desire::Bomb>
+boost::checked_deleter<Boss::Diablon::Desire::Event>
+boost::checked_deleter<Boss::Diablon::Desire::Move>
+boost::checked_deleter<Boss::Diablon::Desire::Wipe>
+boost::checked_deleter<Boss::Diablon::Diablon>
+boost::checked_deleter<BossCharInfo>
+boost::checked_deleter<BossCtrlUnit>
+boost::checked_deleter<Chao>
+boost::checked_deleter<CharCommandUnit>
+boost::checked_deleter<CityLaser>
+boost::checked_deleter<CollisionEffect>
+boost::checked_deleter<Container::ContainerHard>
+boost::checked_deleter<Container::ContainerNormal>
+boost::checked_deleter<Container::ContainerSecret>
+boost::checked_deleter<Container::ContainerWeapon>
+boost::checked_deleter<ContainerBehavior>
+boost::checked_deleter<Effect::System::EffectElement>
+boost::checked_deleter<EggBalloon::SetEggBalloon>
+boost::checked_deleter<EggCannon>
+boost::checked_deleter<EggFleet>
+boost::checked_deleter<EggLastMech::EggLastMech>
+boost::checked_deleter<EggLastMech::EggLastMechSlotDisp2D>
+boost::checked_deleter<EggMecaCtrlUnit_Bomb>
+boost::checked_deleter<EggMecaCtrlUnit_ShockWave>
+boost::checked_deleter<EggPierrot::BakudanManager>
+boost::checked_deleter<EggPierrot::PierrotBall>
+boost::checked_deleter<ElecFootingRotateObj>
+boost::checked_deleter<EmbeddedBazooka::Bazooka>
+boost::checked_deleter<EmbeddedGun::AutoRifle>
+boost::checked_deleter<EnemyCharInfo>
+boost::checked_deleter<EnemyRender::Impl>
+boost::checked_deleter<EnemyRender>
+boost::checked_deleter<EnemyShield>
+boost::checked_deleter<EnemyTarget>
+boost::checked_deleter<EscapePlane::SetEscapePlane>
+boost::checked_deleter<FallBuilding>
+boost::checked_deleter<FallingStoneHard>
+boost::checked_deleter<FallingStoneSoft>
+boost::checked_deleter<GadgetBuilder::CrashInfoCtrl>
+boost::checked_deleter<GadgetCharCollision>
+boost::checked_deleter<GadgetCharInfo>
+boost::checked_deleter<GadgetModelInfo>
+boost::checked_deleter<GadgetParticle::GadgetParticleCtrl>
+boost::checked_deleter<GadgetUtility::Watcher>
+boost::checked_deleter<GiHPGaugeEnemy>
+boost::checked_deleter<GiMissionTarget>
+boost::checked_deleter<HealingUnit::HealingUnit>
+boost::checked_deleter<ItemIcon::Icon>
+boost::checked_deleter<ItemIcon::ManagerUnit>
+boost::checked_deleter<Meteors>
+boost::checked_deleter<Mission::BasicMessage>
+boost::checked_deleter<Mission::CountMessage>
+boost::checked_deleter<Mission::CountMission>
+boost::checked_deleter<Mission::EnemyMission>
+boost::checked_deleter<Mission::GoalMission>
+boost::checked_deleter<Mission::Mission>
+boost::checked_deleter<Mission::RingMission>
+boost::checked_deleter<Mission::TimerCountMission>
+boost::checked_deleter<Mission::TimerGoalMission>
+boost::checked_deleter<Mission::TimerMessage>
+boost::checked_deleter<Mission::TimerMission>
+boost::checked_deleter<MonsterCharInfo>
+boost::checked_deleter<PJSCamera::Collision::ProcessDeltaMoveNoLook>
+boost::checked_deleter<PJSCamera::Collision::ProcessRay2Eye>
+boost::checked_deleter<PJSCamera::ExternalCameraRequest>
+boost::checked_deleter<PickupCharInfo>
+boost::checked_deleter<Player::Behavior::Behavior>
+boost::checked_deleter<Player::Control::ControlBase>
+boost::checked_deleter<Player::ExternalOption>
+boost::checked_deleter<Player::InternalOption>
+boost::checked_deleter<Player::Npc::Amy::NpcAmy>
+boost::checked_deleter<Player::Npc::Bee::NpcBee>
+boost::checked_deleter<Player::Npc::BossSonic::BossSonic>
+boost::checked_deleter<Player::Npc::BossSonic::BossSonicWork>
+boost::checked_deleter<Player::Npc::BossSonic::Desire::Attack>
+boost::checked_deleter<Player::Npc::BossSonic::Desire::CounterAttack>
+boost::checked_deleter<Player::Npc::BossSonic::Desire::Dodge>
+boost::checked_deleter<Player::Npc::BossSonic::Desire::Move>
+boost::checked_deleter<Player::Npc::BossSonic::SonicTypeControl>
+boost::checked_deleter<Player::Npc::DoomsEye::NpcDoomsEye>
+boost::checked_deleter<Player::Npc::EggMonitor::NpcEggMonitor>
+boost::checked_deleter<Player::Npc::Espio::NpcEspio>
+boost::checked_deleter<Player::Npc::FlyType::FlyTypeBehaviorFactory>
+boost::checked_deleter<Player::Npc::FlyType::FlyTypeControlFactory>
+boost::checked_deleter<Player::Npc::Knuckles::NpcKnuckles>
+boost::checked_deleter<Player::Npc::Maria::NpcMaria>
+boost::checked_deleter<Player::Npc::NpcManageUnit>
+boost::checked_deleter<Player::Npc::Omega::NpcOmega>
+boost::checked_deleter<Player::Npc::Rouge::NpcRouge>
+boost::checked_deleter<Player::Npc::Sonic::NpcSonic>
+boost::checked_deleter<Player::Npc::SonicType::SonicTypeBehaviorFactory>
+boost::checked_deleter<Player::Npc::SonicType::SonicTypeControlFactory>
+boost::checked_deleter<Player::Npc::Tails::NpcTails>
+boost::checked_deleter<Player::Npc::Vector::NpcVector>
+boost::checked_deleter<Player::PathImpl>
+boost::checked_deleter<Player::PlayerManageUnit>
+boost::checked_deleter<Player::PlayerShadow>
+boost::checked_deleter<Player::Shadow::ShadowBehavior>
+boost::checked_deleter<Player::Shadow::ShadowControl>
+boost::checked_deleter<Render>
+boost::checked_deleter<ResearcherCharInfo>
+boost::checked_deleter<Rocket::Rocket>
+boost::checked_deleter<RollCircleObj>
+boost::checked_deleter<SaveCycle::Check::Phase>
+boost::checked_deleter<SaveCycle::CheckModule::Phase>
+boost::checked_deleter<SaveCycle::Load::Phase>
+boost::checked_deleter<SaveCycle::Save::Phase>
+boost::checked_deleter<SavedataAnalyzer::StoryCheck>
+boost::checked_deleter<SetGenerator::Manager>
+boost::checked_deleter<SetItem::ItemBox>
+boost::checked_deleter<SetItem::VacuumItemBox>
+boost::checked_deleter<SetWeapon::Arms>
+boost::checked_deleter<ShootingGame::RandomSampling<ShootingGame::Kind::__Kind>>
+boost::checked_deleter<ShootingGame::RandomSampling<float>>
+boost::checked_deleter<Sonicteam::System::Geometry::Line>
+boost::checked_deleter<SonicteamUSA::System::Camera::CameraManagerUnit>
+boost::checked_deleter<SonicteamUSA::System::Camera::CameraScreen>
+boost::checked_deleter<SonicteamUSA::System::Camera::CameraShake>
+boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliAttack>
+boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBody>
+boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo>
+boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneral>
+boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneralBone>
+boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo>
+boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResult>
+boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResultList>
+boost::checked_deleter<SonicteamUSA::System::PathCtrl>
+boost::checked_deleter<SonicteamUSA::System::PathData>
+boost::checked_deleter<StageAction::ContinueAction>
+boost::checked_deleter<StageAction::DeadAction>
+boost::checked_deleter<StageAction::EndAction>
+boost::checked_deleter<StageAction::EventAction>
+boost::checked_deleter<StageAction::FlashbackAction>
+boost::checked_deleter<StageAction::GoalAction>
+boost::checked_deleter<StageAction::InitAction>
+boost::checked_deleter<StageAction::PauseAction>
+boost::checked_deleter<StageAction::PlayAction>
+boost::checked_deleter<StageAction::RestartAction>
+boost::checked_deleter<StageAction::Result2PAction>
+boost::checked_deleter<StageAction::SaveAction>
+boost::checked_deleter<StageAction::ShowAction>
+boost::checked_deleter<StageAction::TimeupAction>
+boost::checked_deleter<StageAction::TryAgainAction>
+boost::checked_deleter<StageManager>
+boost::checked_deleter<StageMovie>
+boost::checked_deleter<StageRouteDisplay>
+boost::checked_deleter<StageSequence::MovieTest::Phase>
+boost::checked_deleter<StageSequence::Play2POnce::Phase>
+boost::checked_deleter<StageSequence::Play2PThree::Phase>
+boost::checked_deleter<StageSequence::PlayEvent::Phase>
+boost::checked_deleter<StageSequence::PlayFlashback::Phase>
+boost::checked_deleter<StageSequence::PlayHard::Phase>
+boost::checked_deleter<StageSequence::PlayOnce::Phase>
+boost::checked_deleter<StageSequence::PlayStory::Phase>
+boost::checked_deleter<StageStaffroll>
+boost::checked_deleter<StonePoleAir>
+boost::checked_deleter<StonePoleFlat>
+boost::checked_deleter<StonePoleSlope>
+boost::checked_deleter<TBlockManage::forBlockCheck>
+boost::checked_deleter<TFogSet>
+boost::checked_deleter<TGiNumberDisplay>
+boost::checked_deleter<TMessageDisp>
+boost::checked_deleter<TPjsSceneTour>
+boost::checked_deleter<TargetSearchList>
+boost::checked_deleter<ThreatObj>
+boost::checked_deleter<ThrowBombImpl>
+boost::checked_deleter<TornadoCharInfo>
+boost::checked_deleter<TrigerCounter>
+boost::checked_deleter<VacuumBomb::Bomb>
+boost::checked_deleter<VacuumCityBombSmall>
+boost::checked_deleter<VacuumContainer::Container>
+boost::checked_deleter<VacuumThrowBomb>
+boost::checked_deleter<Vehicle::TVehicleBase>
+boost::checked_deleter<Vehicle::TVehicleCamera>
+boost::checked_deleter<Vehicle::TVehicleCarMove>
+boost::checked_deleter<VehicleArrow>
+boost::checked_deleter<Vibration::ManagerUnit>
+boost::checked_deleter<Vibration::Request>
+boost::checked_deleter<Vibration::RequestHandle>
+boost::checked_deleter<Vibration::RequestWithPos>
+boost::checked_deleter<WatchCamera::Monitor>
+boost::checked_deleter<WatchCamera::Sight>
+boost::checked_deleter<Weapon::AirBolt::AirBolt>
+boost::checked_deleter<Weapon::ChaosSpear::ChaosSpear>
+boost::checked_deleter<Weapon::Item>
+boost::checked_deleter<Weapon::LockonTarget>
+boost::checked_deleter<Weapon::WeaponBase>
+boost::checked_deleter<folderPause>
+boost::checked_deleter<folderStoryRoute>
+boost::checked_deleter<folderTargetWindow>
+boost::detail::sp_counted_base
+boost::detail::sp_counted_base_impl<@unnamed@EnemyVacuumObject_cpp@::CEnemyVacuumObject *, boost::checked_deleter<@unnamed@EnemyVacuumObject_cpp@::CEnemyVacuumObject>>
+boost::detail::sp_counted_base_impl<@unnamed@VacuumRing_cpp@::Ring *, boost::checked_deleter<@unnamed@VacuumRing_cpp@::Ring>>
+boost::detail::sp_counted_base_impl<AdvReal::AdvCsdEffect *, boost::checked_deleter<AdvReal::AdvCsdEffect>>
+boost::detail::sp_counted_base_impl<AdvReal::BattleMode::Phase *, boost::checked_deleter<AdvReal::BattleMode::Phase>>
+boost::detail::sp_counted_base_impl<AdvReal::Logo::Phase *, boost::checked_deleter<AdvReal::Logo::Phase>>
+boost::detail::sp_counted_base_impl<AdvReal::MemoryCheck::Phase *, boost::checked_deleter<AdvReal::MemoryCheck::Phase>>
+boost::detail::sp_counted_base_impl<AdvReal::Movie::Phase *, boost::checked_deleter<AdvReal::Movie::Phase>>
+boost::detail::sp_counted_base_impl<AdvReal::Option::Phase *, boost::checked_deleter<AdvReal::Option::Phase>>
+boost::detail::sp_counted_base_impl<AdvReal::SelectMode::Phase *, boost::checked_deleter<AdvReal::SelectMode::Phase>>
+boost::detail::sp_counted_base_impl<AdvReal::StoryLibrary::Phase *, boost::checked_deleter<AdvReal::StoryLibrary::Phase>>
+boost::detail::sp_counted_base_impl<AdvReal::Synopsis::Phase *, boost::checked_deleter<AdvReal::Synopsis::Phase>>
+boost::detail::sp_counted_base_impl<AdvReal::Title::Phase *, boost::checked_deleter<AdvReal::Title::Phase>>
+boost::detail::sp_counted_base_impl<BKTank::SetBKTank *, boost::checked_deleter<BKTank::SetBKTank>>
+boost::detail::sp_counted_base_impl<Balloon::VacuumBalloon *, boost::checked_deleter<Balloon::VacuumBalloon>>
+boost::detail::sp_counted_base_impl<Bomb::Bomb *, boost::checked_deleter<Bomb::Bomb>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Beam *, boost::checked_deleter<Boss::Diablon::Behavior::Beam>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Bomb *, boost::checked_deleter<Boss::Diablon::Behavior::Bomb>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Event *, boost::checked_deleter<Boss::Diablon::Behavior::Event>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Idle *, boost::checked_deleter<Boss::Diablon::Behavior::Idle>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Move *, boost::checked_deleter<Boss::Diablon::Behavior::Move>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Behavior::Wipe *, boost::checked_deleter<Boss::Diablon::Behavior::Wipe>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Beam *, boost::checked_deleter<Boss::Diablon::Desire::Beam>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Bomb *, boost::checked_deleter<Boss::Diablon::Desire::Bomb>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Event *, boost::checked_deleter<Boss::Diablon::Desire::Event>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Move *, boost::checked_deleter<Boss::Diablon::Desire::Move>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Desire::Wipe *, boost::checked_deleter<Boss::Diablon::Desire::Wipe>>
+boost::detail::sp_counted_base_impl<Boss::Diablon::Diablon *, boost::checked_deleter<Boss::Diablon::Diablon>>
+boost::detail::sp_counted_base_impl<BossCharInfo *, boost::checked_deleter<BossCharInfo>>
+boost::detail::sp_counted_base_impl<BossCtrlUnit *, boost::checked_deleter<BossCtrlUnit>>
+boost::detail::sp_counted_base_impl<Chao *, boost::checked_deleter<Chao>>
+boost::detail::sp_counted_base_impl<CharCommandUnit *, boost::checked_deleter<CharCommandUnit>>
+boost::detail::sp_counted_base_impl<CityLaser *, boost::checked_deleter<CityLaser>>
+boost::detail::sp_counted_base_impl<CollisionEffect *, boost::checked_deleter<CollisionEffect>>
+boost::detail::sp_counted_base_impl<Container::ContainerHard *, boost::checked_deleter<Container::ContainerHard>>
+boost::detail::sp_counted_base_impl<Container::ContainerNormal *, boost::checked_deleter<Container::ContainerNormal>>
+boost::detail::sp_counted_base_impl<Container::ContainerSecret *, boost::checked_deleter<Container::ContainerSecret>>
+boost::detail::sp_counted_base_impl<Container::ContainerWeapon *, boost::checked_deleter<Container::ContainerWeapon>>
+boost::detail::sp_counted_base_impl<ContainerBehavior *, boost::checked_deleter<ContainerBehavior>>
+boost::detail::sp_counted_base_impl<Effect::PJS::Launcher *, void (*)(Effect::PJS::Launcher *)>
+boost::detail::sp_counted_base_impl<Effect::System::EffectElement *, boost::checked_deleter<Effect::System::EffectElement>>
+boost::detail::sp_counted_base_impl<EggBalloon::SetEggBalloon *, boost::checked_deleter<EggBalloon::SetEggBalloon>>
+boost::detail::sp_counted_base_impl<EggCannon *, boost::checked_deleter<EggCannon>>
+boost::detail::sp_counted_base_impl<EggFleet *, boost::checked_deleter<EggFleet>>
+boost::detail::sp_counted_base_impl<EggLastMech::EggLastMech *, boost::checked_deleter<EggLastMech::EggLastMech>>
+boost::detail::sp_counted_base_impl<EggLastMech::EggLastMechSlotDisp2D *, boost::checked_deleter<EggLastMech::EggLastMechSlotDisp2D>>
+boost::detail::sp_counted_base_impl<EggMecaCtrlUnit_Bomb *, boost::checked_deleter<EggMecaCtrlUnit_Bomb>>
+boost::detail::sp_counted_base_impl<EggMecaCtrlUnit_ShockWave *, boost::checked_deleter<EggMecaCtrlUnit_ShockWave>>
+boost::detail::sp_counted_base_impl<EggPierrot::BakudanManager *, boost::checked_deleter<EggPierrot::BakudanManager>>
+boost::detail::sp_counted_base_impl<EggPierrot::PierrotBall *, boost::checked_deleter<EggPierrot::PierrotBall>>
+boost::detail::sp_counted_base_impl<ElecFootingRotateObj *, boost::checked_deleter<ElecFootingRotateObj>>
+boost::detail::sp_counted_base_impl<EmbeddedBazooka::Bazooka *, boost::checked_deleter<EmbeddedBazooka::Bazooka>>
+boost::detail::sp_counted_base_impl<EmbeddedGun::AutoRifle *, boost::checked_deleter<EmbeddedGun::AutoRifle>>
+boost::detail::sp_counted_base_impl<EnemyCharInfo *, boost::checked_deleter<EnemyCharInfo>>
+boost::detail::sp_counted_base_impl<EnemyRender *, boost::checked_deleter<EnemyRender>>
+boost::detail::sp_counted_base_impl<EnemyRender::Impl *, boost::checked_deleter<EnemyRender::Impl>>
+boost::detail::sp_counted_base_impl<EnemyShield *, boost::checked_deleter<EnemyShield>>
+boost::detail::sp_counted_base_impl<EnemyTarget *, boost::checked_deleter<EnemyTarget>>
+boost::detail::sp_counted_base_impl<EscapePlane::SetEscapePlane *, boost::checked_deleter<EscapePlane::SetEscapePlane>>
+boost::detail::sp_counted_base_impl<FallBuilding *, boost::checked_deleter<FallBuilding>>
+boost::detail::sp_counted_base_impl<FallingStoneHard *, boost::checked_deleter<FallingStoneHard>>
+boost::detail::sp_counted_base_impl<FallingStoneSoft *, boost::checked_deleter<FallingStoneSoft>>
+boost::detail::sp_counted_base_impl<GadgetBuilder::CrashInfoCtrl *, boost::checked_deleter<GadgetBuilder::CrashInfoCtrl>>
+boost::detail::sp_counted_base_impl<GadgetCharCollision *, boost::checked_deleter<GadgetCharCollision>>
+boost::detail::sp_counted_base_impl<GadgetCharInfo *, boost::checked_deleter<GadgetCharInfo>>
+boost::detail::sp_counted_base_impl<GadgetModelInfo *, boost::checked_deleter<GadgetModelInfo>>
+boost::detail::sp_counted_base_impl<GadgetParticle::GadgetParticleCtrl *, boost::checked_deleter<GadgetParticle::GadgetParticleCtrl>>
+boost::detail::sp_counted_base_impl<GadgetUtility::Watcher *, boost::checked_deleter<GadgetUtility::Watcher>>
+boost::detail::sp_counted_base_impl<GiHPGaugeEnemy *, boost::checked_deleter<GiHPGaugeEnemy>>
+boost::detail::sp_counted_base_impl<GiMissionTarget *, boost::checked_deleter<GiMissionTarget>>
+boost::detail::sp_counted_base_impl<HealingUnit::HealingUnit *, boost::checked_deleter<HealingUnit::HealingUnit>>
+boost::detail::sp_counted_base_impl<ItemIcon::Icon *, boost::checked_deleter<ItemIcon::Icon>>
+boost::detail::sp_counted_base_impl<ItemIcon::ManagerUnit *, boost::checked_deleter<ItemIcon::ManagerUnit>>
+boost::detail::sp_counted_base_impl<LineTarget *, void (*)(LineTarget *)>
+boost::detail::sp_counted_base_impl<Meteors *, boost::checked_deleter<Meteors>>
+boost::detail::sp_counted_base_impl<Mission::BasicMessage *, boost::checked_deleter<Mission::BasicMessage>>
+boost::detail::sp_counted_base_impl<Mission::CountMessage *, boost::checked_deleter<Mission::CountMessage>>
+boost::detail::sp_counted_base_impl<Mission::CountMission *, boost::checked_deleter<Mission::CountMission>>
+boost::detail::sp_counted_base_impl<Mission::EnemyMission *, boost::checked_deleter<Mission::EnemyMission>>
+boost::detail::sp_counted_base_impl<Mission::GoalMission *, boost::checked_deleter<Mission::GoalMission>>
+boost::detail::sp_counted_base_impl<Mission::Mission *, boost::checked_deleter<Mission::Mission>>
+boost::detail::sp_counted_base_impl<Mission::RingMission *, boost::checked_deleter<Mission::RingMission>>
+boost::detail::sp_counted_base_impl<Mission::TimerCountMission *, boost::checked_deleter<Mission::TimerCountMission>>
+boost::detail::sp_counted_base_impl<Mission::TimerGoalMission *, boost::checked_deleter<Mission::TimerGoalMission>>
+boost::detail::sp_counted_base_impl<Mission::TimerMessage *, boost::checked_deleter<Mission::TimerMessage>>
+boost::detail::sp_counted_base_impl<Mission::TimerMission *, boost::checked_deleter<Mission::TimerMission>>
+boost::detail::sp_counted_base_impl<MonsterCharInfo *, boost::checked_deleter<MonsterCharInfo>>
+boost::detail::sp_counted_base_impl<PJSCamera::Collision::ProcessDeltaMoveNoLook *, boost::checked_deleter<PJSCamera::Collision::ProcessDeltaMoveNoLook>>
+boost::detail::sp_counted_base_impl<PJSCamera::Collision::ProcessRay2Eye *, boost::checked_deleter<PJSCamera::Collision::ProcessRay2Eye>>
+boost::detail::sp_counted_base_impl<PJSCamera::ExternalCameraRequest *, boost::checked_deleter<PJSCamera::ExternalCameraRequest>>
+boost::detail::sp_counted_base_impl<PickupCharInfo *, boost::checked_deleter<PickupCharInfo>>
+boost::detail::sp_counted_base_impl<Player::Behavior::Behavior *, boost::checked_deleter<Player::Behavior::Behavior>>
+boost::detail::sp_counted_base_impl<Player::Control::ControlBase *, boost::checked_deleter<Player::Control::ControlBase>>
+boost::detail::sp_counted_base_impl<Player::ExternalOption *, boost::checked_deleter<Player::ExternalOption>>
+boost::detail::sp_counted_base_impl<Player::InternalOption *, boost::checked_deleter<Player::InternalOption>>
+boost::detail::sp_counted_base_impl<Player::Npc::Amy::NpcAmy *, boost::checked_deleter<Player::Npc::Amy::NpcAmy>>
+boost::detail::sp_counted_base_impl<Player::Npc::Bee::NpcBee *, boost::checked_deleter<Player::Npc::Bee::NpcBee>>
+boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::BossSonic *, boost::checked_deleter<Player::Npc::BossSonic::BossSonic>>
+boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::BossSonicWork *, boost::checked_deleter<Player::Npc::BossSonic::BossSonicWork>>
+boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::Attack *, boost::checked_deleter<Player::Npc::BossSonic::Desire::Attack>>
+boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::CounterAttack *, boost::checked_deleter<Player::Npc::BossSonic::Desire::CounterAttack>>
+boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::Dodge *, boost::checked_deleter<Player::Npc::BossSonic::Desire::Dodge>>
+boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::Desire::Move *, boost::checked_deleter<Player::Npc::BossSonic::Desire::Move>>
+boost::detail::sp_counted_base_impl<Player::Npc::BossSonic::SonicTypeControl *, boost::checked_deleter<Player::Npc::BossSonic::SonicTypeControl>>
+boost::detail::sp_counted_base_impl<Player::Npc::DoomsEye::NpcDoomsEye *, boost::checked_deleter<Player::Npc::DoomsEye::NpcDoomsEye>>
+boost::detail::sp_counted_base_impl<Player::Npc::EggMonitor::NpcEggMonitor *, boost::checked_deleter<Player::Npc::EggMonitor::NpcEggMonitor>>
+boost::detail::sp_counted_base_impl<Player::Npc::Espio::NpcEspio *, boost::checked_deleter<Player::Npc::Espio::NpcEspio>>
+boost::detail::sp_counted_base_impl<Player::Npc::FlyType::FlyTypeBehaviorFactory *, boost::checked_deleter<Player::Npc::FlyType::FlyTypeBehaviorFactory>>
+boost::detail::sp_counted_base_impl<Player::Npc::FlyType::FlyTypeControlFactory *, boost::checked_deleter<Player::Npc::FlyType::FlyTypeControlFactory>>
+boost::detail::sp_counted_base_impl<Player::Npc::Knuckles::NpcKnuckles *, boost::checked_deleter<Player::Npc::Knuckles::NpcKnuckles>>
+boost::detail::sp_counted_base_impl<Player::Npc::Maria::NpcMaria *, boost::checked_deleter<Player::Npc::Maria::NpcMaria>>
+boost::detail::sp_counted_base_impl<Player::Npc::NpcManageUnit *, boost::checked_deleter<Player::Npc::NpcManageUnit>>
+boost::detail::sp_counted_base_impl<Player::Npc::Omega::NpcOmega *, boost::checked_deleter<Player::Npc::Omega::NpcOmega>>
+boost::detail::sp_counted_base_impl<Player::Npc::Rouge::NpcRouge *, boost::checked_deleter<Player::Npc::Rouge::NpcRouge>>
+boost::detail::sp_counted_base_impl<Player::Npc::Sonic::NpcSonic *, boost::checked_deleter<Player::Npc::Sonic::NpcSonic>>
+boost::detail::sp_counted_base_impl<Player::Npc::SonicType::SonicTypeBehaviorFactory *, boost::checked_deleter<Player::Npc::SonicType::SonicTypeBehaviorFactory>>
+boost::detail::sp_counted_base_impl<Player::Npc::SonicType::SonicTypeControlFactory *, boost::checked_deleter<Player::Npc::SonicType::SonicTypeControlFactory>>
+boost::detail::sp_counted_base_impl<Player::Npc::Tails::NpcTails *, boost::checked_deleter<Player::Npc::Tails::NpcTails>>
+boost::detail::sp_counted_base_impl<Player::Npc::Vector::NpcVector *, boost::checked_deleter<Player::Npc::Vector::NpcVector>>
+boost::detail::sp_counted_base_impl<Player::PathImpl *, boost::checked_deleter<Player::PathImpl>>
+boost::detail::sp_counted_base_impl<Player::PlayerManageUnit *, boost::checked_deleter<Player::PlayerManageUnit>>
+boost::detail::sp_counted_base_impl<Player::PlayerShadow *, boost::checked_deleter<Player::PlayerShadow>>
+boost::detail::sp_counted_base_impl<Player::Shadow::ShadowBehavior *, boost::checked_deleter<Player::Shadow::ShadowBehavior>>
+boost::detail::sp_counted_base_impl<Player::Shadow::ShadowControl *, boost::checked_deleter<Player::Shadow::ShadowControl>>
+boost::detail::sp_counted_base_impl<Render *, boost::checked_deleter<Render>>
+boost::detail::sp_counted_base_impl<ResearcherCharInfo *, boost::checked_deleter<ResearcherCharInfo>>
+boost::detail::sp_counted_base_impl<Rocket::Rocket *, boost::checked_deleter<Rocket::Rocket>>
+boost::detail::sp_counted_base_impl<RollCircleObj *, boost::checked_deleter<RollCircleObj>>
+boost::detail::sp_counted_base_impl<SaveCycle::Check::Phase *, boost::checked_deleter<SaveCycle::Check::Phase>>
+boost::detail::sp_counted_base_impl<SaveCycle::CheckModule::Phase *, boost::checked_deleter<SaveCycle::CheckModule::Phase>>
+boost::detail::sp_counted_base_impl<SaveCycle::Load::Phase *, boost::checked_deleter<SaveCycle::Load::Phase>>
+boost::detail::sp_counted_base_impl<SaveCycle::Save::Phase *, boost::checked_deleter<SaveCycle::Save::Phase>>
+boost::detail::sp_counted_base_impl<SavedataAnalyzer::StoryCheck *, boost::checked_deleter<SavedataAnalyzer::StoryCheck>>
+boost::detail::sp_counted_base_impl<SetGenerator::Manager *, boost::checked_deleter<SetGenerator::Manager>>
+boost::detail::sp_counted_base_impl<SetItem::ItemBox *, boost::checked_deleter<SetItem::ItemBox>>
+boost::detail::sp_counted_base_impl<SetItem::VacuumItemBox *, boost::checked_deleter<SetItem::VacuumItemBox>>
+boost::detail::sp_counted_base_impl<SetWeapon::Arms *, boost::checked_deleter<SetWeapon::Arms>>
+boost::detail::sp_counted_base_impl<ShootingGame::RandomSampling<ShootingGame::Kind::__Kind> *, boost::checked_deleter<ShootingGame::RandomSampling<ShootingGame::Kind::__Kind>>>
+boost::detail::sp_counted_base_impl<ShootingGame::RandomSampling<float> *, boost::checked_deleter<ShootingGame::RandomSampling<float>>>
+boost::detail::sp_counted_base_impl<Sonicteam::System::Geometry::Line *, boost::checked_deleter<Sonicteam::System::Geometry::Line>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraManagerUnit *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraManagerUnit>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraMode *, void (*)(SonicteamUSA::System::Camera::CameraMode *)>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraRequest *, void (*)(SonicteamUSA::System::Camera::CameraRequest *)>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraScreen *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraScreen>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraShake *, boost::checked_deleter<SonicteamUSA::System::Camera::CameraShake>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliAttack *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliAttack>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliBody *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBody>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneral *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneral>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneralBone *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneralBone>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo *, boost::checked_deleter<SonicteamUSA::System::CharaColli::CharaColliGeneralCharInfo>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::Collision::CollisionResult *, boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResult>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::Collision::CollisionResultList *, boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResultList>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::PathCtrl *, boost::checked_deleter<SonicteamUSA::System::PathCtrl>>
+boost::detail::sp_counted_base_impl<SonicteamUSA::System::PathData *, boost::checked_deleter<SonicteamUSA::System::PathData>>
+boost::detail::sp_counted_base_impl<StageAction::ContinueAction *, boost::checked_deleter<StageAction::ContinueAction>>
+boost::detail::sp_counted_base_impl<StageAction::DeadAction *, boost::checked_deleter<StageAction::DeadAction>>
+boost::detail::sp_counted_base_impl<StageAction::EndAction *, boost::checked_deleter<StageAction::EndAction>>
+boost::detail::sp_counted_base_impl<StageAction::EventAction *, boost::checked_deleter<StageAction::EventAction>>
+boost::detail::sp_counted_base_impl<StageAction::FlashbackAction *, boost::checked_deleter<StageAction::FlashbackAction>>
+boost::detail::sp_counted_base_impl<StageAction::GoalAction *, boost::checked_deleter<StageAction::GoalAction>>
+boost::detail::sp_counted_base_impl<StageAction::InitAction *, boost::checked_deleter<StageAction::InitAction>>
+boost::detail::sp_counted_base_impl<StageAction::PauseAction *, boost::checked_deleter<StageAction::PauseAction>>
+boost::detail::sp_counted_base_impl<StageAction::PlayAction *, boost::checked_deleter<StageAction::PlayAction>>
+boost::detail::sp_counted_base_impl<StageAction::RestartAction *, boost::checked_deleter<StageAction::RestartAction>>
+boost::detail::sp_counted_base_impl<StageAction::Result2PAction *, boost::checked_deleter<StageAction::Result2PAction>>
+boost::detail::sp_counted_base_impl<StageAction::SaveAction *, boost::checked_deleter<StageAction::SaveAction>>
+boost::detail::sp_counted_base_impl<StageAction::ShowAction *, boost::checked_deleter<StageAction::ShowAction>>
+boost::detail::sp_counted_base_impl<StageAction::TimeupAction *, boost::checked_deleter<StageAction::TimeupAction>>
+boost::detail::sp_counted_base_impl<StageAction::TryAgainAction *, boost::checked_deleter<StageAction::TryAgainAction>>
+boost::detail::sp_counted_base_impl<StageManager *, boost::checked_deleter<StageManager>>
+boost::detail::sp_counted_base_impl<StageMovie *, boost::checked_deleter<StageMovie>>
+boost::detail::sp_counted_base_impl<StageRouteDisplay *, boost::checked_deleter<StageRouteDisplay>>
+boost::detail::sp_counted_base_impl<StageSequence::MovieTest::Phase *, boost::checked_deleter<StageSequence::MovieTest::Phase>>
+boost::detail::sp_counted_base_impl<StageSequence::Play2POnce::Phase *, boost::checked_deleter<StageSequence::Play2POnce::Phase>>
+boost::detail::sp_counted_base_impl<StageSequence::Play2PThree::Phase *, boost::checked_deleter<StageSequence::Play2PThree::Phase>>
+boost::detail::sp_counted_base_impl<StageSequence::PlayEvent::Phase *, boost::checked_deleter<StageSequence::PlayEvent::Phase>>
+boost::detail::sp_counted_base_impl<StageSequence::PlayFlashback::Phase *, boost::checked_deleter<StageSequence::PlayFlashback::Phase>>
+boost::detail::sp_counted_base_impl<StageSequence::PlayHard::Phase *, boost::checked_deleter<StageSequence::PlayHard::Phase>>
+boost::detail::sp_counted_base_impl<StageSequence::PlayOnce::Phase *, boost::checked_deleter<StageSequence::PlayOnce::Phase>>
+boost::detail::sp_counted_base_impl<StageSequence::PlayStory::Phase *, boost::checked_deleter<StageSequence::PlayStory::Phase>>
+boost::detail::sp_counted_base_impl<StageStaffroll *, boost::checked_deleter<StageStaffroll>>
+boost::detail::sp_counted_base_impl<StonePoleAir *, boost::checked_deleter<StonePoleAir>>
+boost::detail::sp_counted_base_impl<StonePoleFlat *, boost::checked_deleter<StonePoleFlat>>
+boost::detail::sp_counted_base_impl<StonePoleSlope *, boost::checked_deleter<StonePoleSlope>>
+boost::detail::sp_counted_base_impl<TBlockManage::forBlockCheck *, boost::checked_deleter<TBlockManage::forBlockCheck>>
+boost::detail::sp_counted_base_impl<TFogSet *, boost::checked_deleter<TFogSet>>
+boost::detail::sp_counted_base_impl<TGiNumberDisplay *, boost::checked_deleter<TGiNumberDisplay>>
+boost::detail::sp_counted_base_impl<TMessageDisp *, boost::checked_deleter<TMessageDisp>>
+boost::detail::sp_counted_base_impl<TPjsSceneTour *, boost::checked_deleter<TPjsSceneTour>>
+boost::detail::sp_counted_base_impl<Target *, void (*)(Target *)>
+boost::detail::sp_counted_base_impl<TargetSearchList *, boost::checked_deleter<TargetSearchList>>
+boost::detail::sp_counted_base_impl<ThreatObj *, boost::checked_deleter<ThreatObj>>
+boost::detail::sp_counted_base_impl<ThrowBombImpl *, boost::checked_deleter<ThrowBombImpl>>
+boost::detail::sp_counted_base_impl<TornadoCharInfo *, boost::checked_deleter<TornadoCharInfo>>
+boost::detail::sp_counted_base_impl<TrigerCounter *, boost::checked_deleter<TrigerCounter>>
+boost::detail::sp_counted_base_impl<VacuumBomb::Bomb *, boost::checked_deleter<VacuumBomb::Bomb>>
+boost::detail::sp_counted_base_impl<VacuumCityBombSmall *, boost::checked_deleter<VacuumCityBombSmall>>
+boost::detail::sp_counted_base_impl<VacuumContainer::Container *, boost::checked_deleter<VacuumContainer::Container>>
+boost::detail::sp_counted_base_impl<VacuumThrowBomb *, boost::checked_deleter<VacuumThrowBomb>>
+boost::detail::sp_counted_base_impl<Vehicle::TVehicleBase *, boost::checked_deleter<Vehicle::TVehicleBase>>
+boost::detail::sp_counted_base_impl<Vehicle::TVehicleCamera *, boost::checked_deleter<Vehicle::TVehicleCamera>>
+boost::detail::sp_counted_base_impl<Vehicle::TVehicleCarMove *, boost::checked_deleter<Vehicle::TVehicleCarMove>>
+boost::detail::sp_counted_base_impl<VehicleArrow *, boost::checked_deleter<VehicleArrow>>
+boost::detail::sp_counted_base_impl<Vibration::ManagerUnit *, boost::checked_deleter<Vibration::ManagerUnit>>
+boost::detail::sp_counted_base_impl<Vibration::Request *, boost::checked_deleter<Vibration::Request>>
+boost::detail::sp_counted_base_impl<Vibration::RequestHandle *, boost::checked_deleter<Vibration::RequestHandle>>
+boost::detail::sp_counted_base_impl<Vibration::RequestWithPos *, boost::checked_deleter<Vibration::RequestWithPos>>
+boost::detail::sp_counted_base_impl<WatchCamera::Monitor *, boost::checked_deleter<WatchCamera::Monitor>>
+boost::detail::sp_counted_base_impl<WatchCamera::Sight *, boost::checked_deleter<WatchCamera::Sight>>
+boost::detail::sp_counted_base_impl<Weapon::AirBolt::AirBolt *, boost::checked_deleter<Weapon::AirBolt::AirBolt>>
+boost::detail::sp_counted_base_impl<Weapon::ChaosSpear::ChaosSpear *, boost::checked_deleter<Weapon::ChaosSpear::ChaosSpear>>
+boost::detail::sp_counted_base_impl<Weapon::Item *, boost::checked_deleter<Weapon::Item>>
+boost::detail::sp_counted_base_impl<Weapon::LockonTarget *, boost::checked_deleter<Weapon::LockonTarget>>
+boost::detail::sp_counted_base_impl<Weapon::WeaponBase *, boost::checked_deleter<Weapon::WeaponBase>>
+boost::detail::sp_counted_base_impl<_stMtnPlayWork *, void (*)(_stMtnPlayWork *)>
+boost::detail::sp_counted_base_impl<folderPause *, boost::checked_deleter<folderPause>>
+boost::detail::sp_counted_base_impl<folderStoryRoute *, boost::checked_deleter<folderStoryRoute>>
+boost::detail::sp_counted_base_impl<folderTargetWindow *, boost::checked_deleter<folderTargetWindow>>
+boost::enable_shared_from_this<EggLastMech::EggLastMech>
+boost::enable_shared_from_this<ThrowBombImpl>
+std::bad_alloc
+std::bad_cast
+std::bad_exception
+std::exception
+std::runtime_error
