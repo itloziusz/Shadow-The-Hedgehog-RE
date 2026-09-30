@@ -63,7 +63,8 @@ operations may be replaced only after their producers and consumers are traced.
   symbolic state, structural detectors, SQLite evidence DB, unknown-region
   clustering, and fail-closed boot-frontier analysis. See its `README.md` and
   `research/SEMANTIC_RECOGNIZER_32.md` and `SEMANTIC_RECOGNIZER_33.md` for
-  the scans, recovered multiword effects, and validation limits.
+  the scans and recovered multiword effects. `MOTION_TABLE_CONSTRUCTORS_34.md`
+  records the eight NPC MotionImpl copy graphs and their validation limits.
 - `research/` — independent pre-entry, HID2/HID0, FPR-lane, L2, CRT-memory,
   constructor and application-loop audits with exact address evidence, including assembly CFG/data-flow and
   a synthetic Dolphin/HLE checkpoint study. The latter is not retail IPL proof.
@@ -77,7 +78,10 @@ operations may be replaced only after their producers and consumers are traced.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
   register startup, wrapper/stack prefix with applied BE32 bytes, explicit-input HID2 read and
   issued HID2 and HID0 SPR write requests,
-  recurring event loop and command-line probe.
+  recurring event loop and command-line probe. A separate
+  `ConstructorTableProjection.hpp`/`.cpp` applies only the proven global
+  three-word copy graph for eight NPC MotionImpl static initializer bodies;
+  it is not on the connected boot path.
 - `tests/` — exact DOL SHA-256 gate, expected stop state and mutations of all
   36 helper instructions, entry words, descriptors, invalid reads and the
   recurring event/exit order. The HLE-input gate checks the connected prefix
@@ -88,7 +92,7 @@ operations may be replaced only after their producers and consumers are traced.
   its generated recompiler dependencies are not in this repository.
 
 Build with the root CMake project. Supply
-`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable fourteen content-backed
+`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable fifteen content-backed
 CTest cases. This path stays in the ignored build cache and is never committed.
 The PAL fixture also enables `boot_pal_semantic_recognizer`, which checks the
 raw frontier words and adversarial detector/data-flow mutations.

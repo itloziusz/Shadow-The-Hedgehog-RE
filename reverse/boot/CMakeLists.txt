@@ -1,4 +1,5 @@
-add_library(shadow_boot_foundation STATIC src/BootFoundation.cpp src/ApplicationLoop.cpp)
+add_library(shadow_boot_foundation STATIC src/BootFoundation.cpp src/ApplicationLoop.cpp
+    src/ConstructorTableProjection.cpp)
 target_compile_features(shadow_boot_foundation PUBLIC cxx_std_17)
 target_include_directories(shadow_boot_foundation PUBLIC include)
 
@@ -10,6 +11,10 @@ target_link_libraries(shadow_boot_tests PRIVATE shadow_boot_foundation)
 
 add_executable(shadow_boot_application_loop_tests tests/test_application_loop.cpp)
 target_link_libraries(shadow_boot_application_loop_tests PRIVATE shadow_boot_foundation)
+
+add_executable(shadow_boot_constructor_table_tests tests/test_constructor_table_projection.cpp)
+target_link_libraries(shadow_boot_constructor_table_tests PRIVATE shadow_boot_foundation)
+add_test(NAME boot_constructor_table_projection COMMAND shadow_boot_constructor_table_tests)
 
 # Correct a reference-only hardware arithmetic bug with a focused executable
 # check. This target does not connect the hardware path to the native entry.

@@ -10,6 +10,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "recognizer"))
 
 from fingerprints import detectors, fingerprint, similarity
+from cli import family_rankings, learned_hits, rescan
 from machine import DolImage, analyze, decode
 from store import Store
 
@@ -244,6 +245,94 @@ class PalFixtureTests(unittest.TestCase):
         self.assertEqual(len(raw), 8)
         self.assertEqual(len(normalized), 1)
         self.assertEqual(len(destinations), 8)
+
+    def test_motion_table_copy_graph_and_rtti_ownership(self):
+        if self.dol_path is None:
+            self.skipTest("optional PAL DOL argument")
+        image = DolImage(Path(self.dol_path))
+        rows = [
+            (135, 0x8020E1E4, 0x80545400, "Knuckles", 0x8020D7B8),
+            (141, 0x802128C8, 0x805459A8, "Maria", 0x80211EC8),
+            (143, 0x80213D60, 0x80545BC8, "Tails", 0x80213234),
+            (145, 0x80215058, 0x80545DE8, "Omega", 0x802146C4),
+            (147, 0x802163F0, 0x80546008, "Espio", 0x802159C0),
+            (149, 0x80217788, 0x80546228, "Vector", 0x80216D58),
+            (151, 0x80218A80, 0x80546448, "Rouge", 0x802180EC),
+            (155, 0x8021AFD8, 0x80546840, "Amy", 0x8021A5A8),
+        ]
+        copies = {2: 0, 3: 1, 5: 4, 6: None,
+                  8: None, 9: 7, 11: None, 12: 10}
+        for index, start, base, character, class_start in rows:
+            with self.subTest(index=index):
+                self.assertEqual(image.word(0x804AAC60 + 4 * index, text=False), start)
+                analysis = analyze(image, start, start + 0xE8)
+                self.assertEqual(analysis["unsupported_semantics"], [])
+                # The adjacent vtable points to an original RTTI class name;
+                # five initialized target words point back into its code band.
+                ti = image.word(base + 0xE4, text=False)
+                name_ptr = image.word(ti, text=False)
+                name = image.read(name_ptr, 100, text=False).split(b"\0", 1)[0].decode()
+                self.assertEqual(name, f"Player::Npc::{character}::MotionImpl")
+                for slot in (0, 1, 4, 7, 10):
+                    address = base + 0x0C + slot * 12
+                    self.assertEqual(image.word(address, text=False), 0)
+                    self.assertEqual(image.word(address + 4, text=False), 0xFFFFFFFF)
+                    target = image.word(address + 8, text=False)
+                    self.assertTrue(class_start <= target < start)
+                global_writes = {}
+                seen_writes = set()
+                for effect in analysis["effects"]:
+                    address = effect.get("address", "")
+                    if not address.startswith("K:"):
+                        continue
+                    if effect["kind"] == "load":
+                        self.assertNotIn(address, seen_writes)
+                    elif effect["kind"] == "store":
+                        self.assertNotIn(address, global_writes)
+                        global_writes[address] = effect["value"]
+                        seen_writes.add(address)
+                expected = {}
+                for destination_slot, source_slot in copies.items():
+                    for word in range(3):
+                        dest = base + 0x0C + destination_slot * 12 + 4 * word
+                        src = (0x80514CB8 + 4 * word if source_slot is None else
+                               base + 0x0C + source_slot * 12 + 4 * word)
+                        expected[f"K:{dest:08X}"] = f"MEM32:K:{src:08X}"
+                self.assertEqual(global_writes, expected)
+
+    def test_two_motion_seeds_recognize_holdout_without_self_match(self):
+        if self.dol_path is None:
+            self.skipTest("optional PAL DOL argument")
+        image = DolImage(Path(self.dol_path))
+        db = Store(":memory:")
+        for identity, start, origin, status in (
+            ("motion_seed_135", 0x8020E1E4, "seed", "STRONGLY_SUPPORTED"),
+            ("motion_seed_141", 0x802128C8, "seed", "STRONGLY_SUPPORTED"),
+            ("ctor_135", 0x8020E1E4, "candidate", "UNKNOWN"),
+            ("ctor_143", 0x80213D60, "candidate", "UNKNOWN"),
+        ):
+            analysis = analyze(image, start, start + 0xE8)
+            db.upsert(identity, start, start + 0xE8, origin,
+                      "npc_motion_table_copy_graph" if origin == "seed" else "unknown",
+                      status, ["raw fixture"], analysis, fingerprint(analysis), [])
+        matches = rescan(db)
+        self.assertNotIn("motion_seed_135",
+                         [m["reference"] for m in matches["ctor_135"]])
+        self.assertIn("motion_seed_141",
+                      [m["reference"] for m in matches["ctor_135"]])
+        self.assertEqual(matches["ctor_143"][0]["score"], 1.0)
+        patterns = db.learn()
+        self.assertTrue(patterns)
+        hits = learned_hits(db, patterns)
+        self.assertFalse(any(h["candidate"] == "ctor_135" for h in hits))
+        self.assertTrue(any(h["candidate"] == "ctor_143" for h in hits))
+        ranked = family_rankings(db, patterns)
+        self.assertEqual([hit["candidate"] for hit in ranked], ["ctor_143"])
+        self.assertEqual(ranked[0]["shared_ngrams_matched"],
+                         ranked[0]["shared_ngrams_total"])
+        self.assertTrue(ranked[0]["exact_normalized_sequence"])
+        self.assertEqual(ranked[0]["status"], "STRUCTURAL_MATCH")
+        self.assertEqual(db.get("ctor_143")["status"], "UNKNOWN")
 
 
 if __name__ == "__main__":

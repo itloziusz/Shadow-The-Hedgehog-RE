@@ -48,6 +48,22 @@
       "family": "constructor_static_data",
       "status": "STRONGLY_SUPPORTED",
       "evidence": ["reverse/boot/research/CONSTRUCTOR_NEXT_TARGETS.md: index 15; binary and state projection only"]
+    },
+    {
+      "id": "motion_table_seed_135",
+      "start": "8020E1E4",
+      "end": "8020E2CC",
+      "family": "npc_motion_table_copy_graph",
+      "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/MOTION_TABLE_CONSTRUCTORS_34.md: raw copy graph and RTTI owner; runtime execution UNKNOWN", "reverse/boot/tests/test_recognizer.py: exact 24-word edge gate"]
+    },
+    {
+      "id": "motion_table_seed_141",
+      "start": "802128C8",
+      "end": "802129B0",
+      "family": "npc_motion_table_copy_graph",
+      "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/MOTION_TABLE_CONSTRUCTORS_34.md: raw copy graph and RTTI owner; runtime execution UNKNOWN", "reverse/boot/tests/test_recognizer.py: exact 24-word edge gate"]
     }
   ]
 }

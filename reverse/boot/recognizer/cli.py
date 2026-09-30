@@ -134,6 +134,8 @@ def rescan(db, threshold: float = 0.35):
         cfp = json.loads(candidate["fingerprint_json"])
         ranked = []
         for reference in references:
+            if (candidate["start"], candidate["end"]) == (reference["start"], reference["end"]):
+                continue  # a body cannot validate itself under a second identity
             result = similarity(cfp, json.loads(reference["fingerprint_json"]))
             if result["score"] >= threshold:
                 contradictions = []
@@ -189,16 +191,56 @@ def clusters(db, threshold: float = 0.60):
 
 def learned_hits(db, patterns):
     hits = []
+    source_starts = {row["id"]: (row["start"], row["end"])
+                     for row in db.rows(origin="seed")}
     for row in db.rows(origin="candidate"):
         fp = json.loads(row["fingerprint_json"])
         tokens = set(fp["coarse_ngrams"])
         for pattern in patterns:
+            if any(source_starts.get(source) == (row["start"], row["end"])
+                   for source in pattern["sources"]):
+                continue
             if set(pattern["tokens"]) <= tokens:
                 hits.append({"candidate": row["id"], "family_hypothesis": pattern["family"],
                              "pattern_id": pattern["id"], "support": pattern["support"],
                              "status": "STRUCTURAL_MATCH",
                              "validation_needed": "compare ordered effects and reject decoys; no automatic promotion"})
     return hits
+
+
+def family_rankings(db, patterns):
+    """Aggregate shared-token coverage; never interpret it as confidence."""
+    families = {}
+    for pattern in patterns:
+        families.setdefault(pattern["family"], []).append(pattern)
+    seeds = {}
+    for row in db.rows(origin="seed"):
+        seeds.setdefault(row["family"], []).append(row)
+    ranked = []
+    for candidate in db.rows(origin="candidate"):
+        fp = json.loads(candidate["fingerprint_json"])
+        tokens = set(fp["coarse_ngrams"])
+        for family, group in families.items():
+            references = seeds[family]
+            if any((candidate["start"], candidate["end"]) ==
+                   (reference["start"], reference["end"]) for reference in references):
+                continue
+            matched = sum(set(pattern["tokens"]) <= tokens for pattern in group)
+            if matched != len(group):
+                continue  # partial individual n-grams are not a family hit
+            seed_fps = [json.loads(reference["fingerprint_json"]) for reference in references]
+            ranked.append({
+                "candidate": candidate["id"], "family_hypothesis": family,
+                "shared_ngrams_matched": matched, "shared_ngrams_total": len(group),
+                "exact_normalized_sequence": all(
+                    fp["normalized_sha256"] == seed_fp["normalized_sha256"]
+                    for seed_fp in seed_fps),
+                "exact_effect_counts": all(fp["effect_kinds"] == seed_fp["effect_kinds"]
+                                           for seed_fp in seed_fps),
+                "status": "STRUCTURAL_MATCH",
+                "validation_needed": "live dispatch; before/after memory; downstream consumer",
+            })
+    return sorted(ranked, key=lambda hit: (hit["family_hypothesis"], hit["candidate"]))
 
 
 def main(argv=None):
@@ -267,6 +309,7 @@ def main(argv=None):
         output["matches"] = rescan(db)
         output["clusters"] = clusters(db)
         output["learned_hits"] = learned_hits(db, output["learned_patterns"])
+        output["family_rankings"] = family_rankings(db, output["learned_patterns"])
     counts = Counter(r["status"] for r in db.rows())
     output["status_counts"] = dict(counts)
     output["frontier_after"] = hx(db.frontier()["stop_pc"])
@@ -279,6 +322,7 @@ def main(argv=None):
             f"{', '.join(c['members'][:5])}" + (", ..." if len(c['members']) > 5 else "")
             for c in output["clusters"][:5]))
         print(f"learned patterns {len(output['learned_patterns'])}; structural hits {len(output['learned_hits'])}")
+        print(f"complete shared-pattern family matches {len(output['family_rankings'])}")
     if "frontier_analysis" in output:
         f = output["frontier_analysis"]
         print(f"frontier {f['connected_stop']} | detectors {[h['id'] for h in f['hypotheses']]} "

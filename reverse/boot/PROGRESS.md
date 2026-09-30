@@ -5,6 +5,18 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-09-30 — checkpoint 34: eight NPC motion table copy graphs
+
+| Field | Result |
+|---|---|
+| Connected boot | Unchanged. The native Release probe reran from `0x80003154` with explicit synthetic/HLE hardware inputs and still stops before `sync` at `0x80371730`. Constructor dispatch remains unconnected. |
+| New binary finding | The eight constructor-table bodies from checkpoint 33 each operate on 13 consecutive 12-byte entries. Exact word-level data flow gives eight entry copies: `E[2]←E[0]`, `E[3]←E[1]`, `E[5]←E[4]`, `E[6]←Z`, `E[8]←Z`, `E[9]←E[7]`, `E[11]←Z`, `E[12]←E[10]`, where `Z` is the **live** three-word source at `0x80514CB8..C0`. Source and destination concrete addresses are disjoint. |
+| Ownership evidence | Each body's data area abuts a vtable with original RTTI name `Player::Npc::<Knuckles/Maria/Tails/Omega/Espio/Vector/Rouge/Amy>::MotionImpl`; five initialized `{0,0xFFFFFFFF,text pointer}` entries per area point into the matching code band. The Knuckles destructor also writes the same vtable address to its object. This strongly ties the table to the MotionImpl family; the three-word call ABI and gameplay meaning remain UNKNOWN. See `research/MOTION_TABLE_CONSTRUCTORS_34.md`. |
+| Native projection | `ApplyMotionTableCopies()` expresses only the proven global entry-copy graph as C++17 over opaque three-word entries. It accepts live inputs, supplies no zero or pointer defaults, and is not connected to the boot probe. The register/stack and exceptional effects of the original functions are outside that projection. |
+| Recognition feedback | Two static body seeds produce six complete held-out family matches, each with 110/110 shared n-grams and matching normalized sequence/effect counts. All six held-out bodies remain `UNKNOWN` until independent validation; the recognizer excludes a seed's self-match. |
+| Verification | PAL raw-byte and data-flow fixture tests passed **16/16** focused cases; native projection mutation cases and complete root Release CTest passed **46/46**. This is structural/state-projection evidence, not live behavioral or boot-chain parity. |
+| Next proof obligation | Capture the live constructor table and entry memory at one dispatch, then trace a consumer of the three-word entries to establish invocation semantics. The earlier ICFI/`sync` consequence remains the first connected boot blocker. |
+
 ## 2026-09-30 — checkpoint 33: full constructor scan and multiword semantics
 
 | Field | Result |
