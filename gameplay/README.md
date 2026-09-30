@@ -8,7 +8,8 @@ Goal: recover the game's gameplay systems as named, typed, evidence-backed docum
 not as a better disassembly. Start with **`HANDOFF.md`** (newest checkpoint first).
 
 Rules: evidence first (PROVEN / STRONG / LIKELY / UNKNOWN); RTTI class names are original, method names are
-recovered semantics; write only inside this folder (other folders in the repo are read-only references).
+recovered semantics. The historical working copy restricted writes to `gameplay/`; the public repository also
+maintains the root modules listed in its README. Game inputs remain read-only and uncommitted.
 
 **Handing over to another agent (e.g. Codex)?** Read `Read this to continue Codex.md` first. A paste-ready prompt with agent workstreams is in `CODEX_NAVIGATION_PROMPT.md`.
 

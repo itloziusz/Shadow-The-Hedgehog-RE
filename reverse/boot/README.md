@@ -1,6 +1,18 @@
 # Shadow the Hedgehog (PAL GUPP8P) — SYS boot reverse map v1
 
-This bundle is a reusable handoff for the static recompiler. It converts the supplied `sys` files into explicit, machine-readable boot metadata so future agents do not have to rediscover the loader.
+This directory holds the PAL GUPP8P boot evidence and the first buildable native
+startup slice. `shadow_boot_probe` translates the DOL entry branch at
+`0x80003154` and the complete register helper at `0x800032B0..0x8000333C`,
+then stops at `0x80003158` before the hardware helper at `0x80003400`.
+**PROVEN for this bounded slice; full CRT, constructors and game boot remain
+UNKNOWN or incomplete.** It is a fixture-backed research executable, not a
+playable game.
+
+The original boot handoff below was written for a static recompiler. This
+public repository keeps its authored evidence and portable C++ slice. Raw
+`sys/` inputs, generated manifests and disassembly dumps named by the older
+handoff are intentionally excluded; use a read-only, legally obtained PAL
+`main.dol` to run the fixture tests.
 
 ## Source identity
 
@@ -23,21 +35,24 @@ This bundle is a reusable handoff for the static recompiler. It converts the sup
 
 The core rule is: **preserve semantics, not the GameCube boot machinery.**
 
-## Files in this handoff
+## Files in this public directory
 
 - `BOOT_PROCESS.md` — complete boot-chain reconstruction and what can be deleted.
 - `APPLOADER_STATE_MACHINE.md` — loader callback/state-machine map.
 - `DOL_STARTUP.md` — DOL/CRT initialization path and memory tables.
-- `RECOMPILER_SINGLE_EXE_PLAN.md` — design for a single host executable and safe dead-code elimination.
-- `SYS_LAYOUT.json` — machine-readable authoritative map for this exact input.
-- `BOOT_GRAPH.json` — machine-readable boot/dependency graph for agents and compiler passes.
-- `LOW_MEMORY_BOOT_FIELDS.json` — explicit low-memory compatibility state.
-- `DOL_SECTIONS.csv` — all loaded DOL sections.
-- `FST_MANIFEST.csv` — all 3615 FST entries with paths, disc offsets and sizes.
-- `FST_EXTENSION_COUNTS.csv` — quick asset-type census.
-- `analyze_sys.py` — standalone parser for future `sys` bundles.
-- `REFERENCES.md` — external format/behavior cross-checks.
-- `evidence/` — disassembly evidence used for the reconstruction.
+- `MINIMAL_BOOT_FOUNDATION.md` — precise boundary and original evidence.
+- `REFINED_BOOT_GRAPH.md` — original boot dependencies and proposed native cuts.
+- `OPEN_QUESTIONS.md` — prioritized barriers to a real native game boot.
+- `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
+  register-startup slice and command-line probe.
+- `tests/` — exact DOL SHA-256 gate, expected stop state and mutations of all
+  36 helper instructions, entry words, descriptors and invalid reads.
+- `experimental_native_boot/` — reference-only older authored experiments;
+  its generated recompiler dependencies are not in this repository.
+
+Build with the root CMake project. Supply
+`-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>` to enable the two content-backed
+CTest cases. This path stays in the ignored build cache and is never committed.
 
 ## Confidence convention
 

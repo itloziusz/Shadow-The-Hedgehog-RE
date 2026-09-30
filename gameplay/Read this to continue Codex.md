@@ -11,7 +11,16 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint 20, 2026-09-30)
+## Current continuation (checkpoint 21, 2026-09-30)
+
+The canonical public repository added a buildable C++17 boot-entry foundation
+under `reverse/boot/` after checkpoint 20. Its exact PAL fixture gate stops at
+`0x80003158` after the full pinned register helper at `0x800032B0..0x8000333C`;
+it has **no** hardware/CRT/game boot claim. The public Release gate is now
+**31/31 CTest** with read-only content. See `HANDOFF.md` checkpoint 21 and
+`reverse/boot/OPEN_QUESTIONS.md`. Gameplay state below remains unchanged.
+
+### Gameplay continuation from checkpoint 20
 
 Latest `build_and_run.ps1`: **27/27 CTest suites pass**, and stg0100 Dark 35/35 clears →
 stage index 6 (stg0200). Direct stg0201 Hero 60/60 clears → index 11 (stg0302), and
@@ -33,8 +42,10 @@ services remain hooks. Normal enemy death now marks its SET slot killed/detached
 stg0100 asserts zero duplicate Beetle spawns per SET slot. The enemy teardown fix
 detaches a slot only when the old enemy still owns it. SET flag 0x8 does not
 itself block re-spawn: the scanner preserves it if external 0x40 explicitly
-re-arms the slot. See `HANDOFF.md` checkpoint 20
-before changing code. Keep all writes and builds inside `gameplay/`.
+re-arms the slot. See `HANDOFF.md` checkpoint 20 before changing gameplay code.
+The old `gameplay/`-only rule below applied to the original working-copy
+investigation; public repository boot/runtime work now lives in its named
+root modules, with all build products under the repository's ignored `build/`.
 
 ---
 

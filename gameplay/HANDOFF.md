@@ -4,6 +4,31 @@
 
 ---
 
+## Checkpoint 21 — 2026-09-30 (public native boot entry foundation)
+
+- The canonical public repository now builds `reverse/boot/shadow_boot_foundation`
+  as C++17 plus a fixture-backed `shadow_boot_probe`. **PROVEN** for PAL GUPP8P:
+  DOL entry `0x80003154` branches to the 36-instruction register helper
+  `0x800032B0..0x8000333C`; the native slice yields PC/LR `0x80003158`,
+  r1 `0x8060C5F0`, r2 `0x805FA780`, r13 `0x805EC500`, then stops before
+  `0x80003400`. It does not claim hardware, CRT or application boot parity.
+- Fixed two validation gaps in the old standalone proof: it checked only the
+  first/last helper instruction and accepted extra populated DOL section
+  slots. The library now pins all 36 words and all 18 section slots; tests
+  mutate each helper word, entry/boundary words, a section descriptor and
+  absent slots. The exact PAL DOL SHA-256 is checked at each content-backed
+  CTest run. The former standalone file was removed to avoid duplicate code.
+- Public MSVC Release build and **31/31 CTest** passed against read-only game
+  files (27 gameplay, asset, runtime, two boot). The stg0100 exact-route and
+  no-duplicate-spawn gates remain green. Gameplay code and its original
+  27-suite build script are unchanged by this checkpoint.
+- Next boot frontier: independently establish original pre-entry low-memory
+  state and the effects of `0x80003400` before extending the native startup
+  path. See `reverse/boot/OPEN_QUESTIONS.md`. Continue gameplay world,
+  collision and remaining enemy work without inventing those services.
+
+---
+
 ## Checkpoint 20 — 2026-09-30 (GUN Robot and BK Worm simulator adapters)
 
 - Connected native `GunRobotAI` (SET 0x0068, HP 8, team GUN) and `BkWormAI`

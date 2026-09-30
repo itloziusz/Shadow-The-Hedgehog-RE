@@ -41,7 +41,9 @@ The only supported minimum conclusion is: to execute through the first entry bra
 
 ## Tiny architecture and exact acceptance test
 
-[`minimal_boot_foundation.cpp`](minimal_boot_foundation.cpp) is one standalone C++17 translation unit:
+The public implementation is the C++17 `shadow_boot_foundation` library in
+`include/shadow/boot/BootFoundation.hpp` and `src/BootFoundation.cpp`, with
+`src/boot_probe.cpp` as its fixture-backed command-line probe:
 
 ```text
 BootManifest (ten fixed section descriptors, entry)
@@ -52,13 +54,22 @@ BootManifest (ten fixed section descriptors, entry)
     → STOP at 0x80003158 before hardware init
 ```
 
-No general PPC interpreter, guest bus, apploader implementation, FST parser, renderer or game framework is introduced. The fixture file reader in `main()` is only an executable test harness; swapping it for generated section arrays is a later packaging change. The helper translation checks key startup opcodes at runtime; the acceptance procedure separately pins the complete input hash. It is not an invitation to skip the rest of CRT.
+No general PPC interpreter, guest bus, apploader implementation, FST parser,
+renderer or game framework is introduced. The fixture file reader in the probe
+is only an executable test harness; swapping it for generated section arrays
+is a later packaging change. The library checks **all 36** register-helper
+instruction words at runtime, plus the entry and next branch. CTest separately
+pins the complete DOL SHA-256 on each fixture run. It is not an invitation to
+skip the rest of CRT.
 
 Acceptance on this exact fixture:
 
 1. Verify the four SHA-256 values above against `../sys/{boot.bin,bi2.bin,apploader.img,main.dol}`. The DOL hash is the executable-code identity gate; the others pin manifest provenance.
-2. Compile with `clang++ -std=c++17 -Wall -Wextra -Werror minimal_boot_foundation.cpp -o <temporary-exe>` and run `<temporary-exe> ../sys/main.dol` from this directory. It must exit 0 and print exactly `STOP pc=0x80003158 lr=0x80003158 r1=0x8060C5F0 r2=0x805FA780 r13=0x805EC500`.
+2. Configure the root project with `-DSHADOW_BOOT_DOL_PATH=<path-to-PAL-main.dol>`, build it, and run `ctest -R boot_pal`. The probe must exit 0 and print exactly `STOP pc=0x80003158 lr=0x80003158 r1=0x8060C5F0 r2=0x805FA780 r13=0x805EC500`.
 3. A truncated DOL, altered section/header descriptor, wrong entry opcode/helper fingerprint or an unmapped guest word must fail rather than silently manufacture state.
 4. Inspect the stop PC: `0x80003400` and later CRT/game calls have **not** executed. The full original pre-entry parity gate remains open until an independent original-path snapshot exists; this foothold must not be reported as full boot equivalence.
 
-The supplied fixture passed the compiled proof on 2026-09-24 with the exact output in item 2. A 256-byte truncated fixture and a copy with its entry opcode changed both exited 1 with explicit errors. This is the first native entry transition only.
+The earlier standalone proof passed on 2026-09-24. The buildable module was
+rechecked on 2026-09-30 against the exact PAL fixture. Its regression test
+rejects truncation, header changes and mutation of any of the 36 helper
+instructions. This is the first native entry transition only.

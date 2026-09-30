@@ -22,6 +22,10 @@ not a playable port or a replacement for a legally obtained copy of the game.
 - **Native runtime:** `runtime/` is an experimental C++20 resource and streaming
   layer with null, Direct3D 12 and optional Vulkan backends. Its modern design
   choices are distinct from confirmed game behavior.
+- **Boot entry:** `reverse/boot/` now builds a C++17 library and diagnostic
+  executable for the exact PAL DOL entry branch and register helper
+  (`0x80003154` → `0x800032B0` → stop at `0x80003158`). The original
+  hardware/CRT path and complete game boot are not yet implemented.
 - **Evidence and tools:** `gameplay/` contains the address-backed subsystem
   documents, curated symbols, SET catalog and Python query tools. `reverse/`
   keeps the conservative GX FIFO prototype, boot foundation and named streaming
@@ -29,9 +33,9 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **29/29 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime). Without game
-data, **11/11** content-independent suites pass. The scripted stg0100 Dark
+The full public-tree MSVC Release gate passed **31/31 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, two boot).
+Without game data, **11/11** content-independent suites pass. The scripted stg0100 Dark
 mission reached 35/35 and routed to stage index 6. The simulator deliberately
 supplies labelled engine and player hooks, so a passing route is an integration
 check, not full game parity.
@@ -46,7 +50,7 @@ check, not full game parity.
 | `renderware/platform/gamecube/`, `renderware/include/` | recovered RenderWare stream/data parser |
 | `renderware/reverse/`, `renderware/tools/`, `docs/renderware/` | isolated PPC reconstruction, live inspector and RenderWare evidence |
 | `runtime/` | experimental platform-independent resource runtime and optional PC backends |
-| `reverse/gx/`, `reverse/boot/`, `reverse/streaming/` | conservative GX and startup research, recovered resource functions; the older boot experiment is reference only |
+| `reverse/gx/`, `reverse/boot/`, `reverse/streaming/` | conservative GX research, buildable bounded boot entry, recovered resource functions; the older boot experiment is reference only |
 | `docs/assets/`, `docs/reverse-engineering/` | asset-format findings and research indexes |
 
 The modules retain their tested internal layouts. RenderWare-specific code and
@@ -68,6 +72,9 @@ are registered only when you place your own extracted PAL GUPP8P `files/` and
 `sys/` next to `gameplay/`, or provide paths through the module CMake options.
 Do not commit those inputs. On Windows, `gameplay/build_and_run.ps1` runs the
 full gameplay regression and stg0100 simulator when `files/` is present.
+For the boot entry tests, set `SHADOW_BOOT_DOL_PATH` to the read-only PAL
+`main.dol`; CTest verifies its exact SHA-256 before executing the probe and
+mutation regression. The probe stops before hardware initialization.
 
 ## Provenance and limits
 
