@@ -17,7 +17,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   animation, skinning and native conversion code is a separate C++20 module.
   The RenderWare parser and its GameCube-specific data model live under
   `renderware/`. Other RenderWare research and a PowerPC-only motion-blur
-  reconstruction are kept there and in `docs/renderware/`.
+  reconstruction are kept there and in `docs/renderware/`. The older Dolphin
+  live-inspection tool is isolated under `renderware/tools/live_lab/`.
 - **Native runtime:** `runtime/` is an experimental C++20 resource and streaming
   layer with null, Direct3D 12 and optional Vulkan backends. Its modern design
   choices are distinct from confirmed game behavior.
@@ -43,9 +44,9 @@ check, not full game parity.
 | `gameplay/tools/`, `gameplay/data/` | DOL/RTTI/SET query tools and compact derived tables |
 | `assets/` | GameCube asset readers and portable native conversion |
 | `renderware/platform/gamecube/`, `renderware/include/` | recovered RenderWare stream/data parser |
-| `renderware/reverse/`, `docs/renderware/` | isolated PPC reconstruction and RenderWare evidence |
+| `renderware/reverse/`, `renderware/tools/`, `docs/renderware/` | isolated PPC reconstruction, live inspector and RenderWare evidence |
 | `runtime/` | experimental platform-independent resource runtime and optional PC backends |
-| `reverse/gx/`, `reverse/boot/`, `reverse/streaming/` | conservative GX and startup research, recovered resource functions |
+| `reverse/gx/`, `reverse/boot/`, `reverse/streaming/` | conservative GX and startup research, recovered resource functions; the older boot experiment is reference only |
 | `docs/assets/`, `docs/reverse-engineering/` | asset-format findings and research indexes |
 
 The modules retain their tested internal layouts. RenderWare-specific code and

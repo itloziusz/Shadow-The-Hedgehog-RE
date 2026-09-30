@@ -15,6 +15,8 @@ strength of the stated evidence, not completeness of a native implementation.
 | `runtime/` | native PC resource/streaming experiment | modern target architecture, not claimed original |
 | `reverse/gx/` | GX/PPC FIFO research prototype | conservative decoding rules, not original game code |
 | `reverse/boot/` | authored startup investigation | isolated native boot foundation and evidence; not linked into the game runtime |
+| `reverse/boot/experimental_native_boot/` | older authored startup experiment | reference-only C++; generated recompiler corpus excluded, so not a build target |
+| `renderware/tools/live_lab/` | v0.8 live RenderWare inspector | research tool and address catalogs, not game runtime code |
 | `reverse/streaming/` | named resource-streaming PPC-to-C++ work | partial functions with explicit ABI obligations |
 
 The tree excludes `main.dol`, extracted `files/`, proprietary RenderWare SDKs,

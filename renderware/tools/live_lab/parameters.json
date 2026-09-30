@@ -1,0 +1,3180 @@
+[
+  {
+    "group": "Camera",
+    "name": "Current camera holder",
+    "address": "0x8056FF1C",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Singleton holder; +0 is current RwCamera*."
+  },
+  {
+    "group": "Camera",
+    "name": "Aspect scalar",
+    "address": "0x805EBA30",
+    "type": "f32",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "View-window aspect scalar; presets in GUI."
+  },
+  {
+    "group": "Camera",
+    "name": "Near clip",
+    "address": "RwCamera+0x80",
+    "type": "f32",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "Live near plane."
+  },
+  {
+    "group": "Camera",
+    "name": "Far clip",
+    "address": "RwCamera+0x84",
+    "type": "f32",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "Live far plane / draw distance."
+  },
+  {
+    "group": "Camera",
+    "name": "Fog plane",
+    "address": "RwCamera+0x88",
+    "type": "f32",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "Camera fog plane."
+  },
+  {
+    "group": "Camera",
+    "name": "View window X/Y",
+    "address": "RwCamera+0x68/+0x6C",
+    "type": "f32x2",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "Perspective view window."
+  },
+  {
+    "group": "Streaming",
+    "name": "Runtime AABB margin",
+    "address": "0x8003A6C0",
+    "type": "f32",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "Engine Lab live parameter; extent = 1-2*margin after TBlockManage ready."
+  },
+  {
+    "group": "Streaming",
+    "name": "Lab signature",
+    "address": "0x8003A6C4",
+    "type": "char[4]",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "SELB signature."
+  },
+  {
+    "group": "Streaming",
+    "name": "Lab version",
+    "address": "0x8003A6C8",
+    "type": "u32",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "v2 adds no-op render callback."
+  },
+  {
+    "group": "Renderer",
+    "name": "No-op callback",
+    "address": "0x8003A6D0",
+    "type": "PPC blr",
+    "access": "hook_target",
+    "confidence": "CONFIRMED",
+    "description": "Preserves r3; used to suppress RpWorldSector/RpAtomic render callbacks."
+  },
+  {
+    "group": "Land",
+    "name": "TObjLand singleton",
+    "address": "0x80572560",
+    "type": "struct",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "32 land slots, size 0xC0."
+  },
+  {
+    "group": "Land",
+    "name": "Alternate land-world path (UNSAFE / blocked)",
+    "address": "0x80573D68",
+    "type": "u8",
+    "access": "direct",
+    "confidence": "CODE",
+    "description": "TObjLand+0x1808. Runtime test produced a GX CP/XF vertex descriptor mismatch (0 normals supplied vs 1 expected). This is not a collision visualization switch. Use a dedicated collision Im3D/GX debug renderer instead.",
+    "writable": false
+  },
+  {
+    "group": "Land",
+    "name": "Freeze loader",
+    "address": "0x80573D70",
+    "type": "u8",
+    "access": "direct",
+    "confidence": "CODE",
+    "description": "TObjLand+0x1810."
+  },
+  {
+    "group": "RenderWare",
+    "name": "RwGlobals pointer",
+    "address": "0x805F265C",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Points to RwGlobals, live 0x8060E340 in research capture."
+  },
+  {
+    "group": "RenderWare",
+    "name": "Render-state cache",
+    "address": "0x805E42D0",
+    "type": "struct",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "GC render-state shadow; do not poke directly when forcing GX."
+  },
+  {
+    "group": "RenderWare",
+    "name": "Bound textures[8]",
+    "address": "0x8056FCDC",
+    "type": "RwTexture*[8]",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Last texture pointers written by bind path."
+  },
+  {
+    "group": "Effects",
+    "name": "EffectManagerPJS singleton ptr",
+    "address": "0x805EF2D8",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Live manager pointer."
+  },
+  {
+    "group": "Effects",
+    "name": "Hide all",
+    "address": "EffectManager+0x24",
+    "type": "u8",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "Walker toggles hidden bit around Render for resource release."
+  },
+  {
+    "group": "Effects",
+    "name": "Draw list head",
+    "address": "EffectManager+0x14",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Intrusive effect element list."
+  },
+  {
+    "group": "Effects",
+    "name": "Lens flare object",
+    "address": "EffectManager+0x50",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CODE",
+    "description": "Pointer used by global lens flare path."
+  },
+  {
+    "group": "Effects",
+    "name": "Lens flare enable",
+    "address": "LensFlare+0x04",
+    "type": "u8",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "Global lens flare gate."
+  },
+  {
+    "group": "RpWorld",
+    "name": "Flags",
+    "address": "RpWorld+0x08",
+    "type": "u32",
+    "access": "direct_advanced",
+    "confidence": "CONFIRMED",
+    "description": "World flags; mutation can change pipeline behavior."
+  },
+  {
+    "group": "RpWorld",
+    "name": "Root sector",
+    "address": "RpWorld+0x1C",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Root BSP sector/tree."
+  },
+  {
+    "group": "RpWorld",
+    "name": "Sector render callback",
+    "address": "RpWorld+0x68",
+    "type": "fnptr",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "Set to lab BLR callback to suppress stage geometry."
+  },
+  {
+    "group": "RpWorld",
+    "name": "Pipeline",
+    "address": "RpWorld+0x6C",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "World pipeline override."
+  },
+  {
+    "group": "RpAtomic",
+    "name": "Geometry",
+    "address": "RpAtomic+0x18",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Geometry pointer."
+  },
+  {
+    "group": "RpAtomic",
+    "name": "Render callback",
+    "address": "RpAtomic+0x48",
+    "type": "fnptr",
+    "access": "direct",
+    "confidence": "CONFIRMED",
+    "description": "Can be replaced by lab BLR callback for per-atomic visibility."
+  },
+  {
+    "group": "RpAtomic",
+    "name": "Pipeline",
+    "address": "RpAtomic+0x6C",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Atomic pipeline override."
+  },
+  {
+    "group": "RpGeometry",
+    "name": "Flags",
+    "address": "RpGeometry+0x08",
+    "type": "u32",
+    "access": "direct_advanced",
+    "confidence": "CONFIRMED",
+    "description": "TRISTRIP/POS/TEX/PRELIT/NORMALS/LIGHT/MODULATE/native flags."
+  },
+  {
+    "group": "RpGeometry",
+    "name": "Vertex count",
+    "address": "RpGeometry+0x14",
+    "type": "s32",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Number of vertices."
+  },
+  {
+    "group": "RpGeometry",
+    "name": "Mesh header",
+    "address": "RpGeometry+0x54",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "RpMeshHeader*."
+  },
+  {
+    "group": "RpGeometry",
+    "name": "RepEntry",
+    "address": "RpGeometry+0x58",
+    "type": "ptr",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "GC native instance data."
+  },
+  {
+    "group": "RpMaterial",
+    "name": "Texture",
+    "address": "RpMaterial+0x00",
+    "type": "ptr",
+    "access": "direct_advanced",
+    "confidence": "CONFIRMED",
+    "description": "RwTexture*; NULL maps to raster-less Im texture in some paths."
+  },
+  {
+    "group": "RpMaterial",
+    "name": "Color",
+    "address": "RpMaterial+0x04",
+    "type": "RGBA8",
+    "access": "direct_advanced",
+    "confidence": "CONFIRMED",
+    "description": "Material color."
+  },
+  {
+    "group": "RwTexture",
+    "name": "Raster",
+    "address": "RwTexture+0x00",
+    "type": "ptr",
+    "access": "direct_advanced",
+    "confidence": "CONFIRMED",
+    "description": "RwRaster*."
+  },
+  {
+    "group": "RwTexture",
+    "name": "Name",
+    "address": "RwTexture+0x10",
+    "type": "char[32]",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Texture name."
+  },
+  {
+    "group": "RwTexture",
+    "name": "Filter/address",
+    "address": "RwTexture+0x50",
+    "type": "u32",
+    "access": "direct_advanced",
+    "confidence": "CONFIRMED",
+    "description": "Low byte filter, U/V addressing nibbles."
+  },
+  {
+    "group": "RwRaster",
+    "name": "Width/height",
+    "address": "RwRaster+0x0C/+0x10",
+    "type": "s32x2",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Raster dimensions."
+  },
+  {
+    "group": "RwRaster",
+    "name": "GX format",
+    "address": "RwRaster+0x40",
+    "type": "u32",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "GC raster extension GXTexFmt."
+  },
+  {
+    "group": "RwRaster",
+    "name": "Has alpha",
+    "address": "RwRaster+0x48",
+    "type": "u32",
+    "access": "telemetry",
+    "confidence": "CONFIRMED",
+    "description": "Bit0 drives alpha-test mode and camera pixel format."
+  },
+  {
+    "group": "RW Device",
+    "name": "curCamera",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RWSRCGLOBAL(curCamera); set by core begin 0x804863A4, cleared by 0x80486370; fog start/end read cam+0x80/0x84/0x88 from it; NULL between frames (MEM1 image)"
+  },
+  {
+    "group": "RW Device",
+    "name": "curWorld",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "set by RpWorld camera-begin override 0x80461B6C; none"
+  },
+  {
+    "group": "RW Device",
+    "name": "renderFrame (u16)",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "incremented per camera begin by 0x80461B6C; none"
+  },
+  {
+    "group": "RW Device",
+    "name": "lightFrame (u16)",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "light dedup stamp; none"
+  },
+  {
+    "group": "RW Device",
+    "name": "gammaCorrection",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "f32 = 1.0; unused by GX"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpSystem",
+    "address": "0x80494EDC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwSystemFunc(request, pOut, pInOut, nIn); 23-way jump table 0x8056F494; OPEN/START do GXInit+VI config; see system rows"
+  },
+  {
+    "group": "RW Device",
+    "name": "zBufferNear",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "f32 = 0.0 (RwIm2DGetNearScreenZ); Im2D z=0.0 -> depth 0"
+  },
+  {
+    "group": "RW Device",
+    "name": "zBufferFar",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "f32 = 0x3F7FFFFF = 0.99999994 (RwIm2DGetFarScreenZ); depth 0xFFFFFE"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpRenderStateSet",
+    "address": "0x80498954",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwRenderStateSet(state,value): bounds 30, jump table 0x8056FAD4; see rs rows"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpRenderStateGet",
+    "address": "0x804984C4",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwRenderStateGet(state,*value): jump table 0x8056FA58; reads cache 0x805E42D0 / Im texture"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpIm2DRenderLine",
+    "address": "0x80491D0C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "RwIm2DRenderLine(verts,n,v1,v2); GXBegin(GX_LINES,VTXFMT0,2); 0 static game call sites; 0 runtime hits"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpIm2DRenderTriangle",
+    "address": "0x80491B08",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "RwIm2DRenderTriangle(verts,n,v1,v2,v3); GXBegin(GX_TRIANGLES,VTXFMT0,3) order v1,v2,v3; 0 static game call sites; 0 runtime hits"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpIm2DRenderPrimitive",
+    "address": "0x80491E80",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwIm2DRenderPrimitive(primType,verts,n); Im2DBegin 0x8049148C; GXBegin(map[prim],VTXFMT0,n); POS xyz F32, CLR0 RGBA8, [TEX0 ST F32]; Im2DEnd 0x80491774; 18 static sites/13 fns (16 TRISTRIP, 2 POLYLINE)"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpIm2DRenderIndexedPrimitive",
+    "address": "0x8049245C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(code)/0 runtime",
+    "description": "RwIm2DRenderIndexedPrimitive(prim,verts,n,idx,ni); GXBegin(map[prim],0,ni) with vertices dereferenced on CPU; 1 static site 0x80479A28 (TRILIST); 0 runtime hits"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpIm3DRenderLine",
+    "address": "NULL",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "NULL in static block 0x8056F53C and in live RwGlobals: Im3D runs through RxPipelines (ImmInstance.csl / SubmitNoLight.csl); see drv.Im3DSubmitNoLight; 0 static call sites through the engine pointer"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpIm3DRenderTriangle",
+    "address": "NULL",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "NULL in static block 0x8056F53C and in live RwGlobals: Im3D runs through RxPipelines (ImmInstance.csl / SubmitNoLight.csl); see drv.Im3DSubmitNoLight; 0 static call sites through the engine pointer"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpIm3DRenderPrimitive",
+    "address": "NULL",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "NULL in static block 0x8056F53C and in live RwGlobals: Im3D runs through RxPipelines (ImmInstance.csl / SubmitNoLight.csl); see drv.Im3DSubmitNoLight; 0 static call sites through the engine pointer"
+  },
+  {
+    "group": "RW Device",
+    "name": "fpIm3DRenderIndexedPrimitive",
+    "address": "NULL",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "NULL in static block 0x8056F53C and in live RwGlobals: Im3D runs through RxPipelines (ImmInstance.csl / SubmitNoLight.csl); see drv.Im3DSubmitNoLight; 0 static call sites through the engine pointer"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDNASTANDARD",
+    "address": "0x80494CCC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "return FALSE stub (id absent from table); absent from 0x8051D400; live RwGlobals holds 0x80494CCC"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDCAMERABEGINUPDATE",
+    "address": "0x804956F4",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "(NULL, RwCamera*, 0): GX view matrix 0x805E428C = inv(LTM) x viewOffset shear; projection 0x8056F4F0; pixel fmt; viewport+scissor = camera raster rect; GXSetProjectionv, GXSetPixelFmt(only CAMERATEXTURE fb), GXSetViewport, GXSetScissor, GXSetScissorBoxOffset; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRGBTOPIXEL",
+    "address": "0x80492BFC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "RwRGBA -> packed pixel for raster format; none; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDPIXELTORGB",
+    "address": "0x80492F10",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "packed pixel -> RwRGBA; none; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERCREATE",
+    "address": "0x80497CA8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "(NULL,RwRaster*,flags): ext init, format select 0x80497458, alloc via rwmalloc hint 0x30411; CAMERA/ZBUFFER = no memory (EFB); TEXTURE/CAMERATEXTURE -> GX image buffer (+GXInitTlutObj for palettes); table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERDESTROY",
+    "address": "0x80498058",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "waits GXDrawSync token (ext+0x30) then rwfree; GXSetDrawSync + wait 0x8049B7DC; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDIMAGEGETRASTER",
+    "address": "0x80493A40",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "RwImage <- raster; none; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERSETIMAGE",
+    "address": "0x80494614",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "raster <- RwImage (lock/convert/unlock); GX texel encode; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDTEXTURESETRASTER",
+    "address": "0x8049819C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "tex->raster = r4; tex ext+0x20 = 0x01000000 (dirty: re-InitTexObj on next bind); none (deferred); table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDIMAGEFINDRASTERFORMAT",
+    "address": "0x804948D8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "pick raster format for image; none; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDCAMERAENDUPDATE",
+    "address": "0x80495CAC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "[0x805F26F8]=NULL, return TRUE; none (no copy, no flush); table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDSETRASTERCONTEXT",
+    "address": "0x8049A570",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "[0x805F2710]=raster; none; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERSUBRASTER",
+    "address": "0x804981B8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "copy stride/depth/cType/cFormat from parent, cpPixels=0 (core sets offsets/size); none; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERCLEARRECT",
+    "address": "0x8049A508",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "clear rect of context raster via 0x8049A124; ortho quad; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERCLEAR",
+    "address": "0x8049A52C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "clear whole context raster via 0x8049A124; ortho quad; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERLOCK",
+    "address": "0x80496CA4",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "lock level (mode>>8); NORMAL/TEXTURE/CAMERATEXTURE only (CAMERA/ZBUFFER -> error); none (CPU pointer into GX image); table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERUNLOCK",
+    "address": "0x80497104",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "restore dims, DCFlushRange, GXInvalidateTexAll; GXInvalidateTexAll; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERRENDER",
+    "address": "0x80499A9C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "0x80499924(src,pos,scaled=0,masked=1) -> 2D quad 0x80499394; ortho textured quad; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERRENDERSCALED",
+    "address": "0x80499AEC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "0x80499924(src,rect,1,1); ortho textured quad; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERRENDERFAST",
+    "address": "0x80499AC4",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "0x80499924(src,pos,0,0); ortho textured quad; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERSHOWRASTER",
+    "address": "0x80495CBC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "present: raster arg IGNORED; queue XFB, GXFlush, GXCopyDisp(curXFB, clear=[0x805F2688]=0), GXSetDrawSync(token), token=(token+1)%0xE000, swap XFB 0x805F26A0/A4; GXCopyDisp (the only one in-game); table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDCAMERACLEAR",
+    "address": "0x80495638",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "(camera, RwRGBA*, mode): [0x805F2688]==0 -> ClearQuad 0x80499E58 over camera fb rect; full-rect GX_QUADS at z=0.99999994, blend ONE/ZERO, ZMode(1,ALWAYS,Z?); table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDHINTRENDERF2B",
+    "address": "0x80494CCC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "not provided (stub returns FALSE); absent from 0x8051D400; live RwGlobals holds 0x80494CCC"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERLOCKPALETTE",
+    "address": "0x804972B8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "return palette ptr ext+0x20; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERUNLOCKPALETTE",
+    "address": "0x80497388",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "DCFlush palette; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDNATIVETEXTUREGETSIZE",
+    "address": "0x8049A57C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "stream size of GC native texture; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDNATIVETEXTUREREAD",
+    "address": "0x8049A8DC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "read GC native texture (platform 6): 88B tex header + 16B raster header + palette + u32 size + GX image; GXInvalidateTexAll; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDNATIVETEXTUREWRITE",
+    "address": "0x8049A604",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "write GC native texture; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwSTANDARDRASTERGETMIPLEVELS",
+    "address": "0x804966D8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED(live table)",
+    "description": "ext+0x32+1 or log2(max(w,h))+1 when 0xFF and MIPMAP; table 0x8051D400 {id,fn} pair"
+  },
+  {
+    "group": "RW Device",
+    "name": "dirtyFrameList",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwLinkList; none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "stringFuncs.vecSprintf..vecSscanf (17 fps to +0x104)",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "C runtime string fps; none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "memoryFuncs.rwmalloc = 0x80050E28",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwMalloc(size,hint) - trampoline 0x80049BB8 adds 0x32 to hint; none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "memoryFuncs.rwfree = 0x80050EF0",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwFree - trampoline 0x80049B5C (NOT RenderStateGet); none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "memoryFuncs.rwrealloc = 0x80050D3C",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "memoryFuncs.rwcalloc = 0x80050DDC",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "memoryAlloc (freelist) = 0x80486C1C",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "memoryFree (freelist) = 0x80486C4C",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "metrics = NULL",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "engineStatus = 3 (STARTED)",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "resArenaInitSize = 0x40000",
+    "address": "data",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "none; live MEM1 image at 45e9"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMOPEN",
+    "address": "0x80495124",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "alloc GX FIFO"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMCLOSE",
+    "address": "0x804951D8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMSTART",
+    "address": "0x80495214",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "GXInit, FIFO, VI config from render mode [0x805F26F4], viewport/scissor/DispCopySrc/Dst, copy filter, two-pass flag [0x805F2698], GXSetPixelFmt([0x805F268C])"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMSTOP",
+    "address": "0x804954CC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMREGISTER",
+    "address": "0x804950A0",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "copy static RwDevice 0x8056F50C into RwGlobals+0x10"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETNUMMODES",
+    "address": "0x80494F34",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETMODEINFO",
+    "address": "0x80494F44",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMUSEMODE",
+    "address": "0x80494F18",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMFOCUS",
+    "address": "0x80495098",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMINITPIPELINE",
+    "address": "0x804954F0",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETMODE",
+    "address": "0x80495088",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMSTANDARDS",
+    "address": "0x804954F8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "copy {id,fn} table 0x8051D400 into stdFunc[29]"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETTEXMEMSIZE",
+    "address": "0x8049561C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "unsupported"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETNUMSUBSYSTEMS",
+    "address": "0x8049561C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "unsupported"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETSUBSYSTEMINFO",
+    "address": "0x8049561C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "unsupported"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETCURRENTSUBSYSTEM",
+    "address": "0x8049561C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "unsupported"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMSETSUBSYSTEM",
+    "address": "0x8049561C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "unsupported"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMFINALIZESTART",
+    "address": "0x804954B4",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "render-state reset 0x804981E8"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMINITIATESTOP",
+    "address": "0x804954C0",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETMAXTEXTURESIZE",
+    "address": "0x804955FC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMRXPIPELINEREQUESTPIPE",
+    "address": "0x8049561C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "unsupported"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETMETRICBLOCK",
+    "address": "0x8049561C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "unsupported"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwDEVICESYSTEMGETID",
+    "address": "0x8049560C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": ""
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATENARENDERSTATE",
+    "address": "0x80498F58",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "return FALSE; none"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATETEXTURERASTER",
+    "address": "0x80498C18",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "if raster != ImTex->raster: TextureSetRaster(ImTex=[0x805F270C], raster); deferred: bound at next Im2D/Im3D prim via 0x80498854 -> 0x8049AC88(ImTex, GX_TEXMAP0)"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATETEXTUREADDRESS",
+    "address": "0x80498B6C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "value 4 (BORDER) rejected; ImTex+0x50 bits8-15 = v|(v<<4); wrap S/T via table 0x8056FCC8 {0:CLAMP,1:REPEAT,2:MIRROR,3:CLAMP,4:CLAMP}"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATETEXTUREADDRESSU",
+    "address": "0x80498BA4",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "BORDER rejected; ImTex+0x50 bits 8-11; wrapS"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATETEXTUREADDRESSV",
+    "address": "0x80498BD0",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "BORDER rejected; ImTex+0x50 bits 12-15; wrapT"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATETEXTUREPERSPECTIVE",
+    "address": "0x80498E48",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "returns value, no state; none"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEZTESTENABLE",
+    "address": "0x80498CA4",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "cache +0x04; on: GXSetZMode(1,GX_LEQUAL,zwrite) off: GXSetZMode(1,GX_ALWAYS,zwrite); cache +0x08=func; compare stays ENABLED; 'test off' = ALWAYS so z-write still works"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATESHADEMODE",
+    "address": "0x80498E30",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "returns (value==rwSHADEMODEGOURAUD); no state; none (always Gouraud)"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEZWRITEENABLE",
+    "address": "0x80498C38",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "cache +0x00; GXSetZMode(1,cache+0x08,value); z update"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATETEXTUREFILTER",
+    "address": "0x80498BFC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "ImTex+0x50 low byte = value (no validation); min/mag via table 0x8056FC90"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATESRCBLEND",
+    "address": "0x80498D38",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "valid 1,2,5..10; cache +0x34; GXSetBlendMode(GX_BM_BLEND, map[src], map[cache dst], GX_LO_CLEAR); map 0x8056FA28 {1:ZERO,2:ONE,5:SRCALPHA,6:INVSRCALPHA,7:DSTALPHA,8:INVDSTALPHA,9:DSTCLR(2),10:INVDSTCLR(3)}"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEDESTBLEND",
+    "address": "0x80498DC0",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "valid 1..8; cache +0x38; GXSetBlendMode(GX_BM_BLEND, map[cache src], map[dst], CLEAR); dst 3/4 = SRCCLR/INVSRCCLR"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEVERTEXALPHAENABLE",
+    "address": "0x80498F58",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "NO-OP: jump-table entry = common exit with r6=0 -> returns FALSE; none (blending is always on)"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEBORDERCOLOR",
+    "address": "0x80498E40",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "returns FALSE; none"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEFOGENABLE",
+    "address": "0x80498990",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "on: if !cache+0x10 {copy cam near/far/fogPlane; GXSetFog(typeMap[cache+0x14], startz=fogPlane, endz=far|override, nearz=near, farz=far, color)} off: GXSetFog(GX_FOG_NONE,5,10,0.05,10,color); typeMap 0x8056FA18 {0:NONE,1:LIN(2),2:EXP(4),3:EXP2(5)}"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEFOGCOLOR",
+    "address": "0x80498A80",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "value=A<<24|R<<16|G<<8|B; if changed: cache GXColor +0x1C; GXSetFog(typeMap[type], cam fogPlane, cam far, cam near, cam far, color) - IGNORES fog enable; re-arms fog even when RW fog is off"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEFOGTYPE",
+    "address": "0x80498AF8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "only 1 (LINEAR) accepted; GXSetFog(...) like FOGCOLOR; GX_FOG_LIN"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEFOGDENSITY",
+    "address": "0x80498B64",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "returns FALSE; none"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATE(dead legacy)",
+    "address": "0x80498F58",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "FALSE"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATECULLMODE",
+    "address": "0x80498E50",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "cache +0x0C; GXSetCullMode(value-1); RW NONE1->GX_CULL_NONE0, RW BACK2->GX_CULL_FRONT1, RW FRONT3->GX_CULL_BACK2 (winding flip)"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATESTENCIL*",
+    "address": "0x80498F58",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "returns FALSE (no stencil on GC); none"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEALPHATESTFUNCTION",
+    "address": "0x80498E78",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "cache +0x40 = value-1 (GX_NEVER..ALWAYS); emits GXSetAlphaCompare only when mode+0x3C != 1; see 0x804987C8 / 0x80498F74"
+  },
+  {
+    "group": "RW Device",
+    "name": "rwRENDERSTATEALPHATESTFUNCTIONREF",
+    "address": "0x80498F18",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "cache byte +0x4C; emit when mode != 1; ref0"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.TextureBind",
+    "address": "0x8049AC88",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwGameCubeTextureBind(RwTexture* or NULL->white 4x4, GXTexMapID); GXInitTexObj[CI]+GXInitTexObjLOD when dirty or filterAddressing changed; GXLoadTlut(parentExt+0,map) for CI; GXLoadTexObj(texObj,map); bound[map]=tex @0x8056FCDC; 13 callers: pipelines 0x80449D54 0x8044EEC4 0x80463964, matfx 0x804A3F74.. 0x804A55CC, EMBM 0x804A7AAC, Im 0x80498854"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.LoadWorldViewMatrix",
+    "address": "0x804960FC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwGameCubeSetTransform(RwMatrix* world|NULL, RwBool normals); M = world x view(0x805E428C); GX row0=(-rx,-ux,-ax,-px) row1=(ry,uy,ay,py) row2=(-rz,-uz,-az,-pz); GXLoadPosMtxImm(PNMTX0) [+GXLoadNrmMtxImm]; GXSetCurrentMtx(0); 6 callers (pipelines + Im3D)"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.GetDeviceBlock",
+    "address": "0x804960F0",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "return &static RwDevice 0x8056F50C; REGISTER + RwEngineInit"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.CameraTextureCopy",
+    "address": "0x80496208",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwGameCubeCameraTextureCopy(RwRaster* dst(sub of CAMERATEXTURE), RwBool halfRes); GXSetCopyFilter(off); GXSetTexCopySrc(dst offset/size, x2 if halfRes); GXSetTexCopyDst(parent w,h, parentExt fmt, mipmap=halfRes); GXCopyTex(parentPixels+offset, clear=[0x805F2688]=0); GXPixModeSync; restore copy filter from render mode; GXInvalidateTexRegion/All; called by effect code directly (SaveScreen, glare, shimmer)"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.ClearQuad",
+    "address": "0x80499E58",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "(raster, RwRect*, RwRGBA*, clearMode); ZMode(1,ALWAYS,Z?) [+ColorUpdate(0) if Z only]; ChanMatColor(COLOR0A0,color); Blend(BLEND,ONE,ZERO,CLEAR); Cull NONE; alpha policy 1; fog off; 2D setup 0x80499B14; GX_QUADS 4 verts z=0.99999994; restore blend/zmode/cull/colorupdate(1)/fog; only via CAMERACLEAR"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.Im2DBegin",
+    "address": "0x8049148C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "Im2D per-primitive GX setup; VtxDesc POS/CLR0[/TEX0]; 1 TEV stage MODULATE|PASSCLR; chan COLOR0A0 mat=VTX; viewport (0,0,fbW,xfbH,0,1); save+set ortho proj 0x8056F13C; PosMtx 0x8056F158 = translate(nOffX+0.5,nOffY+0.5) * scaleZ(-1)"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.Im2DEnd",
+    "address": "0x80491774",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "Im2D restore; if camera fb is a sub-raster: viewport+scissor back to sub rect; GXSetProjectionv(saved 0x805E4218)"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.ImTextureBindAlphaPolicy",
+    "address": "0x80498854",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "bind Im texture to TEXMAP0 + alpha policy from raster alpha; if ImTex->raster: 0x8049AC88(ImTex,0); mode = !(parentExt+0x14 & 1); if changed: mode1 -> AlphaCompare(ALWAYS,0,AND,ALWAYS,0)+ZCompLoc(1) else cached compare+ZCompLoc(0); Im2D/Im3D/raster render"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.AlphaTestZCompLocPolicy",
+    "address": "0x804987C8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwGameCubeSetAlphaTestMode(mode); mode 1: GXSetAlphaCompare(ALWAYS,0,AND,ALWAYS,0), GXSetZCompLoc(GX_TRUE); mode 0: GXSetAlphaCompare(cached), GXSetZCompLoc(GX_FALSE); only on change (cache +0x3C); 17 callers incl. RenderLevel payload 0x80046D80 and pipelines"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.SetAlphaCompareFull",
+    "address": "0x80498F74",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "RwGameCubeSetAlphaCompare(comp0,ref0,op,comp1,ref1); if mode != 1 emit the PREVIOUS cached compare, then store new values, +0x4E=1 (new values reach GX only at the next emit); 6 callers, all fragments of 0x80046D80"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.RenderStateReset",
+    "address": "0x804981E8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "device FINALIZESTART; defaults: ZMode(1,LEQUAL,1) ZCompLoc(1) AlphaCompare(ALWAYS) Blend(BLEND,SRCALPHA,INVSRCALPHA) Cull FRONT ChanCtrl(all 4 chans off) ChanMatColor(0xFFFFFFFF) Color/AlphaUpdate(1) CopyClear({255,255,255,255}, 0xFFFFFF) CurrentMtx(0); cache: zwrite=1 ztest=1 zfunc=LEQUAL cull=BACK src=SRCALPHA dst=INVSRCALPHA fog off type LINEAR alpha mode=1 comp0=GREATER ref0=0; Im texture + white 4x4 RGB565 raster; 2 hits (boot)"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.FogEnableDirect",
+    "address": "0x804986B8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "fog on/off without RenderStateSet; same as FOGENABLE case; ClearQuad only"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.BlendModeDirect",
+    "address": "0x80498910",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "GXSetBlendMode(BLEND, map[src], map[dst], CLEAR); ClearQuad restore / raster render"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.Im3DInstanceNode",
+    "address": "0x804A0B4C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "ImmInstance.csl node: [0x805F2748]=*param; 0 in-stage"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.Im3DSubmitNoLightNode",
+    "address": "0x804A0B68",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "SubmitNoLight.csl node; SetTransform(stash+0x10 ltm,0); POS/CLR0[/TEX0]; GXBegin(map 0x8056FD00[prim], n) from 36-byte RwIm3DVertex; 49,912 boot/menu hits, 0 in-stage"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.TextureSetLODParams",
+    "address": "0x8049B568",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "(RwTexture*, biasClamp, edgeLOD, maxAniso, f1=lodBias); re-InitTexObj + GXInitTexObjLOD(min,mag,0,maxLod,bias,clamp,edge,aniso); callers 0x8049A8DC, game 0x80038BB0, 0x80039550"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.RasterPluginRegister",
+    "address": "0x80496440",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "RwRasterRegisterPlugin(0x34, id 0x40C) -> [0x805F2700]"
+  },
+  {
+    "group": "RW Device",
+    "name": "drv.RasterSelectFormat",
+    "address": "0x80497458",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "type/format -> ext GX fmt, tlut fmt, alpha, depth, cFormat"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwCameraBeginUpdate",
+    "address": "0x8048652C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "camera->beginUpdate(cam) (+0x18): RpWorld 0x80461B6C -> core 0x804863A4 -> stdFunc[1]"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwCameraEndUpdate",
+    "address": "0x80486504",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "camera->endUpdate(cam) (+0x1C): 0x80474EEC -> core 0x80486340 -> stdFunc[10] -> curCamera=NULL"
+  },
+  {
+    "group": "RW Device",
+    "name": "core.CameraBeginUpdateDefault",
+    "address": "0x804863A4",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "curCamera=cam; frame sync 0x8048C3A4; stdFunc[1]"
+  },
+  {
+    "group": "RW Device",
+    "name": "core.CameraEndUpdateDefault",
+    "address": "0x80486340",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "stdFunc[10]; curCamera=NULL"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwCameraClear",
+    "address": "0x8048680C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "stdFunc[21](cam,color,mode)"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwRasterShowRaster",
+    "address": "0x8048AD94",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "stdFunc[20](raster,dev,flags)"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwRasterCreate",
+    "address": "0x8048AF0C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "stdFunc[4]"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwRasterDestroy",
+    "address": "0x8048AC2C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "stdFunc[5]"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwRasterLock",
+    "address": "0x8048AFC0",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "stdFunc[15]"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwRasterUnlock",
+    "address": "0x8048AB90",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "stdFunc[16]"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwRasterSubRaster",
+    "address": "0x8048AE14",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "sub.w/h=rect.w/h; sub.nOffset=parent.nOffset+rect.xy; stdFunc[12]"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwTextureSetRaster",
+    "address": "0x8048DA50",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "stdFunc[8]"
+  },
+  {
+    "group": "RW Device",
+    "name": "RwTextureCreate",
+    "address": "0x8048DD2C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "alloc + stdFunc[8]"
+  },
+  {
+    "group": "RW Device",
+    "name": "RpWorld camera begin override",
+    "address": "0x80461B6C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "curWorld = camera plugin world; renderFrame++; tail-call saved begin"
+  },
+  {
+    "group": "RW Device",
+    "name": "camera end override",
+    "address": "0x80474EEC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "tail-call [0x805E2DA8]"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXBegin",
+    "address": "0x80396934",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetCullMode",
+    "address": "0x80396B54",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetCopyFilter",
+    "address": "0x80397228",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXCopyDisp",
+    "address": "0x80397444",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXCopyTex",
+    "address": "0x803975AC",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXInitTexObj",
+    "address": "0x80397E34",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXInitTexObjCI",
+    "address": "0x80398080",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXLoadTexObj",
+    "address": "0x8039843C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXLoadTexObjPreLoaded",
+    "address": "0x803982C0",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXLoadTlut",
+    "address": "0x803984C8",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetAlphaCompare",
+    "address": "0x80399778",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetFog",
+    "address": "0x80399A0C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetBlendMode",
+    "address": "0x80399D44",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetZMode",
+    "address": "0x80399DF0",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetZCompLoc",
+    "address": "0x80399E24",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetPixelFmt",
+    "address": "0x80399E58",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetProjectionv",
+    "address": "0x8039A158",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXLoadPosMtxImm",
+    "address": "0x8039A22C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetViewport",
+    "address": "0x8039A49C",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetViewportJitter",
+    "address": "0x8039A444",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "RW Device",
+    "name": "GXSetScissor",
+    "address": "0x8039A4E4",
+    "type": "fn/data",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "counts include non-RwGC callers (pipelines, CSD, display lists)"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpAtomic.frame",
+    "address": "RpAtomic+0x04",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "RwFrameGetLTM 0x804882E8; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpAtomic.repEntry",
+    "address": "RpAtomic+0x14",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "used when numMorphTargets!=1; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpAtomic.geometry",
+    "address": "RpAtomic+0x18",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpAtomic.renderCallBack",
+    "address": "RpAtomic+0x48",
+    "type": "fnptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0x80456F04 default; game wrappers 0x801645D0/0x8003851C/0x800386EC; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpAtomic.interpolator.flags",
+    "address": "RpAtomic+0x4C",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "bit0 dirty -> morph reinstance; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpAtomic.worldSectorTies",
+    "address": "RpAtomic+0x64",
+    "type": "list",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "tie+8 = sector; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpAtomic.pipeline",
+    "address": "RpAtomic+0x6C",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "NULL -> default; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpAtomic.skin plugin: RpHAnimHierarchy*",
+    "address": "RpAtomic+0x7C",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.flags",
+    "address": "RpGeometry+0x08",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0x01 TRISTRIP,0x02 POS,0x04 TEX,0x08 PRELIT,0x10 NORMALS,0x20 LIGHT,0x40 MODULATE,0x80 TEX2,0x01000000 NATIVE,0x02000000 NATIVEINSTANCE; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.lockedSinceLastInst",
+    "address": "RpGeometry+0x0C",
+    "type": "u16",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "& 0x17 dirty; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.numVertices",
+    "address": "RpGeometry+0x14",
+    "type": "s32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.numMorphTargets",
+    "address": "RpGeometry+0x18",
+    "type": "s32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.numTexCoordSets",
+    "address": "RpGeometry+0x1C",
+    "type": "s32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.preLitLum (RwRGBA*)",
+    "address": "RpGeometry+0x30",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.texCoords",
+    "address": "RpGeometry+0x34",
+    "type": "ptr[8]",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.mesh (RpMeshHeader*)",
+    "address": "RpGeometry+0x54",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.repEntry",
+    "address": "RpGeometry+0x58",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.morphTarget (+0x14 verts, +0x18 normals)",
+    "address": "RpGeometry+0x5C",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.VtxFmt plugin",
+    "address": "RpGeometry+0x60",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpGeometry.RpSkin plugin",
+    "address": "RpGeometry+0x68",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpMeshHeader.flags",
+    "address": "RpMeshHeader+0x00",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "bit0 tristrip; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpMeshHeader.numMeshes",
+    "address": "RpMeshHeader+0x04",
+    "type": "u16",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpMeshHeader.serialNum",
+    "address": "RpMeshHeader+0x06",
+    "type": "u16",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "compared with header+2; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpMeshHeader.meshes",
+    "address": "RpMeshHeader+0x10",
+    "type": "RpMesh[]",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "12 B: indices, numIndices, material; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpMaterial.texture",
+    "address": "RpMaterial+0x00",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "NULL -> raster-less Im texture [0x805F270C]; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpMaterial.color",
+    "address": "RpMaterial+0x04",
+    "type": "RGBA8",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpMaterial.surfaceProps.ambient",
+    "address": "RpMaterial+0x0C",
+    "type": "f32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "ka; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpMaterial.MatFX data (offset [0x805F2750])",
+    "address": "RpMaterial+0x1C",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpMaterial.GCN material plugin 0x129 (registry idx 6)",
+    "address": "RpMaterial+0x20",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "NULL on all FH materials; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorldSector.repEntry",
+    "address": "RpWorldSector+0x34",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorldSector.lights (tie+8 = RpLight)",
+    "address": "RpWorldSector+0x40",
+    "type": "list",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorldSector.tightBBox.inf",
+    "address": "RpWorldSector+0x6C",
+    "type": "f32x3",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "origin for quantised worlds; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorldSector.mesh",
+    "address": "RpWorldSector+0x78",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorldSector.pipeline",
+    "address": "RpWorldSector+0x7C",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorldSector.numVertices",
+    "address": "RpWorldSector+0x82",
+    "type": "u16",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorldSector.numPolygons",
+    "address": "RpWorldSector+0x84",
+    "type": "u16",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0 -> skipped; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorld.flags",
+    "address": "RpWorld+0x08",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0x4101000D live; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorld.matList",
+    "address": "RpWorld+0x10",
+    "type": "RpMaterialList",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorld.rootSector",
+    "address": "RpWorld+0x1C",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorld.positioned lights",
+    "address": "RpWorld+0x34",
+    "type": "list",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorld.direct lights (link at light+0x34)",
+    "address": "RpWorld+0x3C",
+    "type": "list",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorld.sector render cb",
+    "address": "RpWorld+0x68",
+    "type": "fnptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0x80460B60; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorld.pipeline",
+    "address": "RpWorld+0x6C",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpWorld.VtxFmt plugin",
+    "address": "RpWorld+0x70",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "NULL live; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpLight.type",
+    "address": "RpLight+0x01",
+    "type": "u8",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "1 dir, 2 amb, 0x80 point, 0x81 spot, 0x82 softspot; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpLight.flags",
+    "address": "RpLight+0x02",
+    "type": "u8",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "1 LIGHTATOMICS, 2 LIGHTWORLD; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpLight.radius",
+    "address": "RpLight+0x14",
+    "type": "f32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpLight.color",
+    "address": "RpLight+0x18",
+    "type": "f32x3",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpLight.lightFrame",
+    "address": "RpLight+0x3C",
+    "type": "u16",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "rwobjects",
+    "name": "RpLight.GC light plugin",
+    "address": "[0x805F25D8]",
+    "type": "28 B",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "u32 customAttn; f32 a0,a1,a2,k0,k1,k2; code reads in 0x80464AAC/0x80464478/0x8046521C/0x80460B60/0x80456F04 + dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.numBones",
+    "address": "RpSkin+0x00",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "30,7,7,10,5 live; 0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.numUsedBones",
+    "address": "RpSkin+0x04",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "26,7,7,9,4; 0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.usedBoneIds",
+    "address": "RpSkin+0x08",
+    "type": "u8*",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.inverseBindMatrices",
+    "address": "RpSkin+0x0C",
+    "type": "RwMatrix*",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "64 B each; 0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.maxNumWeightsForVertex",
+    "address": "RpSkin+0x10",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "2 for all live skins -> CPU path; 0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.vertexBoneIndices",
+    "address": "RpSkin+0x14",
+    "type": "u32*",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.vertexBoneWeights",
+    "address": "RpSkin+0x18",
+    "type": "RwMatrixWeights*",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.bind-pose POS array (CPU path)",
+    "address": "RpSkin+0x1C",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.bind-pose NRM array (CPU path)",
+    "address": "RpSkin+0x20",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.platform skin type",
+    "address": "RpSkin+0x2C",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "3 forces CPU; live 1 or 2; 0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.split boneLimit",
+    "address": "RpSkin+0x34",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0 live; !=0 -> per-mesh RLE palette reload; 0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.meshBoneRLECount",
+    "address": "RpSkin+0x40",
+    "type": "u8*",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "{start,count} per mesh; 0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "RpSkin.meshBoneRLE",
+    "address": "RpSkin+0x44",
+    "type": "u8*",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "{firstBone,numBones}; 0x8044EEC4, 0x8044EA8C, 0x8044E394; dump"
+  },
+  {
+    "group": "skin",
+    "name": "Globals.atomic skin plugin offset",
+    "address": "Globals+0x8056E7C8+4",
+    "type": "s32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0x7C; dump"
+  },
+  {
+    "group": "skin",
+    "name": "Globals.geometry skin plugin offset",
+    "address": "Globals+0x8056E7C8+8",
+    "type": "s32",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0x68; dump"
+  },
+  {
+    "group": "skin",
+    "name": "Globals.bone matrix cache",
+    "address": "Globals+0x8056E7C8+12",
+    "type": "ptr",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "0x8078B8C0; dump"
+  },
+  {
+    "group": "skin",
+    "name": "Rule.path select",
+    "address": "-",
+    "type": "rule",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "cpu = maxWeights>1 || type==3; palette: PNMTXIDX DIRECT, slot i -> GX_PNMTX0+3i; 0x8044EF34-0x8044EF64"
+  },
+  {
+    "group": "matfx",
+    "name": "rpMatFXMaterialData.data[0]",
+    "address": "rpMatFXMaterialData+0x00",
+    "type": "union 0x14",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "bump{frame,bumpedTex,bumpTex,coef,invBumpWidth} | env{frame,texture,coef,fbAlpha} | dual{texture,src,dst} | uv{base,dual}; 0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads"
+  },
+  {
+    "group": "matfx",
+    "name": "rpMatFXMaterialData.data[0].flag",
+    "address": "rpMatFXMaterialData+0x14",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads"
+  },
+  {
+    "group": "matfx",
+    "name": "rpMatFXMaterialData.data[1]",
+    "address": "rpMatFXMaterialData+0x18",
+    "type": "union 0x14",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "second effect (bump-env env, dual-uv dual); 0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads"
+  },
+  {
+    "group": "matfx",
+    "name": "rpMatFXMaterialData.data[1].flag",
+    "address": "rpMatFXMaterialData+0x2C",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads"
+  },
+  {
+    "group": "matfx",
+    "name": "rpMatFXMaterialData.flags",
+    "address": "rpMatFXMaterialData+0x30",
+    "type": "u32",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "0 NULL,1 BUMP,2 ENV,3 BUMPENV,4 DUAL,5 UVTRANSFORM,6 DUALUV; 0x804A55CC switch; 0x804A48DC/0x804A4E00/0x804A3F74/0x804A4358 reads"
+  },
+  {
+    "group": "matfx",
+    "name": "Cache.chanValid,lastMaterial,tevValid",
+    "address": "Cache+0x805E4388",
+    "type": "u32x3",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "cleared per object by render cb / 0x804A3F58; drop natively; 0x804A62D0; 0x804A55CC"
+  },
+  {
+    "group": "matfx",
+    "name": "Registry.GC plugin registry entry 6",
+    "address": "Registry+0x805E4398+16*6",
+    "type": "u32x4",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "{6, pluginId 0x129, offset 0x20, size 0xC}; native-shader material plugin; dump; 0x804AA118"
+  },
+  {
+    "group": "matfx",
+    "name": "Effect.0x804A48DC+0x804A4B7C",
+    "address": "2 ENVMAP",
+    "type": "dispatch",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "base pass (alpha test off) then additive pass: blend src ONE|DESTALPHA dst ONE; chan off, mat=coef; texgen NRM x TEXMTX0 {-.5E.rx,-.5E.ux,-.5E.ax,.5; -.5E.ry,-.5E.uy,-.5E.ay,.5}; MODULATE; per frame FH: 25.1; watch hits C40/D45"
+  },
+  {
+    "group": "matfx",
+    "name": "Effect.inline 0x804A5A44",
+    "address": "5 UVTRANSFORM",
+    "type": "dispatch",
+    "access": "struct_field",
+    "confidence": "CONFIRMED",
+    "description": "base pass with TEXMTX0 {r.x,u.x,0,p.x; r.y,u.y,0,p.y} on TEX0; per frame FH: 6; watch hits C40/D45"
+  },
+  {
+    "group": "matfx",
+    "name": "Effect.0x804A3F74+0x804A4240",
+    "address": "4 DUALTEXTURE",
+    "type": "dispatch",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "base pass, then same DL with dual texture, blend from data, TEX1 texgen if TEX2 flag; per frame FH: 0; watch hits C40/D45"
+  },
+  {
+    "group": "matfx",
+    "name": "Effect.0x804A4358+0x804A47F4",
+    "address": "6 DUALUVTRANSFORM",
+    "type": "dispatch",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "two passes with base/dual UV matrices; per frame FH: 0; watch hits C40/D45"
+  },
+  {
+    "group": "matfx",
+    "name": "Effect.0x804A4E00",
+    "address": "1/3 BUMP/BUMPENV",
+    "type": "dispatch",
+    "access": "struct_field",
+    "confidence": "CODE",
+    "description": "3/4 TEV stages with indirect add_prev; see md section 10.3; per frame FH: 0; watch hits C40/D45"
+  },
+  {
+    "group": "Effect Path",
+    "name": "SCH-01 Effect bucket scheduler (7 draw tasks -> wrappers -> walker)",
+    "address": "0x804261C0",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "owner=EffectManagerPJS 0x8057798C (draw list mgr+0x14, next elem+0x3C); level=Opeq/Punch/Trans/Add/Add/GlareWorld/PostGlare; bucket=0..6; API=none (dispatch); intercept=keep in guest; no sorting; order = draw list order; Render = elem vtable +0x10"
+  },
+  {
+    "group": "Effect Path",
+    "name": "EP-01 EffectParticlePJS billboards via RpPTank",
+    "address": "0x80434824 (fill) -> 0x80449010 -> 0x80449A74",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "owner=EffectParticlePJS vt 0x8053D9BC; level=as bucket (Final Haunt: GlareWorld); bucket=elem+0x30 (FH: 5; saved 3 or 2); API=RpPTankAtomicLock/Unlock 0x80449458/0x804495E8; RpAtomic render callback; intercept=0x80449A74 PTank GC render callback (or atomic render cb 0x80449010); emitter 0x8044C260 math in doc section 5.6 (parabolic sin/cos; half-size corners; v0=-W-H uv(u1,v0) v1=+W-H (u0,v0) v2=+W+H (u0,v1) v3=-W+H (u1,v1)); camera R=LTM.right U=-LTM.up; vertices written raw to FIFO"
+  },
+  {
+    "group": "Effect Path",
+    "name": "EP-01a RpPTank GC pipeline render + emitters (below cut)",
+    "address": "0x80449D54 / 0x8044A25C..0x8044C6A4",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "owner=RW RpPTank GC driver; level=-; bucket=-; API=RW driver internals; intercept=drop (replace by native instanced quads); 10 emitters selected by dataFlags (MATRIX, CNSMATRIX, 2DROTATE, SIZE x USECENTER); only 0x8044C260 used by effects"
+  },
+  {
+    "group": "Effect Path",
+    "name": "EP-02 EffectParticle3DPJS oriented quads",
+    "address": "0x80433DA8 (+frag 0x80433F40); fill in update 0x804341D0",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=EffectParticle3DPJS vt 0x8053DAB0; level=as bucket; bucket=elem+0x30; API=RwIm3DTransform 0x8049B87C + RwIm3DRenderPrimitive 0x8049BB48 + RwIm3DEnd 0x8049B95C; intercept=RwIm3D API; CPU M = T(pos) Rz(+0x18) Ry(+0x14) Rx(+0x10) S(+0x28) [x elem+0x54 if b11]; corners elem+0x14C; uv k0=(u1,v1) k1=(u1,v0) k2=(u0,v1) k3=(u0,v0)"
+  },
+  {
+    "group": "Effect Path",
+    "name": "EP-03 EffectParticle3DPJS model per particle",
+    "address": "0x80433DA8",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=EffectParticle3DPJS; level=as bucket; bucket=elem+0x30; API=RpClumpRender 0x80457C14 (or world add 0x8046334C); intercept=RpClumpRender -> world atomic pipeline; clone per particle via 0x804580E0 into 152-byte record +0x90"
+  },
+  {
+    "group": "Effect Path",
+    "name": "EP-04 EffectRayPJS camera-facing beams",
+    "address": "0x8042D870 (+frag 0x8042D8DC)",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=EffectRayPJS vt 0x8053D8D4; level=as bucket; bucket=elem+0x30; API=RwIm3DTransform + RenderPrimitive(TRISTRIP) + End; intercept=RwIm3D API; side = normalize(cross(B-A, B-eye)) * width(node+0x34) * [0x8051C304]; length clamp node+0x30"
+  },
+  {
+    "group": "Effect Path",
+    "name": "EP-05 EffectLocusPJS ribbons/trails",
+    "address": "0x8043B618",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=EffectLocusPJS vt 0x8053D860; level=as bucket; bucket=elem+0x30; API=RwIm3DTransform + RenderPrimitive(TRISTRIP) + End; intercept=RwIm3D API; buffer elem+0x170; rebuild fn_8043AB68 when +0x10C & 0x4000"
+  },
+  {
+    "group": "Effect Path",
+    "name": "EP-06 EffectShimmerPJS heat-haze grid",
+    "address": "0x8043531C (+frag 0x80435408)",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=EffectShimmerPJS vt 0x8053D728; level=PostGlare (bucket 6); bucket=elem+0x30; API=RwGameCubeCameraTextureCopy 0x80496208 + Im2DRenderPrimitive (device +0x30); intercept=camera texture copy + Im2D; grid (+0x108+1) x (+0x10C) with sin offsets"
+  },
+  {
+    "group": "Effect Path",
+    "name": "EP-07 EffectObjectPJS attached clump",
+    "address": "0x80433AA0",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=EffectObjectPJS vt 0x8053DA3C; level=as bucket; bucket=elem+0x30; API=RpClumpRender 0x80457C14 / world add 0x8046334C; intercept=RpClumpRender; hidden branch unregisters (0x804635BC/0x8046343C)"
+  },
+  {
+    "group": "Effect Path",
+    "name": "EP-08 Arranger / GlobalParam / LensFlareRW3 elements",
+    "address": "0x800273E4 / 0x801D1360 / 0x801D12F4",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED (vtable dump)",
+    "description": "owner=EffectArrangerPJS / EffectGlobalParamPJS / EffectLensFlareRW3; level=-; bucket=-; API=none (Render = blr); intercept=-; logic-only elements"
+  },
+  {
+    "group": "Effect Path",
+    "name": "LF-01 GlobalLensFlare sprite chain",
+    "address": "0x80431E38 (+frag 0x80431E94)",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED gate / CODE draw",
+    "description": "owner=ScreenEffect LF=[mgr+0x50]; tasks DrawGlobalLensFlare 0x801D2928 / Another 0x801D2A94; level=GlareWorld; bucket=-; API=Im2DRenderPrimitive (device +0x30) + RwCameraBeginUpdate/End; intercept=Im2D API; gate LF+0x04; return if LF+0x8C && LF+0x8D; element descriptors LF+0x18 (0x24 stride, pass byte +0x20); verts LF+0x28 (0x60 per element)"
+  },
+  {
+    "group": "Effect Path",
+    "name": "KG-01 KageTask drop shadow (flattened clump)",
+    "address": "0x80357578 (draw functor)",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "owner=KageTask singleton [0x805F1EEC]; level=Trans ([RenderTaskSystem+0x18]); bucket=-; API=RpClumpRender 0x80457C14; intercept=RpClumpRender -> world atomic pipeline; per record: 3x4 -> RwMatrix (0x80059318) into clump frame +0x10, RwFrameUpdateObjects, RpClumpRender; Y scale 0.0; lift 0.02*worldScale; submits 0x80357260 (1/frame) / 0x803573A4 (0)"
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-01 Eff::Belt strip",
+    "address": "0x802DE4BC",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=Eff::Belt task (attach 0x802DE398 / 0x802DE43C); level=Add; bucket=-; API=RwIm3DTransform(22, NULL, 0x18) + TRISTRIP + End; intercept=RwIm3D API; "
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-02 Eff::LocusMultiVtx trail",
+    "address": "0x802DF140",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=Eff::LocusMultiVtx task (attach 0x802DF0C0); level=Add; bucket=-; API=RwIm3DTransform(n, NULL, 0x18) + TRISTRIP + End; intercept=RwIm3D API; "
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-03 ElecSearchLight cone",
+    "address": "0x8015390C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=ElecSearchLight (LIGHT.BIN) functor 0x8052B908, attach 0x80155DD8; level=Glare; bucket=-; API=RwIm3DTransform(26, ?, 0x18) + TRISTRIP + End; intercept=RwIm3D API; refutes the 'RenderLevel_Glare empty' negative"
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-04 ElecFan glow model",
+    "address": "0x802662A4",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=ElecFan / DE0403DENSIRYUU.DFF functor 0x8054D2EC, attach 0x80266834; level=Glare; bucket=-; API=RpClumpRender; intercept=RpClumpRender; "
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-05 Enemy laser/aim line",
+    "address": "0x80039948",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=called from enemy fn 0x802E2858; level=caller's level; bucket=-; API=RwIm3DTransform(2) + RenderPrimitive(LINELIST) + End; intercept=RwIm3D API; "
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-06 LockonMark homing reticle",
+    "address": "0x800620D4",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=LockonMark functor 0x8051FEA0, attach 0x80062D24; level=Sprite3D; bucket=-; API=Im2DRenderPrimitive (device +0x30); intercept=Im2D API; screen position from camera projection of the target"
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-07 GiHPGaugeEnemy HP bars (3D-anchored CSD)",
+    "address": "0x800BF634",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "owner=GiHPGaugeEnemy functor 0x80523758, attach 0x800C002C; level=Sprite3D; bucket=-; API=Chao::CSD project -> CPlatformRW::DrawPrimitive2D 0x80364024 -> Im2D; intercept=CSD / Im2D (2D lane); 2D lane owns CSD"
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-08 CSD scene anchored in 3D",
+    "address": "0x8033BB10",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "owner=functor 0x8055E6C8, attach 0x8033C3E4; level=Sprite3D; bucket=-; API=Chao::CSD; intercept=CSD / Im2D (2D lane); "
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-09 Sprite3D model functor",
+    "address": "0x802B4A8C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=functor 0x80558748, attach 0x802B5108; level=Sprite3D; bucket=-; API=RpClumpRender; intercept=RpClumpRender; "
+  },
+  {
+    "group": "Effect Path",
+    "name": "GS-10 EggLastMechFeverRing model",
+    "address": "0x80358A54",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=functor 0x80560828, attach 0x80359230; level=Opeq; bucket=-; API=RpClumpRender (render-context mode 5, StageLight record switch); intercept=RpClumpRender; doc 04 mislabelled it EffectKage_LightSwitch"
+  },
+  {
+    "group": "Effect Path",
+    "name": "LK-01 AtomicShimmer subtractive passes",
+    "address": "0x804381C4 / 0x80438570 (fns 0x80438168 / 0x804382F8)",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED census / CODE recipe",
+    "description": "owner=ScreenEffect atomic shimmer [E+0x4C] via EffectShimmerRW3::Draw 0x80028BA4; level=PostGlare (bucket 6); bucket=6; API=RpClumpRender + Im2DRenderPrimitive + camera texture copy; intercept=RW API + raw GX call; RW cached SRC/DST desynchronised by the raw call"
+  },
+  {
+    "group": "Effect Path",
+    "name": "LK-02 DiscErrorScreen self-contained renderer",
+    "address": "0x8032D4CC (setup 0x8032D7CC, handlers 0x8032DBB4..0x8032DE30, quad 0x8032E038, font 0x8032E10C)",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE (0 runtime hits)",
+    "description": "owner=DVD/system error controller; level=none (outside the task tree); bucket=-; API=none; intercept=raw GX (reimplement or replace by host UI); raw FIFO writes in 0x8032E038"
+  },
+  {
+    "group": "Effect Path",
+    "name": "LK-03 Boot video GXSetMisc",
+    "address": "0x80051028",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=boot video init; level=-; bucket=-; API=none; intercept=config only; "
+  },
+  {
+    "group": "Effect Path",
+    "name": "LK-04 VI display-copy Y scale",
+    "address": "0x80306888",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=video/movie module; level=-; bucket=-; API=none; intercept=config only; "
+  },
+  {
+    "group": "Effect Path",
+    "name": "LK-05 Reset GXAbortFrame",
+    "address": "0x803746B0",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=reset handler; level=-; bucket=-; API=none; intercept=config only; "
+  },
+  {
+    "group": "Effect Path",
+    "name": "LK-06 Orphan TexObj query",
+    "address": "0x80393634",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "owner=none (0 callers); level=-; bucket=-; API=none; intercept=dead; "
+  },
+  {
+    "group": "Effect Path",
+    "name": "RW-IM2D RW GC Im2D implementation",
+    "address": "0x80491E80 / 0x8049245C / 0x80491B08 / 0x80491D0C (setup 0x8049148C)",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "owner=RwDevice 0x8056F508 (+0x28..+0x34); level=any; bucket=-; API=device fpIm2DRender*; intercept=Im2D device entries; 31 CSD DrawPrimitive2D + 2 from 0x80363F10 + ~56 post (INFERRED split)"
+  },
+  {
+    "group": "Effect Path",
+    "name": "RW-IM3D RW GC Im3D implementation",
+    "address": "0x8049B87C / 0x8049BB48 / 0x8049B9AC / 0x8049B95C; node 0x804A0B68",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "owner=Im3D module [0x805F272C]; level=any; bucket=-; API=RwIm3D API; intercept=RwIm3D API; "
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#1 RenderStart",
+    "address": "0x801D032C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PreRender; pass=clear; state=ZMode(on,ALWAYS,write); blend ONE/ZERO; cull NONE; alpha-test off; fog off; COLOR0 mat colour = clear colour; z=0.99999994 (~0xFFFFFE); reads=clear colour RwRGBA at 0x8057E760 (FH/Lava = 0,0,0,0xE8; alpha ignored by RGB8 EFB); writes=EFB RGB <- clear colour; Z <- far; RwCameraClear(cam,&V[0],rwCAMERACLEARIMAGE|rwCAMERACLEARZ); GX copy-clear flag 0x805F2688 is 0 so no GXCopy ever clears"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#2 EffectDeleteResourceTask",
+    "address": "0x801D2E78",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "level=PreRender; pass=resource; state=-; reads=E+0x2C pending-delete list; writes=frees textures; no GX; safe point before any draw"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#3 RenderAttach_Div",
+    "address": "0x801E4EF0",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=(group exec); pass=viewport select; state=-; reads=V=0x8057E760 +0x60 mode; writes=camMgr layout/camera; per-frame calls 0x8027211C=3 0x80271F9C=2 in 1P (Div+Static+Set2D)"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#4 LandDispManager_N",
+    "address": "0x8004620C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=OpeqWorld; pass=world geometry; state=flags 0x28 via fn_80046D80: SRCALPHA/INVSRCALPHA, ZTEST 1 ZWRITE 1 (LEQUAL), alpha GREATER 1 (late z), TEXTUREFILTER LINEAR, CULL BACK, fog off; reads=RpWorld display lists; writes=EFB colour+Z; table 0x8051E328 entry 0; runtime tree walk (stg0602)"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#5 FullScreenShimmerDraw",
+    "address": "0x801D25F0",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=OpeqWorld (child of LandDispManager_N); pass=copy + distorted mesh; state=SRCALPHA/INVSRCALPHA; VERTEXALPHA; ZTEST 0 ZWRITE 0; FOG 0; FILTER NEAREST; CULL NONE; Im2D TRISTRIP [S+0xA4] count [S+0xB4]; reads=EFB after land N only; S params S+0x0C..0x40, phases S+0xBC/0xC0 (advanced by Sub task 0x801D2564 in Layer16); writes=E+0x34 parent (0xC1EE60) 640x480 RGBA8; EFB colour; distorts only what is in the EFB at that point (land N); everything later is undistorted"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#6 LandDispManager_D/OS/OSL/O/OW/OL/P",
+    "address": "0x8004620C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=OpeqWorld; pass=world geometry; state=D 0x28; OS/O 0x2C (+fog); OSL/OL 0x2D (+fog +lights); OW 0x3C (+fog, cull none); P 0x80C (punch: SRCALPHA/INVSRCALPHA, ZWRITE 1, alpha GREATER 200, late z, +fog, linear); reads=RpWorlds; writes=EFB; PunchWorld level has NO land; punch land is drawn here"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#7 CameraRender + RenderUnit(s) + EffectDrawOpaq + TFogSet",
+    "address": "0x801D04D4 / 0x8004E390 / 0x801D2B14 / 0x8016A904",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=Opeq; pass=objects + effects; state=level flags 0x20 (default arm): SRCALPHA/INVSRCALPHA, ZTEST 1 ZWRITE 1, alpha GREATER 1, filter per-raster, CULL BACK, fog off; elements override per draw; reads=object/effect geometry; writes=EFB; TFogSet (flags 0x0000, not run while paused) programs fog after OpeqWorld"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#8 CameraRenderClose",
+    "address": "0x801D0418",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PunchWorld; pass=state close; state=-; reads=-; writes=-; closes Opeq's CameraRender; does NOT reset render states"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#9 CameraRender + EffectDrawPunch",
+    "address": "0x801D04D4 / 0x801D2B90",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=Punch; pass=effects; state=flags 0x800: SRCALPHA/INVSRCALPHA ZTEST 1 ZWRITE 1 alpha GREATER 200 late z CULL BACK; reads=effect elements; writes=EFB; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#10 CameraRenderClose + LandDispManager_AF/A/AL",
+    "address": "0x801D0418 / 0x8004620C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=TransWorld; pass=world geometry; state=AF/A 0x5C: SRCALPHA/INVSRCALPHA ZTEST 1 ZWRITE 0, alpha ALWAYS (early z), CULL NONE, fog, LINEAR; AL 0x4D (+lights, cull back); reads=RpWorlds; writes=EFB colour; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#11 CameraRender + RenderUnit + EffectDrawTrans + stage tasks",
+    "address": "0x801D04D4 / 0x801D2C0C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=Trans; pass=objects + effects; state=flags 0x40: SRCALPHA/INVSRCALPHA ZTEST 1 ZWRITE 0 alpha ALWAYS early z CULL BACK; reads=geometry; writes=EFB colour; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#12 CameraRenderClose + LandDispManager_K/M",
+    "address": "0x801D0418 / 0x8004620C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=AddWorld; pass=world geometry; state=K 0x9C: SRCALPHA/ONE ZTEST 1 ZWRITE 0 early z CULL NONE fog LINEAR; M 0x11C: INVDESTCOLOR/ZERO (GX INVDSTCLR,ZERO) CULL NONE fog LINEAR; reads=RpWorlds; writes=EFB colour; M = colour-invert world class"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#13 CameraRender + EffectDrawAdd + EffectDrawSub (+Eff::Belt/LocusMultiVtx where present)",
+    "address": "0x801D04D4 / 0x801D2C88 / 0x801D2D04",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=Add; pass=effects; state=flags 0x80: SRCALPHA/ONE ZTEST 1 ZWRITE 0; Sub elements use GXSetBlendMode(SUBTRACT) at 0x804381C4/0x80438570; reads=effect elements; writes=EFB colour; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#14 CameraRenderClose",
+    "address": "0x801D0418",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=GlareWorld; pass=state close; state=-; reads=-; writes=-; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#15 PreGlare",
+    "address": "0x801D266C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=GlareWorld; pass=scene save + glare-source clear; state=clear: ZMode(on,ALWAYS,no write) colour (0,0,0,0) replace; reads=EFB (finished opaque/punch/trans/add scene); gate G+0x08 && G+0xE0 && (G+0xE1||G+0xE2); writes=E+0x38 parent (0xD4AEA0) 640x480 RGBA8 <- scene; EFB colour <- black; Z untouched; split-screen: re-creates 128/64 offset sub-rasters G+0x14/G+0x1C when viewport offset != 0"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#16 DrawGlobalLensFlare (pass 1)",
+    "address": "0x801D2928",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED (gating) / CODE (draw)",
+    "description": "level=GlareWorld; pass=sprite chain into glare source; state=save 7 states; SRCALPHA/ONE; VERTEXALPHA; ZWRITE 0; FOG 0; FILTER NEAREST; sun sprite (elem 0) ZTEST 1, chain ZTEST 0; wash quad LF+0x2C ONE/ONE untextured (pass 0 only); reads=LF+0x04 enable; LF+0x8C/0x8D hidden flags (1=hidden); LENSFLARE.TXD textures; writes=EFB glare source; sun sprite is DEPTH-TESTED against scene Z -> occlusion; corrects doc 10 negative result"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#17 EffectDrawGlare",
+    "address": "0x801D2D80",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=GlareWorld; pass=glare emitters; state=per element (typically additive); reads=bucket-5 elements; writes=EFB glare source; GlareWorld has no CameraRender payload so the wrapper brackets the camera itself"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#18 LandDispManager_G / LandDispManager_GL",
+    "address": "0x8004620C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=GlareWorld; pass=glare world geometry; state=G 0x98 / GL 0x99: SRCALPHA/ONE ZTEST 1 ZWRITE 0 early z CULL NONE LINEAR no fog (GL +lights); reads=RpWorlds; writes=EFB glare source (depth-tested vs scene Z); -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#19 DrawGlobalLensFlareAnother (pass 0)",
+    "address": "0x801D2A94",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=GlareWorld; pass=sprite chain + wash; state=as row 16; reads=as row 16; writes=EFB glare source; stage-heap task appended after land G/GL (2 LF draw calls/frame measured)"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#20 CameraRender (+stage gimmicks e.g. ElecSearchLight 0x80155B10 fn_802659D4 fn_802667A8)",
+    "address": "0x801D04D4",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=Glare; pass=glare source extras; state=flags 0x80 SRCALPHA/ONE ZTEST 1 ZWRITE 0; reads=gimmick geometry; writes=EFB glare source; corrects doc 14 'reserved'"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#21 CameraRenderClose",
+    "address": "0x801D0418",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=state close; state=-; reads=-; writes=-; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#22 PostGlare: state + source capture",
+    "address": "0x801D26E8",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=capture; state=save 8 states (10,11,6,8,2,12,7,9); set ZTEST 0 ZWRITE 0 TEXTUREADDRESS CLAMP SHADEMODE GOURAUD FILTER LINEAR (inherited by the ladder); cam->zBuffer(+0x64)=NULL; reads=EFB glare source; writes=E+0x34 parent (0xC1EE60) 640x480 RGBA8; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#23 ladder L1: level-A capture",
+    "address": "0x8042F258",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=downsample; state=SRC ONE DST ZERO; LINEAR; vertex RGB = trunc(G+0xE5*0.95) A=255 (FH 0x20 -> 30); UV row 0 = viewport sub-rect +0.5 texel; reads=E+0x34 parent 640x480; writes=EFB corner (0,0)-(128,128) then copy; single bilinear tap per dest pixel (sparse 5:1 x 3.75:1 decimation)"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#24 ladder L2: level-A horizontal half",
+    "address": "0x804302EC",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=separable tap sum; state=SRC ONE DST ONE; LINEAR; taps x-offset k*spreadA-0.5 for k in {0,+1,-1,+2,-2..} (1+hA taps; FH hA=2 -> 3 taps); each tap clipped to [0,128]; reads=G+0x10 (self); writes=G+0x10 via copy; unnormalised sum; 8-bit saturation"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#25 ladder L3: level-A vertical half",
+    "address": "0x804302EC",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=separable tap sum; state=as L2 (1+vA taps; FH vA=2 -> 3); reads=G+0x10; writes=G+0x10; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#26 ladder L4: level-B capture (cascade arm)",
+    "address": "0x8042F258",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=downsample; state=ONE/ZERO LINEAR; cascade arm (E4==0 && E1): source = level A, vertex RGB = G+0xE6 raw (FH 0x30=48), UV row 1; other arms: source = capture, RGB=trunc(E6*0.95), row 0; reads=G+0x10 128x128 (FH); writes=EFB corner then copy; exclusive copy sites 0x8042F630 / 0x8042F7E8 (FH) / 0x8042F9C4"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#27 ladder L5: level-B horizontal half",
+    "address": "0x804302EC",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=separable tap sum; state=ONE/ONE LINEAR; 1+hB taps (FH hB=4 -> 5 taps: 0,+1,-1,+2,-2); reads=G+0x18; writes=G+0x18; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#28 ladder L6: level-B vertical half",
+    "address": "0x804302EC",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=separable tap sum; state=ONE/ONE; 1+vB taps (FH 5); reads=G+0x18; writes=G+0x18; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#29 ladder L7: wipe",
+    "address": "0x8042F258",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=clear; state=clear colour (0,0,0,0) IMAGE (Z untouched); reads=-; writes=EFB colour black; site 0x8042FA30"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#30 ladder L8: merge B into A (E3==0 && E1 && E2)",
+    "address": "0x8042F258",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=upsample merge; state=ONE/ONE LINEAR: draw A 1:1, draw B 64->128; reads=G+0x10 and G+0x18; writes=G+0x10 via copy then wipe; wipe (0,0,0,0) at 0x8042FF50 counted here"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#31 ladder L9: composite level A",
+    "address": "0x8042F258",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=upsample composite; state=ONE/ONE LINEAR; reads=G+0x10 (A + up(B)); writes=EFB colour (on black); E3!=0 path instead composites A (row 1) and B (row 2) separately"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#32 ladder L10: add unblurred glare source",
+    "address": "0x8042F258",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=composite; state=ONE/ONE LINEAR; reads=E+0x34 parent (glare source); writes=EFB colour; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#33 PostGlare: scene add-back",
+    "address": "0x80430904",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=composite; state=ONE/ONE LINEAR; then restore the 8 saved states; reads=E+0x38 parent (scene save); writes=EFB colour = scene + glare source + bloom (8-bit saturating); ladder total BuildQuad calls 23/frame incl. this quad"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#34 DrawBlur",
+    "address": "0x801D27FC",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED (code) / measured earlier (motion-blur-2026-09-14)",
+    "description": "level=PostGlare; pass=temporal + zoom composite; state=save 7 states; SRCALPHA/INVSRCALPHA; VERTEXALPHA; ZTEST 0 ZWRITE 0 FOG 0; FILTER NEAREST; vertex RGB 255 A=B+0x01; UV (off+0.5)/640..(off+w+0.5)/640; reads=B+0x74 parent 320x240 history (previous frame); writes=EFB colour; gate B+0x00 && B+0x01 && B+0x78"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#35 EffectDrawShimmer",
+    "address": "0x801D2DFC",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostGlare; pass=refraction elements; state=per element; reads=bucket-6 elements; writes=-; atomic shimmer 0x80438168 never reached: E+0x4C is 0 in both dumps"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#36 CameraRender + RenderUnits",
+    "address": "0x801D04D4 / 0x8004E390",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=Sprite3D; pass=world-space sprites; state=flags 0x20: ZTEST 1 ZWRITE 1 (scene Z still intact after glare/blur); reads=object sprites; writes=EFB; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#37 CameraRenderClose",
+    "address": "0x801D0418",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=Last; pass=state close; state=leaves Sprite3D's ZTEST 1 ZWRITE 1 latched; reads=-; writes=-; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#38 RenderAttach_Static",
+    "address": "0x801E4E40",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=(group exec); pass=viewport restore; state=-; reads=-; writes=-; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#39 SaveScreen",
+    "address": "0x801D2764",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostEffect; pass=history capture; state=B+0x78=0 first (unconditional); gate B+0 && B+1; stomp quad B+0x7C (0..320 x 0..240, UV 640 +0.5) and restore quad B+0xDC (0..640 x 0..480): SRC ONE DST ZERO; Z test/write INHERITED (LEQUAL write), filter inherited (measured NEAREST); z=0; reads=EFB (post-glare/blur/shimmer/Sprite3D frame); writes=E+0x34 parent 640x480; B+0x74 parent 320x240; EFB repainted; B+0x78=1; writes depth 0 over the screen when active"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#40 DrawScreenColor",
+    "address": "0x801D2878",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED (gating) / CODE (modes)",
+    "description": "level=PostEffect; pass=tint / overlay / invert; state=C+0 multiply (C+3..5 != white): copy then ONE/ZERO redraw with vertex colour; C+0 overlay (C+0x0A!=0): untextured SRCALPHA/INVSRCALPHA; C+1 invert: untextured INVDESTCOLOR/ZERO; all ZTEST 0 ZWRITE 0 FOG 0 NEAREST; reads=EFB; C+0x10 (= E+0x34); writes=EFB colour; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#41 CameraMatrix->Set2D",
+    "address": "0x801D019C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "level=Sprite; pass=camera mode; state=-; reads=-; writes=camMgr+0x30..0x64; does NOT set an ortho projection (Im2D sets its own per primitive)"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#42 CameraRender (0x418) + SpriteBack/SpriteMiddle/SpriteFront + RenderUnits",
+    "address": "0x801D04D4 / 0x8004E390",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=Sprite; pass=2D HUD; state=flags 0x418: SRCALPHA/INVSRCALPHA ZTEST 0 ZWRITE 0 alpha ALWAYS CULL NONE FILTER LINEAR fog off; TEV MODULATE; reads=HUD textures (C4/C8/RGB5A3...); writes=EFB colour; child order: Set2D, CameraRender, SpriteBack, SpriteMiddle, SpriteFront(+MessageTask/RenderUnits), then Sprite RenderUnits"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#43 CameraRenderClose + CameraRender(0x418) + FadeDrawTask (+StageTitleTask when loading)",
+    "address": "0x80044E08",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=OnFade; pass=full-screen fade; state=ten 64x480 untextured tri-strips, vertex alpha; optional 109x135 badge quad; reads=fade state 0x80573E54; writes=EFB colour; fade darkens scene+HUD; stage title card and Gindows draw above it"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#44 CameraRenderClose + CameraRender(0x418) + SaveMessageDrawTask",
+    "address": "0x802E61AC",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED (tree) / CODE",
+    "description": "level=Gindows; pass=2D windows; state=flags 0x418; reads=window textures; writes=EFB colour; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#45 CameraRenderClose + CameraMatrix->Reset2D",
+    "address": "0x801D019C",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CODE",
+    "description": "level=SpriteLast; pass=camera restore; state=-; reads=camMgr saved; writes=camera; -"
+  },
+  {
+    "group": "Frame Pass",
+    "name": "#46 RenderStop",
+    "address": "0x801D0250",
+    "type": "function",
+    "access": "hook_point",
+    "confidence": "CONFIRMED",
+    "description": "level=PostRender; pass=present (XFB copy); state=GXSetCopyFilter(aa 0, pattern 6s, vf ON, vfilter {8,8,10,12,10,8,8}) = 1/4,1/2,1/4 vertical deflicker; YScale 1.0; gamma 1.0; clear flag 0; GXFlush; GXCopyDisp(xfb); GXSetDrawSync(token); swap between 2 XFBs; throttles on VI queue; reads=EFB colour 640x480; writes=XFB 640x480 YUV (PAL60 interlaced EURGB60 DF); per frame totals FH: 9 GXCopyTex, 1 GXCopyDisp, 8 clears, 32 camera begins, 89 Im2D, 113 GXBegin, 176.3 GXCallDisplayList, 1061 GX primitives, 9021 triangles"
+  }
+]
