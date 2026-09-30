@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.24)
+project(ShadowTheHedgehogRE LANGUAGES CXX)
+
+option(SHADOW_BUILD_GAMEPLAY "Build the evidence-backed gameplay reconstruction" ON)
+option(SHADOW_BUILD_ASSETS "Build the GameCube asset reader and native conversion code" ON)
+option(SHADOW_BUILD_RUNTIME "Build the experimental native PC resource runtime" ON)
+
+enable_testing()
+if(SHADOW_BUILD_GAMEPLAY)
+  add_subdirectory(gameplay/src)
+endif()
+if(SHADOW_BUILD_ASSETS)
+  add_subdirectory(assets)
+endif()
+if(SHADOW_BUILD_RUNTIME)
+  add_subdirectory(runtime)
+endif()

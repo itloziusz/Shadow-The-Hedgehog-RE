@@ -1,0 +1,66 @@
+{
+  "byte_order": "big-endian",
+  "wgpipe": "0xCC008000",
+  "commands": {
+    "0x00": {"name": "NOP"},
+    "0x08": {"name": "LOAD_CP", "layout": "u8 opcode, u8 reg, be32 value"},
+    "0x10": {"name": "LOAD_XF", "layout": "u8 opcode, be32 header, be32 data[count]"},
+    "0x20": {"name": "LOAD_INDX_A"},
+    "0x28": {"name": "LOAD_INDX_B"},
+    "0x30": {"name": "LOAD_INDX_C"},
+    "0x38": {"name": "LOAD_INDX_D"},
+    "0x40": {"name": "CALL_DL"},
+    "0x44": {"name": "UNKNOWN_METRICS_COMMAND"},
+    "0x48": {"name": "INVALIDATE_VERTEX_CACHE"},
+    "0x61": {"name": "LOAD_BP", "layout": "u8 opcode, be32(reg8:value24)"}
+  },
+  "primitive_opcode": {
+    "mask": "0x78",
+    "vat_mask": "0x07",
+    "bases": {
+      "0x80": "QUADS",
+      "0x88": "QUADS_2",
+      "0x90": "TRIANGLES",
+      "0x98": "TRIANGLE_STRIP",
+      "0xA0": "TRIANGLE_FAN",
+      "0xA8": "LINES",
+      "0xB0": "LINE_STRIP",
+      "0xB8": "POINTS"
+    }
+  },
+  "cp_register_ranges": {
+    "0x50": "VCD_LO",
+    "0x60": "VCD_HI",
+    "0x70-0x77": "VAT_A[0..7]",
+    "0x80-0x87": "VAT_B[0..7]",
+    "0x90-0x97": "VAT_C[0..7]",
+    "0xA0-0xAF": "ARRAY_BASE",
+    "0xB0-0xBF": "ARRAY_STRIDE"
+  },
+  "vertex_component_mode": {
+    "0": "NONE",
+    "1": "DIRECT",
+    "2": "INDEX8",
+    "3": "INDEX16"
+  },
+  "component_format": {
+    "0": "U8",
+    "1": "S8",
+    "2": "U16",
+    "3": "S16",
+    "4": "F32"
+  },
+  "texture_formats": {
+    "0x0": "I4",
+    "0x1": "I8",
+    "0x2": "IA4",
+    "0x3": "IA8",
+    "0x4": "RGB565",
+    "0x5": "RGB5A3",
+    "0x6": "RGBA8",
+    "0x8": "C4",
+    "0x9": "C8",
+    "0xA": "C14X2",
+    "0xE": "CMPR"
+  }
+}
