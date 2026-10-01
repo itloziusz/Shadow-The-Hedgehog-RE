@@ -135,3 +135,100 @@ current global owners are compared. Raw/symbolic patterns remain UNKNOWN.
 `agent_clock_adversarial_semantics.py` provide independent scans and checks;
 source/library paths are required for the source audit. Read
 `../research/CLOCK_RESEARCH_41.md` for pins, actual rollover and exact limits.
+
+## Derived elapsed work and continuous source tracing (research42)
+
+`shadow_boot_clock_research ... research-produced-work` derives elapsed work
+from original apploader/DOL/boot/BI2 bytes and the unchanged native prefix.
+The frontier argument must be `-`; supplied frontier counts, unexplained epoch
+phase and unwitnessed BI2 paths decline. It does not provide a production
+clock. `SOURCE_PENDING_WORK 00000004` records the executed terminal block's
+unretired work rather than silently discarding it for uninterrupted continuation.
+
+`build_timing_trace_oracle.py --help` constructs a passive copied interpreter
+observer, retaining the original source/library read-only. `capture_timing_prefix.py
+--help` records complete initialization, events, instruction retirement and
+bounded MMIO through before80373AC4. A missing closed tail or evidence binding
+declines. `validate_produced_clock.py --help` first checks the independent source
+audit, then compares compiled derived work, region-bounded checkpoint
+occurrences, all clock phases, terminal state, owned memory and ordered writes.
+It rejects348 deliberate output corruptions for each profile. Explicit input,
+toolchain, program, pinned-source/library and private build-output paths are
+required; captured work/heap data never becomes native producer input.
+
+`agent_si_device_falsifier_42.py --help` independently changes only initial
+source device0 to NONE and adds SI/DVD MMIO watches. It pins the unmodified base
+capture function, validates actual configuration/output changes and repeats
+native parity. Explicit loopback bind probing skips excluded/busy Windows
+ports and declines unavailable ranges;15 produced-clock/tool tests cover the
+transport, provenance, occurrence and compiled early-decline cases.
+
+The source/event, raw semantic work, independent falsification and F0/alarm/DEC
+helpers are `agent_timing_source_42.py`, `agent_native_work_42.py`,
+`agent_timing_adversarial_42.py` and `agent_os_timer_42.py`. They report bounded
+evidence and limitations, not promotion. Whole-text `scan_boot_motifs.py` now
+also detects the unsigned global-pointer/call-or-word-clear motif; all scan
+candidates remain UNKNOWN. See `../research/CLOCK_PRODUCTION_RESEARCH_42.md`.
+
+## Finite first-Advance owner and adversarial receipts (research42b)
+
+`shadow_boot_initial_events_tests --dump` executes fresh finite C++ state
+through the unbound live DTK logging read. `--dump-bound-control` runs a
+separate declared-control completion; it supplies no captured queue/deadline.
+GPU effect delivery and Movie/frame-step/achievement/private state remain
+explicit bindings, not inferred from queue equality.
+
+`agent_initial_events_42.py --help` requires the compiled executable SHA,
+source/library, complete original captures and a private build output. It
+checks51 source pins and invokes the complete37-pin source audit before
+comparing exported event/heap state. Fourteen malformed provenance bindings
+and52 corrupted outputs decline per profile. The root regression additionally
+rejects consistently wrong supplied oracle hashes, non-object manifests and
+an unconsumed DOL byte change. `validate_produced_clock.py` now pins the whole
+original PAL DOL before launching either compiled path.
+
+`agent_initial_event_adversarial_42.py` independently checks callback effects,
+trace structure and native outputs. `agent_apploader_entry_42.py` checks the
+three raw Entry words and source producers, while marking their missing
+direct state/store receipt UNKNOWN in that historical audit. These tools
+preserve all older captures and tool identities; source/reference traces
+are never C++ producer inputs.
+
+`../.gitattributes` preserves original bytes for capture-bound research sources.
+They contain the exact newline formats used by the recorded SHA identities;
+Git checkout must not normalize those bytes. This avoids platform-dependent
+provenance failures without weakening any hash gate.
+
+## Producer receipts and typed native diffs (research42c)
+
+`agent_entry_receipt_42.py build|capture|check` adds bounded passive original
+Entry/nested-frame receipts in a copied Interpreter TU. It preserves the
+original fetch, execution and SingleStep/Advance ordering, and records actual
+mapped-byte/store/code-copy ancestry. `compare-native --help` re-executes the
+MSVC frame candidate with original input locations only, reruns an archived
+independent receipt auditor, compares22 snapshots/10 stores, and rejects6066
+type/value/key/arity/omission/mode/input mutations. All build/source/tool
+identities are explicit; native clock/event admission remains false.
+
+`shadow_boot_entry_frames_tests <PAL-DOL-path>` reads original sibling
+apploader/boot/BI2 inputs and runs49 negative gates. Optional
+`--output <build/private.json>` exports the finite frame effects. It stops before812003B8
+and owns no scheduler/clock. Its connector rejects current partial and
+declared-only Complete first-event owners.
+
+`agent_dtk_owner_42.py --help` builds/captures a copied Mixer/Layer observer.
+Both actual producer-off and initial-DumpAudio-enabled runs retain complete
+source/build/queue/instruction ancestry. `--compare-owned-native --help`
+reruns the exact archived capture auditor before comparing the executed C++
+owned DTK state, ordered producer receipts and preserved old-mode bytes.
+769 off and495 enabled mutations decline with exact recursive JSON types.
+Changing a checker does not relabel the earlier capture's tool identity.
+
+`shadow_boot_initial_events_tests --dump-owned-dtk` derives its private false
+logging flag from construction/default configuration, then stops at undelivered
+GPU AllowSleep. `--dump-owned-dtk-enabled` fails earlier on the unowned live
+system dump-state read; it does not skip host time/path/WAV effects.
+`agent_owner_receipt_adversarial_42.py --help` independently checks source and
+observer inverses, link inputs, original receipts and typed native effects.
+Numeric-bool conflation, missing/extra keys and omitted stores now have explicit
+falsifiers. See the three owner-receipt notes for exact scopes and pins.

@@ -48,6 +48,17 @@ not a playable port or a replacement for a legally obtained copy of the game.
   with exact phase/wrap; debugger stepping differs from continuous execution.
   Native elapsed-time/event ownership remains unknown, so production stays
   before `0x80379628`. No host timer or fixed tick is substituted.
+  Research42 now derives pre-entry and prefix work in C++ from original
+  inputs. Three continuous reference profiles agree through `0x80373AC4`
+  without supplying observed elapsed cycles. The remaining gate is an owned
+  native event/device lifecycle, beginning before the apploader entry.
+  Producer-bound DTK research now runs to the undelivered GPU `AllowSleep`
+  effect; the original unbound mode still stops at `Mixer.cpp:253`.
+  Original apploader receipts support an executed eleven-word frame slice
+  through before `0x812003B8`, including ten ordered stores. Both slices
+  reject production admission: worker/async effects, callback lifetime and
+  progressive apploader memory remain proof obligations.
+  See [clock production research42](reverse/boot/research/CLOCK_PRODUCTION_RESEARCH_42.md).
   The 74-word FPR projection also retains its six earlier standalone HLE
   experiments; it is now connected under the bounded native backend.
 - **Evidence and tools:** `gameplay/` contains the address-backed subsystem
@@ -57,8 +68,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **60/60 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime, thirty-one boot).
+The full public-tree MSVC Release gate passed **66/66 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, thirty-seven boot).
 `reverse/boot/PROGRESS.md` records the last
 connected boot checkpoint and first fail-closed stop.
 Some suites require the read-only PAL fixture. The scripted stg0100 Dark

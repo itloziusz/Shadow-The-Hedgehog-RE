@@ -19,6 +19,21 @@ exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
 boot remain UNKNOWN or incomplete.** These fixture-backed components do not
 make a playable game.
 
+Latest research42 connects original apploader work and native prefix work
+to the compiled continuous clock experiment. Three fresh profiles compare
+129 clock phase checkpoints and117 available machine checkpoints, including
+complete endpoint state, without feeding observed frontier cycles into C++.
+Full Release **66/66**, standalone gameplay **27/27**, required route pass.
+Production remains checkpoint40, **before80379628**: the native event/device
+lifecycle is not completely owned. Fresh producer-bound DTK research now
+executes to the undelivered GPU AllowSleep effect. The original unbound mode
+still stops at Mixer.cpp:253. Original Entry/callee receipts support11 native
+words/10 stores through before812003B8; this slice owns no clock/scheduler
+and rejects current incomplete and declared-only Complete event owners.
+Worker/async effects, callback private state and progressive apploader memory
+stay gated. Read `research/CLOCK_PRODUCTION_RESEARCH_42.md`
+first; it records the exact pre-entry blocker, next experiment and decline.
+
 Checkpoint41 is **research**, not a connected frontier advance. The new
 `shadow_boot_clock_research` executes source-derived TB arithmetic and exact
 sampler/retry/offset/EE/return/store effects through before **80373AC4**. Four
@@ -121,6 +136,36 @@ operations may be replaced only after their producers and consumers are traced.
 - `research/CLOCK_RESEARCH_41.md`, `BINARY_CLOCK_PREFIX_41.md` and the three
   `CLOCK_*_AUDIT_41.md` notes — source/units/phase/rollover/consumer evidence,
   executed research parity and the unclosed native clock provider.
+- `research/CLOCK_PRODUCTION_RESEARCH_42.md` and independent
+  `TIMING_SOURCE_AUDIT_42.md`, `TIMING_NATIVE_WORK_42.md`,
+  `TIMING_ADVERSARIAL_42.md`, `OS_TIMER_OWNERSHIP_AUDIT_42.md` — raw-derived
+  elapsed work, pre-entry phase, queue/callback recurrence, F0 and timer evidence.
+- `research/INITIAL_EVENT_OWNER_42.md`, `INITIAL_EVENT_ADVERSARIAL_42.md`,
+  `APPLOADER_ENTRY_OWNER_42.md` — finite native first-Advance effects,
+  independent counterexamples and the historical missing pre-entry receipts.
+- `research/APPLOADER_ENTRY_RECEIPT_42.md`, `DTK_OWNER_RECEIPT_42.md`,
+  `OWNER_RECEIPT_ADVERSARIAL_42.md` — passive original producers/consumers,
+  executed native research, exact typed state diffs and GPU counterexample.
+- `include/shadow/boot/InitialBootEvents.hpp`, `src/InitialBootEvents.cpp` —
+  finite research owner with explicit live branch/effect bindings and an
+  immutable partial stop; not connected to the production boot runner.
+- `include/shadow/boot/ApploaderEntryFrames.hpp`, `src/ApploaderEntryFrames.cpp`
+  — original-byte-gated11-word frame reconstruction, private64-byte storage,
+  ordered live-register spills and an explicitly closed production connector.
+- `include/shadow/boot/ApploaderElapsedWork.hpp`, `BootElapsedWork.hpp` and
+  their `src/` implementations — finite semantic work producers, explicit
+  conditional premises, raw input gates and no runtime opcode interpreter.
+- `tools/build_timing_trace_oracle.py`, `capture_timing_prefix.py` — private
+  copied passive observer and strictly closed continuous capture.
+- `tools/validate_produced_clock.py` — all clock phases, occurrence-bounded
+  machine state, ordered original stores and adversarial differential checks;
+  does not admit a native event owner or promote a checkpoint.
+- `tools/agent_initial_events_42.py`, `agent_initial_event_adversarial_42.py`,
+  `agent_apploader_entry_42.py` — complete capture admission before event
+  subset comparison, independent falsification, raw/source Entry proof gates.
+- `tools/agent_entry_receipt_42.py`, `agent_dtk_owner_42.py`,
+  `agent_owner_receipt_adversarial_42.py` — independently bound build/source
+  receipts, native execution/comparison and typed mutation/omission rejection.
 - `include/shadow/boot/TimeBaseSemantics.hpp`, `src/TimeBaseSemantics.cpp` —
   pure counter/carry/CR semantics and explicitly separate SingleStep projection.
 - `tools/capture_clock_state.py`, `validate_clock_research.py` — producer/phase,

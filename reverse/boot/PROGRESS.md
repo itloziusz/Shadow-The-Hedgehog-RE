@@ -5,6 +5,46 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-10-01 — research42c: producer-bound DTK and Entry frames; connected frontier stays40
+
+| Field | Result |
+|---|---|
+| Last validated connected checkpoint | Unchanged checkpoint40: before **80379628**, `LIVE_TIME_BASE_UNRESOLVED`. No host clock or production promotion. |
+| New executed owners | Fresh DTK constructor/configuration/closed-ingress C++ produces its own logging state and stops before **BlockingLoop.h:233**, undelivered GPU AllowSleep. Original-byte-gated Entry frames execute11 words/10 ordered stores to **before812003B8**, without a clock/scheduler owner. Current incomplete AND declared-only Complete event owners cannot connect that slice. |
+| Original receipts | Entry8 rows/224 fields/two stores and nested18 rows/612 fields/eight spills; actual fresh clear/code copy/mapping/store ancestry. DTK baseline and genuine startup-enabled control retain1291 exported queue/device records and exact original instruction stream. Independent receipt falsification rejects237+628+154+188 mutations. Source-only reset fields are distinguished from observed fields. |
+| Native validation | DTK tests41 declines; frame tests49. Author DTK strict diffs reject769+495 mutations; independent992. Author frame22 snapshots/10 stores reject6066; independent3410. Earlier4232/9030-byte event dumps remain byte-identical. Complete three-profile event admission reruns before subset comparisons. |
+| Root cause / fixes | Enabled dumping reaches unowned IsAudioDumpStarted at AudioCommon.cpp78 before host-time/path/WAV effects; the model now stops there. Python bool/numeric equality could admit invalid output types; strict recursive types/keys/list arity plus bool substitutions and omissions now reject them. Capture-bound source bytes are preserved across Git checkout. |
+| Preserved clock parity | All three complete entry-to-clock comparisons rerun after the new owners:117 selected machine checkpoints,129 clock checkpoints,4911 fields,312 bytes,12 stores,1044 output declines. Old clock/prefix executables are byte-identical. Research still stops before80373AC4 with pending4; physical elapsed equivalence and native lifecycle remain UNKNOWN. |
+| Genuine unresolved dependency | GPU AllowSleep is consumed by the live worker's TestAndClear; its payload pulls AsyncRequests before pause and can publish CP interrupts. A dummy local atomic does not preserve those effects. Need exact instance/lifetime, original store/consume results and async/CP ancestry. Movie/frame-step/achievement, SI and progressive memory remain separate; next frame range is callback publication at812003C4. |
+| Full regression | Final MSVC Release **66/66 CTest**, standalone gameplay **27/27**, exact required Dark mission ->stage index6. Earlier sync/L2/CRT/BI2 implementation, runtime, decline and pixel gates preserved. No first-frame claim. |
+| Continue | Read `CLOCK_PRODUCTION_RESEARCH_42.md`, `DTK_OWNER_RECEIPT_42.md`, `APPLOADER_ENTRY_RECEIPT_42.md` and `OWNER_RECEIPT_ADVERSARIAL_42.md`. Capture the original worker results without new atomic loads or forced stores; preserve input/thread ancestry. Do not turn finite research predicates or queue equality into a production certificate. |
+
+## 2026-10-01 — research42b: finite first-event owner; connected frontier stays40
+
+| Field | Result |
+|---|---|
+| Last validated connected checkpoint | Unchanged checkpoint40: `shadow_boot_native_bi2` stops before **80379628**, `LIVE_TIME_BASE_UNRESOLVED`. No host timing or production promotion. |
+| Executed new owner | `InitialBootEventOwner` creates fresh queue/state and executes first Advance to **Mixer.cpp:253**, live DTK log read, preserving prior effects and active callback. Separately declared controls complete DTK/GPU/DSP/VI; that control is conditional research, not live-state ownership. |
+| Complete admission/parity | All three original42d references pass the complete37-pin lifecycle/instruction/MMIO/environment/closure audit first. Per profile: unbound11 records/84 exported fields; declared control26/200;52 corrupted outputs and14 malformed bindings decline.51 source pins; unseen device interiors are explicitly excluded. |
+| Independent falsification |30 source gates,1620 event-field/deletion mutations, six malformed closures and535 compiled output mutations reject. Alternative Movie states have the same queue, proving event parity alone cannot certify callback side state. |
+| Genuine bugs fixed | External exception mask corrected10->4 with nonzero set/clear tests retaining other flags. VI even-edge off-by-one corrected to1045/1044 with assertions. Capture gate rejects consistently wrong oracle identities and non-object manifests. Whole-DOL identity rejects an unconsumed-byte change; all three clock comparisons rerun. |
+| Exact unresolved dependency | Live DTK log/WAV lifecycle, then GPU worker delivery, Movie/frame-step and achievement client/DLL lifetime. The original Entry first-three stores lack direct receipts; later19-callback stack reuse cannot prove them. SI and progressive memory/event ownership remain separate. |
+| Full regression | Final MSVC Release **65/65 CTest**; standalone gameplay **27/27**, exact required Dark mission ->stage index6. Recognizer37/37 and produced-clock tools15/15. Earlier sync/L2/CRT/BI2, runtime and pixel requirements preserved. |
+| Continue | Read `research/CLOCK_PRODUCTION_RESEARCH_42.md`, `INITIAL_EVENT_OWNER_42.md`, `INITIAL_EVENT_ADVERSARIAL_42.md` and `APPLOADER_ENTRY_OWNER_42.md`. Capture live producers/reads, reconstruct only admitted effects, retain pending4, rerun complete parity before any frontier promotion. |
+
+## 2026-10-01 — research42: native derived work and continuous clock parity; connected frontier stays40
+
+| Field | Result |
+|---|---|
+| Last validated connected checkpoint | Unchanged checkpoint40: `shadow_boot_native_bi2` stops before **80379628**, `LIVE_TIME_BASE_UNRESOLVED`. Research42 is not a production promotion. |
+| Executed new path | `research-produced-work` derives original apploader N=2656493, fresh source phase20000 and native prefix work154130/154246, then executes the continuous clock/EE/store/return slice to before **80373AC4**. No observed frontier count, tick output, trace, queue snapshot or host timing is an input. |
+| Differential evidence | Three fresh captures, including paused and enabled-L2 cases:129 complete clock phase/cache/global checkpoints,117 available machine-state checkpoints,4911 fields,312 owned terminal bytes,12 ordered original stores.17 inner prefix observations per profile lack native checkpoint granularity and are explicitly not counted.1044 output mutations decline. |
+| Production dependency | Earliest missing native owner is DVD's due0/FIFO0 DTK callback on the first Advance, before81200258; VI0->1 also clears PI VI cause and enters NewField/Movie. The conditional factory creates no event/device/guest-store lifecycle. Native SI poll/control/output ownership and live ingress remain unresolved. Source opinfo costs are not physical Gekko timing. |
+| Root causes / fixes | Truncated passive trace rejected and closed-tail capture enforced. Validator stopped borrowing a later call's same-PC checkpoint. Empty BI2 checkpoint `.back()` after unknown CRT handler now declines cleanly. Regressions cover each bug and unexplained initial globals/phase. |
+| Tooling and downstream research |65 native semantic work units,524 raw/data gates;25 paths/557 compiled work declines;31 apploader negative gates.37 source pins, complete queue/callback replay,14110 independent stream mutation rejects. Whole-text F0/copy/DEC/alarm/descriptor audit passes. Fresh GC F0 zero producer is MemoryManager.Clear, not the Wii-only store. |
+| Full regression | Release **64/64 CTest**, standalone gameplay **27/27**, exact Dark mission ->stage index6. Earlier sync/L2/CRT/BI2 implementation, runtime and pixel requirements preserved. No first frame/pixel completion claim. |
+| Next | Read `research/CLOCK_PRODUCTION_RESEARCH_42.md`. Construct native fresh event/device initialization and first Advance, validate exact DTK/GPU/DSP/VI state/order; then own SI controls and preserve unknown input until consumed. Carry pending4 correctly for uninterrupted continuation. F0/alarms are static evidence until their connected gates pass. |
+
 ## 2026-10-01 — checkpoint41 research: clock provenance, real rollover; connected frontier stays40
 
 | Field | Result |

@@ -4,6 +4,82 @@
 
 ---
 
+## Checkpoint35 — 2026-10-01 (producer receipts, owned DTK and finite Entry frames)
+
+- Production remains checkpoint40, **before80379628**. Research42c adds
+  producer-bound original apploader stack receipts and fresh DTK lifecycle
+  reconstruction. No host timer or production frontier is admitted.
+- Executed owned DTK C++ now reaches **BlockingLoop.h:233**, before the
+  undelivered GPU AllowSleep effect. Constructor/default-config producers
+  create the false logging state; no observed flag is an input. Enabled
+  logging stops earlier at **AudioCommon.cpp:78**, unknown IsAudioDumpStarted.
+- Original Entry and nested call receipts now prove the register transitions
+  and ordered stores. Executed C++ reconstructs11 words/10 stores through
+  **before812003B8**. It owns no scheduler/clock and rejects every current
+  native first-Advance connection, including declared-only Complete.
+- Native event tests pass41 declines; frame tests pass49. Both earlier event
+  dumps are byte-identical. Author and independent comparisons pass with
+  exact scalar types, keys, arity and omission rejection. Three complete
+  entry-to-clock comparisons rerun:117 machine/129 clock checkpoints,
+  4911 fields,12 stores and1044 mutation declines; production stays40.
+- Full Release **66/66**, standalone gameplay **27/27**, exact
+  `RESULT: Dark mission cleared -> next stage index 6 (stg0200)`.
+- Read `APPLOADER_ENTRY_RECEIPT_42.md`, `DTK_OWNER_RECEIPT_42.md` and
+  `OWNER_RECEIPT_ADVERSARIAL_42.md`. GPU's actual flag is consumed by a live
+  worker which pulls async requests and can publish CP interrupts; a local
+  dummy atomic is insufficient. Next capture its instance/store/consume and
+  async/CP ancestry. Frame publication at812003C4 needs low-memory ownership.
+- Keep GPU/Movie/frame-step/achievement lifetime, progressive RAM/SI/event
+  ownership and physical elapsed conversion UNKNOWN until their gates pass.
+  Preserve pending4, earlier sync/L2/CRT/BI2 and every runtime/pixel gate.
+
+## Checkpoint34 — 2026-10-01 (finite first-event owner; exact live-state stop)
+
+- Read boot `PROGRESS.md` research42b and
+  `research/CLOCK_PRODUCTION_RESEARCH_42.md` first. Production remains
+  **before80379628**, checkpoint40. Derived-work clock research still matches
+  three complete captures through before80373AC4; no host timer is admitted.
+- A finite C++ first-event owner now creates initial state/queue and runs to
+  **Mixer.cpp:253**, before the unknown DTK audio-log read. Declared controls
+  complete the first Advance separately; Movie/GPU/DSP/PI/private side state
+  stays conditional. Three complete audits validate exported event/heap
+  parity and reject52 output corruptions/14 malformed bindings per profile.
+- Final Release **65/65**, standalone gameplay **27/27**, exact
+  `RESULT: Dark mission cleared -> next stage index 6 (stg0200)`.
+  Independent adversarial event and apploader-entry audits cross-check the
+  author; exception-bit and VI-edge errors now have native regressions.
+- Next bind live DTK log/WAV producers and reads, then GPU effect delivery,
+  Movie/frame-step and achievement lifetime. Direct first-three apploader
+  state/store receipts are missing; late reused stack bytes cannot prove them.
+  Progressive RAM/SI/event ownership and physical timing stay UNKNOWN.
+  Preserve pending4 and all prior sync/L2/CRT/BI2, runtime and pixel gates.
+
+## Checkpoint33 — 2026-10-01 (derived elapsed work; native event ownership is the gate)
+
+- Read boot `PROGRESS.md` research42 and
+  `research/CLOCK_PRODUCTION_RESEARCH_42.md` first. Production remains
+  **before80379628**, checkpoint40. C++ now derives original apploader
+  elapsed work and prefix work and matches continuous clock effects through
+  before80373AC4 without accepting a measured frontier cycle count.
+- Three captures match129 clock phase/cache/global checkpoints,117 selected
+  machine checkpoints,4911 fields and12 ordered original stores;1044 output
+  corruptions decline.17 inner prefix observations per profile are explicitly
+  unavailable native checkpoint granularity.65 raw-gated work units and31
+  apploader negative gates pass; independent stream checks reject14110 mutations.
+- Full Release **64/64**, standalone gameplay **27/27**, exact
+  `RESULT: Dark mission cleared -> next stage index 6 (stg0200)`.
+  Earlier sync/L2/CRT/BI2 code and gameplay code/hooks remain unchanged.
+- Exact blocker precedes the apploader: first Advance's DTK/GPU/DSP/VI
+  lifecycle has no native owner. SI control/masks/poll outputs, DVD pending
+  blocks and progressive visibility must be carried, not copied from a trace.
+  Source virtual work is not physical Gekko elapsed time. No host clock admitted.
+- New strict tools fix truncated tails, same-PC borrowing across call regions
+  and an empty-checkpoint CLI access. Next own fresh initialization + first
+  Advance and reproduce its ordered state; then connect SI inputs and retain
+  pending4 for continuation. F0 zero is proven only for fresh GC Clear; the
+  unsigned28-byte copy and timer/alarm/DEC chains have static address evidence.
+  Preserve all retail/runtime/first-frame/pixel gates.
+
 ## Checkpoint32 — 2026-10-01 (clock research; production boot remains checkpoint40)
 
 - Read boot `PROGRESS.md` research41 and `research/CLOCK_RESEARCH_41.md` first.

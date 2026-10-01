@@ -8,10 +8,14 @@ or source-code generator.
 Current immutable connected frontier: **80379628**, before a live time-base
 read (checkpoint40). The legacy request-only frontier remains80371730.
 `../tools/scan_boot_motifs.py` now scans all original text for bitfield-checked
-EE, eight-word fill, high/low/high clock and unsigned low-tick deadline motifs, storing UNKNOWN candidates.
+EE, eight-word fill, high/low/high clock, unsigned low-tick deadline and global
+pointer/unsigned-threshold/call-or-word-clear motifs, storing UNKNOWN candidates.
 Two clock sampler, one low-tick deadline and two fill matches do not imply shared callers or validated
 clock state. Four new scoped solved seeds support later recognition; current
-raw/symbolic/proof tests35/35 pass. Stale evidence cannot survive changed raw
+raw/symbolic/proof tests37/37 pass. The new pointer motif preserves the loaded
+global, unsigned comparison, exact CFG, call argument dependencies and partial
+word clear. Its one whole-text match at80373AC0 neither proves a readable
+pointer nor identifies its callee. Stale evidence cannot survive changed raw
 bytes/binary/range; CTR, conditional-return, insert and XER.SO dependencies
 remain explicit. Shared shape and packed-register gates reject UNKNOWN data.
 

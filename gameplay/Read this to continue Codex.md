@@ -11,7 +11,69 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint32, 2026-10-01)
+## Current continuation (checkpoint35, 2026-10-01)
+
+Read boot `PROGRESS.md` research42c and
+`research/CLOCK_PRODUCTION_RESEARCH_42.md` first. Production remains
+**before80379628**, checkpoint40. No host timing or elapsed provider is
+admitted. The owned fresh DTK path stops before GPU AllowSleep; enabled
+audio dumping stops at the earlier unowned IsAudioDumpStarted read.
+
+Read `DTK_OWNER_RECEIPT_42.md`, `APPLOADER_ENTRY_RECEIPT_42.md` and the
+independent `OWNER_RECEIPT_ADVERSARIAL_42.md`. The C++ Entry slice now
+reconstructs11 words/10 stores through before812003B8, with private64-byte
+storage and source-derived reset state. It owns no clock/scheduler and
+rejects current partial AND declared-only Complete event owners. Reference
+timing observations are not native inputs or falsely compared fields.
+
+Full root **66/66**, standalone gameplay **27/27**, exact required route.
+All three complete entry-to-clock comparisons rerun; prior sync/L2/CRT/BI2
+source is unchanged. Exact typed diffs fix Python bool/numeric conflation.
+Next bind GPU worker instance/lifetime, existing store/consume results,
+async requests and CP interrupt publication. Then Movie/frame-step and
+achievements, progressive low-memory callback publication, SI and event
+ownership. Keep physical elapsed equivalence, F0/alarms and pending4 gated;
+preserve every runtime, decline, parity and pixel requirement.
+
+## Previous continuation (checkpoint34, 2026-10-01)
+
+Read boot `PROGRESS.md` research42b and
+`research/CLOCK_PRODUCTION_RESEARCH_42.md` first. Production remains
+**before80379628**, checkpoint40. Derived-work C++ clock parity to80373AC4
+is unchanged. The new finite first-event owner executes to **Mixer.cpp:253**,
+before consuming unknown DTK logging state. Its complete declared-control
+run is conditional research, not a production provider. All three original
+captures pass the full source admission audit before exported event/heap
+comparison. Root **65/65**, standalone gameplay **27/27**, required route.
+
+Read `INITIAL_EVENT_OWNER_42.md`, `INITIAL_EVENT_ADVERSARIAL_42.md` and
+`APPLOADER_ENTRY_OWNER_42.md`. Next obtain producer-bound DTK log/WAV
+receipts, GPU delivery and Movie/frame-step/achievement lifetime; then prove
+the original Entry's first-three register/store transitions. Late reused
+stack bytes cannot certify those stores. No guessed queue/state, host clock
+or hidden exception is admitted. Preserve pending4 and every earlier
+sync/L2/CRT/BI2, runtime, decline and pixel requirement.
+
+## Previous continuation (checkpoint33, 2026-10-01)
+
+Read boot `PROGRESS.md` research42 and
+`research/CLOCK_PRODUCTION_RESEARCH_42.md` first. The produced-work C++ mode
+derives2656493 apploader steps and154130/154246 prefix work from original
+inputs; three continuous captures agree through before80373AC4, with no
+observed frontier cycles supplied.129 clock phase checkpoints,117 selected
+machine checkpoints,4911 fields,1044 output declines; root **64/64** and
+standalone gameplay **27/27**, exact required route.
+
+Production is still **before80379628**, checkpoint40. The first missing
+native ownership is the pre-entry event/device lifecycle: first Advance's
+DTK/GPU/DSP/VI effects, SI poll/control/input state and progressive memory.
+The conditional apploader factory counts work but creates none of that state.
+Read the four independent42 audits. Own fresh initialization + first Advance
+before admitting a clock provider; carry pending4 for uninterrupted continuation.
+Fresh GC Clear produces F0 zero, but no default is valid for restored/retail
+state. Preserve existing sync/L2/CRT/BI2, runtime and pixel gates.
+
+## Previous continuation (checkpoint32, 2026-10-01)
 
 Read boot `PROGRESS.md` research41 and `research/CLOCK_RESEARCH_41.md` first.
 Connected native remains **before80379628**, checkpoint40. Clock ISA/source,

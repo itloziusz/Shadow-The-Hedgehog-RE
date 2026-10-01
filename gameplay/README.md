@@ -13,12 +13,17 @@ maintains the root modules listed in its README. Game inputs remain read-only an
 
 **Handing over to another agent (e.g. Codex)?** Read `Read this to continue Codex.md` first. A paste-ready prompt with agent workstreams is in `CODEX_NAVIGATION_PROMPT.md`.
 
-Latest coordination: handoff32 / boot research41 proves clock semantics and
-actual rollover retries in an executed projection, through before80373AC4.
-Connected production stays checkpoint40, before80379628, until elapsed-time
-and event ownership are proven. Root Release60/60, standalone gameplay27/27
+Latest coordination: handoff35 / boot research42c derives original apploader
+and native prefix elapsed work and matches continuous clock state through
+before80373AC4 without accepting observed frontier cycles.
+Connected production stays checkpoint40, before80379628, until native
+event/device ownership is proven. Owned DTK research now stops before the
+live GPU worker effect; original Entry receipts validate the finite C++
+frame slice through before812003B8. Complete declared controls remain
+conditional, and the frame connector rejects them.
+Root Release66/66, standalone gameplay27/27
 and the required stage route pass; gameplay code/hooks remain unchanged.
-See `../reverse/boot/research/CLOCK_RESEARCH_41.md` and `PROGRESS.md`.
+See `../reverse/boot/research/CLOCK_PRODUCTION_RESEARCH_42.md` and `PROGRESS.md`.
 
 ## Documents
 

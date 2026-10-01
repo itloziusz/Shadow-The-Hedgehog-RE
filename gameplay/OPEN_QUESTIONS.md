@@ -39,3 +39,21 @@ Priority: P1 blocks faithful native behaviour · P2 affects tuning/fidelity · P
 - SET param type codes 1 Sint32, 2 Uint32, 3 Hex, 4 Single (the DOL's own "Sample" object).
 - Stage number ↔ stage index = row of the stage table 0x804C5AE8.
 - Enemy type ids 0–14 (except 9) resolved by constant propagation through base-ctor chains.
+
+## Boot coordination, research42c
+
+Gameplay questions above are unchanged. **PROVEN reference / conditional
+native work:** original apploader and prefix work now produce the correct
+40.5MHz source clock phase through80373AC4 without observed frontier counts.
+Fresh source-bound DTK lifecycle now reaches the GPU AllowSleep effect;
+enabled dumping fails at the earlier live system dump-state read. Original
+Entry/callee receipts support11 native words/10 ordered stores through
+before812003B8. The frame model owns no scheduler and refuses a connection
+from current declared-only Complete event owners.
+**UNKNOWN native ownership:** live GPU worker/async/CP effects,
+Movie/frame-step/achievement lifetime, general log/WAV ingress, SI poll/input
+and progressive device/memory state. Production remains before80379628.
+Fresh GC memory Clear is the source of zero at800030F0; restored/retail
+ownership, ordered copy extents and live alarm/DEC/callback consumers remain
+gated. See `../reverse/boot/research/CLOCK_PRODUCTION_RESEARCH_42.md` and boot
+`OPEN_QUESTIONS.md` for exact addresses, evidence and next tests.

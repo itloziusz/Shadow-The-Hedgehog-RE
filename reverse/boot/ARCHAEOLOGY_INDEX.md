@@ -9,6 +9,17 @@ mode and does not establish retail pre-entry state.
 
 ## Evidence ladder
 
+Latest research42 adds independent original apploader and prefix work producers,
+continuous clock phase/cached/global parity and a complete event lifecycle audit.
+See `research/CLOCK_PRODUCTION_RESEARCH_42.md`: the source-specific arithmetic
+connection is executed. Producer-bound fresh DTK research stops before GPU
+AllowSleep; the unbound mode still stops before the live DTK logging read.
+Original Entry/callee receipts now validate an11-word native frame slice.
+Neither slice nor declared-control completion establishes a complete native
+event/device owner or a clock/scheduler connection.
+Production remains before80379628. F0/copy/alarm/DEC facts are static or
+conditional-source evidence until their connected execution gates pass.
+
 For each region, record: file offset and VA; four raw bytes and BE word;
 encoding class and fields; independently decoded PPC instruction; CFG edge;
 register, SPR and memory input provenance; ordered state and memory effects;
@@ -39,13 +50,15 @@ The checked regions are bounded; this is not complete boot coverage.
 | Cache and selector1 handler paths — CPU/OS | yes, 305 words | L2 predicates/reads, EE masks, registry and real epilogues checked | varied inputs; independent reference comparisons | bounded owner connected through hardware return | `NATIVE_L2_COMPLETION_38.md`, `NATIVE_CRT_COMPLETION_39.md` and audits. Explicit old-slot input; unknown stops at803733B4. No physical cache, retail or asynchronous delivery claim. |
 | CRT entry/walker/fill leaf and descriptors — CRT/memory | yes, 111 instruction and41 descriptor words | exact identity descriptors, zero-group/remainder and carry | full three ranges, hostile seeds and boundary canaries | connected from entry through80003188 | `NATIVE_CRT_COMPLETION_39.md`:153 original new points,1473816 full byte comparisons,102 ordered stores. Repeated in all six checkpoint40 profiles. No blanket BSS zero. |
 | BI2/debug/relocation/metadata `80003188..3264` — CRT/metadata | yes, registered ledger | two fresh reads, all admitted branch/alias/CTR effects | six complete live-blob profiles; resolved context stop | connected ordinary/debug4 paths | `BINARY_BI2_OS_PREFIX_40.md`, `NATIVE_BI2_COMPLETION_40.md`, two independent audits. New191 points/22156 fields/1564672 BI2 bytes. Debug2/3 and null fallback stop before unknown effects. |
-| OS/clock prologues — OS/EE | yes, registered ledger plus static later clock record | produced guard, applied frames, EE disable | connected state and stack aliases | through80379628, before first TBU | `NATIVE_BI2_COMPLETION_40.md`, `OS_ENTRY_NEXT_BOUNDARY.md`. Live ticks/units/rollover, offset800030D8/DC, later OS/device responses remain UNKNOWN. Two sampler fingerprints are structural only. |
-| Clock sampler/offset/return/store and next frame — timing/OS | yes,71 words plus complete loaded-text inventory | exact TB halves, signed CR/SO, carry, MSR and aliases | four reference profiles with full64 and signed-high retry; continuous schedule falsifies step substitution | research projection only,182 CP; production remains80379628 | `CLOCK_RESEARCH_41.md` and three independent audits. Before80373AC4 in the research projection; native elapsed/event provider and800030F0 pointer still UNKNOWN. |
+| OS/clock prologues — OS/EE | yes, registered ledger plus static later clock record | produced guard, applied frames, EE disable | connected state and stack aliases | through80379628, before first TBU | `NATIVE_BI2_COMPLETION_40.md`, `OS_ENTRY_NEXT_BOUNDARY.md`. Research41/42 proves bounded clock units/wrap/phase and offset consequences; production source ownership and later OS/device responses remain UNKNOWN. |
+| Clock sampler/offset/return/store and next frame — timing/OS | yes,71 words plus complete loaded-text inventory | exact TB halves, signed CR/SO, carry, MSR and aliases | four rollover/stepped profiles; three continuous derived-work captures | research41:182 CP; research42:129 clock/117 machine CP; production remains80379628 | `CLOCK_RESEARCH_41.md`, `CLOCK_PRODUCTION_RESEARCH_42.md` and independent audits. Before80373AC4 in research. Native event/progressive-memory ownership and physical elapsed conversion remain UNKNOWN. Fresh source Clear owns F0 zero conditionally, not for restored/retail state. |
+| Original apploader Entry81200258..260 and nested8120039C..3B4 — pre-entry/runtime | yes,11 words plus next raw boundary | SP/LR/store operands, call target and ascending stmw | first-three8 rows/224 fields; nested18 rows/612 fields;10 ordered stores, clear/code/mapping provenance | executed finite research22 snapshots/10 stores; no clock/scheduler; native connector closed | `APPLOADER_ENTRY_RECEIPT_42.md`, `OWNER_RECEIPT_ADVERSARIAL_42.md`. Before812003B8; next unowned range is callback publication at812003C4. Current event Complete is declared-only. Reset extras are source-derived, not separately observed. |
+| Fresh source first Advance — reference timing/device boundary | source/library pins, not DOL game code | due/FIFO queue and callback branch/effect chains | complete capture audit; exported init/queue/VI rows; DTK ctor/writer/read/config receipts | owned fresh DTK stops GPU AllowSleep; original unbound stops Mixer.cpp:253; declared-control completion only | `DTK_OWNER_RECEIPT_42.md`, `INITIAL_EVENT_OWNER_42.md`, independent audits. Live worker/async/CP, Movie/frame-step/achievement ownership remains UNKNOWN. Enabled dump stops at IsAudioDumpStarted before host time/WAV. No source hardware callback is promoted to native game behavior. |
 | Constructor walker `0x803796AC..0x8037971C` and table — C++ runtime/game | partial | yes for walker and first 16 bodies; bounded structural scan of 16–281; exact global-copy graph for eight NPC MotionImpl bodies | no | bounded copy projection only | `ASM_CONSTRUCTORS.md`, `CONSTRUCTOR_NEXT_TARGETS.md`, `SEMANTIC_RECOGNIZER_33.md`, `MOTION_TABLE_CONSTRUCTORS_34.md`; 282 static table pointers checked. Live targets, source values, entry/return deltas and connected effects remain unresolved. |
 | RenderWare, GX, audio and game application transition — middleware/game | partial | partial | no | no | `research/CRT_TO_GAME.md` and other subsystem docs are navigation only until binary-first region records and connected tests exist. |
 
 The next connected immutable native work starts at `0x80379628`, before the
-first live time-base read. Read research41 and checkpoint40 together. Clock
+first live time-base read. Read research42c, research41 and checkpoint40 together. Clock
 research does not promote this frontier: prove the native source-time/event
 contract before coding a connected continuation.
 The older request-only profile still stops at `0x80371730`; its HLE DCFI
