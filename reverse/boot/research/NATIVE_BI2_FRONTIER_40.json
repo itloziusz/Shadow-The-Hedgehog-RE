@@ -1,0 +1,14 @@
+{
+  "binary_sha256":"fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af",
+  "frontier_name":"connected_immutable_native_boot",
+  "previous_stop":"0x80003188",
+  "next_stop":"0x80379628",
+  "raw_decode":"95 pinned BI2/OS/clock/stop words; registered byte/offset/19-branch/4-SPR ledger; independent100-word decode including reused EE leaf and14-word loader producer",
+  "data_flow":"complete original live8192-byte BI2; two fresh F4 reads; exact debug/relocation/CTR/arena paths; coherent CRT-owned SDA; produced first-call guard; actual stack and EE leaf effects",
+  "reference_state":"six pre-entry profiles;191 new checkpoints;22156 state fields;18536 known stack bytes;1564672 BI2 bytes;83 word/two byte effects; independent native replays and124 result mutations; no mid-chain writes",
+  "native_replay":"NativeBi2Prefix calls unchanged prior runners from80003154; only measured pre-entry pointer/fullblob added; five profiles stop before first TBU80379628 anddebug2 stops before800031F4",
+  "regression":"56/56 complete MSVC Release CTest; standalonegameplay27/27 andrequiredroute;95 raw mutations; both L2E branches, same-owner aliases, carry/CR/CTR, null/unknown/partial/overflow/extent declines; all prior gates intact",
+  "scope":"closed immutable owner; complete measured aligned BI2 disjoint from existing owners; bounded owned relocation array; ordinary debug or proven debug4 byte leaf; no asynchronous writer/interrupt source",
+  "unresolved_side_effects":[],
+  "excluded_unresolved_profiles":["unknown pointer/blob","zero-pointer arena fallback","debug2/3 context-transfer effects","retail/hardware timing","external/asynchronous writers","live time-base producer/units/rollover andoffset800030D8/DC","later OS/device/constructors/game andpixel parity"]
+}

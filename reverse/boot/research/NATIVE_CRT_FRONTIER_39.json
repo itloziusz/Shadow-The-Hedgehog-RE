@@ -1,0 +1,14 @@
+{
+  "binary_sha256":"fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af",
+  "frontier_name":"connected_immutable_native_boot",
+  "previous_stop":"0x80372904",
+  "next_stop":"0x80003188",
+  "raw_decode":"216 pinned continuation words; independent handler/CRT audits and existing raw ledgers",
+  "data_flow":"opaque slot read/store, exact EE masks, applied saved stack bytes, immutable descriptor ownership, ascending three zero fills and XER.CA; all aliases preserved",
+  "reference_state":"three perturbed full-entry HLE runs;153 new CP/17598 fields/13324 known stack byte comparisons/1473816 full cleared bytes/102 ordered stores; independent comparison agrees",
+  "native_replay":"unchanged checkpoint38 runner from80003154 then NativeCrtPrefix; only opaque pre-entry old-handler word added; no intermediate state or postcondition inputs",
+  "regression":"53/53 full MSVC Release CTest; gameplay27/27 plus requiredroute;216 raw/data mutations;32 recognizer and25 state-shape cases; all original sync/L2 gates preserved",
+  "scope":"closed immutable private owner; selector1; known old-slot word; no asynchronous source/external writer; exact PAL identity-copy/aligned zero descriptors",
+  "unresolved_side_effects":[],
+  "excluded_unresolved_profiles":["unknown old-slot word","EE1 connected interrupt delivery","retail/physical cache/timing","external descriptor writers","relocated copy or unaligned/short/nonzero fill","BI2 and later OS/constructor/game/pixel state"]
+}

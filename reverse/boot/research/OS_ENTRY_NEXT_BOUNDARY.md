@@ -1,5 +1,11 @@
 # PAL OS first-call clock boundary, binary-first audit
 
+Current continuation: checkpoint40 (`NATIVE_BI2_COMPLETION_40.md`) now validates
+the connected OS/clock prologues and EE-disable leaf through **80379628**,
+before the first live time-base read. The static clock body below still needs
+tick/offset producer, rollover, carry and downstream-consumer validation.
+Statements about the earlier sync stop describe this historical audit's scope.
+
 Scope: the first-call prefix of `0x80370E68`, its direct clock helper
 `0x80379648..0x803796A8`, stable time-base reader `0x80379628..3C`,
 and the two interrupt-state leaves `0x8037611C..2C` and

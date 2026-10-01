@@ -1,6 +1,8 @@
 add_library(shadow_boot_foundation STATIC src/BootFoundation.cpp src/ApplicationLoop.cpp src/FprSeedProjection.cpp
     src/NativeBootPrefix.cpp
     src/NativeL2Prefix.cpp
+    src/NativeCrtPrefix.cpp
+    src/NativeBi2Prefix.cpp
     src/ConstructorTableProjection.cpp)
 target_compile_features(shadow_boot_foundation PUBLIC cxx_std_17)
 target_include_directories(shadow_boot_foundation PUBLIC include)
@@ -21,6 +23,14 @@ add_executable(shadow_boot_native_l2 tools/native_l2_probe.cpp)
 target_link_libraries(shadow_boot_native_l2 PRIVATE shadow_boot_foundation)
 add_executable(shadow_boot_native_l2_tests tests/test_native_l2.cpp)
 target_link_libraries(shadow_boot_native_l2_tests PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_native_crt tools/native_crt_probe.cpp)
+target_link_libraries(shadow_boot_native_crt PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_native_crt_tests tests/test_native_crt.cpp)
+target_link_libraries(shadow_boot_native_crt_tests PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_native_bi2 tools/native_bi2_probe.cpp)
+target_link_libraries(shadow_boot_native_bi2 PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_native_bi2_tests tests/test_native_bi2.cpp)
+target_link_libraries(shadow_boot_native_bi2_tests PRIVATE shadow_boot_foundation)
 add_executable(shadow_boot_fpr_seed_tests tests/test_fpr_seed_projection.cpp)
 target_link_libraries(shadow_boot_fpr_seed_tests PRIVATE shadow_boot_foundation)
 
@@ -51,6 +61,10 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_rsp.py")
         add_test(NAME boot_l2_capture_regression
             COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_l2_capture.py")
+        add_test(NAME boot_state_diff_regression
+            COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_boot_state_diff.py")
+        add_test(NAME boot_bi2_capture_provenance
+            COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_bi2_tools.py")
         add_test(NAME boot_pal_semantic_recognizer
             COMMAND "${Python3_EXECUTABLE}" -B
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_recognizer.py"
@@ -120,6 +134,18 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_crt_return_projection.py"
                 "${SHADOW_BOOT_DOL_PATH}")
+        add_test(NAME boot_pal_raw_bi2_os_prefix
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/verify_binary_note.py"
+                "${SHADOW_BOOT_DOL_PATH}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/research/BINARY_BI2_OS_PREFIX_40.md"
+                --expected-words 95 --expected-branches 19 --expected-sprs 4
+                --required-code-range 80003140:80003148
+                --required-code-range 80003188:80003264
+                --required-code-range 80370BF0:80370C14
+                --required-code-range 80370E68:80370EA4
+                --required-code-range 80379628:80379628
+                --required-code-range 80379648:80379668)
     endif()
     add_test(NAME boot_pal_fixture
         COMMAND ${CMAKE_COMMAND}
@@ -150,6 +176,18 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             "-DDOL=${SHADOW_BOOT_DOL_PATH}"
             "-DPROGRAM=$<TARGET_FILE:shadow_boot_native_l2_tests>"
             -DMODE=native_l2
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
+    add_test(NAME boot_pal_native_handler_crt
+        COMMAND ${CMAKE_COMMAND}
+            "-DDOL=${SHADOW_BOOT_DOL_PATH}"
+            "-DPROGRAM=$<TARGET_FILE:shadow_boot_native_crt_tests>"
+            -DMODE=native_crt
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
+    add_test(NAME boot_pal_native_bi2_os_prefix
+        COMMAND ${CMAKE_COMMAND}
+            "-DDOL=${SHADOW_BOOT_DOL_PATH}"
+            "-DPROGRAM=$<TARGET_FILE:shadow_boot_native_bi2_tests>"
+            -DMODE=native_bi2
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
     add_test(NAME boot_pal_user_mode_decline
         COMMAND ${CMAKE_COMMAND}

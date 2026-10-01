@@ -153,9 +153,46 @@ def join(old: dict[str, str] | None, new: dict[str, str]) -> tuple[dict[str, str
     return merged, merged != old
 
 
+def unconditional_branch(ins) -> bool:
+    """BO0 and BO2 suppress the CR test and CTR decrement/test respectively."""
+    return ins.bo is None or (ins.bo & 0x14) == 0x14
+
+
+def branch_condition(ins, s: dict[str, str]) -> str:
+    """Preserve both BO predicates and the architectural CTR update.
+
+    This is a symbolic explanation, not a path-selection oracle. Both CFG
+    edges remain present even when a local constant explains one predicate.
+    """
+    if ins.bo is None:
+        return "ALWAYS"
+    terms = []
+    if not ins.bo & 4:
+        s["CTR"] = add(s["CTR"], -1)
+        terms.append(f"CTR{'==' if ins.bo & 2 else '!='}0({s['CTR']})")
+    if not ins.bo & 16:
+        terms.append(f"CRbit{ins.bi}=={int(bool(ins.bo & 8))}({s[f'CR{ins.bi >> 2}']})")
+    return " AND ".join(terms) if terms else "ALWAYS"
+
+
+def xer_so(value: str) -> str:
+    """XER.SO is PPC bit 0 (numeric mask 0x80000000), not the whole word."""
+    known = literal(value)
+    return str((known >> 31) & 1) if known is not None else f"XER.SO({value})"
+
+
 def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
     m, rd, ra = ins.m, ins.rd, ins.ra
     src = s[f"r{rd}"]
+    # rfi consumes SRR0/SRR1 rather than LR. Invalid bcctr forms cannot use
+    # CTR simultaneously as a decrementing counter and a branch address.
+    if m == "rfi" or ((ins.w >> 26) == 19 and ((ins.w >> 1) & 0x3FF) == 528
+                      and not ins.bo & 4):
+        for key in s:
+            s[key] = "UNKNOWN:unsupported"
+        effects.append({"pc": hx(ins.addr), "kind": "unsupported", "mnemonic": m,
+                        "reason": "SRR state unmodeled" if m == "rfi" else "invalid bcctr BO"})
+        return
     if m in ("li", "lis"):
         s[f"r{rd}"] = f"K:{((ins.imm << 16) if m == 'lis' else ins.imm) & 0xFFFFFFFF:08X}"
     elif m in ("addi", "addis"):
@@ -167,7 +204,7 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
                              (value & imm) if m.startswith('and') else (value ^ imm)) & 0xFFFFFFFF:08X}"
                       if value is not None else f"{m}({src},{hx(imm)})")
         if m.startswith("and"):
-            s["CR0"] = f"cmp0({s[f'r{ra}']})"
+            s["CR0"] = f"cmp0({s[f'r{ra}']},SO={xer_so(s['XER'])})"
     elif (ins.w >> 26) in (20, 21):
         sh, mb, me = ins.rb, (ins.w >> 6) & 31, (ins.w >> 1) & 31
         mask = 0
@@ -176,20 +213,22 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
                 mask |= 1 << (31 - bit)
         value = literal(src)
         rotated = ((value << sh) | (value >> ((32 - sh) & 31))) & 0xFFFFFFFF if value is not None else None
-        old = literal(s[f"r{ra}"])
+        old_value = s[f"r{ra}"]
+        old = literal(old_value)
         result = (((old & ~mask) | (rotated & mask)) if old is not None and rotated is not None
                   else None) if (ins.w >> 26) == 20 else (rotated & mask if rotated is not None else None)
         s[f"r{ra}"] = f"K:{result & 0xFFFFFFFF:08X}" if result is not None else (
-            f"rotate_mask({src},sh={sh},mb={mb},me={me})")
+            f"insert_mask({old_value},{src},sh={sh},mb={mb},me={me})"
+            if (ins.w >> 26) == 20 else f"rotate_mask({src},sh={sh},mb={mb},me={me})")
         if ins.w & 1:
-            s["CR0"] = f"cmp0({s[f'r{ra}']})"
+            s["CR0"] = f"cmp0({s[f'r{ra}']},SO={xer_so(s['XER'])})"
     elif m in ("add", "subf"):
         left, right = literal(s[f"r{ra}"]), literal(s[f"r{ins.rb}"])
         result = (left + right if m == "add" else right - left) if left is not None and right is not None else None
         s[f"r{rd}"] = f"K:{result & 0xFFFFFFFF:08X}" if result is not None else (
             f"{m}({s[f'r{ra}']},{s[f'r{ins.rb}']})")
         if ins.w & 1:
-            s["CR0"] = f"cmp0({s[f'r{rd}']})"
+            s["CR0"] = f"cmp0({s[f'r{rd}']},SO={xer_so(s['XER'])})"
     elif m == "mr":
         s[f"r{ra}"] = src
     elif m in ("mflr", "mfctr"):
@@ -251,7 +290,7 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
             s[f"r{base_reg}"] = address
     elif m in ("cmpwi", "cmplwi", "cmpw", "cmplw"):
         cr = ins.ops[0][1]
-        s[f"CR{cr}"] = f"{m}({s[f'r{ra}']},{ins.imm if ins.imm is not None else s[f'r{ins.rb}']})"
+        s[f"CR{cr}"] = f"{m}({s[f'r{ra}']},{ins.imm if ins.imm is not None else s[f'r{ins.rb}']},SO={xer_so(s['XER'])})"
     elif m == "mfmsr":
         s[f"r{rd}"] = s["MSR"]
     elif m == "mtmsr":
@@ -270,10 +309,12 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
         effects.append({"pc": hx(ins.addr), "kind": "fpscr_write", "value": s["FPSCR"],
                         "status": "exception_flags_unresolved"})
     elif ins.kind == "call":
+        condition = branch_condition(ins, s)
         target = (hx(ins.target) if ins.target is not None else
                   aligned_branch_target(s["CTR" if "ctr" in m else "LR"]))
         effects.append({"pc": hx(ins.addr), "kind": "call", "target": target,
                         "indirect": ins.target is None,
+                        "condition": condition,
                         "return_address": hx(ins.addr + 4),
                         "callee_effects": "UNTRACED"})
         # This bounded analysis does not descend into callees. Even ABI
@@ -285,15 +326,12 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
         effects.append({"pc": hx(ins.addr), "kind": "barrier",
                         "status": "unresolved_hardware"})
     elif ins.kind == "ret":
+        condition = branch_condition(ins, s)
         effects.append({"pc": hx(ins.addr), "kind": "return",
-                        "target": aligned_branch_target(s["LR"])})
+                        "target": aligned_branch_target(s["LR"]),
+                        "condition": condition})
     elif ins.kind == "branch":
-        # The BO field can combine CTR and CR tests. Do not reduce a compound
-        # predicate to one of its inputs without decoding the full BO semantics.
-        condition = (f"UNKNOWN:BO={ins.bo},BI={ins.bi},CTR={s['CTR']}"
-                     if ins.bo is not None and ins.bo not in (4, 5, 12, 13, 20)
-                     else s[f"CR{ins.bi >> 2}"] if ins.bi is not None and ins.bo != 20
-                     else "ALWAYS" if ins.bo == 20 else "UNKNOWN")
+        condition = branch_condition(ins, s)
         effects.append({"pc": hx(ins.addr), "kind": "branch",
                         "target": hx(ins.target) if ins.target is not None else
                         aligned_branch_target(s["LR" if "lr" in m else "CTR"]),
@@ -340,8 +378,10 @@ def analyze(image: DolImage, start: int, end: int) -> dict:
         if last.kind == "branch":
             if last.target is not None and start <= last.target < end:
                 successors.append(last.target)
-            if last.m not in ("b", "ba") and hi < end:
+            if not unconditional_branch(last) and hi < end:
                 successors.append(hi)
+        elif last.kind == "ret" and not unconditional_branch(last) and hi < end:
+            successors.append(hi)
         elif last.kind != "ret" and hi < end:
             successors.append(hi)
         unresolved_edge = last.kind == "branch" and last.target is None
@@ -372,7 +412,9 @@ def analyze(image: DolImage, start: int, end: int) -> dict:
             if changed:
                 entries[successor] = merged
                 pending.append(successor)
-        if not block["successors"]:
+        # A conditional LR return has both an external return edge and a
+        # fallthrough edge. Preserve its output state even with successors.
+        if not block["successors"] or insns[(block["end"] - start) // 4 - 1].kind == "ret":
             exit_states[block["end"]] = state.copy()
     # Keep within-instruction ordering: lexical register sorting would put
     # r10 before r9 and silently falsify ordered stmw/lmw memory effects.

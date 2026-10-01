@@ -7,6 +7,7 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -15,6 +16,8 @@ from machine import DolImage, PAL_SHA256, analyze, hx
 from store import Store
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"tools"))
+from boot_state_diff import parse_native_state
 SEEDS = Path(__file__).with_name("seeds.json")
 
 
@@ -85,6 +88,10 @@ def frontier(db, image, name="connected_pal_boot"):
         identity, end = "frontier_l2cr_call", 0x803728A4
     elif start == 0x80372904:
         identity, end = "frontier_handler_call", 0x80372908
+    elif start == 0x80003188:
+        identity, end = "frontier_bi2_load", 0x80003198
+    elif start == 0x80379628:
+        identity, end = "frontier_timebase_sampler", 0x80379640
     else:
         # No generic extent is inferred from a PC alone. Add a byte-backed
         # range before analyzing a future frontier.
@@ -93,6 +100,8 @@ def frontier(db, image, name="connected_pal_boot"):
         db, image, identity, start, end, "frontier",
         "unknown_boot_frontier", "UNKNOWN",
         ["reverse/boot/PROGRESS.md: explicit profile-specific connected stop",
+         "reverse/boot/research/NATIVE_BI2_COMPLETION_40.md" if start == 0x80379628 else
+         "reverse/boot/research/NATIVE_CRT_COMPLETION_39.md" if start == 0x80003188 else
          "reverse/boot/research/NATIVE_L2_COMPLETION_38.md" if start == 0x80372904 else
          "reverse/boot/research/NATIVE_SYNC_COMPLETION_37.md" if start == 0x80372894
          else "reverse/boot/research/SYNC_GQR_CHAIN.md: raw tail only"])
@@ -126,21 +135,28 @@ def run_native_probe(exe: Path, dol: Path, observed: dict[str, str | None], entr
                                check=False)
     if completed.returncode:
         raise RuntimeError(f"native boot probe failed: {completed.stderr.strip()}")
-    stops = re.findall(r"^STOP pc=0x([0-9A-F]{8})\b(.*)$", completed.stdout, re.M)
+    stops = re.findall(r"^STOP pc=0x([0-9A-Fa-f]{8})\b(.*)$", completed.stdout, re.M)
     if len(stops) != 1:
         raise ValueError("native probe did not report exactly one stop")
-    fields = dict(re.findall(r"\b([a-z][a-z0-9]*)=0x([0-9A-F]{8})\b", stops[0][1]))
+    fields = dict(re.findall(r"\b([a-z][a-z0-9]*)=0x([0-9A-Fa-f]{8})\b", stops[0][1]))
     if entry:
-        lines = [line.split() for line in completed.stdout.splitlines() if re.match(r"^[0-9a-f]{8} ", line)]
-        if not lines or len(lines[-1]) not in (115, 118) or int(lines[-1][0], 16) != int(stops[0][0], 16):
+        lines = [parse_native_state(line) for line in completed.stdout.splitlines() if re.match(r"^[0-9a-f]{8} ", line)]
+        if not lines or int(lines[-1][0], 16) != int(stops[0][0], 16):
             raise ValueError("native entry probe missing full stop state")
         fields = {key: lines[-1][n] for n, key in enumerate(("pc", "msr", "lr", "cr", "xer", "fpscr"))}
         fields.update({f"r{n}": lines[-1][6+n] for n in range(32)})
         fields.update({"ctr": lines[-1][102], "hid0": lines[-1][103], "hid2": lines[-1][104]})
-        if len(lines[-1]) == 118:
+        if len(lines[-1]) >= 118:
             fields["l2cr"] = lines[-1][115]
-    writes = [dict(re.findall(r"\b([a-z]+)=0x([0-9A-F]{8})\b", line))
-              for line in completed.stdout.splitlines() if line.startswith("WRITE ")]
+        if len(lines[-1]) == 120:
+            for index,key in ((118,"handler_slot"),(119,"lowmem44")):
+                if lines[-1][index]!="-":fields[key]=lines[-1][index]
+    writes = []
+    for line in completed.stdout.splitlines():
+        if line.startswith("WRITE "):
+            if not re.fullmatch(r"WRITE addr=0x[0-9A-F]{8} value=0x[0-9A-F]{8} width=4 endian=BE",line):
+                raise ValueError("malformed native WRITE effect")
+            writes.append(dict(re.findall(r"\b([a-z]+)=0x([0-9A-F]{8})\b",line)))
     for line in completed.stdout.splitlines():
         if line.startswith(("COMMITTED_STACK ", "COMMITTED_L2 ")):
             parts = line.split()
@@ -148,7 +164,20 @@ def run_native_probe(exe: Path, dol: Path, observed: dict[str, str | None], entr
                 raise ValueError("malformed native committed-memory readback")
             writes.append({"addr": "0x" + parts[1].upper(), "value": "0x" + parts[2].upper(),
                            "provenance": "applied native stack bytes; printed readback"})
-    return {"stop_pc": "0x" + stops[0][0], "known_fields": fields,
+        elif line.startswith("BOOT_STORE "):
+            parts=line.split()
+            if len(parts)!=5 or any(not re.fullmatch(r"[0-9a-fA-F]{8}",p) for p in parts[1:]) or parts[3].lower()!=parts[4].lower():
+                raise ValueError("malformed/uncommitted boot store")
+            writes.append({"pc":"0x"+parts[1].upper(),"addr":"0x"+parts[2].upper(),"value":"0x"+parts[3].upper(),
+                           "provenance":"applied native bytes; immediate same-owner readback"})
+        elif line.startswith("BOOT_BYTE_STORE "):
+            parts=line.split()
+            if (len(parts)!=5 or any(not re.fullmatch(r'[0-9a-fA-F]{8}',p) for p in parts[1:3]) or
+                    any(not re.fullmatch(r'[0-9a-fA-F]{2}',p) for p in parts[3:]) or parts[3].lower()!=parts[4].lower()):
+                raise ValueError('malformed/uncommitted boot byte store')
+            writes.append({'pc':'0x'+parts[1].upper(),'addr':'0x'+parts[2].upper(),'value':'0x'+parts[3].upper(),'width':1,
+                           'provenance':'applied native byte; immediate same-owner readback'})
+    return {"stop_pc": "0x" + stops[0][0].upper(), "known_fields": fields,
             "ordered_stack_writes": writes,
             "provenance": "native C++ from explicit entry fixture; bounded immutable backend" if entry
             else "native C++ run; hardware inputs explicitly caller supplied",

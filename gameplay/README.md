@@ -13,6 +13,11 @@ maintains the root modules listed in its README. Game inputs remain read-only an
 
 **Handing over to another agent (e.g. Codex)?** Read `Read this to continue Codex.md` first. A paste-ready prompt with agent workstreams is in `CODEX_NAVIGATION_PROMPT.md`.
 
+Latest coordination: handoff31 / boot checkpoint40 reaches the first live
+time-base read80379628. Root Release56/56 and standalone gameplay27/27 plus
+the required stage route pass; gameplay source and unresolved engine hooks
+are unchanged. See `../reverse/boot/PROGRESS.md` for the current boot dependency.
+
 ## Documents
 
 | File | Contents |

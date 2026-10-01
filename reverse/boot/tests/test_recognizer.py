@@ -10,9 +10,9 @@ from unittest.mock import patch
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "recognizer"))
 
-from fingerprints import detectors, fingerprint, similarity
+from fingerprints import detectors, fingerprint, similarity, stable_timebase_sampler
 from cli import family_rankings, frontier, learned_hits, rescan, run_native_probe
-from machine import DolImage, analyze, decode
+from machine import DolImage, analyze, decode, initial_state, transfer
 from store import Store
 
 
@@ -35,9 +35,119 @@ class FakeImage:
 
 
 class RecognizerTests(unittest.TestCase):
+    def test_validated_region_cannot_inherit_proof_after_binary_or_range_change(self):
+        image = FakeImage(0x80001000, [0x38600001, 0x4E800020])
+        original = analyze(image, image.start, image.start + 8)
+        for change in ("address", "range", "binary", "raw_body"):
+            with self.subTest(change=change):
+                db = Store(":memory:")
+                fp = fingerprint(original)
+                db.upsert("reviewed", image.start, image.start + 8, "seed", "old_family",
+                          "VALIDATED", ["reviewed original evidence"], original, fp, [])
+                altered = dict(original); altered_fp = dict(fp)
+                start, end = image.start, image.start + 8
+                if change == "address": start, end = start + 16, end + 16
+                elif change == "range": end += 4
+                elif change == "binary": altered["sha256"] = "another binary"
+                else: altered_fp["raw_sha256"] = "another raw body"
+                with self.assertRaisesRegex(ValueError, "validated region binary/range changed"):
+                    db.upsert("reviewed", start, end, "candidate", "new_family", "UNKNOWN",
+                              ["unreviewed"], altered, altered_fp, [])
+                self.assertEqual(json.loads(db.get("reviewed")["evidence_json"]),
+                                 ["reviewed original evidence"])
+
+    def test_rescan_preserves_reviewed_analysis_and_semantic_name(self):
+        image = FakeImage(0x80001000, [0x38600001, 0x4E800020])
+        original = analyze(image, image.start, image.start + 8)
+        db = Store(":memory:"); fp = fingerprint(original)
+        db.upsert("reviewed", image.start, image.start + 8, "seed", "reviewed_family",
+                  "VALIDATED", ["reviewed evidence"], original, fp, [])
+        proposed = dict(original); proposed["effects"] = [{"kind": "invented"}]
+        db.upsert("reviewed", image.start, image.start + 8, "candidate", "guessed_family",
+                  "UNKNOWN", ["new hypothesis"], proposed, fp, [])
+        row = db.get("reviewed")
+        self.assertEqual(row["family"], "reviewed_family")
+        self.assertEqual(row["origin"], "seed")
+        self.assertEqual(json.loads(row["analysis_json"]), original)
+        self.assertEqual(json.loads(row["evidence_json"]), ["reviewed evidence"])
+
+    def test_ctr_update_and_full_bo_predicate_are_preserved(self):
+        # Direct conditional branches admit all BO combinations. Test each
+        # predicate against independent BO0/BO2 and wrapping arithmetic rules.
+        for bo in range(32):
+            for ctr in (0, 1, 2, 0xFFFFFFFF):
+                with self.subTest(bo=bo, ctr=ctr):
+                    word = (16 << 26) | (bo << 21) | (6 << 16) | 8
+                    state = initial_state(); state["CTR"] = f"K:{ctr:08X}"
+                    effects = []; transfer(decode(word, 0x80001000), state, effects)
+                    expected = ctr if bo & 4 else (ctr - 1) & 0xFFFFFFFF
+                    self.assertEqual(state["CTR"], f"K:{expected:08X}")
+                    condition = effects[0]["condition"]
+                    self.assertEqual("CTR" in condition, not bool(bo & 4))
+                    self.assertEqual("CRbit6" in condition, not bool(bo & 16))
+                    if not bo & 4:
+                        self.assertIn("CTR==0" if bo & 2 else "CTR!=0", condition)
+                    if not bo & 16:
+                        self.assertIn(f"CRbit6=={int(bool(bo & 8))}", condition)
+
+    def test_mfctr_after_count_branch_reads_decremented_value(self):
+        image = FakeImage(0x80001000, [0x38600002, 0x7C6903A6,
+                                       0x42000004, 0x7C8902A6, 0x4E800020])
+        region = analyze(image, image.start, image.start + 20)
+        self.assertEqual(region["exit_states"]["0x80001014"]["r4"], "K:00000001")
+
+    def test_conditional_lr_return_keeps_taken_exit_and_fallthrough(self):
+        image = FakeImage(0x80001000, [0x4D820020, 0x38600007, 0x4E800020])
+        region = analyze(image, image.start, image.start + 12)
+        self.assertEqual(region["cfg"][0]["successors"], ["0x80001004"])
+        self.assertIn("0x80001004", region["exit_states"])
+        self.assertEqual(region["exit_states"]["0x8000100C"]["r3"], "K:00000007")
+        first_return = next(e for e in region["effects"] if e["kind"] == "return")
+        self.assertIn("CRbit2==1", first_return["condition"])
+
+    def test_unconditional_ctr_branch_has_no_fallthrough(self):
+        image = FakeImage(0x80001000, [0x4E800420, 0x906D0000, 0x4E800020])
+        region = analyze(image, image.start, image.start + 12)
+        self.assertEqual(region["cfg"][0]["successors"], [])
+        self.assertFalse(any(e["kind"] == "store" for e in region["effects"]))
+        self.assertTrue(region["unresolved_edges"])
+
+    def test_rfi_and_invalid_bcctr_cannot_fabricate_control_state(self):
+        for word in (0x4C000064, 0x4E000420):
+            with self.subTest(word=f"{word:08X}"):
+                state = initial_state(); state["LR"] = "K:80001000"; effects = []
+                transfer(decode(word, 0x80001000), state, effects)
+                self.assertEqual(effects[0]["kind"], "unsupported")
+                self.assertTrue(all(value == "UNKNOWN:unsupported" for value in state.values()))
+
+    def test_symbolic_rlwimi_preserves_prior_destination_dependency(self):
+        # The low 24 destination bits survive this high-byte insertion.
+        word = (20 << 26) | (3 << 21) | (4 << 16) | (7 << 1)
+        results = []
+        for previous in ("IN:first_destination", "IN:second_destination"):
+            state = initial_state(); state["r4"] = previous; effects = []
+            transfer(decode(word, 0x80001000), state, effects)
+            self.assertIn(previous, state["r4"])
+            self.assertIn("IN:r3", state["r4"])
+            results.append(state["r4"])
+        self.assertNotEqual(*results)
+
+    def test_compare_and_record_cr_keep_xer_so_provenance(self):
+        for word in (0x2C030000, 0x28030000, 0x706300FF, 0x54640001):
+            with self.subTest(word=f"{word:08X}"):
+                state = initial_state(); state["XER"] = "IN:exception_summary"; effects = []
+                transfer(decode(word, 0x80001000), state, effects)
+                self.assertIn("SO=XER.SO(IN:exception_summary)", state["CR0"])
+                for xer, so in ((0, 0), (0x80000000, 1), (0x40000000, 0), (0xFFFFFFFF, 1)):
+                    state = initial_state(); state["XER"] = f"K:{xer:08X}"
+                    transfer(decode(word, 0x80001000), state, [])
+                    self.assertIn(f"SO={so})", state["CR0"])
+
     def test_native_probe_keeps_committed_l2_memory_readbacks(self):
         # Diagnostic-parser test, not original machine-state evidence.
         words = ["00000000"] * 118
+        for n in range(38,102):words[n]="0000000000000000"
+        words[113]="0"*32;words[114]="0"*16;words[116]="0"*288;words[117]="0"*144
         words[0] = "80372904"; words[115] = "80000000"
         output = " ".join(words) + "\nCOMMITTED_STACK 8060c5e0 8060c5f0\n"
         output += "COMMITTED_L2 8060c5e4 803728d4\nSTOP pc=0x80372904 reason=LIVE_HANDLER_SLOT_UNRESOLVED\n"
@@ -53,6 +163,20 @@ class RecognizerTests(unittest.TestCase):
         with patch("cli.subprocess.run", return_value=done), self.assertRaises(ValueError):
             run_native_probe(Path("native"), Path("dol"),
                              {"msr":None,"hid2":None,"hid0":None}, Path("entry"))
+        for corrupted in (output.replace("00000000", "UNKNOWN", 1),output+"WRITE nonsense\n"):
+            done.stdout=corrupted
+            with patch("cli.subprocess.run",return_value=done),self.assertRaises(ValueError):
+                run_native_probe(Path("native"),Path("dol"),{"msr":None,"hid2":None,"hid0":None},Path("entry"))
+        earlier=output.replace('80372904','800031f4').replace('STOP pc=', 'BOOT_BYTE_STORE 80003144 805f1ff0 01 01\nSTOP pc=')
+        done.stdout=earlier
+        with patch('cli.subprocess.run',return_value=done),patch('cli.Path.read_bytes',return_value=b'synthetic entry'):
+            result=run_native_probe(Path('native'),Path('dol'),{'msr':None,'hid2':None,'hid0':None},Path('entry'))
+        self.assertEqual(result['stop_pc'],'0x800031F4')
+        self.assertEqual(result['ordered_stack_writes'][-1]['width'],1)
+        for bad in ('01 UNKNOWN','01 00','0001 01'):
+            done.stdout=earlier.replace('01 01',bad)
+            with patch('cli.subprocess.run',return_value=done),self.assertRaises(ValueError):
+                run_native_probe(Path('native'),Path('dol'),{'msr':None,'hid2':None,'hid0':None},Path('entry'))
 
     def test_pointer_chain_stays_symbolic_at_indirect_call(self):
         # lis/addi build a DOL address; the live word at that address may
@@ -236,7 +360,45 @@ class RecognizerTests(unittest.TestCase):
 
 
 class PalFixtureTests(unittest.TestCase):
+    def test_timebase_sampler_register_and_compare_variants_falsified(self):
+        if self.dol_path is None:self.skipTest("optional PAL DOL argument")
+        image=DolImage(Path(self.dol_path))
+        for pc in (0x80379628,0x804035D4):
+            words=[image.word(pc+4*n) for n in range(6)]
+            self.assertIsNotNone(stable_timebase_sampler(words,pc))
+            self.assertIn('stable_timebase_sampler',[h['id'] for h in detectors(analyze(image,pc,pc+24))])
+            for index,value in ((2,words[0]),(3,words[3]^0x00000800),(4,words[4]^0x00010000),(4,words[4]^4),(4,words[4]^2),(5,0x4E800021)):
+                changed=words.copy();changed[index]=value
+                self.assertIsNone(stable_timebase_sampler(changed,pc))
+
+    def test_raw_ee_and_fill_motifs_falsify_register_aliases(self):
+        if self.dol_path is None:self.skipTest("optional PAL DOL argument")
+        image=DolImage(Path(self.dol_path))
+        clear=analyze(image,0x8037611C,0x80376130)
+        self.assertIn("interrupt_mask_exchange",[h["id"] for h in detectors(clear)])
+        changed=json.loads(json.dumps(clear));changed["instructions"][2]["raw"]="7C600124"
+        self.assertNotIn("interrupt_mask_exchange",[h["id"] for h in detectors(changed)])
+        changed=json.loads(json.dumps(clear));changed['instructions'][0]['raw']='7C6100A6'
+        self.assertNotIn('interrupt_mask_exchange',[h['id'] for h in detectors(changed)])
+        fill=analyze(image,0x80005498,0x800054C0)
+        self.assertIn("eight_word_fill_group",[h["id"] for h in detectors(fill)])
+        changed=json.loads(json.dumps(fill));changed["instructions"][8]["raw"]="94E4001C"
+        self.assertNotIn("eight_word_fill_group",[h["id"] for h in detectors(changed)])
     dol_path = None
+
+    def test_actual_fill_tail_keeps_conditional_return_fallthrough(self):
+        if self.dol_path is None:
+            self.skipTest("optional PAL DOL argument")
+        image = DolImage(Path(self.dol_path))
+        self.assertEqual(image.word(0x800054E0, text=True), 0x4D820020)
+        region = analyze(image, 0x800054DC, 0x800054F4)
+        self.assertEqual(region["cfg"][0]["successors"], ["0x800054E4"])
+        self.assertIn("0x800054E4", region["exit_states"])
+        self.assertIn("0x800054F4", region["exit_states"])
+        # Unmodeled carry/update-store semantics stay unsupported rather
+        # than disappearing behind the earlier conditional return.
+        self.assertIn("0x800054E4", region["unsupported_semantics"])
+        self.assertIn("0x800054E8", region["unsupported_semantics"])
 
     def test_real_frontier_matches_original_bytes(self):
         if self.dol_path is None:

@@ -15,9 +15,27 @@ The paired-setup stack stores are applied as bounded, validity-tracked
 big-endian guest bytes; the later saved-LR load remains behind the `sync` stop.
 The separate `RunApplicationRecurringPhase` translates the static event and
 exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
-**PROVEN for these bounded slices; full hardware, CRT, constructors and game
+**PROVEN for these bounded slices; full hardware, OS, constructors and game
 boot remain UNKNOWN or incomplete.** These fixture-backed components do not
 make a playable game.
+
+Checkpoint 40 adds `shadow_boot_native_bi2`: complete measured BI2 ownership,
+two fresh pointer reads, debug/relocation routes, coherent SDA metadata and
+first OS/clock frames. It stops before **`80379628`**, the first live time-base
+read. Six independent replays match191 new CP/22156 fields/1564672 BI2 bytes;
+all earlier handler/CRT checkpoints rerun. Final Release **56/56**, gameplay
+**27/27** and required route pass. Read `research/NATIVE_BI2_COMPLETION_40.md`
+and checkpoint40 first. Live clock/offset producers, retail/hardware timing,
+later OS/constructors and first-frame/pixel parity remain UNKNOWN.
+
+Checkpoint39 adds `shadow_boot_native_crt`: connected handler registration,
+actual stack/return effects and exact three-range CRT zeroing from entry.
+Three complete replays match246 CP/28200 fields; the new tail compares1473816
+cleared bytes with hostile pre-entry seeds and preserved boundary canaries.
+Unknown old-slot words stop803733B4; admitted inputs reach **80003188**, before
+live BI2 pointer800000F4. Full Release **53/53**, gameplay **27/27** and required
+route. Read `NATIVE_CRT_COMPLETION_39.md` and checkpoint39 first; later BI2/OS,
+physical/retail and first-frame/pixel gates remain unresolved.
 
 Checkpoint 38 adds `shadow_boot_native_l2`, which calls the unchanged
 checkpoint-37 entry runner then traces live L2CR through both E branches,
@@ -110,6 +128,19 @@ operations may be replaced only after their producers and consumers are traced.
   entry run, private completion contract, actual bytes and controls, explicit
   input CLI and same-run downstream comparison. `test_native_prefix.cpp`
   covers all 166 words, adverse inputs and later stack aliases.
+- `include/shadow/boot/NativeBi2Prefix.hpp`, `src/NativeBi2Prefix.cpp`,
+  `tools/native_bi2_probe.cpp`, `capture_bi2_state.py`, `validate_native_bi2.py`
+  — connected typed BI2/OS prefix, controlled experiments and complete-byte
+  state diffs. `test_native_bi2.cpp` rejects95 raw mutations; `test_bi2_tools.py`
+  protects provenance, packed GPR slices and original branch hints.
+- `include/shadow/boot/NativeCrtPrefix.hpp`, `src/NativeCrtPrefix.cpp`, `tools/native_crt_probe.cpp`,
+  `capture_crt_state.py`, `validate_native_crt.py`, `boot_state_diff.py` —
+  connected handler/CRT semantics, reusable opt-in capture and strict repeated-PC
+  comparisons. `test_native_crt.cpp` rejects216 raw/data mutations; the state
+  schema gate independently checks shape, validity, seeds and occurrence order.
+- `tools/scan_boot_motifs.py` — scans original text with shared raw EE/fill/
+  time-base detectors; persists UNKNOWN candidates without promoting them.
+  `BINARY_BI2_OS_PREFIX_40.md` retains the registered exact95-word ledger.
 - `include/shadow/boot/NativeL2Prefix.hpp`, `src/NativeL2Prefix.cpp`,
   `tools/native_l2_probe.cpp`, `tools/capture_l2_state.py`,
   `tools/validate_native_l2.py` — separate checkpoint38 continuation, controlled

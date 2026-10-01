@@ -101,7 +101,7 @@ def checked_effects(effects, states, disabled):
         raise ValueError("ordered L2 read/write/completion effects differ")
 
 
-def checked_states(report, image):
+def checked_states(report, image, *, controlled_entry_msr=None):
     """Reject stale captures, unlabelled entry changes and mid-chain forcing."""
     if report["disc_sha256"] != DISC_SHA or report["dolphin_sha256"] != report["instrumentation_manifest"]["instrumented_executable_sha256"]:
         raise ValueError("reference identity mismatch")
@@ -129,6 +129,10 @@ def checked_states(report, image):
     if int(entry["l2cr"], 16) != int(report["controlled_initial_l2cr"], 16) or int(entry["hid0"], 16) != int(report["controlled_initial_hid0"], 16):
         raise ValueError("entry control provenance differs")
     for key in ("msr", "gpr", "hid2", "cr", "architectural_xer", "ctr", "fpscr", "ps0", "ps1", "gqr"):
+        if key=="msr" and controlled_entry_msr is not None:
+            if not re.fullmatch(r"[0-9a-fA-F]{8}",controlled_entry_msr) or entry[key].lower()!=controlled_entry_msr.lower():
+                raise ValueError("labelled entry MSR readback differs")
+            continue
         if entry[key] != original[key]:
             raise ValueError(f"unlabelled pre-entry {key} change")
     source = report["controlled_entry_source_bits"] or original["fpr_source"]
@@ -138,14 +142,14 @@ def checked_states(report, image):
     return states
 
 
-def validate(dol, program, capture, work):
+def validate(dol, program, capture, work, *, controlled_entry_msr=None):
     if sha256(dol) != "fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af":
         raise ValueError("PAL digest mismatch")
     root = Path(__file__).resolve().parents[3] / "build"
     if not work.resolve().is_relative_to(root.resolve()):
         raise ValueError("outputs must stay in repository build/")
     report = json.loads(capture.read_text(encoding="utf-8"))
-    states = checked_states(report, DolImage(dol))
+    states = checked_states(report, DolImage(dol),controlled_entry_msr=controlled_entry_msr)
     entry = states[0x80003154]
     disabled = not int(entry["l2cr"], 16) & 0x80000000
     expected_order = checkpoint_order(disabled)

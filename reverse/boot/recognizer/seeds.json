@@ -2,6 +2,26 @@
   "binary_sha256": "fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af",
   "regions": [
     {
+      "id": "ee_disable_leaf", "start": "8037611C", "end": "80376130",
+      "family": "interrupt_mask_exchange", "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/NATIVE_CRT_COMPLETION_39.md: exact EE state projection; connected closed owner only", "Pending interrupt, retail and physical timing profiles remain UNKNOWN; no match inherits runtime validation"]
+    },
+    {
+      "id": "crt_zero_fill_group", "start": "80005498", "end": "800054C0",
+      "family": "eight_word_fill_group", "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/NATIVE_CRT_COMPLETION_39.md: exact ascending group stores with carry; full three-range byte and canary validation", "Only the connected aligned zero-fill descriptor profile is admitted; matching other inputs is structural only"]
+    },
+    {
+      "id": "boot_metadata_leaf", "start": "80370BF0", "end": "80370C18",
+      "family": "boot_metadata_initializer", "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/NATIVE_BI2_COMPLETION_40.md: connected ordered stores and producer-backed SDA owner", "Explicit measured BI2 inputs and closed writer scope; no arbitrary-pointer or retail claim"]
+    },
+    {
+      "id": "debug4_byte_leaf", "start": "80003140", "end": "8000314C",
+      "family": "debug4_byte_initializer", "status": "STRONGLY_SUPPORTED",
+      "evidence": ["reverse/boot/research/NATIVE_BI2_COMPLETION_40.md: actual single byte store; adjacent bytes and same-owner relocation tested", "Debug2/3 context-transfer behavior remains UNKNOWN and is not promoted"]
+    },
+    {
       "id": "fpr_seed_projection",
       "start": "80370CDC",
       "end": "80370E04",

@@ -57,7 +57,9 @@ def signed_branch_target(address, word, mnemonic):
         bo, bi = (word >> 21) & 31, (word >> 16) & 31
         conditions = {"beq": (12, 2), "bne": (4, 2),
                       "bne cr1,": (4, 6), "blt": (12, 0), "bdnz": (16, 0)}
-        if (bo, bi) != conditions[mnemonic]:
+        # BO's low bit is the static prediction hint, not a predicate input.
+        # The original BI2 beq words use BO13; retain the other four BO bits.
+        if (bo & ~1, bi) != conditions[mnemonic]:
             raise ValueError(f"0x{address:08X} condition fields differ")
         delta = word & 0xFFFC
         if delta & 0x8000:

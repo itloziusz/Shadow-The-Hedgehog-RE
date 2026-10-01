@@ -16,7 +16,7 @@ from capture_boot_machine_state import DISC_SHA, STEPS, snapshot
 from capture_dolphin_rsp import RSP, sha256
 
 
-def run(args):
+def run(args, extension=None):
     root = Path(__file__).resolve().parents[3] / "build"
     for path in (args.user_dir, args.out):
         if not path.resolve().is_relative_to(root.resolve()):
@@ -67,6 +67,8 @@ def run(args):
                 # read observation, never a zero-filled native input.
                 state["l2_stack_address"] = "8060c570"
                 state["l2_stack_bytes"] = rsp.memory(0x8060C570, 0x90).hex()
+                if extension is not None:
+                    extension.observe(rsp, state)
                 return state
 
             original = capture()
@@ -81,6 +83,8 @@ def run(args):
                 bytes.fromhex(args.source)
                 if rsp.send(f"M805f1f30,10:{args.source}") != "OK":
                     raise ValueError("pre-entry source experiment refused")
+            if extension is not None:
+                extension.prepare(rsp)
             states = [capture()]
             if int(states[0]["l2cr"], 16) != args.l2cr or int(states[0]["hid0"], 16) != 0x0011C064:
                 raise ValueError(f"controlled entry readback mismatch: {states[0]['l2cr']} / {states[0]['hid0']}")
@@ -135,6 +139,8 @@ def run(args):
             if args.l2cr & 0x80000000 or not (args.l2cr & 1 or args.second_poll_busy):
                 reach(0x803728F8)
                 reach(0x80372904)
+                if extension is not None:
+                    extension.advance(rsp, reach, states)
             report = {"oracle_kind": "controlled startup-only HLE interpreter; not physical L2 completion",
                       "disc_sha256": DISC_SHA, "dolphin_sha256": sha256(args.dolphin),
                       "instrumentation_manifest": manifest,
@@ -146,6 +152,8 @@ def run(args):
                       "controlled_midchain_l2cr": args.second_poll_busy,
                       "controlled_live_bss_source_experiment": False,
                       "checkpoints": states}
+            if extension is not None:
+                report["region_extension"] = extension.metadata()
             args.out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     finally:
         process.terminate()

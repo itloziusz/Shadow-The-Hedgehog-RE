@@ -5,6 +5,31 @@ and checks its SHA-256 before analysis. It is an evidence index and hypothesis
 generator for the connected boot path. It is not a PPC interpreter, emulator,
 or source-code generator.
 
+Current immutable connected frontier: **80379628**, before a live time-base
+read (checkpoint40). The legacy request-only frontier remains80371730.
+`../tools/scan_boot_motifs.py` now scans all original text for bitfield-checked
+EE, eight-word fill and high/low/high clock motifs, storing UNKNOWN candidates.
+Two clock sampler and two fill matches do not imply shared callers or validated
+clock state. Four new scoped solved seeds support later recognition; current
+raw/symbolic/proof tests33/33 pass. Stale evidence cannot survive changed raw
+bytes/binary/range; CTR, conditional-return, insert and XER.SO dependencies
+remain explicit. Shared shape and packed-register gates reject UNKNOWN data.
+
+```powershell
+python -B reverse/boot/tools/scan_boot_motifs.py <PAL-main.dol> `
+  build/boot-recognizer-hidden-state-36.sqlite build/raw-motifs-40.json
+python -B reverse/boot/recognizer/cli.py --dol <PAL-main.dol> `
+  --db build/boot-recognizer-hidden-state-36.sqlite `
+  --frontier-name connected_immutable_native_boot `
+  --probe-exe build/reverse/boot/Release/shadow_boot_native_bi2.exe `
+  --native-entry build/bi2-validation-40/bi2-zero-40.entry.txt frontier
+```
+
+Frontier evidence files37–40 must be submitted in their actual sequence to a
+fresh database; each includes mandatory complete-regression proof. Scanning
+and learning never change the frontier or promote matches automatically.
+`../research/NATIVE_BI2_COMPLETION_40.md` records complete reproduction/scope.
+
 From the repository root, with Python 3.10+ and an existing Release build:
 
 ```powershell

@@ -11,7 +11,29 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint 29, 2026-10-01)
+## Current continuation (checkpoint31, 2026-10-01)
+
+Read boot `PROGRESS.md` checkpoint40 first. `shadow_boot_native_bi2` reaches
+**80379628**, before the first live time-base read, from80003154 through all
+unchanged sync/L2/handler/CRT checkpoints. Six independent replays match191
+new checkpoints/22156 state fields/1564672 BI2 bytes, including same-owner
+relocation and precise debug-context stops. Release **56/56**, gameplay
+**27/27**, required stage route pass. Read `NATIVE_BI2_COMPLETION_40.md`,
+`BINARY_BI2_OS_PREFIX_40.md` and the two BI2 audits. Next recover clock units,
+live tick/offset producers, rollover/retry and later consumers. No fixed
+sample, unknown pointer, asynchronous state or first-frame gate may be bypassed.
+
+## Previous continuation (checkpoint30, 2026-10-01)
+
+Read boot `PROGRESS.md` checkpoint39 first. New `shadow_boot_native_crt`
+preserves the unchanged sync/L2 prefix, handler return and three ordered CRT
+clears, stopping before **80003188**, live BI2 read800000F4. Three full-entry
+replays match246 CP/28200 fields; Release **53/53**, gameplay **27/27**, required
+stage route. `NATIVE_CRT_COMPLETION_39.md` and the independent audits record
+the complete scope. Continue with live BI2 bytes and OS guard/clock; do not
+default unknown startup pointers, physical state or weaken first-frame gates.
+
+### Earlier continuation (checkpoint 29, 2026-10-01)
 
 Read `reverse/boot/PROGRESS.md` checkpoint38 first. The native L2 continuation
 uses unchanged checkpoint37 sync, preserves the bounded L2 consequence and

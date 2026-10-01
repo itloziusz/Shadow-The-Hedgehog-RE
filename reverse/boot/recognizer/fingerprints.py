@@ -72,10 +72,71 @@ def similarity(a: dict, b: dict) -> dict:
             "meaning": "weighted structural overlap, not confidence or runtime parity"}
 
 
+def raw_motifs(rows: list[dict]) -> list[dict]:
+    found = []
+    # Raw local motifs retain registers/masks/dependencies; they do not turn
+    # hardware completion or a function family into validated behavior.
+    raw=[int(row["raw"],16) for row in rows]
+    for index in range(max(0,len(raw)-4)):
+        a,b,c,d,e=raw[index:index+5]
+        original=(a>>21)&31;temporary=(b>>16)&31
+        if (a&~0x03E00000==0x7C0000A6 and
+            b>>26==21 and (b>>21)&31==original and (b>>11)&31==0 and (b>>6)&31==17 and (b>>1)&31==15 and not b&1 and
+            c&~0x03E00000==0x7C000124 and (c>>21)&31==temporary and
+            d>>26==21 and (d>>21)&31==original and (d>>16)&31==original and (d>>11)&31==17 and (d>>6)&31==31 and (d>>1)&31==31 and not d&1 and
+            e==0x4E800020 and original!=temporary):
+            found.append({"id":"interrupt_mask_exchange","status":"STRUCTURAL_MATCH",
+                "hypothesis":"clear EE and return its prior one-bit value",
+                "evidence":[f"raw five-word dependency chain at {rows[index]['pc']}","exact MSR clear mask and rotate-to-bit0; distinct registers"],
+                "contradictions":["privilege and pending interrupt state are not provided"],
+                "validation_needed":["compare live MSR/return word for both EE inputs","prove closed native delivery scope"]})
+    for index in range(max(0,len(raw)-9)):
+        group=raw[index:index+10];stores=group[:1]+group[2:9]
+        source=(stores[0]>>21)&31;base=(stores[0]>>16)&31
+        decrement=group[1];counter=(decrement>>21)&31;branch=group[9]
+        if (all(w>>26==(37 if n==7 else 36) and (w>>21)&31==source and (w>>16)&31==base and (w&0xFFFF)==4*(n+1)
+                for n,w in enumerate(stores)) and base!=0 and source!=base and
+            decrement>>26==13 and (decrement>>16)&31==counter and decrement&0xFFFF==0xFFFF and counter not in (source,base) and
+            branch==0x4082FFDC):
+            found.append({"id":"eight_word_fill_group","status":"STRUCTURAL_MATCH",
+                "hypothesis":"ascending eight-word fill with decremented CR0 loop counter",
+                "evidence":[f"raw ten-word motif at {rows[index]['pc']}","eight same-value stores at offsets4..32; final stwu; exact CR0 backward edge"],
+                "contradictions":["fill value, allocation bounds, zero/tail paths and carry are not supplied"],
+                "validation_needed":["slice incoming value/count/address","compare full written range and boundary canaries","validate carry and next consumer"]})
+    for index in range(max(0,len(raw)-5)):
+        match=stable_timebase_sampler(raw[index:index+6],int(rows[index]['pc'],16))
+        if match:
+            found.append({"id":"stable_timebase_sampler","status":"STRUCTURAL_MATCH",
+                "hypothesis":"retry high/low/high time-base sampling until both high words agree",
+                "evidence":[f"raw six-word dependency chain at {rows[index]['pc']}",str(match)],
+                "contradictions":["live tick producer, units, offset, interruption and timing consumers remain unknown"],
+                "validation_needed":["capture both equal/retry branches and rollover","trace tick/offset provenance and downstream consumers","compare portable clock contract without fixed reference values"]})
+    return found
+
+
+def stable_timebase_sampler(words: list[int],pc: int):
+    if len(words)!=6:return None
+    def tbr(w):
+        if w>>26!=31 or (w>>1)&1023!=371 or w&1:return None
+        return ((w>>16)&31)|((w>>6)&0x3E0)
+    if [tbr(w) for w in words[:3]]!=[269,268,269]:return None
+    high,low,second=[(w>>21)&31 for w in words[:3]]
+    if len({high,low,second})!=3:return None
+    compare,branch,ret=words[3:]
+    if compare>>26!=31 or (compare>>1)&1023!=0 or compare&0x00600001:return None
+    field=(compare>>23)&7
+    if {(compare>>16)&31,(compare>>11)&31}!={high,second}:return None
+    if branch>>26!=16 or (branch>>21)&31 not in (4,5) or (branch>>16)&31!=4*field+2 or branch&3:return None
+    displacement=branch&0xFFFC
+    if displacement&0x8000:displacement-=0x10000
+    if (pc+16+displacement)&0xFFFFFFFF!=pc or ret!=0x4E800020:return None
+    return dict(high_register=high,low_register=low,second_high_register=second,cr_field=field,retry_target=f'{pc:08X}')
+
+
 def detectors(region: dict) -> list[dict]:
     rows, effects = region["instructions"], region["effects"]
     ms = [r["mnemonic"] for r in rows]
-    found = []
+    found = raw_motifs(rows)
     writes_by_pc = {e["pc"]: e for e in effects if e["kind"] == "spr_write"}
     gqr_writes = [writes_by_pc.get(r["pc"]) for r in rows[2:10]]
     if (len(rows) >= 10 and ms[:2] == ["sync", "li"] and
@@ -146,6 +207,13 @@ def detectors(region: dict) -> list[dict]:
 
 def minimal_experiments(region: dict) -> list[dict]:
     requests = []
+    for match in raw_motifs(region['instructions']):
+        if match['id']=='stable_timebase_sampler':
+            pc=int(match['evidence'][0].split()[-1],16)
+            requests.append({'break_before':f'0x{pc:08X}',
+                'read':['three destination GPRs','CR field','live tick producer/frequency','offset words800030D8/DC'],
+                'step':'three original time-base reads and compare; observe both EQ-return and retry paths',
+                'assert':'trace sample provenance/units and rollover; no fixed tick or guessed offset; downstream consumer parity required'})
     for e in region["effects"]:
         if e["kind"] == "call" and e["indirect"]:
             requests.append({"break_before": e["pc"], "read": ["CTR", "LR", e["target"]],

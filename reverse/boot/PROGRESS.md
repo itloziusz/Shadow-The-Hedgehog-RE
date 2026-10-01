@@ -5,6 +5,27 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-10-01 — checkpoint40: complete live BI2, OS guard and clock frontier
+
+| Field | Result |
+|---|---|
+| Last fully validated connected checkpoint | `shadow_boot_native_bi2` runs from80003154 through unchanged sync/L2, handler and CRT, then two BI2 reads, admitted debug/relocation paths, metadata, first OS guard and actual OS/clock frames. Ordinary profiles stop **before80379628**, first live TBU; debug2 stops before800031F4. |
+| Evidence | Complete original live8192-byte BI2 equals original input in six fresh runs. Labelled pre-entry writes only. Six independent native comparisons:191 new CP,22156 raw state fields,18536 known stack bytes,1564672 BI2 bytes,83 word/two byte effects. Aliases/CTR/modulo sums/array-start alignment and coherent SDA owners agree. Earlier L2/CRT comparisons rerun in every profile. |
+| Regression | Final complete Release **56/56 CTest**, standalone gameplay **27/27** and required Dark35/35→stage6.95 BI2/OS fingerprint mutations plus all earlier mutation/decline gates pass; registered ledger checks95 words/19 direct branches/4 SPR encodings. |
+| Tooling / root causes | Complete-blob capture and input-derived repeated-PC plans; strict state/ordered-byte/global deltas. Packed GPR capture indexing bug fixed/tested; byte checker now recognizes original BO13 prediction hint and rejects predicate mutations. Canary/seed contradictions and relabelled stack/fill observations decline. Recognizer33/33, shared schema32/32, BI2 tools4/4. |
+| Learn/rescan | Shared raw detectors scan1216776 text words: two fill groups, one EE leaf, two stable clock samplers. Candidates remain UNKNOWN/STRUCTURAL_MATCH; four scoped solved examples added. No structural score promotes a function or advances boot. |
+| Genuine next dependency | Live time-base producer/units/rollover and offset words800030D8/DC; later carry/restoration/store and timing consumers need connected proof. No fixed tick, supplied retry result or ignored constructor. Retail/physical/asynchronous and first-frame/pixel requirements remain UNKNOWN. Read `NATIVE_BI2_COMPLETION_40.md`, `BINARY_BI2_OS_PREFIX_40.md` and both independent audits. |
+
+## 2026-10-01 — checkpoint39: handler return, exact CRT fills and BI2 frontier
+
+| Field | Result |
+|---|---|
+| Last fully validated connected checkpoint | New `shadow_boot_native_crt` runs the unchanged checkpoint38 prefix from80003154, selector1 registration/return, logger, hardware return, sentinels, ten identity-copy descriptors and three exact zero fills. Stops before **80003188**, live BI2 pointer read800000F4. Unknown old handler stops exactly before803733B4. |
+| Reconstructed behavior | Explicit opaque old-slot input is copied, never invoked; same-owner registry and actual saved bytes preserve addresses/aliases. CRT clears the earlier handler and FPR source in separate proper stages, preserving gaps and loaded sections. Counter effects set architectural XER.CA1; final r4 remains805FC5E8. No blanket BSS zero or interpreter. |
+| Multi-pass evidence | Three full-entry comparisons match246 CP/28200 fields; new tail153 CP/17598 fields/13324 known stack bytes/1473816 full cleared bytes/102 stores. Independent raw/source/reference audit agrees. Hostile pre-entry seeds have immediate and per-CP readbacks; six outside canaries persist. Full Release **53/53**, gameplay **27/27**, required stg0100 Dark35/35→index6;216 continuation raw/data mutations decline. |
+| Tooling/root causes | Strict shared state shapes and occurrence-aware diffs, opt-in capture plans, raw EE/fill motifs. Genuine recognizer bugs fixed: stale proof reuse, CTR/BO effects, conditional-return fallthrough, rlwimi old-destination provenance, XER.SO; UNKNOWN diagnostic fields/malformed stores decline. Focused recognizer32/32 and schema25/25. |
+| Next and limits | `NATIVE_CRT_COMPLETION_39.md` and three independent audits. Inspect live BI2 target bytes and both pointer loads, debug/relocation routes and OS guard/clock next. Retail/physical timing, asynchronous delivery, external writers and game/pixel parity remain UNKNOWN. Original sync/L2 implementation unchanged. |
+
 ## 2026-10-01 — checkpoint 38: bounded native L2 consequence and both branches
 
 | Field | Result |

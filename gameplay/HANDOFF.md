@@ -4,6 +4,34 @@
 
 ---
 
+## Checkpoint31 — 2026-10-01 (live BI2 and first OS/clock prologues)
+
+- Read boot `PROGRESS.md` checkpoint40, `NATIVE_BI2_COMPLETION_40.md` and
+  the independent BI2 audits first. Connected native prefix now reaches
+  **80379628**, before the first live time-base read. No tick or clock offset
+  was supplied to get past a failure; debug2/null/unknown profiles stop earlier.
+- Six independent entry replays match191 new checkpoints/22156 state fields,
+  18536 known stack bytes and1564672 full BI2 bytes, while rerunning all earlier
+  sync/L2/handler/CRT checkpoints. Final Release **56/56**, gameplay **27/27**,
+  required `RESULT: Dark mission cleared -> next stage index 6 (stg0200)`.
+- Complete-byte capture, ordered effects and raw EE/fill/clock motif scans are
+  reusable; packed-register and evidence-checker bugs have focused regressions.
+  Continue with clock/offset producer and downstream timing proof. Preserve
+  every decline and runtime/pixel requirement; gameplay code is unchanged.
+
+## Checkpoint30 — 2026-10-01 (handler/CRT connected from boot entry)
+
+- Read boot `PROGRESS.md` checkpoint39 and `NATIVE_CRT_COMPLETION_39.md`.
+  New native CRT runner preserves checkpoint37/38, applies selector1 registry
+  and real saved-stack effects, clears three exact CRT ranges, and stops before
+  **80003188**, live BI2 pointer800000F4. No inherited zero or whole BSS fill.
+- Three full-entry replays match246 CP/28200 fields, including153 new tail
+  points and1473816 full cleared bytes. Independent audits agree. Full Release
+  **53/53**, standalone gameplay **27/27**, required Dark35/35→index6.
+- Tooling now preserves repeated loop occurrences, validates raw shapes and
+  byte validity, and rejects stale proof/CFG/CTR/rlwimi/SO errors. Next: live BI2
+  blob/debug/relocation and OS clock; physical/retail/first-frame gates remain.
+
 ## Checkpoint 29 — 2026-10-01 (bounded native L2 continuation)
 
 - Continue from `reverse/boot/PROGRESS.md` checkpoint38 and

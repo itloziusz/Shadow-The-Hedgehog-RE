@@ -31,15 +31,17 @@ not a playable port or a replacement for a legally obtained copy of the game.
   A second entry-owned native runner now completes the bounded local barrier
   consequence, GQR/FPR seed and enabled ICE/DCE checks. Its separate L2
   continuation now follows both enabled/disabled branches, preserves the
-  bounded invalidation consequence and stops before handler installation at
-  **`0x80372904`**. Three full entry experiments match 10,602 state fields
-  and 2,228 known-memory byte comparisons. Its immutable-code
+  bounded invalidation consequence. Further connected runners now apply handler
+  return, exact CRT ranges, live BI2 processing and the first OS/clock prologues,
+  stopping before **`0x80379628`**, the first live time-base read. Six perturbed
+  entry replays compare 191 new checkpoints, 22,156 state fields and 1,564,672
+  BI2 byte comparisons, while rerunning every earlier checkpoint. Its immutable-code
   backend rejects DCFI/ABE/disabled-cache and other unvalidated profiles;
   the old HLE HID0 word remains a request-only input, not a retail default.
   The binary-first archaeology index links raw bytes, decoded fields, CFG and
   memory/ISA evidence. The bounded recurring event/exit loop at
-  `0x800511E0..0x80051218` remains separate. Full hardware, CRT, constructor
-  effects and game boot remain unresolved.
+  `0x800511E0..0x80051218` remains separate. Live clock/offset producers, later
+  OS, constructors, retail hardware effects and first game frame remain unresolved.
   The 74-word FPR projection also retains its six earlier standalone HLE
   experiments; it is now connected under the bounded native backend.
 - **Evidence and tools:** `gameplay/` contains the address-backed subsystem
@@ -49,8 +51,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **51/51 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime, twenty-two boot).
+The full public-tree MSVC Release gate passed **56/56 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, twenty-seven boot).
 `reverse/boot/PROGRESS.md` records the last
 connected boot checkpoint and first fail-closed stop.
 Some suites require the read-only PAL fixture. The scripted stg0100 Dark

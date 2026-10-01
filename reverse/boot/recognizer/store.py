@@ -55,12 +55,21 @@ class Store:
         if status not in {"UNKNOWN", "STRUCTURAL_MATCH", "PROBABLE",
                           "STRONGLY_SUPPORTED", "VALIDATED"}:
             raise ValueError("invalid confidence status")
-        previous = self.connection.execute("SELECT status,evidence_json FROM regions WHERE id=?",
+        previous = self.connection.execute("SELECT * FROM regions WHERE id=?",
                                            (identity,)).fetchone()
-        # A rescan may not silently demote or overwrite a manually validated item.
-        if previous and previous["status"] == "VALIDATED" and status != "VALIDATED":
-            status = "VALIDATED"
-            evidence = json.loads(previous["evidence_json"])
+        # Validation belongs to an exact binary span, not an arbitrary row ID.
+        # Rescanning that span cannot replace reviewed evidence or semantics;
+        # explicit revalidation belongs in promote(). A changed body needs a
+        # new identity and its own proof rather than inheriting VALIDATED.
+        if previous and previous["status"] == "VALIDATED":
+            prior_analysis = json.loads(previous["analysis_json"])
+            prior_fingerprint = json.loads(previous["fingerprint_json"])
+            before = (previous["start"], previous["end"], prior_analysis.get("sha256"),
+                      prior_fingerprint.get("raw_sha256"))
+            after = (start, end, analysis.get("sha256"), fingerprint.get("raw_sha256"))
+            if before != after:
+                raise ValueError("validated region binary/range changed; new evidence required")
+            return
         self.connection.execute("""
             INSERT INTO regions VALUES(?,?,?,?,?,?,?,?,?,?,?)
             ON CONFLICT(id) DO UPDATE SET
