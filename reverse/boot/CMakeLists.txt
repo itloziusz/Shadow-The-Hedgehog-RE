@@ -1,5 +1,6 @@
 add_library(shadow_boot_foundation STATIC src/BootFoundation.cpp src/ApplicationLoop.cpp src/FprSeedProjection.cpp
     src/NativeBootPrefix.cpp
+    src/NativeL2Prefix.cpp
     src/ConstructorTableProjection.cpp)
 target_compile_features(shadow_boot_foundation PUBLIC cxx_std_17)
 target_include_directories(shadow_boot_foundation PUBLIC include)
@@ -16,6 +17,10 @@ add_executable(shadow_boot_native_prefix tools/native_prefix_probe.cpp)
 target_link_libraries(shadow_boot_native_prefix PRIVATE shadow_boot_foundation)
 add_executable(shadow_boot_native_prefix_tests tests/test_native_prefix.cpp)
 target_link_libraries(shadow_boot_native_prefix_tests PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_native_l2 tools/native_l2_probe.cpp)
+target_link_libraries(shadow_boot_native_l2 PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_native_l2_tests tests/test_native_l2.cpp)
+target_link_libraries(shadow_boot_native_l2_tests PRIVATE shadow_boot_foundation)
 add_executable(shadow_boot_fpr_seed_tests tests/test_fpr_seed_projection.cpp)
 target_link_libraries(shadow_boot_fpr_seed_tests PRIVATE shadow_boot_foundation)
 
@@ -44,6 +49,8 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
     if(Python3_Interpreter_FOUND)
         add_test(NAME boot_rsp_packet_regression
             COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_rsp.py")
+        add_test(NAME boot_l2_capture_regression
+            COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_l2_capture.py")
         add_test(NAME boot_pal_semantic_recognizer
             COMMAND "${Python3_EXECUTABLE}" -B
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_recognizer.py"
@@ -137,6 +144,12 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             "-DDOL=${SHADOW_BOOT_DOL_PATH}"
             "-DPROGRAM=$<TARGET_FILE:shadow_boot_native_prefix_tests>"
             -DMODE=native_sync
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
+    add_test(NAME boot_pal_native_l2_completion
+        COMMAND ${CMAKE_COMMAND}
+            "-DDOL=${SHADOW_BOOT_DOL_PATH}"
+            "-DPROGRAM=$<TARGET_FILE:shadow_boot_native_l2_tests>"
+            -DMODE=native_l2
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
     add_test(NAME boot_pal_user_mode_decline
         COMMAND ${CMAKE_COMMAND}

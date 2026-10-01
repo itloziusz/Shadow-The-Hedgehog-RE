@@ -4,6 +4,22 @@
 
 ---
 
+## Checkpoint 29 — 2026-10-01 (bounded native L2 continuation)
+
+- Continue from `reverse/boot/PROGRESS.md` checkpoint38 and
+  `research/NATIVE_L2_COMPLETION_38.md`. The separate native L2 runner calls
+  the unchanged checkpoint37 sync prefix, follows both E branches and stops
+  before **`80372904`**, handler installation with live slot `80586CB4`.
+- Three full-entry comparisons match 10,602 state fields, 2,228 known-memory
+  byte comparisons and 24 new committed words. Full Release CTest passed
+  **51/51**, including strict capture/provenance, order and validity guards.
+  Standalone gameplay passed **27/27** and stg0100 Dark35/35 → stageindex6.
+- Three agents independently checked raw CFG/data flow, the bounded cache-free
+  native contract and reference validation. Incoming pending/test/reserved
+  states decline. Real cache/timing/history, retail inputs and first-frame/
+  pixel parity remain UNKNOWN. Next: handler-slot producer, interrupt save/
+  restore and registration consumers; preserve every existing gate.
+
 ## Checkpoint 28 — 2026-10-01 (bounded native boot crosses sync)
 
 - Read `reverse/boot/PROGRESS.md` checkpoint 37 and

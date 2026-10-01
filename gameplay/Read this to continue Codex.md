@@ -11,7 +11,19 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint 28, 2026-10-01)
+## Current continuation (checkpoint 29, 2026-10-01)
+
+Read `reverse/boot/PROGRESS.md` checkpoint38 first. The native L2 continuation
+uses unchanged checkpoint37 sync, preserves the bounded L2 consequence and
+both E branches, and stops before **`80372904`**, the handler-install call.
+The next live input is old slot `80586CB4`. Three full-entry comparisons pass
+10,602 raw fields + 2,228 known-memory byte comparisons and 24 new stores;
+full Release CTest **51/51**, standalone gameplay **27/27**, required stg0100
+route. Read `research/NATIVE_L2_COMPLETION_38.md`, the independent L2 audits
+and `HANDOFF.md` checkpoint29. Pending I/IP, TS and reserved states decline;
+physical timing/history, retail state and first-frame/pixel parity remain UNKNOWN.
+
+### Earlier continuation (checkpoint 28, 2026-10-01)
 
 Read `reverse/boot/PROGRESS.md` checkpoint 37 first. The new entry-owned
 immutable native profile crosses sync, GQR/FPR seed and enabled ICE/DCE

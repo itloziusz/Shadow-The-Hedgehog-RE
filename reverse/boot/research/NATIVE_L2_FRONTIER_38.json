@@ -1,0 +1,21 @@
+{
+  "binary_sha256": "fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af",
+  "frontier_name": "connected_immutable_native_boot",
+  "previous_stop": "0x80372894",
+  "next_stop": "0x80372904",
+  "raw_decode": "BINARY_CACHE_HANDLER.md; L2_BINARY_AUDIT_38.md independently rereads 95 words, masks, branches, SPR operands and stack aliases; all 95 mutations decline",
+  "data_flow": "NATIVE_L2_COMPLETION_38.md; eight fresh L2 reads and five writes, both E branches, both IP predicates, distinct I/IP, saved live MSR and applied helper/logger stack bytes",
+  "reference_state": "three controlled pre-entry HLE profiles; 93 checkpoints, 10602 raw fields, 2228 known-memory byte comparisons, 24 new committed words and twelve earlier frame words; stock/export 819 shared fields at39 points; not physical timing",
+  "native_replay": "RunImmutableNativeL2Prefix calls unchanged checkpoint37 entry runner from80003154; only explicit pre-entry L2CR added; synchronous private visibility consequence with no inherited cache payload or external queue; no completion/branch/register injection",
+  "regression": "51/51 full MSVC Release CTest; standalone gameplay27/27 and stg0100 Dark35/35 -> stageindex6;16 admitted L2 profiles;95 new raw mutations;original166sync mutations and3complete checkpoint37 captures stillpass;27 captureguard cases;21 recognizer cases",
+  "scope": "checkpoint37 closed immutable native backend plus initialL2CR subsetC0480000, no inherited cache-only data/ECC faults/physical pending work or timing observer; IP is owned outstanding work, I remains until guest clear; both fresh reads retained",
+  "unresolved_side_effects": [],
+  "excluded_unresolved_profiles": [
+    "retail IPL and physical cache/timing",
+    "inherited dirty L2/ECC/WT history and DPM conditions",
+    "incoming I/IP;TS;reserved bits",
+    "external observers/device queues/DMA/pending exceptions",
+    "excluded checkpoint37 hardware/FP modes",
+    "handler installation and later boot/first-frame/pixel parity"
+  ]
+}

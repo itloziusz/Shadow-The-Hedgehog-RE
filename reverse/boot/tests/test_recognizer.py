@@ -5,12 +5,13 @@ import sys
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "recognizer"))
 
 from fingerprints import detectors, fingerprint, similarity
-from cli import family_rankings, frontier, learned_hits, rescan
+from cli import family_rankings, frontier, learned_hits, rescan, run_native_probe
 from machine import DolImage, analyze, decode
 from store import Store
 
@@ -34,6 +35,25 @@ class FakeImage:
 
 
 class RecognizerTests(unittest.TestCase):
+    def test_native_probe_keeps_committed_l2_memory_readbacks(self):
+        # Diagnostic-parser test, not original machine-state evidence.
+        words = ["00000000"] * 118
+        words[0] = "80372904"; words[115] = "80000000"
+        output = " ".join(words) + "\nCOMMITTED_STACK 8060c5e0 8060c5f0\n"
+        output += "COMMITTED_L2 8060c5e4 803728d4\nSTOP pc=0x80372904 reason=LIVE_HANDLER_SLOT_UNRESOLVED\n"
+        done = SimpleNamespace(returncode=0, stdout=output, stderr="")
+        with patch("cli.subprocess.run", return_value=done), patch("cli.Path.read_bytes", return_value=b"synthetic entry"):
+            result = run_native_probe(Path("native"), Path("dol"),
+                                      {"msr":None,"hid2":None,"hid0":None}, Path("entry"))
+        self.assertEqual(result["known_fields"]["l2cr"], "80000000")
+        self.assertEqual([w["addr"] for w in result["ordered_stack_writes"]],
+                         ["0x8060C5E0", "0x8060C5E4"])
+        self.assertEqual(result["ordered_stack_writes"][1]["value"], "0x803728D4")
+        done.stdout = output.replace("8060c5e4 803728d4", "8060c5e4 UNKNOWN")
+        with patch("cli.subprocess.run", return_value=done), self.assertRaises(ValueError):
+            run_native_probe(Path("native"), Path("dol"),
+                             {"msr":None,"hid2":None,"hid0":None}, Path("entry"))
+
     def test_pointer_chain_stays_symbolic_at_indirect_call(self):
         # lis/addi build a DOL address; the live word at that address may
         # have changed, so the indirect target cannot become a DOL constant.
@@ -249,6 +269,29 @@ class PalFixtureTests(unittest.TestCase):
         analysis = json.loads(row["analysis_json"])
         self.assertEqual([i["raw"] for i in analysis["instructions"]],
                          ["4BFFE269", "54600000", "28000000", "40820058"])
+        self.assertEqual(row["status"], "UNKNOWN")
+        self.assertEqual(db.frontier()["stop_pc"], 0x80371730)
+
+    def test_native_l2_frontier_does_not_assume_handler_return(self):
+        if self.dol_path is None:
+            self.skipTest("optional PAL DOL argument")
+        db = Store(":memory:")
+        proof = {k: "synthetic test evidence" for k in
+                 ("raw_decode", "data_flow", "reference_state", "native_replay", "regression")}
+        proof.update(previous_stop="0x80371730", unresolved_side_effects=[])
+        db.advance_frontier(0x80372894, proof, name="connected_immutable_native_boot")
+        proof["previous_stop"] = "0x80372894"
+        db.advance_frontier(0x80372904, proof, name="connected_immutable_native_boot")
+        result = frontier(db, DolImage(Path(self.dol_path)), "connected_immutable_native_boot")
+        self.assertEqual(result["raw_range"], ["0x80372904", "0x80372908"])
+        self.assertIsNone(result["next_native_checkpoint"])
+        experiment = result["minimal_experiments"][0]
+        self.assertEqual(experiment["break_before"], "0x80373378")
+        self.assertEqual(experiment["break_after"], "0x80372908")
+        row = db.get("frontier_handler_call")
+        analysis = json.loads(row["analysis_json"])
+        self.assertEqual(analysis["instructions"][0]["raw"], "48000A75")
+        self.assertEqual(analysis["effects"][0]["callee_effects"], "UNTRACED")
         self.assertEqual(row["status"], "UNKNOWN")
         self.assertEqual(db.frontier()["stop_pc"], 0x80371730)
 

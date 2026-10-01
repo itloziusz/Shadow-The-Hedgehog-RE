@@ -29,9 +29,11 @@ not a playable port or a replacement for a legally obtained copy of the game.
   `0x80370BA8`. Supplying measured HID2 and HID0 words issues the two
   byte-derived SPR write requests and reaches `0x80371730`, before `sync`.
   A second entry-owned native runner now completes the bounded local barrier
-  consequence, GQR/FPR seed and enabled ICE/DCE checks, stopping before the
-  live L2CR call at **`0x80372894`**. Three explicit pre-entry experiments
-  match 5,763 state fields and 444 known stack bytes. Its immutable-code
+  consequence, GQR/FPR seed and enabled ICE/DCE checks. Its separate L2
+  continuation now follows both enabled/disabled branches, preserves the
+  bounded invalidation consequence and stops before handler installation at
+  **`0x80372904`**. Three full entry experiments match 10,602 state fields
+  and 2,228 known-memory byte comparisons. Its immutable-code
   backend rejects DCFI/ABE/disabled-cache and other unvalidated profiles;
   the old HLE HID0 word remains a request-only input, not a retail default.
   The binary-first archaeology index links raw bytes, decoded fields, CFG and
@@ -47,8 +49,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **49/49 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime, twenty boot).
+The full public-tree MSVC Release gate passed **51/51 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, twenty-two boot).
 `reverse/boot/PROGRESS.md` records the last
 connected boot checkpoint and first fail-closed stop.
 Some suites require the read-only PAL fixture. The scripted stg0100 Dark

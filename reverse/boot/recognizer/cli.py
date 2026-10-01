@@ -83,6 +83,8 @@ def frontier(db, image, name="connected_pal_boot"):
         identity, end = "frontier_sync_gqr", 0x80371768
     elif start == 0x80372894:
         identity, end = "frontier_l2cr_call", 0x803728A4
+    elif start == 0x80372904:
+        identity, end = "frontier_handler_call", 0x80372908
     else:
         # No generic extent is inferred from a PC alone. Add a byte-backed
         # range before analyzing a future frontier.
@@ -91,6 +93,7 @@ def frontier(db, image, name="connected_pal_boot"):
         db, image, identity, start, end, "frontier",
         "unknown_boot_frontier", "UNKNOWN",
         ["reverse/boot/PROGRESS.md: explicit profile-specific connected stop",
+         "reverse/boot/research/NATIVE_L2_COMPLETION_38.md" if start == 0x80372904 else
          "reverse/boot/research/NATIVE_SYNC_COMPLETION_37.md" if start == 0x80372894
          else "reverse/boot/research/SYNC_GQR_CHAIN.md: raw tail only"])
     return {"connected_stop": hx(start), "next_native_checkpoint": None,
@@ -129,13 +132,22 @@ def run_native_probe(exe: Path, dol: Path, observed: dict[str, str | None], entr
     fields = dict(re.findall(r"\b([a-z][a-z0-9]*)=0x([0-9A-F]{8})\b", stops[0][1]))
     if entry:
         lines = [line.split() for line in completed.stdout.splitlines() if re.match(r"^[0-9a-f]{8} ", line)]
-        if not lines or len(lines[-1]) != 115 or int(lines[-1][0], 16) != int(stops[0][0], 16):
+        if not lines or len(lines[-1]) not in (115, 118) or int(lines[-1][0], 16) != int(stops[0][0], 16):
             raise ValueError("native entry probe missing full stop state")
         fields = {key: lines[-1][n] for n, key in enumerate(("pc", "msr", "lr", "cr", "xer", "fpscr"))}
         fields.update({f"r{n}": lines[-1][6+n] for n in range(32)})
         fields.update({"ctr": lines[-1][102], "hid0": lines[-1][103], "hid2": lines[-1][104]})
+        if len(lines[-1]) == 118:
+            fields["l2cr"] = lines[-1][115]
     writes = [dict(re.findall(r"\b([a-z]+)=0x([0-9A-F]{8})\b", line))
               for line in completed.stdout.splitlines() if line.startswith("WRITE ")]
+    for line in completed.stdout.splitlines():
+        if line.startswith(("COMMITTED_STACK ", "COMMITTED_L2 ")):
+            parts = line.split()
+            if len(parts) != 3 or any(not re.fullmatch(r"[0-9a-fA-F]{8}", p) for p in parts[1:]):
+                raise ValueError("malformed native committed-memory readback")
+            writes.append({"addr": "0x" + parts[1].upper(), "value": "0x" + parts[2].upper(),
+                           "provenance": "applied native stack bytes; printed readback"})
     return {"stop_pc": "0x" + stops[0][0], "known_fields": fields,
             "ordered_stack_writes": writes,
             "provenance": "native C++ from explicit entry fixture; bounded immutable backend" if entry

@@ -1,5 +1,10 @@
 # PAL boot L2 status polls: fresh synthetic oracle
 
+> Historical selected-path observation. Checkpoint38's separately proven
+> **closed native owner** now connects this slice; see
+> `NATIVE_L2_COMPLETION_38.md` and its independent audits. This older capture
+> still establishes no physical completion/timing or retail input.
+
 Scope: the two `L2CR[L2IP]` polls in PAL GUPP8P `main.dol`,
 `0x80372678..0x80372684` and `0x803726B4..0x803726C0`, plus their
 immediate producers and consumers. This is an independent selected-path

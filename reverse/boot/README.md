@@ -19,6 +19,19 @@ exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
 boot remain UNKNOWN or incomplete.** These fixture-backed components do not
 make a playable game.
 
+Checkpoint 38 adds `shadow_boot_native_l2`, which calls the unchanged
+checkpoint-37 entry runner then traces live L2CR through both E branches,
+both IP polls, MSR restoration and the leaf logger. The bounded private
+completion requires no full L2 cache and accepts only explained E/CE/DO/WT
+native states; pending I/IP, TS and reserved bits decline. Three entry replays
+match **10,602 raw fields + 2,228 known-memory byte comparisons** and 24 new
+committed words. It stops before **`80372904`**, the handler-install call
+with unresolved live slot `80586CB4`. Full Release CTest: **51/51**;
+standalone gameplay: **27/27** plus the required stg0100 route.
+Read `research/NATIVE_L2_COMPLETION_38.md`, its three independent audits and
+`PROGRESS.md` first. No physical cache timing, dirty-cache history or retail
+input is inferred. First-frame/runtime/pixel requirements remain outstanding.
+
 Checkpoint 37 adds `shadow_boot_native_prefix`, an entry-owned immutable
 native backend. It completes the local sync consequence, all GQR writes,
 the FPR seed and enabled ICE/DCE checks, stopping before live L2CR at
@@ -97,6 +110,14 @@ operations may be replaced only after their producers and consumers are traced.
   entry run, private completion contract, actual bytes and controls, explicit
   input CLI and same-run downstream comparison. `test_native_prefix.cpp`
   covers all 166 words, adverse inputs and later stack aliases.
+- `include/shadow/boot/NativeL2Prefix.hpp`, `src/NativeL2Prefix.cpp`,
+  `tools/native_l2_probe.cpp`, `tools/capture_l2_state.py`,
+  `tools/validate_native_l2.py` — separate checkpoint38 continuation, controlled
+  entry/poll experiments and strict full-chain comparison. `test_native_l2.cpp`
+  checks sixteen admitted profiles and 95 new word mutations;
+  `test_l2_capture.py` checks provenance, effect order and memory validity.
+  `research/NATIVE_L2_COMPLETION_38.md` and the three `L2_*_AUDIT_38.md`
+  files distinguish native completion from unresolved physical cache state.
 - `include/shadow/boot/FprSeedProjection.hpp`, `src/FprSeedProjection.cpp` —
   explicit-input paired/scalar state projection with fail-closed unsupported
   paths; supplied from the connected entry runner only in its admitted profile.
@@ -144,6 +165,17 @@ The fixture order is MSR/HID0/HID2/CR/XER/CTR/FPSCR (seven 32-bit hex words),
 BE32 source words. There is no supplied intermediate PC/LR/GPR, expected
 branch, or sync acknowledgment. Missing/extra fields decline. The supported
 mode and reproduction instructions are in `NATIVE_SYNC_COMPLETION_37.md`.
+
+The L2 continuation uses the same fixture followed by one explicit pre-entry
+32-bit L2CR word. `validate_native_l2.py` produces it from a controlled capture:
+
+```powershell
+build/reverse/boot/Release/shadow_boot_native_l2.exe <PAL-main.dol> <explicit-entry-with-l2.txt>
+```
+
+Its supported profile and reproduction/decline requirements are in
+`NATIVE_L2_COMPLETION_38.md`. It cannot accept a supplied poll result or
+completion acknowledgment; the native owner produces those effects.
 
 ## Confidence convention
 
