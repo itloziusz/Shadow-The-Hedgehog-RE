@@ -235,6 +235,12 @@ def transfer(ins, s: dict[str, str], effects: list[dict]) -> None:
         s[f"r{rd}"] = s["LR" if m == "mflr" else "CTR"]
     elif m in ("mtlr", "mtctr"):
         s["LR" if m == "mtlr" else "CTR"] = src
+    elif m in ("mftb", "mftbu"):
+        # Distinct sampling events stay symbolic; never fold two reads into
+        # one constant, or turn an unprovided source into a branch/pointer.
+        s[f"r{rd}"] = f"UNKNOWN:TB_{'HIGH' if m == 'mftbu' else 'LOW'}@{hx(ins.addr)}"
+        effects.append({"pc": hx(ins.addr), "kind": "timebase_read", "half": "high" if m == "mftbu" else "low",
+                        "register": f"r{rd}", "value": s[f"r{rd}"], "source_status": "UNPROVIDED", "ordering": "distinct sample; no memory fence"})
     elif m == "mfspr":
         s[f"r{rd}"] = f"SPR:{ins.imm}"
         effects.append({"pc": hx(ins.addr), "kind": "spr_read", "spr": ins.imm})

@@ -380,6 +380,10 @@ def decode(w, addr):
             return ins
         if xo in (339, 467, 371):
             spr = ((w >> 16) & 31) | (((w >> 11) & 31) << 5)
+            if xo == 371 and (spr not in (268, 269) or w & 1):
+                # Gekko mftb has exactly TBL/TBU selectors and reserved Rc=0.
+                # Invalid selectors must not silently become a low TB read.
+                return ins
             ins.imm = spr
             if xo == 339:
                 ins.m = {8: 'mflr', 9: 'mfctr', 1: 'mfxer'}.get(spr, 'mfspr')

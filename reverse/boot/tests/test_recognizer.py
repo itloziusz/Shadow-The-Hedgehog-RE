@@ -10,7 +10,7 @@ from unittest.mock import patch
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "recognizer"))
 
-from fingerprints import detectors, fingerprint, similarity, stable_timebase_sampler
+from fingerprints import detectors, fingerprint, similarity, stable_timebase_sampler, low_timebase_deadline
 from cli import family_rankings, frontier, learned_hits, rescan, run_native_probe
 from machine import DolImage, analyze, decode, initial_state, transfer
 from store import Store
@@ -35,6 +35,29 @@ class FakeImage:
 
 
 class RecognizerTests(unittest.TestCase):
+    def test_timebase_selector_and_symbolic_provenance(self):
+        for bad in (0x7C6D42E7,0x7C6E42E6):
+            self.assertEqual(decode(bad,0x80001000).m,'.word')
+        initial=initial_state();initial['r6']='K:12345678'
+        effects=[];transfer(decode(0x7C6D42E6,0x80001000),initial,effects)
+        transfer(decode(0x7C8C42E6,0x80001004),initial,effects)
+        self.assertTrue(initial['r3'].startswith('UNKNOWN:TB_HIGH'))
+        self.assertTrue(initial['r4'].startswith('UNKNOWN:TB_LOW'))
+        self.assertEqual(initial['r6'],'K:12345678')
+        self.assertEqual([e['kind'] for e in effects],['timebase_read','timebase_read'])
+        self.assertTrue(all(e['source_status']=='UNPROVIDED' for e in effects))
+
+    def test_low_timebase_deadline_retains_start_and_exact_predicate(self):
+        words=[0x7CAC42E6,0x7CCC42E6,0x7CE53050,0x28071124,0x4180FFF4]
+        match=low_timebase_deadline(words,0x80376EBC)
+        self.assertEqual(match['threshold_ticks'],0x1124)
+        self.assertEqual(match['retry_target'],'80376EC0')
+        for index,bit in ((0,1),(0,1<<16),(1,1<<16),(2,1<<11),(2,1),(3,1<<21),(4,1<<16),(4,1<<2)):
+            changed=words.copy();changed[index]^=bit
+            self.assertIsNone(low_timebase_deadline(changed,0x80376EBC))
+        changed=words.copy();changed[4]^=1<<21 # BO hint only
+        self.assertIsNotNone(low_timebase_deadline(changed,0x80376EBC))
+
     def test_validated_region_cannot_inherit_proof_after_binary_or_range_change(self):
         image = FakeImage(0x80001000, [0x38600001, 0x4E800020])
         original = analyze(image, image.start, image.start + 8)

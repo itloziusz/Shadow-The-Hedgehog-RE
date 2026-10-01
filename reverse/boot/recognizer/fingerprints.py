@@ -111,7 +111,35 @@ def raw_motifs(rows: list[dict]) -> list[dict]:
                 "evidence":[f"raw six-word dependency chain at {rows[index]['pc']}",str(match)],
                 "contradictions":["live tick producer, units, offset, interruption and timing consumers remain unknown"],
                 "validation_needed":["capture both equal/retry branches and rollover","trace tick/offset provenance and downstream consumers","compare portable clock contract without fixed reference values"]})
+    for index in range(max(0,len(raw)-4)):
+        match=low_timebase_deadline(raw[index:index+5],int(rows[index]['pc'],16))
+        if match:
+            found.append({"id":"low_timebase_deadline","status":"STRUCTURAL_MATCH",
+                "hypothesis":"retain a starting low tick; poll unsigned modulo32 elapsed ticks against an immediate threshold",
+                "evidence":[f"raw five-word dependency chain at {rows[index]['pc']}",str(match)],
+                "contradictions":["source phase/frequency, progress, counter wrap interval and hardware consumer are not supplied"],
+                "validation_needed":["capture predicate on either side of threshold and wrap","trace device state and producer scheduling","preserve reference tick units; no host spin assumption"]})
     return found
+
+
+def low_timebase_deadline(words: list[int],pc: int):
+    if len(words)!=5:return None
+    a,b,sub,cmp,branch=words
+    def low(w):
+        return w>>26==31 and (w>>1)&1023==371 and not w&1 and (((w>>16)&31)|((w>>6)&0x3E0))==268
+    if not low(a) or not low(b):return None
+    start,current=(a>>21)&31,(b>>21)&31
+    delta=(sub>>21)&31
+    if len({start,current,delta})!=3:return None
+    if sub>>26!=31 or (sub>>1)&1023!=40 or sub&1 or (sub>>16)&31!=start or (sub>>11)&31!=current:return None
+    if cmp>>26!=10 or cmp&0x00600000 or (cmp>>16)&31!=delta or not cmp&0xFFFF:return None
+    field=(cmp>>23)&7
+    if branch>>26!=16 or (branch>>21)&31 not in (12,13) or (branch>>16)&31!=4*field or branch&3:return None
+    disp=branch&0xFFFC
+    if disp&0x8000:disp-=0x10000
+    if (pc+16+disp)&0xFFFFFFFF!=(pc+4)&0xFFFFFFFF:return None
+    return dict(start_register=start,current_register=current,elapsed_register=delta,threshold_ticks=cmp&0xFFFF,
+                cr_field=field,retry_target=f'{pc+4:08X}',elapsed_semantics='unsigned subtraction modulo32')
 
 
 def stable_timebase_sampler(words: list[int],pc: int):

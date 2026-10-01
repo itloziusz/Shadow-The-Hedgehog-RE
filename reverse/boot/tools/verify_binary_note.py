@@ -19,8 +19,9 @@ DATA_ROW = re.compile(
     r"^\| `([0-9A-Fa-f]{8})` \| `([0-9A-Fa-f]{6})` \| "
     r"`([0-9A-Fa-f]{2}(?: [0-9A-Fa-f]{2}){3})` \| `([0-9A-Fa-f]{8})` \|"
 )
-BRANCH = re.compile(r"→ `(bl|b|beq|bne(?: cr1,)?|blt|bdnz) (?:0x)?([0-9A-Fa-f]{8})`")
+BRANCH = re.compile(r"→ `(bl|b|beq|bne(?: cr1,)?|blt|bgt|bdnz) (?:0x)?([0-9A-Fa-f]{8})`")
 SPR = re.compile(r"\bSPR(\d+)\b")
+TBR = re.compile(r"\bTBR(\d+)\b")
 
 
 def be32(data, offset):
@@ -56,7 +57,7 @@ def signed_branch_target(address, word, mnemonic):
             raise ValueError(f"0x{address:08X} is not a conditional branch")
         bo, bi = (word >> 21) & 31, (word >> 16) & 31
         conditions = {"beq": (12, 2), "bne": (4, 2),
-                      "bne cr1,": (4, 6), "blt": (12, 0), "bdnz": (16, 0)}
+                      "bne cr1,": (4, 6), "blt": (12, 0), "bgt": (12, 1), "bdnz": (16, 0)}
         # BO's low bit is the static prediction hint, not a predicate input.
         # The original BI2 beq words use BO13; retain the other four BO bits.
         if (bo & ~1, bi) != conditions[mnemonic]:
@@ -119,6 +120,13 @@ def verify(dol, note, expected_code=None, expected_data=None):
             if signed_branch_target(address, noted_word, target[1]) != int(target[2], 16):
                 raise ValueError(f"branch target differs at 0x{address:08X}")
             branches += 1
+        tbr = TBR.search(line)
+        if tbr:
+            if noted_word >> 26 != 31 or ((noted_word >> 1) & 1023) != 371 or noted_word & 1:
+                raise ValueError(f"TBR opcode/reserved Rc differs at 0x{address:08X}")
+            selected = ((noted_word >> 16) & 31) | (((noted_word >> 11) & 31) << 5)
+            if selected not in (268,269) or selected != int(tbr[1]):
+                raise ValueError(f"TBR selector differs at 0x{address:08X}")
         spr = SPR.search(line)
         if spr:
             if noted_word >> 26 != 31 or ((noted_word >> 1) & 1023) not in (339, 467):
