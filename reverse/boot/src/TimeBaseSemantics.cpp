@@ -37,7 +37,8 @@ ClockWordSum AddClockOffset(std::uint64_t tb,std::uint64_t offset,std::uint32_t 
     return {static_cast<std::uint32_t>(high),static_cast<std::uint32_t>(low),
         (xer&~CA)|((low>>32u)?CA:0u),(xer&~CA)|((high>>32u)?CA:0u)};
 }
-ClockResearchRun ProjectClockSingleStep(const BootImage& image,const ClockResearchInputs& input) {
+namespace {
+ClockResearchRun ProjectClock(const BootImage& image,const ClockResearchInputs& input,bool continuous) {
     Check(image,0x80379628u,{0x7C6D42E6u,0x7C8C42E6u,0x7CAD42E6u,0x7C032800u,0x4082FFF0u,0x4E800020u});
     Check(image,0x80379648u,{0x7C0802A6u,0x90010004u,0x9421FFE0u,0x93E1001Cu,0x93C10018u,0x93A10014u,0x4BFFCABDu,0x7C7F1B78u,0x4BFFFFC1u,0x3CC08000u,0x80A630DCu,0x800630D8u,0x7FA52014u,0x7FC01914u,0x7FE3FB78u,0x4BFFCAC1u,0x7FA4EB78u,0x7FC3F378u,0x80010024u,0x83E1001Cu,0x83C10018u,0x83A10014u,0x38210020u,0x7C0803A6u,0x4E800020u});
     Check(image,0x8037611Cu,{0x7C6000A6u,0x5464045Eu,0x7C800124u,0x54638FFEu,0x4E800020u});
@@ -73,7 +74,24 @@ ClockResearchRun ProjectClockSingleStep(const BootImage& image,const ClockResear
         }
         run.checkpoints.push_back({live,cycles,cached,{global(0x805F1F50u),global(0x805F1F54u)}});
     };
-    const auto step=[&](std::uint32_t next,auto effect){effect();++cycles;save(next);};
+    unsigned pending_work=0;
+    const auto step=[&](std::uint32_t next,auto effect) {
+        const auto pc=cpu.pc;
+        effect();
+        if(!continuous)++cycles;
+        else {
+            // Source-conditioned semantic work annotations for the sealed
+            // clock/EE/return slice. No runtime decoder or instruction dispatch.
+            // Only its LR write costs two; other reached operations cost one.
+            pending_work+=pc==0x803796A4u?2u:1u;
+            const bool ends_unit=pc==0x80379638u||pc==0x8037963Cu||pc==0x80379684u||
+                pc==0x8037614Cu||pc==0x80376154u||pc==0x8037615Cu||pc==0x80376164u||
+                pc==0x803796A8u||pc==0x80370EB0u||pc==0x80376124u||pc==0x8037612Cu||
+                pc==0x80370EB8u;
+            if(ends_unit){cycles+=pending_work;pending_work=0;}
+        }
+        save(next);
+    };
     const auto nop=[](){};
     const auto stack_store=[&](std::uint32_t pc,std::uint32_t a,std::uint32_t v) {
         b.stack.StoreBE32(a,v);run.stores.push_back({pc,a,v,b.stack.LoadBE32(a)});
@@ -137,6 +155,14 @@ ClockResearchRun ProjectClockSingleStep(const BootImage& image,const ClockResear
     step(0x80373ABCu,[&]{stack_store(0x80373AB8u,cpu.gpr[1]+4u,cpu.gpr[0]);});
     step(0x80373AC0u,[&]{auto old=cpu.gpr[1];cpu.gpr[1]-=8u;stack_store(0x80373ABCu,cpu.gpr[1],old);});
     step(0x80373AC4u,[&]{cpu.gpr[5]=0x80000000u;});
+    run.unretired_work=pending_work;
     return run; // NEVER read the unprovided 800030F0 pointer.
+}
+}
+ClockResearchRun ProjectClockSingleStep(const BootImage& image,const ClockResearchInputs& input) {
+    return ProjectClock(image,input,false);
+}
+ClockResearchRun ProjectClockContinuousResearch(const BootImage& image,const ClockResearchInputs& input) {
+    return ProjectClock(image,input,true);
 }
 }

@@ -14,7 +14,7 @@ from machine import DolImage, analyze
 from fingerprints import raw_motifs, detectors, fingerprint
 from store import Store
 
-WIDTHS={'interrupt_mask_exchange':5,'eight_word_fill_group':10,'stable_timebase_sampler':6,'low_timebase_deadline':5}
+WIDTHS={'interrupt_mask_exchange':5,'eight_word_fill_group':10,'stable_timebase_sampler':6,'low_timebase_deadline':5,'unsigned_pointer_copy_gate':9}
 
 
 def scan(dol,db_path,report):

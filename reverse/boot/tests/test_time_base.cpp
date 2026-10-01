@@ -42,6 +42,17 @@ int main(int argc,char** argv) {
         Require(phase.stores.size()==4u&&phase.stores[0].pc==0x80370EA8u&&phase.stores[1].pc==0x80370EACu,"clock low/high store order lost");
         Require(phase.stores[2].address==0x8060C5D4u&&phase.stores[3].address==0x8060C5C8u,"restored stack slot aliases lost");
         Require(phase.prefix.checkpoints.back().boot.boot.native.state.machine.cpu.pc==0x80379628u,"research advanced production frontier");
+        const auto continuous=ProjectClockContinuousResearch(image,input);
+        Require(continuous.checkpoints[0].cached_tb==0u&&continuous.checkpoints[0].cycles==11u,
+                "continuous getter advanced unretired work");
+        Require(continuous.checkpoints[1].cached_tb==0u&&continuous.checkpoints[2].cached_tb==0u,
+                "same-block clock reads acquired different epochs");
+        Require(continuous.checkpoints.back().cycles==51u,
+                "continuous completed work or final pending four cycles changed");
+        Require(continuous.unretired_work==4u&&phase.unretired_work==0u,
+                "terminal pending work was silently lost or charged to stepped mode");
+        Require(continuous.stores[0].value==0xFFFFFFFFu,
+                "continuous low sample was replaced by stepped sample");
         input.epoch.rtc_seconds=129089431u;input.frontier_cycles=383u;input.offset=0u;
         Require(std::uint32_t(TimeBaseAt(input.epoch,0u))==0xFFFFFFE0u,"rollover fixture producer wrong");
         const auto roll=ProjectClockSingleStep(image,input);

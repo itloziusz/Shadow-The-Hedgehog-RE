@@ -22,8 +22,9 @@ struct ClockResearchInputs {
     // Optional original-entry producer rebase; explicit research input only.
     // Captures must prove low/high/commit controls before any guest instruction.
     std::optional<std::uint64_t> rebased_epoch;
-    // Observed upstream cycle count at checkpoint40; NOT derived by the
-    // native prefix. Consequently this projection cannot advance boot.
+    // Explicit research phase. Legacy experiments observe it; produced-work
+    // experiments derive it from original apploader and native prefix inputs.
+    // Neither supplies a native event owner or physical elapsed-time proof.
     std::uint64_t frontier_cycles;
     std::uint64_t offset;
     std::uint64_t cached_tb;
@@ -39,6 +40,9 @@ struct ClockResearchRun {
     std::vector<ClockResearchCheckpoint> checkpoints;
     std::vector<BootWordEffect> stores;
     std::vector<NativeZeroRange> globals;
+    // Effects have executed but this source block has not retired its work.
+    // The terminal debugger discards it; an uninterrupted successor must carry it.
+    std::uint32_t unretired_work{};
 };
 // Research-only projection of the proven GDB SingleStep source contract:
 // one source-cycle per debugger step. No retail/free-run latency claim, no
@@ -46,4 +50,8 @@ struct ClockResearchRun {
 // Ordinary boot STILL stops before80379628. A matching research result at
 //80373AC4 is explicitly not a validated connected frontier.
 ClockResearchRun ProjectClockSingleStep(const BootImage&, const ClockResearchInputs&);
+// Separate source-conditioned continuous-block experiment. Inputs remain
+// labelled research until a native epoch/work/event owner passes chain parity.
+// Getter observations do not retire work; the stable reads share one cycle.
+ClockResearchRun ProjectClockContinuousResearch(const BootImage&, const ClockResearchInputs&);
 }

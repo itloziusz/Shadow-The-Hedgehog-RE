@@ -4,6 +4,8 @@ add_library(shadow_boot_foundation STATIC src/BootFoundation.cpp src/Application
     src/NativeCrtPrefix.cpp
     src/NativeBi2Prefix.cpp
     src/TimeBaseSemantics.cpp
+    src/BootElapsedWork.cpp
+    src/ApploaderElapsedWork.cpp
     src/ConstructorTableProjection.cpp)
 target_compile_features(shadow_boot_foundation PUBLIC cxx_std_17)
 target_include_directories(shadow_boot_foundation PUBLIC include)
@@ -36,6 +38,19 @@ add_executable(shadow_boot_clock_research tools/clock_research_probe.cpp)
 target_link_libraries(shadow_boot_clock_research PRIVATE shadow_boot_foundation)
 add_executable(shadow_boot_time_base_tests tests/test_time_base.cpp)
 target_link_libraries(shadow_boot_time_base_tests PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_elapsed_work_tests tests/test_boot_elapsed_work.cpp)
+target_link_libraries(shadow_boot_elapsed_work_tests PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_apploader_work_tests tests/test_apploader_elapsed_work.cpp)
+target_link_libraries(shadow_boot_apploader_work_tests PRIVATE shadow_boot_foundation)
+
+# Finite initialization/event ownership research is separate from the connected
+# entry library and from its pinned clock/prefix executables.
+add_library(shadow_boot_initial_events_research STATIC src/InitialBootEvents.cpp)
+target_compile_features(shadow_boot_initial_events_research PUBLIC cxx_std_17)
+target_include_directories(shadow_boot_initial_events_research PUBLIC include)
+add_executable(shadow_boot_initial_events_tests tests/test_initial_boot_events.cpp)
+target_link_libraries(shadow_boot_initial_events_tests PRIVATE shadow_boot_initial_events_research)
+add_test(NAME boot_initial_event_owner_research COMMAND shadow_boot_initial_events_tests)
 
 add_executable(shadow_boot_fpr_seed_tests tests/test_fpr_seed_projection.cpp)
 target_link_libraries(shadow_boot_fpr_seed_tests PRIVATE shadow_boot_foundation)
@@ -228,6 +243,11 @@ endif()
 
 if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
     add_test(NAME boot_pal_time_base_semantics COMMAND shadow_boot_time_base_tests "${SHADOW_BOOT_DOL_PATH}")
+    add_test(NAME boot_pal_elapsed_work_semantics COMMAND shadow_boot_elapsed_work_tests "${SHADOW_BOOT_DOL_PATH}")
+    get_filename_component(SHADOW_BOOT_SYS_INPUT_DIR "${SHADOW_BOOT_DOL_PATH}" DIRECTORY)
+    if(EXISTS "${SHADOW_BOOT_SYS_INPUT_DIR}/apploader.img" AND EXISTS "${SHADOW_BOOT_SYS_INPUT_DIR}/boot.bin" AND EXISTS "${SHADOW_BOOT_SYS_INPUT_DIR}/bi2.bin")
+        add_test(NAME boot_pal_apploader_work_semantics COMMAND shadow_boot_apploader_work_tests "${SHADOW_BOOT_DOL_PATH}")
+    endif()
 endif()
 
 if(EXISTS "${SHADOW_BOOT_DOL_PATH}" AND Python3_Interpreter_FOUND)
@@ -237,4 +257,8 @@ endif()
 
 if(Python3_Interpreter_FOUND)
     add_test(NAME boot_clock_tool_falsification COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_clock_tools.py")
+    add_test(NAME boot_timing_prefix_tool_falsification COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_timing_prefix_tools.py")
+    if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
+        add_test(NAME boot_produced_clock_tool_falsification COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_produced_clock_tools.py" --dol "${SHADOW_BOOT_DOL_PATH}" --program "$<TARGET_FILE:shadow_boot_clock_research>")
+    endif()
 endif()

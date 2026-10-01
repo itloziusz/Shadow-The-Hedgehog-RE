@@ -10,7 +10,7 @@ from unittest.mock import patch
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "recognizer"))
 
-from fingerprints import detectors, fingerprint, similarity, stable_timebase_sampler, low_timebase_deadline
+from fingerprints import detectors, fingerprint, similarity, stable_timebase_sampler, low_timebase_deadline, unsigned_pointer_copy_gate
 from cli import family_rankings, frontier, learned_hits, rescan, run_native_probe
 from machine import DolImage, analyze, decode, initial_state, transfer
 from store import Store
@@ -35,6 +35,39 @@ class FakeImage:
 
 
 class RecognizerTests(unittest.TestCase):
+    def test_pointer_gate_preserves_unsigned_branch_and_word_only_clear(self):
+        words=[0x3CA08000,0x808530F0,0x7C052040,0x41810010,0x38A0001C,
+               0x4BC91A21,0x4800000C,0x38000000,0x90030000]
+        match=unsigned_pointer_copy_gate(words,0x80373AC0)
+        self.assertEqual(match['global_address'],'800030F0')
+        self.assertEqual(match['call_target'],'800054F4')
+        self.assertEqual(match['comparison'],'unsigned32')
+        self.assertEqual(match['lower_arm'],'80373ADC')
+        self.assertEqual(match['join'],'80373AE4')
+        self.assertEqual(match['call_inputs']['r5'],28)
+        self.assertEqual(match['lower_arm_store'],{'width':4,'offset':0,'value':0})
+        self.assertIn('UNKNOWN',match['pointer_status'])
+        found=detectors(analyze(FakeImage(0x80373AC0,words),0x80373AC0,0x80373AE4))
+        self.assertEqual([x['status'] for x in found if x['id']=='unsigned_pointer_copy_gate'],['STRUCTURAL_MATCH'])
+
+    def test_pointer_gate_rejects_signed_alias_and_changed_cfg_dependencies(self):
+        words=[0x3CA08000,0x808530F0,0x7C052040,0x41810010,0x38A0001C,
+               0x4BC91A21,0x4800000C,0x38000000,0x90030000]
+        for index,bit in ((0,1<<16),(0,1<<21),(1,1<<21),(1,1<<16),
+                          (2,1<<6),(2,1<<11),(2,1<<16),(2,1),(2,1<<21),
+                          (3,1<<16),(3,1<<2),(3,1),(3,2),(4,1<<21),(4,1<<16),(4,1<<15),
+                          (5,1),(5,2),(6,1),(6,2),(6,4),(7,1),(7,1<<16),
+                          (8,1),(8,1<<21),(8,1<<16),(8,1<<26)):
+            changed=words.copy();changed[index]^=bit
+            with self.subTest(index=index,bit=bit):
+                self.assertIsNone(unsigned_pointer_copy_gate(changed,0x80373AC0))
+        changed=words.copy();changed[3]^=1<<21
+        self.assertIsNotNone(unsigned_pointer_copy_gate(changed,0x80373AC0)) # BO prediction hint
+        changed=words.copy();changed[1]=0x8085FFF0;changed[4]=0x38A00004
+        match=unsigned_pointer_copy_gate(changed,0x80373AC0)
+        self.assertEqual(match['global_address'],'7FFFFFF0')
+        self.assertEqual(match['call_inputs']['r5'],4)
+
     def test_timebase_selector_and_symbolic_provenance(self):
         for bad in (0x7C6D42E7,0x7C6E42E6):
             self.assertEqual(decode(bad,0x80001000).m,'.word')

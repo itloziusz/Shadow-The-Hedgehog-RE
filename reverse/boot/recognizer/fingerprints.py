@@ -119,7 +119,49 @@ def raw_motifs(rows: list[dict]) -> list[dict]:
                 "evidence":[f"raw five-word dependency chain at {rows[index]['pc']}",str(match)],
                 "contradictions":["source phase/frequency, progress, counter wrap interval and hardware consumer are not supplied"],
                 "validation_needed":["capture predicate on either side of threshold and wrap","trace device state and producer scheduling","preserve reference tick units; no host spin assumption"]})
+    for index in range(max(0,len(raw)-8)):
+        match=unsigned_pointer_copy_gate(raw[index:index+9],int(rows[index]['pc'],16))
+        if match:
+            found.append({"id":"unsigned_pointer_copy_gate","status":"STRUCTURAL_MATCH",
+                "hypothesis":"load a global pointer; unsigned high-address arm calls with a count in r5; lower arm clears only destination word0",
+                "evidence":[f"raw nine-word dependency chain at {rows[index]['pc']}",str(match)],
+                "contradictions":["pointer ownership, readable extent and callee effects remain unproven","numeric high-address acceptance is not a valid-memory check"],
+                "validation_needed":["trace the global's writer and initialization lifetime","capture both arms and ordered callee effects","preserve guest-address comparison before any alias canonicalization"]})
     return found
+
+
+def unsigned_pointer_copy_gate(words: list[int],pc: int):
+    """Exact local encoding/dependencies, not proof that the call is memcpy."""
+    if len(words)!=9:return None
+    base,load,compare,branch,count,call,join,zero,store=words
+    bound=(base>>21)&31
+    if base>>26!=15 or (base>>16)&31 or base&0xFFFF!=0x8000 or bound in (0,3,4):return None
+    if load>>26!=32 or (load>>21)&31!=4 or (load>>16)&31!=bound:return None
+    if compare>>26!=31 or (compare>>1)&1023!=32 or compare&0x00600001:return None
+    if (compare>>16)&31!=bound or (compare>>11)&31!=4:return None
+    field=(compare>>23)&7
+    if branch>>26!=16 or (branch>>21)&31 not in (12,13) or (branch>>16)&31!=4*field+1 or branch&3:return None
+    disp=branch&0xFFFC
+    if disp&0x8000:disp-=0x10000
+    if (pc+12+disp)&0xFFFFFFFF!=(pc+28)&0xFFFFFFFF:return None
+    if count>>26!=14 or (count>>21)&31!=5 or (count>>16)&31 or not 0<(count&0xFFFF)<0x8000:return None
+    if call>>26!=18 or call&3!=1 or join>>26!=18 or join&3:return None
+    def destination(word,address):
+        offset=word&0x03FFFFFC
+        if offset&0x02000000:offset-=0x04000000
+        return (address+offset)&0xFFFFFFFF
+    if destination(join,pc+24)!=(pc+36)&0xFFFFFFFF:return None
+    zero_reg=(zero>>21)&31
+    if zero>>26!=14 or (zero>>16)&31 or zero&0xFFFF or zero_reg==3:return None
+    if store>>26!=36 or (store>>21)&31!=zero_reg or (store>>16)&31!=3 or store&0xFFFF:return None
+    offset=load&0xFFFF
+    if offset&0x8000:offset-=0x10000
+    return dict(global_address=f'{(0x80000000+offset)&0xFFFFFFFF:08X}',
+                threshold='80000000',comparison='unsigned32',cr_field=field,
+                lower_arm=f'{(pc+28)&0xFFFFFFFF:08X}',call_target=f'{destination(call,pc+20):08X}',
+                call_inputs={'r3':'unchanged destination input','r4':'unknown loaded pointer','r5':count&0xFFFF},
+                lower_arm_store={'width':4,'offset':0,'value':0},join=f'{(pc+36)&0xFFFFFFFF:08X}',
+                pointer_status='UNKNOWN; threshold alone establishes no readable extent')
 
 
 def low_timebase_deadline(words: list[int],pc: int):
