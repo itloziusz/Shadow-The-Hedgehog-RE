@@ -155,4 +155,8 @@ def minimal_experiments(region: dict) -> list[dict]:
                              "read": ["HID0", "HID2", "MSR", "stack writes", "instruction bytes"],
                              "step": "barrier and next instruction", "read_after": ["HID0", "PC", "stack bytes"],
                              "assert": "ordered state; cache completion requires separate evidence"})
+        elif e["kind"] == "call" and e.get("callee_effects") == "UNTRACED":
+            requests.append({"break_before": e["target"], "read": ["GPR", "LR", "callee raw bytes", "consumed globals/SPR"],
+                             "break_after": e["return_address"], "read_after": ["GPR", "memory delta", "consumed globals/SPR"],
+                             "assert": "trace callee and producer of each branch/pointer input; do not supply an assumed return"})
     return requests

@@ -5,6 +5,17 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-10-01 — checkpoint 37: bounded native completion crosses sync
+
+| Field | Result |
+|---|---|
+| Last validated connected checkpoint | New `shadow_boot_native_prefix` starts at `0x80003154` with explicit entry inputs and a closed immutable native backend. It completes the local sync consequence, all GQR writes, FPR seed and enabled ICE/DCE checks, stopping **before `0x80372894: bl 0x80370AFC`** (live L2CR unresolved). The historical request-only probe and its old input profile still stop at `80371730`. |
+| Root cause and reconstruction | Prior code only issued requests. A private entry-owned completion now verifies applied stack bytes, preserves accepted paired enable state, derives self-cleared HID0 separately from r3, and establishes instruction visibility for immutable compiled bodies. No device/port/code write or external observer exists in the admitted finite interval; no caller acknowledgment or interpreter is used. |
+| Important falsification | Old HLE HID0 `0011C464` contains DCFI with DCE on. The manual specifies data loss/self-clear while this interpreter only implements ICFI. The new backend rejects DCFI rather than masking it. Three explicitly labelled pre-entry experiments validate clean-command HID0 profiles; none is called a retail default. |
+| Verification | Three complete native entry replays match **17 checkpoints each: 5,763 state fields + 444 known stack bytes** total, plus all twelve committed cache-frame words. The unchanged reference agrees on 380 shared JSON fields at 20 points. Full MSVC Release CTest passed **49/49**; all **166 reached/stop-word mutations** and adverse mode/source/stale-state cases decline. Standalone gameplay passed **27/27** and stg0100 Dark → stage index 6. See `research/NATIVE_SYNC_COMPLETION_37.md`. |
+| Genuine bookkeeping fix | Recognizer frontier progress incorrectly required increasing numeric PCs. It now uses explicit matching previous-stop evidence, permits validated lower-address successors and separates native/backend profiles. Focused recognizer tests pass **19/19**. Reused DB: 277 regions, 268 UNKNOWN; no static-family promotion. The L2 branch stays symbolic and a minimal callee/return capture is proposed. The new frontier receives reviewed evidence; scans cannot promote it by themselves. |
+| Remaining unknown / next step | Read L2CR provenance and reconstruct the required L2 consequence, both polls and error/logger paths. Disabled cache, DCFI/ABE, retail pending effects, physical timing, exceptional FP, CRT/constructors/OS and first-frame/pixel parity remain unresolved. |
+
 ## 2026-09-30 — checkpoint 36: hidden state measured; native FPR projection
 
 | Field | Result |

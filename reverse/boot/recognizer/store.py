@@ -123,18 +123,23 @@ class Store:
         self.connection.commit()
         return self.frontier(name)
 
-    def advance_frontier(self, next_pc: int, evidence: dict):
+    def advance_frontier(self, next_pc: int, evidence: dict, *, name="connected_pal_boot"):
         required = {"raw_decode", "data_flow", "reference_state", "native_replay",
-                    "regression", "unresolved_side_effects"}
+                    "regression", "unresolved_side_effects", "previous_stop"}
         if required - evidence.keys() or any(not evidence[k] for k in required - {"unresolved_side_effects"}):
             raise ValueError("frontier advance lacks five-pass evidence")
         if evidence["unresolved_side_effects"]:
             raise ValueError("frontier advance has unresolved side effects")
-        current = self.frontier()
-        if next_pc <= current["stop_pc"]:
-            raise ValueError("frontier must advance")
+        current = self.frontier(name)
+        if int(evidence["previous_stop"], 16) != current["stop_pc"]:
+            raise ValueError("frontier evidence belongs to a different previous stop")
+        # Control flow can advance to a lower VA (e.g. sync -> FPR callee).
+        # Numeric address ordering is not execution progress. The explicit
+        # replay/chain evidence is required, and a repeated stop is rejected.
+        if next_pc == current["stop_pc"]:
+            raise ValueError("frontier stop did not change")
         self.connection.execute("UPDATE frontier SET stop_pc=?,status=?,evidence_json=? WHERE name=?",
-                                (next_pc, "VALIDATED_STOP", encoded(evidence), "connected_pal_boot"))
+                                (next_pc, "VALIDATED_STOP", encoded(evidence), name))
         self.connection.commit()
 
     def learn(self) -> list[dict]:

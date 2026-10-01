@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
@@ -75,18 +76,23 @@ def scan_constructors(db, image, first: int, stop: int):
     return found
 
 
-def frontier(db, image):
-    current = db.frontier()
+def frontier(db, image, name="connected_pal_boot"):
+    current = db.frontier(name)
     start = current["stop_pc"]
-    if start != 0x80371730:
+    if start == 0x80371730:
+        identity, end = "frontier_sync_gqr", 0x80371768
+    elif start == 0x80372894:
+        identity, end = "frontier_l2cr_call", 0x803728A4
+    else:
         # No generic extent is inferred from a PC alone. Add a byte-backed
         # range before analyzing a future frontier.
         raise ValueError(f"no checked bounded region for frontier {hx(start)}")
     analysis, fp, hypotheses = record(
-        db, image, "frontier_sync_gqr", start, 0x80371768, "frontier",
+        db, image, identity, start, end, "frontier",
         "unknown_boot_frontier", "UNKNOWN",
-        ["reverse/boot/PROGRESS.md checkpoint 31: stop before sync",
-         "reverse/boot/research/SYNC_GQR_CHAIN.md: raw tail only"])
+        ["reverse/boot/PROGRESS.md: explicit profile-specific connected stop",
+         "reverse/boot/research/NATIVE_SYNC_COMPLETION_37.md" if start == 0x80372894
+         else "reverse/boot/research/SYNC_GQR_CHAIN.md: raw tail only"])
     return {"connected_stop": hx(start), "next_native_checkpoint": None,
             "raw_range": [analysis["start"], analysis["end"]],
             "normalized_sha256": fp["normalized_sha256"],
@@ -97,8 +103,12 @@ def frontier(db, image):
             "classification": "STRUCTURAL_ONLY; no boot-frontier advance"}
 
 
-def run_native_probe(exe: Path, dol: Path, observed: dict[str, str | None]):
+def run_native_probe(exe: Path, dol: Path, observed: dict[str, str | None], entry: Path | None = None):
     args = [str(exe), str(dol)]
+    if entry:
+        if any(observed.values()):
+            raise ValueError("native entry fixture cannot be mixed with request-only observations")
+        args.append(str(entry))
     for name in ("msr", "hid2", "hid0"):
         value = observed[name]
         if value is None:
@@ -117,11 +127,20 @@ def run_native_probe(exe: Path, dol: Path, observed: dict[str, str | None]):
     if len(stops) != 1:
         raise ValueError("native probe did not report exactly one stop")
     fields = dict(re.findall(r"\b([a-z][a-z0-9]*)=0x([0-9A-F]{8})\b", stops[0][1]))
+    if entry:
+        lines = [line.split() for line in completed.stdout.splitlines() if re.match(r"^[0-9a-f]{8} ", line)]
+        if not lines or len(lines[-1]) != 115 or int(lines[-1][0], 16) != int(stops[0][0], 16):
+            raise ValueError("native entry probe missing full stop state")
+        fields = {key: lines[-1][n] for n, key in enumerate(("pc", "msr", "lr", "cr", "xer", "fpscr"))}
+        fields.update({f"r{n}": lines[-1][6+n] for n in range(32)})
+        fields.update({"ctr": lines[-1][102], "hid0": lines[-1][103], "hid2": lines[-1][104]})
     writes = [dict(re.findall(r"\b([a-z]+)=0x([0-9A-F]{8})\b", line))
               for line in completed.stdout.splitlines() if line.startswith("WRITE ")]
     return {"stop_pc": "0x" + stops[0][0], "known_fields": fields,
             "ordered_stack_writes": writes,
-            "provenance": "native C++ run; hardware inputs explicitly caller supplied",
+            "provenance": "native C++ from explicit entry fixture; bounded immutable backend" if entry
+            else "native C++ run; hardware inputs explicitly caller supplied",
+            "entry_fixture_sha256": hashlib.sha256(entry.read_bytes()).hexdigest() if entry else None,
             "observed_input_names": [k for k, v in observed.items() if v is not None]}
 
 
@@ -249,6 +268,9 @@ def main(argv=None):
     parser.add_argument("--db", type=Path, default=ROOT / "build" / "boot-recognizer.sqlite")
     parser.add_argument("--report", type=Path, default=ROOT / "build" / "boot-recognizer-report.json")
     parser.add_argument("--probe-exe", type=Path, help="run the current native boot prefix first")
+    parser.add_argument("--native-entry", type=Path, help="explicit pre-entry input file for the immutable native probe")
+    parser.add_argument("--frontier-name", choices=("connected_pal_boot", "connected_immutable_native_boot"),
+                        default="connected_pal_boot", help="keep different supported input/backend profiles separate")
     for name in ("msr", "hid2", "hid0"):
         parser.add_argument("--observed-" + name, help="explicit 8-hex-digit reference input")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -265,24 +287,31 @@ def main(argv=None):
     promote.add_argument("family")
     promote.add_argument("evidence", type=Path, help="JSON with four validation passes and addresses")
     sub.add_parser("report-db")
+    advance = sub.add_parser("advance-frontier", help="explicit reviewed five-pass evidence; never automatic")
+    advance.add_argument("evidence", type=Path)
     args = parser.parse_args(argv)
     image = DolImage(args.dol)
     db = Store(args.db)
     db.run(image.sha256, args.command)
     output = {"dol_sha256": image.sha256, "command": args.command,
-              "frontier_before": hx(db.frontier()["stop_pc"])}
+              "frontier_name": args.frontier_name,
+              "frontier_before": hx(db.frontier(args.frontier_name)["stop_pc"])}
     observed = {name: getattr(args, "observed_" + name) for name in ("msr", "hid2", "hid0")}
     if args.probe_exe:
-        output["native_probe"] = run_native_probe(args.probe_exe, args.dol, observed)
+        if args.native_entry and args.frontier_name != "connected_immutable_native_boot":
+            raise ValueError("explicit native profile requires its separate frontier name")
+        output["native_probe"] = run_native_probe(args.probe_exe, args.dol, observed, args.native_entry)
     elif any(observed.values()):
         raise ValueError("observed values require --probe-exe")
+    elif args.native_entry:
+        raise ValueError("native-entry requires --probe-exe")
     if args.command in ("bootstrap", "batch"):
         output["seed_count"] = bootstrap(db, image)
     if args.command in ("scan", "batch"):
         first, stop = (int(v) for v in (args.constructors if args.command == "scan" else "16:48").split(":"))
         output["scanned_constructors"] = scan_constructors(db, image, first, stop)
     if args.command in ("frontier", "batch"):
-        output["frontier_analysis"] = frontier(db, image)
+        output["frontier_analysis"] = frontier(db, image, args.frontier_name)
         if "native_probe" in output:
             output["frontier_analysis"]["entry_from_native_probe"] = (
                 output["native_probe"] if output["native_probe"]["stop_pc"] ==
@@ -293,6 +322,11 @@ def main(argv=None):
         evidence = json.loads(args.evidence.read_text(encoding="utf-8"))
         db.promote(args.identity, args.family, evidence)
         output["promoted"] = args.identity
+    if args.command == "advance-frontier":
+        evidence = json.loads(args.evidence.read_text(encoding="utf-8"))
+        if evidence["frontier_name"] != args.frontier_name or evidence["binary_sha256"] != image.sha256:
+            raise ValueError("frontier evidence profile/binary mismatch")
+        db.advance_frontier(int(evidence["next_stop"], 16), evidence, name=args.frontier_name)
     if args.command == "inspect":
         row = db.get(args.identity)
         analysis = json.loads(row["analysis_json"])
@@ -312,7 +346,7 @@ def main(argv=None):
         output["family_rankings"] = family_rankings(db, output["learned_patterns"])
     counts = Counter(r["status"] for r in db.rows())
     output["status_counts"] = dict(counts)
-    output["frontier_after"] = hx(db.frontier()["stop_pc"])
+    output["frontier_after"] = hx(db.frontier(args.frontier_name)["stop_pc"])
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
     print(f"DOL {image.sha256} | {args.command} | regions {sum(counts.values())} | statuses {dict(counts)}")

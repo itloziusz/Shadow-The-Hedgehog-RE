@@ -14,8 +14,9 @@ struct FprLanes {
     std::uint64_t ps1 = 0;
 };
 
-// Explicit input, not a boot default. This bounded projection is unconnected
-// across the unresolved ICFI/sync boundary. Source bytes must be live reads.
+// Explicit input, not a boot default. Standalone bounded projection; the
+// NativeBootPrefix runner supplies it from the checked immutable entry path.
+// Other ICFI/sync profiles remain unresolved. Source bytes must be live reads.
 struct FprSeedState {
     HardwareCallPrefix machine;
     std::uint32_t cr = 0;

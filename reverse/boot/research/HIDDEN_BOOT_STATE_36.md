@@ -1,5 +1,10 @@
 # Checkpoint 36 — measured cache/GQR/PS1 state and bounded FPR C++
 
+**Continuation:** checkpoint 37 `NATIVE_SYNC_COMPLETION_37.md` connects the
+bounded GQR/FPR path through a private native completion and reaches `80372894`.
+It also identifies the old HLE HID0 DCFI discrepancy. The historical captures
+below remain HLE evidence with that limitation; no retail/timing claim follows.
+
 The connected native prefix still stops **before `sync` at `0x80371730`**.
 This checkpoint removes an observation gap, adds a conditional C++ projection,
 and fixes a reproduced FPSCR error. It does not bypass the barrier or establish

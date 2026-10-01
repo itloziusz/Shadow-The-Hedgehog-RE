@@ -10,7 +10,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "recognizer"))
 
 from fingerprints import detectors, fingerprint, similarity
-from cli import family_rankings, learned_hits, rescan
+from cli import family_rankings, frontier, learned_hits, rescan
 from machine import DolImage, analyze, decode
 from store import Store
 
@@ -197,6 +197,23 @@ class RecognizerTests(unittest.TestCase):
         self.assertEqual(db.learn(), [])
         self.assertEqual(db.connection.execute("SELECT COUNT(*) FROM learned_patterns").fetchone()[0], 0)
 
+    def test_frontier_progress_follows_control_flow_not_address_order(self):
+        db = Store(":memory:")
+        proof = {k: "synthetic validation-gate fixture" for k in
+                 ("raw_decode", "data_flow", "reference_state", "native_replay", "regression")}
+        proof.update(previous_stop="0x80371730", unresolved_side_effects=[])
+        # The real FPR callee is below sync in address order, but later in
+        # execution. Profile-specific advancement must retain the legacy stop.
+        db.advance_frontier(0x80370CDC, proof, name="connected_immutable_native_boot")
+        self.assertEqual(db.frontier("connected_immutable_native_boot")["stop_pc"], 0x80370CDC)
+        self.assertEqual(db.frontier()["stop_pc"], 0x80371730)
+        with self.assertRaises(ValueError):
+            db.advance_frontier(0x80372894, proof, name="connected_immutable_native_boot")
+        proof["previous_stop"] = "0x80370CDC"
+        proof["unresolved_side_effects"] = ["missing ordering"]
+        with self.assertRaises(ValueError):
+            db.advance_frontier(0x80372894, proof, name="connected_immutable_native_boot")
+
 
 class PalFixtureTests(unittest.TestCase):
     dol_path = None
@@ -213,6 +230,27 @@ class PalFixtureTests(unittest.TestCase):
         self.assertEqual(len([e for e in region["effects"] if e["kind"] == "spr_write"]), 8)
         self.assertIn("sync_gqr_zero_chain", [d["id"] for d in detectors(region)])
         self.assertEqual(region["effects"][0]["status"], "unresolved_hardware")
+
+    def test_native_profile_frontier_retains_unknown_l2_input(self):
+        if self.dol_path is None:
+            self.skipTest("optional PAL DOL argument")
+        image = DolImage(Path(self.dol_path))
+        db = Store(":memory:")
+        proof = {k: "synthetic test evidence" for k in
+                 ("raw_decode", "data_flow", "reference_state", "native_replay", "regression")}
+        proof.update(previous_stop="0x80371730", unresolved_side_effects=[])
+        db.advance_frontier(0x80372894, proof, name="connected_immutable_native_boot")
+        result = frontier(db, image, "connected_immutable_native_boot")
+        self.assertEqual(result["connected_stop"], "0x80372894")
+        self.assertIsNone(result["next_native_checkpoint"])
+        self.assertEqual(result["minimal_experiments"][0]["break_before"], "0x80370AFC")
+        self.assertEqual(result["minimal_experiments"][0]["break_after"], "0x80372898")
+        row = db.get("frontier_l2cr_call")
+        analysis = json.loads(row["analysis_json"])
+        self.assertEqual([i["raw"] for i in analysis["instructions"]],
+                         ["4BFFE269", "54600000", "28000000", "40820058"])
+        self.assertEqual(row["status"], "UNKNOWN")
+        self.assertEqual(db.frontier()["stop_pc"], 0x80371730)
 
     def test_repeated_constructor_keeps_concrete_write_addresses(self):
         if self.dol_path is None:

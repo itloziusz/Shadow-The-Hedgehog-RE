@@ -1,4 +1,5 @@
 add_library(shadow_boot_foundation STATIC src/BootFoundation.cpp src/ApplicationLoop.cpp src/FprSeedProjection.cpp
+    src/NativeBootPrefix.cpp
     src/ConstructorTableProjection.cpp)
 target_compile_features(shadow_boot_foundation PUBLIC cxx_std_17)
 target_include_directories(shadow_boot_foundation PUBLIC include)
@@ -11,6 +12,10 @@ target_link_libraries(shadow_boot_tests PRIVATE shadow_boot_foundation)
 
 add_executable(shadow_boot_fpr_projection tools/fpr_projection_probe.cpp)
 target_link_libraries(shadow_boot_fpr_projection PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_native_prefix tools/native_prefix_probe.cpp)
+target_link_libraries(shadow_boot_native_prefix PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_native_prefix_tests tests/test_native_prefix.cpp)
+target_link_libraries(shadow_boot_native_prefix_tests PRIVATE shadow_boot_foundation)
 add_executable(shadow_boot_fpr_seed_tests tests/test_fpr_seed_projection.cpp)
 target_link_libraries(shadow_boot_fpr_seed_tests PRIVATE shadow_boot_foundation)
 
@@ -126,6 +131,12 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             "-DDOL=${SHADOW_BOOT_DOL_PATH}"
             "-DPROGRAM=$<TARGET_FILE:shadow_boot_fpr_seed_tests>"
             -DMODE=fpr_seed
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
+    add_test(NAME boot_pal_native_sync_completion
+        COMMAND ${CMAKE_COMMAND}
+            "-DDOL=${SHADOW_BOOT_DOL_PATH}"
+            "-DPROGRAM=$<TARGET_FILE:shadow_boot_native_prefix_tests>"
+            -DMODE=native_sync
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
     add_test(NAME boot_pal_user_mode_decline
         COMMAND ${CMAKE_COMMAND}

@@ -7,7 +7,7 @@
       "end": "80370E04",
       "family": "paired_then_scalar_fpr_seed",
       "status": "STRONGLY_SUPPORTED",
-      "evidence": ["reverse/boot/research/HIDDEN_BOOT_STATE_36.md: exact 74 words; bounded finite/zero HLE two-lane projection only; unconnected across sync", "reverse/boot/tests/test_fpr_seed_projection.cpp: all-word mutations and explicit exceptional-state declines; retail and skipped paired edge UNKNOWN"]
+      "evidence": ["reverse/boot/research/HIDDEN_BOOT_STATE_36.md: exact 74 words; bounded finite/zero HLE two-lane projection", "reverse/boot/research/NATIVE_SYNC_COMPLETION_37.md: connected only under explicit immutable native profile; retail/exceptional paths UNKNOWN", "reverse/boot/tests/test_fpr_seed_projection.cpp and test_native_prefix.cpp: all-word mutations and explicit exceptional-state declines; generic analyzer PS1 effects still UNKNOWN"]
     },
     {
       "id": "register_helper",

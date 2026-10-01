@@ -1,7 +1,8 @@
 """Measure the ICFI/GQR/FPR boundary with a read-only extended HLE oracle.
 
-The optional source-word experiment changes only live BSS data through GDB;
-it is explicitly synthetic. No DOL byte, instruction or SPR is patched.
+Optional source-word and initial HID0 experiments are explicitly synthetic.
+Pre-entry and older mid-chain source experiments are labelled separately.
+No DOL byte or instruction is patched. Original and controlled entry are retained.
 All generated files and the private oracle user directory stay in build/.
 """
 
@@ -23,8 +24,8 @@ STEPS = [(0x803725FC, False), (0x80372600, True),
          (0x80370CDC, False), (0x80370CF0, False), (0x80370CFC, False),
          (0x80370D00, True), (0x80370D7C, False),
          (0x80370D80, True), (0x80370D84, True),
-         (0x80370DFC, False), (0x80003418, False),
-         (0x80372860, False), (0x80372880, False)]
+         (0x80370DFC, False), (0x80003418, False), (0x80372838, False),
+         (0x80372860, False), (0x80372880, False), (0x80372894, False)]
 
 
 def snapshot(rsp, extended):
@@ -92,6 +93,25 @@ def run(args):
             states = [snapshot(rsp, not args.stock)]
             if states[0]["pc"] != "80003154":
                 raise ValueError("unexpected entry PC")
+            original_entry = states[0]
+            if args.initial_hid0 or args.entry_source_bits:
+                if args.initial_hid0:
+                    if len(args.initial_hid0) != 8:
+                        raise ValueError("initial-hid0 must contain exactly four bytes")
+                    bytes.fromhex(args.initial_hid0)
+                    if rsp.send(f"P77={args.initial_hid0}") != "OK":
+                        raise ValueError("controlled pre-entry HID0 experiment refused")
+                if args.entry_source_bits:
+                    if len(args.entry_source_bits) != 32:
+                        raise ValueError("entry-source-bits must contain exactly 16 bytes")
+                    bytes.fromhex(args.entry_source_bits)
+                    if rsp.send(f"M805f1f30,10:{args.entry_source_bits}") != "OK":
+                        raise ValueError("controlled pre-entry BSS experiment refused")
+                states[0] = snapshot(rsp, not args.stock)
+                if args.initial_hid0 and states[0]["hid0"].lower() != args.initial_hid0.lower():
+                    raise ValueError("pre-entry HID0 experiment readback differs")
+                if args.entry_source_bits and states[0]["fpr_source"].lower() != args.entry_source_bits.lower():
+                    raise ValueError("pre-entry BSS experiment readback differs")
             for address, step in STEPS:
                 if step:
                     rsp.send("s", reply=False)
@@ -122,6 +142,9 @@ def run(args):
                       "disc_sha256": DISC_SHA, "dolphin_sha256": sha256(args.dolphin),
                       "instrumentation_manifest": manifest,
                       "controlled_live_bss_source_experiment": bool(args.finite_sources or args.source_bits),
+                      "original_unmodified_entry": original_entry,
+                      "controlled_initial_hid0": args.initial_hid0,
+                      "controlled_entry_source_bits": args.entry_source_bits,
                       "checkpoints": states}
             args.out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     finally:
@@ -141,4 +164,6 @@ if __name__ == "__main__":
     parser.add_argument("--stock", action="store_true", help="compare original exposed fields")
     parser.add_argument("--finite-sources", action="store_true")
     parser.add_argument("--source-bits", help="controlled 16-byte BSS source, hexadecimal")
+    parser.add_argument("--initial-hid0", help="controlled pre-entry HID0 experiment; not retail state")
+    parser.add_argument("--entry-source-bits", help="controlled 16-byte BSS input at entry, hexadecimal")
     run(parser.parse_args())

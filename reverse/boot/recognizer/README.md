@@ -49,8 +49,9 @@ The table is writable at runtime; a static pointer is not proof that its
 target executes. A structural similarity score is **not** confidence or
 runtime parity. `promote` requires explicit identification, falsification,
 reference behavior, chain validation, addresses, and oracle provenance;
-the submitted evidence still requires human review. No CLI command advances
-the boot frontier automatically. `VALIDATED` seeds have the bounded meaning
+the submitted evidence still requires review. `advance-frontier <evidence.json>`
+accepts explicit reviewed five-pass evidence, binary/profile identity and a
+matching previous stop; scans never advance automatically. `VALIDATED` seeds have the bounded meaning
 stated in `seeds.json`; the full connected boot remains incomplete.
 
 For an unresolved indirect transfer, barrier, or hardware consequence, the
@@ -58,11 +59,29 @@ report retains symbolic state and suggests the smallest reference capture it
 needs. Full dynamic execution, Gekko cache behavior, paired-single PS1,
 retail IPL state, and later constructors are not inferred from a match.
 
-Checkpoint 36 adds a `STRONGLY_SUPPORTED` FPR-region seed with explicit
-finite/zero HLE projection scope. Both lanes are now measured by separate
-read-only validation tooling; the generic symbolic analyzer still keeps
-unproven scalar PS1 effects UNKNOWN. The full scan has 276 regions and retains
-the connected `0x80371730` stop. See `../research/HIDDEN_BOOT_STATE_36.md`.
+Checkpoint 37 adds the separately named `connected_immutable_native_boot`
+frontier at `0x80372894`. The legacy `connected_pal_boot` request-only profile
+retains `0x80371730`. The former is a bounded native completion with explicit
+entry inputs, and its reviewed evidence is `../research/NATIVE_SYNC_FRONTIER_37.json`.
+Use a new or existing ignored database, then replay the entry fixture generated
+by `validate_native_prefix.py`:
+
+```powershell
+python -B reverse/boot/recognizer/cli.py --dol <PAL-main.dol> `
+  --frontier-name connected_immutable_native_boot `
+  advance-frontier reverse/boot/research/NATIVE_SYNC_FRONTIER_37.json
+python -B reverse/boot/recognizer/cli.py --dol <PAL-main.dol> `
+  --frontier-name connected_immutable_native_boot `
+  --probe-exe build/reverse/boot/Release/shadow_boot_native_prefix.exe `
+  --native-entry <explicit-entry.txt> frontier
+```
+
+Repeating the evidence submission declines because its previous stop is stale.
+Numeric address increase is not progress: a validated call may descend in VA.
+Both lanes are measured by separate validation tooling; the generic symbolic
+analyzer still keeps unproven scalar PS1 effects UNKNOWN. No static family
+match is promoted by this new connected profile. See
+`../research/NATIVE_SYNC_COMPLETION_37.md`.
 
 Regression:
 

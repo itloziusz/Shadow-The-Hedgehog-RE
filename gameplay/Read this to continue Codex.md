@@ -11,7 +11,19 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint 27, 2026-09-30)
+## Current continuation (checkpoint 28, 2026-10-01)
+
+Read `reverse/boot/PROGRESS.md` checkpoint 37 first. The new entry-owned
+immutable native profile crosses sync, GQR/FPR seed and enabled ICE/DCE
+checks, stopping before live L2CR at **`0x80372894`**. Three explicit
+pre-entry experiments match 5,763 state fields + 444 known stack bytes;
+full Release CTest passed **49/49**, with 166 word-mutation declines.
+Old HLE HID0 includes an unsupported DCFI command; the legacy request-only
+probe still stops at `80371730`. No retail defaults, bus timing or first
+game frame are claimed. Continue with L2CR provenance/completion/polls, using
+`reverse/boot/research/NATIVE_SYNC_COMPLETION_37.md` and `HANDOFF.md` checkpoint 28.
+
+### Earlier continuation (checkpoint 27, 2026-09-30)
 
 Read `reverse/boot/PROGRESS.md` checkpoint 36 first for current boot work.
 The connected native prefix remains stopped before sync at `0x80371730`.

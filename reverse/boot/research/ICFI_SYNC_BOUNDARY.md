@@ -1,6 +1,12 @@
 # HID0 invalidate request → `sync`: independent boundary audit
 
-**Continuation:** checkpoint 36 (`HIDDEN_BOOT_STATE_36.md`) captures cache
+**Current continuation:** checkpoint 37 (`NATIVE_SYNC_COMPLETION_37.md`)
+implements a bounded entry-owned native completion and reaches `80372894`.
+The earlier request-only stop and physical/retail uncertainties below remain
+historical evidence. The old HLE input also contains DCFI, now separately
+identified and rejected by the new backend.
+
+**Earlier continuation:** checkpoint 36 (`HIDDEN_BOOT_STATE_36.md`) captures cache
 validity/replacement bytes immediately after the command and at later fetches.
 It also confirms that the HLE interpreter ignores sync and has an ICE=0
 invalidation rule differing from the manual. Physical/native completion is

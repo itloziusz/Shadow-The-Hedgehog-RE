@@ -67,9 +67,10 @@ struct Hid0IcfiBoundary {
 };
 
 // A prediction conditional on successful completion of the still-unmodeled
-// ICFI/sync boundary. This is not a connected boot state. It projects only
+// ICFI/sync boundary. This API alone is not a connected boot state. It projects only
 // the byte-proven instructions 0x80371734..0x80371764 and their ordinary
 // register/stack/GQR write operands; no hardware acceptance is asserted.
+// NativeBootPrefix uses it after its separate bounded completion contract.
 struct PostSyncGqrTailPrediction {
     HardwareCallPrefix before_saved_lr_load;
     std::array<SprWriteRequest, 8> ordered_gqr_writes{};

@@ -4,6 +4,23 @@
 
 ---
 
+## Checkpoint 28 — 2026-10-01 (bounded native boot crosses sync)
+
+- Read `reverse/boot/PROGRESS.md` checkpoint 37 and
+  `research/NATIVE_SYNC_COMPLETION_37.md`. The new entry-owned immutable
+  native runner crosses sync, connects GQR/FPR state and both HID0 branch
+  consumers, stopping before live L2CR at **`0x80372894`**.
+- Three controlled pre-entry experiments match 5,763 state fields and 444
+  known stack bytes; 166 checked words are mutation-gated. Full Release CTest
+  passed **49/49**. Old HLE HID0 includes DCFI; the new backend rejects it.
+  The historical request-only probe preserves its `80371730` stop.
+  Standalone `build_and_run.ps1` also passed **27/27** and stg0100 Dark → 6.
+- Recognizer profiles are separate; reviewed advancement follows control flow,
+  including lower addresses, and requires matching previous-stop evidence.
+  Next: L2CR producer/completion/polls and error/logger paths. Retail inputs,
+  excluded hardware modes, physical timing and first-frame/pixel parity remain
+  UNKNOWN. All gameplay, decline and runtime gates remain required.
+
 ## Checkpoint 27 — 2026-09-30 (boot hidden-state capture and FPR projection)
 
 - Continue boot work from `reverse/boot/PROGRESS.md` checkpoint 36. The

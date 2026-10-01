@@ -1,5 +1,9 @@
 # `sync` / GQR boot tail from the PAL DOL
 
+**Continuation:** checkpoint 37 `NATIVE_SYNC_COMPLETION_37.md` connects this
+tail after the bounded immutable native completion and reaches `80372894`.
+The original request-only profile and physical/retail paths remain separate.
+
 Scope: the fourteen reached words at `0x80371730..0x80371764` after the
 HID0 ICFI request. **PROVEN-BINARY** below means a direct read of the
 read-only PAL GUPP8P DOL (SHA-256

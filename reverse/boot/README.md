@@ -19,13 +19,17 @@ exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
 boot remain UNKNOWN or incomplete.** These fixture-backed components do not
 make a playable game.
 
-Checkpoint 36 adds a read-only reference export for PS1/GQR/HID2/cache state
-and an **unconnected** native projection of `0x80370CDC..0x80370E00`.
-Six controlled HLE runs match 4,896 raw fields; all 74 words have mutation
-gates. A genuine FPSCR reserved-bit bug was reproduced and fixed in both
-implementations. See `research/HIDDEN_BOOT_STATE_36.md`. The connected stop
-remains before sync: the reference interpreter ignores that barrier and
-cannot prove physical ordering. The complete Release CTest gate is **48/48**.
+Checkpoint 37 adds `shadow_boot_native_prefix`, an entry-owned immutable
+native backend. It completes the local sync consequence, all GQR writes,
+the FPR seed and enabled ICE/DCE checks, stopping before live L2CR at
+**`0x80372894`**. Three controlled pre-entry profiles compare 17 checkpoints
+each: **5,763 state fields + 444 known stack bytes**. All 166 checked words
+have mutation gates. The old HLE HID0 includes an unimplemented DCFI command;
+the new backend rejects that word. No retail input or physical bus timing
+is inferred. Read `research/NATIVE_SYNC_COMPLETION_37.md` and `PROGRESS.md`
+first. Complete Release CTest: **49/49**. Checkpoint 36's six standalone
+FPR experiments and reproduced FPSCR/RSP fixes remain valid historical
+evidence in `research/HIDDEN_BOOT_STATE_36.md`.
 
 The original boot handoff below was written for a static recompiler. This
 public repository keeps its authored evidence and portable C++ slice. Raw
@@ -88,9 +92,14 @@ operations may be replaced only after their producers and consumers are traced.
   `capture_boot_machine_state.py`, `validate_fpr_capture.py` — reproduce the
   synthetic SYS-only fixture, build a separate read-only debugger export,
   capture hidden state and compare the bounded native FPR projection.
+- `include/shadow/boot/NativeBootPrefix.hpp`, `src/NativeBootPrefix.cpp`,
+  `tools/native_prefix_probe.cpp`, `tools/validate_native_prefix.py` — connected
+  entry run, private completion contract, actual bytes and controls, explicit
+  input CLI and same-run downstream comparison. `test_native_prefix.cpp`
+  covers all 166 words, adverse inputs and later stack aliases.
 - `include/shadow/boot/FprSeedProjection.hpp`, `src/FprSeedProjection.cpp` —
   explicit-input paired/scalar state projection with fail-closed unsupported
-  paths; not connected through the unresolved barrier.
+  paths; supplied from the connected entry runner only in its admitted profile.
 - `include/shadow/boot/BootFoundation.hpp`, `src/` — C++17 section-backed
   register startup, wrapper/stack prefix with applied BE32 bytes, explicit-input HID2 read and
   issued HID2 and HID0 SPR write requests, plus a conditional, unconnected
@@ -122,8 +131,19 @@ at `0x8037172C` after reporting the HID2 write request. Add
 `0x80371730` before `sync`. All supplied values came from a startup-only
 synthetic HLE run and are not retail boot defaults.
 The probe declines a user-mode MSR before privileged `mfmsr`; a dedicated
-negative CLI gate prevents regression. Crossing `sync` still requires
-validated cache-command completion and separate HID0 readback.
+negative CLI gate prevents regression. This historical executable remains
+request-only. The new executable uses an **explicit entry fixture**, produced
+by `validate_native_prefix.py` from a controlled reference capture:
+
+```powershell
+build/reverse/boot/Release/shadow_boot_native_prefix.exe <PAL-main.dol> <explicit-entry.txt>
+```
+
+The fixture order is MSR/HID0/HID2/CR/XER/CTR/FPSCR (seven 32-bit hex words),
+32 raw PS0 and 32 PS1 64-bit words, eight GQR words, source address and four
+BE32 source words. There is no supplied intermediate PC/LR/GPR, expected
+branch, or sync acknowledgment. Missing/extra fields decline. The supported
+mode and reproduction instructions are in `NATIVE_SYNC_COMPLETION_37.md`.
 
 ## Confidence convention
 

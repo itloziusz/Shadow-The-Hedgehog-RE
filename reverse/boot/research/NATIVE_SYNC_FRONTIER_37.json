@@ -1,0 +1,14 @@
+{
+  "binary_sha256": "fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af",
+  "frontier_name": "connected_immutable_native_boot",
+  "previous_stop": "0x80371730",
+  "next_stop": "0x80372894",
+  "raw_decode": "BINARY_BOOT_PREFIX.md; BINARY_FPR_PREFIX.md; BINARY_CACHE_HANDLER.md; all 166 checked instruction/stop words mutation-gated",
+  "data_flow": "NATIVE_SYNC_COMPLETION_37.md sections 1-3; private owned bytes/controls; live saved LR; derived HID0; all downstream consumers before L2CR",
+  "reference_state": "three controlled pre-entry HLE profiles; 17 checkpoints each; 5763 state fields and 444 known stack bytes; not retail or physical timing",
+  "native_replay": "RunImmutableNativeBootPrefix from 80003154; no intermediate GPR/PC/LR or acknowledgment input; stops before live L2CR call 80372894",
+  "regression": "49/49 full MSVC Release CTest; 166 raw-word mutations; hardware/mode declines; entry variants; stale-state and alias checks",
+  "scope": "ICE=1 DCE=1 ABE=0 no incoming cache commands; validated passive HID0 bits; HID2 LSQE/WPE/PSE subset; closed immutable native backend with no inherited external queue; supported FPR inputs",
+  "unresolved_side_effects": [],
+  "excluded_unresolved_profiles": ["retail IPL", "physical cache/bus timing", "DCFI input", "ICE/DCE disabled", "ABE", "locked cache/DMA", "exceptional FP", "L2CR and later boot"]
+}

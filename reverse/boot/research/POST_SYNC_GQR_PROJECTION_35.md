@@ -1,5 +1,10 @@
 # Conditional post-`sync` GQR tail projection
 
+**Continuation:** checkpoint 37 `NATIVE_SYNC_COMPLETION_37.md` calls this
+projection after the entry-owned bounded native completion. It is now on
+that supported connected path; this standalone API still supplies no barrier
+acknowledgment, and excluded physical/retail profiles remain unresolved.
+
 **Scope:** PAL GUPP8P `main.dol`, `0x80371734..0x80371764`, immediately
 after the unresolved ICFI/`sync` at `0x80371730`. Original read-only DOL
 SHA-256: `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
