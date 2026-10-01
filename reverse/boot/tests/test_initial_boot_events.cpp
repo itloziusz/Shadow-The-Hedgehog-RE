@@ -33,10 +33,10 @@ void EventJson(const InitialBootEvent& event) {
 template<class T> void OptionalJson(const std::optional<T>& value) {
     if (value) std::cout << +*value; else std::cout << "null";
 }
-void Dump(const InitialBootEventOwner& owner, bool bound) {
+void Dump(const InitialBootEventOwner& owner, bool bound, const char* control=nullptr, bool owned=false) {
     const auto& s=owner.State();
     std::cout << "{\"schema\":\"initial-boot-events-42-v1\",\"scope\":\"research-only\","
-              << "\"control\":\"" << (bound ? "declared-bound-control" : "unbound-reference")
+              << "\"control\":\"" << (control ? control : (bound ? "declared-bound-control" : "unbound-reference"))
               << "\",\"stop\":\"" << InitialBootStopName(owner.Stop())
               << "\",\"scheduler\":{\"global\":" << s.global_timer << ",\"slice\":" << s.slice_length
               << ",\"downcount\":" << s.downcount << ",\"sane\":" << s.sane
@@ -70,7 +70,15 @@ void Dump(const InitialBootEventOwner& owner, bool bound) {
               << ",\"gpu_allow_sleep_calls\":" << s.gpu_allow_sleep_calls
               << ",\"new_field_calls\":" << s.new_field_calls << ",\"achievement_return_calls\":"
               << s.achievement_return_calls << ",\"guest_ram_write_bytes\":" << s.guest_ram_write_bytes
-              << "},\"journal\":[";
+              << "}";
+    if (owned) {
+        std::cout << ",\"dtk_logging_owner\":{\"constructor_owned\":" << s.dtk_logging.constructor_owned
+                  << ",\"configuration_owned\":" << s.dtk_logging.configuration_owned
+                  << ",\"flag_read\":" << s.dtk_logging.flag_read
+                  << ",\"enabled\":" << s.dtk_logging.enabled
+                  << ",\"backend_sample_rate\":" << s.dtk_logging.backend_sample_rate << "}";
+    }
+    std::cout << ",\"journal\":[";
     first=true;
     for (const auto& record:owner.Journal()) {
         if (!first) std::cout << ','; first=false;
@@ -82,6 +90,91 @@ void Dump(const InitialBootEventOwner& owner, bool bound) {
         std::cout << "]}";
     }
     std::cout << "]}\n";
+}
+unsigned OwnedDtkTests() {
+    using Inputs=InitialDtkLoggingSourceInputs;
+    const auto config=FreshInitialBootSourceConfig42();
+    const auto inputs=FreshInitialDtkLoggingSource42();
+    auto owned=InitialBootEventOwner::WithOwnedDtkLogging(config,inputs);
+    Require(owned.State().dtk_logging.constructor_owned && !owned.State().dtk_logging.enabled &&
+            owned.State().dtk_logging.backend_sample_rate==48000u,"owned source constructor missing");
+    Require(owned.FirstAdvance(Authorized())==InitialBootStop::GpuSleepEffect,"owned DTK did not reach GPU boundary");
+    const auto& s=owned.State();
+    Require(s.dtk_logging.configuration_owned && s.dtk_logging.flag_read && !s.dtk_logging.enabled &&
+            s.global_timer==20000 && s.slice_length==20000 && s.downcount==0 && s.sane &&
+            s.next_fifo==7u && s.queue.size()==5u && s.active_callback->kind==InitialEventKind::Gpu &&
+            s.dvd.pending_blocks==6u && s.dvd.streaming_push_calls==1u && s.dvd.streaming_frames==0u &&
+            s.pi.cause==0x10100u && s.pi.mask==0u && s.pi.exceptions==0u &&
+            !s.gpu_sleep_effect_delivered && s.gpu_allow_sleep_calls==0u && s.dsp.update_calls==0u &&
+            s.vi.half_line==0u && !s.movie.frame && s.guest_ram_write_bytes==0u,
+            "owned DTK partial state fabricated later effects");
+    const auto dtk=std::find_if(s.queue.begin(),s.queue.end(),[](const auto& e){return e.kind==InitialEventKind::Dtk;});
+    Require(dtk!=s.queue.end() && dtk->deadline==1699488 && dtk->fifo==6u &&
+            dtk->userdata==0x300000001ull,"owned source successor wrong");
+    // Old declared false control has the same semantic prefix. Owned rows
+    // expose new provenance; all former records retain their exact bytes.
+    InitialBootBranchBindings control;control.dtk_audio_logging=false;
+    InitialBootEventOwner declared(config,control);declared.FirstAdvance(Authorized());
+    std::vector<InitialEventRecord> semantic;
+    for (const auto& r:owned.Journal()) if (r.kind.rfind("dtk-owned-",0)!=0) semantic.push_back(r);
+    Require(semantic.size()==declared.Journal().size(),"owned logging changed semantic journal size");
+    for (std::size_t n=0;n<semantic.size();++n)
+        Require(semantic[n].kind==declared.Journal()[n].kind && semantic[n].name==declared.Journal()[n].name &&
+                semantic[n].values==declared.Journal()[n].values,"owned logging changed existing semantic effect order");
+    Decline([&]{owned.FirstAdvance(Authorized());});
+    unsigned declines=1;
+    for (unsigned field=0;field<4;++field) for (auto ingress:{Inputs::Ingress::Unknown,Inputs::Ingress::Present}) {
+        auto input=inputs;
+        auto* target=field==0 ? &input.changed_configuration : field==1 ? &input.logging_requests :
+                     field==2 ? &input.mutable_config_aliases : &input.lifetime_changes;
+        *target=ingress;
+        auto candidate=InitialBootEventOwner::WithOwnedDtkLogging(config,input);
+        const auto expected=field==0 ? InitialBootStop::DtkConfigIngressRead :
+            field==1 ? InitialBootStop::DtkLogRequestIngressRead :
+            field==2 ? InitialBootStop::DtkMutableConfigAliasRead : InitialBootStop::DtkMixerLifetimeIngressRead;
+        Require(candidate.FirstAdvance(Authorized())==expected,"unknown/present logging ingress consumed");
+        const auto& p=candidate.State();
+        if (field==1) {
+            Require(p.global_timer==20000 && p.active_callback->kind==InitialEventKind::Dtk &&
+                    p.next_fifo==6u && p.dvd.pending_blocks==0u && p.dvd.streaming_push_calls==1u &&
+                    !p.dtk_logging.flag_read,"unknown Start/Stop ingress advanced past live read");
+        } else {
+            Require(p.global_timer==0 && !p.active_callback && p.next_fifo==6u &&
+                    !p.dtk_logging.configuration_owned && !p.dtk_logging.flag_read,
+                    "unknown config/alias/lifetime mutated elapsed time");
+        }
+        ++declines;
+    }
+    auto unknown_lifecycle=inputs;unknown_lifecycle.mixer_lifecycle=Inputs::MixerLifecycle::Unknown;
+    auto lifecycle=InitialBootEventOwner::WithOwnedDtkLogging(config,unknown_lifecycle);
+    Require(lifecycle.FirstAdvance(Authorized())==InitialBootStop::DtkMixerLifecycleRead &&
+            !lifecycle.State().dtk_logging.constructor_owned && lifecycle.State().global_timer==0,
+            "unknown constructor/lifetime fabricated initial member");++declines;
+    auto unknown_config=inputs;unknown_config.configuration=Inputs::Configuration::Unknown;
+    auto configuration=InitialBootEventOwner::WithOwnedDtkLogging(config,unknown_config);
+    Require(configuration.FirstAdvance(Authorized())==InitialBootStop::DtkConfigRead &&
+            !configuration.State().dtk_logging.configuration_owned && configuration.State().global_timer==0,
+            "unknown resolver result treated as default false");++declines;
+    auto enabled_input=inputs;enabled_input.configuration=Inputs::Configuration::InitialDumpAudioEnabled;
+    auto enabled=InitialBootEventOwner::WithOwnedDtkLogging(config,enabled_input);
+    Require(enabled.FirstAdvance(Authorized())==InitialBootStop::DtkAudioDumpStartedRead &&
+            enabled.State().dtk_logging.constructor_owned && !enabled.State().dtk_logging.enabled &&
+            !enabled.State().dtk_logging.flag_read && enabled.State().global_timer==0 &&
+            enabled.State().next_fifo==6u && enabled.State().dvd.streaming_push_calls==0u,
+            "enabled logging invented WAV Start success");++declines;
+    Decline([&]{InitialBootEventOwner::WithOwnedDtkLogging(config,inputs,control);});++declines;
+    for (unsigned field=0;field<6;++field) {
+        auto invalid=inputs;
+        if (field==0) invalid.mixer_lifecycle=static_cast<Inputs::MixerLifecycle>(99);
+        else if (field==1) invalid.configuration=static_cast<Inputs::Configuration>(99);
+        else {
+            auto* target=field==2 ? &invalid.changed_configuration : field==3 ? &invalid.logging_requests :
+                         field==4 ? &invalid.mutable_config_aliases : &invalid.lifetime_changes;
+            *target=static_cast<Inputs::Ingress>(99);
+        }
+        Decline([&]{InitialBootEventOwner::WithOwnedDtkLogging(config,invalid);});++declines;
+    }
+    return declines;
 }
 void Tests() {
     Require(ProjectInitialPiException(0x100u,0x100u,0x10u)==0x14u,
@@ -191,6 +284,7 @@ void Tests() {
             !partial.State().gpu_sleep_effect_delivered && partial.State().gpu_allow_sleep_calls==0u,
             "throwing GPU effect fabricated completion");
     Decline([&] {partial.FirstAdvance(Authorized());}); ++negatives;
+    negatives+=OwnedDtkTests();
     std::cout << "PASS first-Advance research owner; " << negatives
               << " input/branch declines; signed/FIFO and ordered effects; unbound stops at Mixer.cpp253\n";
 }
@@ -203,6 +297,16 @@ int main(int argc,char** argv) {
             InitialBootEventOwner owner(FreshInitialBootSourceConfig42(),
                 bound ? Bound(gpu) : InitialBootBranchBindings{});
             owner.FirstAdvance(Authorized()); Dump(owner,bound); return 0;
+        }
+        if (argc==2 && (std::string(argv[1])=="--dump-owned-dtk" ||
+                        std::string(argv[1])=="--dump-owned-dtk-enabled")) {
+            auto inputs=FreshInitialDtkLoggingSource42();
+            const bool enabled=std::string(argv[1])=="--dump-owned-dtk-enabled";
+            if (enabled) inputs.configuration=InitialDtkLoggingSourceInputs::Configuration::InitialDumpAudioEnabled;
+            auto owner=InitialBootEventOwner::WithOwnedDtkLogging(FreshInitialBootSourceConfig42(),inputs);
+            owner.FirstAdvance(Authorized());
+            Dump(owner,false,enabled ? "owned-initial-dump-enabled" : "owned-fresh-dtk-source",true);
+            return 0;
         }
         Require(argc==1,"unknown first-Advance test option");
         Tests(); return 0;

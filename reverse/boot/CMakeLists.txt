@@ -52,6 +52,15 @@ add_executable(shadow_boot_initial_events_tests tests/test_initial_boot_events.c
 target_link_libraries(shadow_boot_initial_events_tests PRIVATE shadow_boot_initial_events_research)
 add_test(NAME boot_initial_event_owner_research COMMAND shadow_boot_initial_events_tests)
 
+# Original-byte-gated stack frames remain a separate research slice. Its
+# connector rejects current partial and declared-only first-event owners.
+add_library(shadow_boot_entry_frames_research STATIC src/ApploaderEntryFrames.cpp)
+target_compile_features(shadow_boot_entry_frames_research PUBLIC cxx_std_17)
+target_include_directories(shadow_boot_entry_frames_research PUBLIC include)
+target_link_libraries(shadow_boot_entry_frames_research PUBLIC shadow_boot_initial_events_research)
+add_executable(shadow_boot_entry_frames_tests tests/test_apploader_entry_frames.cpp)
+target_link_libraries(shadow_boot_entry_frames_tests PRIVATE shadow_boot_entry_frames_research)
+
 add_executable(shadow_boot_fpr_seed_tests tests/test_fpr_seed_projection.cpp)
 target_link_libraries(shadow_boot_fpr_seed_tests PRIVATE shadow_boot_foundation)
 
@@ -247,6 +256,7 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
     get_filename_component(SHADOW_BOOT_SYS_INPUT_DIR "${SHADOW_BOOT_DOL_PATH}" DIRECTORY)
     if(EXISTS "${SHADOW_BOOT_SYS_INPUT_DIR}/apploader.img" AND EXISTS "${SHADOW_BOOT_SYS_INPUT_DIR}/boot.bin" AND EXISTS "${SHADOW_BOOT_SYS_INPUT_DIR}/bi2.bin")
         add_test(NAME boot_pal_apploader_work_semantics COMMAND shadow_boot_apploader_work_tests "${SHADOW_BOOT_DOL_PATH}")
+        add_test(NAME boot_pal_apploader_entry_frames COMMAND shadow_boot_entry_frames_tests "${SHADOW_BOOT_DOL_PATH}")
     endif()
 endif()
 

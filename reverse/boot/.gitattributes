@@ -7,3 +7,6 @@ tools/validate_produced_clock.py -text whitespace=blank-at-eol,blank-at-eof,spac
 include/shadow/boot/InitialBootEvents.hpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 src/InitialBootEvents.cpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 tests/test_initial_boot_events.cpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+include/shadow/boot/ApploaderEntryFrames.hpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+src/ApploaderEntryFrames.cpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tests/test_apploader_entry_frames.cpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

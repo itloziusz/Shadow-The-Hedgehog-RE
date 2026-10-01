@@ -35,6 +35,21 @@ struct InitialBootSourceConfig {
 // Config values are audited source inputs, not observer queue outputs.
 InitialBootSourceConfig FreshInitialBootSourceConfig42();
 
+// Finite source initialization/ingress contract, never a captured flag.
+struct InitialDtkLoggingSourceInputs {
+    enum class MixerLifecycle { Unknown, FreshSoundStream48000 };
+    enum class Configuration { Unknown, FreshAllDumpAudioAbsent, InitialDumpAudioEnabled };
+    enum class Ingress { Unknown, Excluded, Present };
+    MixerLifecycle mixer_lifecycle = MixerLifecycle::Unknown;
+    Configuration configuration = Configuration::Unknown;
+    Ingress changed_configuration = Ingress::Unknown;
+    Ingress logging_requests = Ingress::Unknown;
+    Ingress mutable_config_aliases = Ingress::Unknown;
+    Ingress lifetime_changes = Ingress::Unknown;
+};
+// Explicit research capsule with owned closed ingress; not a host/UI provider.
+InitialDtkLoggingSourceInputs FreshInitialDtkLoggingSource42();
+
 struct InitialBootBranchBindings {
     enum class MovieLifecycle { Unknown, FreshInactive };
     MovieLifecycle movie_lifecycle = MovieLifecycle::Unknown;
@@ -57,7 +72,10 @@ enum class InitialBootStop {
     NotAdvanced, Advancing, DtkAudioLogRead, DtkAudioLogBranch, GpuSleepEffect,
     MovieFrameCounterRead, NewFieldFrameStepRead,
     NewFieldFrameStepBranch, AchievementClientRead, AchievementClientBranch,
-    AchievementDllRead, AchievementDllBranch, FirstAdvanceComplete
+    AchievementDllRead, AchievementDllBranch, FirstAdvanceComplete,
+    DtkMixerLifecycleRead, DtkConfigRead, DtkConfigIngressRead,
+    DtkMutableConfigAliasRead, DtkMixerLifetimeIngressRead,
+    DtkLogRequestIngressRead, DtkAudioDumpStartedRead
 };
 const char* InitialBootStopName(InitialBootStop);
 struct InitialEventRecord {
@@ -102,6 +120,11 @@ struct InitialBootSnapshot {
     bool gpu_sleep_effect_delivered{};
     std::uint32_t gpu_allow_sleep_calls{}, new_field_calls{}, achievement_return_calls{};
     std::uint32_t guest_ram_write_bytes{};
+    struct DtkLogging {
+        bool constructor_owned{}, configuration_owned{}, flag_read{};
+        bool enabled{};
+        std::uint32_t backend_sample_rate{};
+    } dtk_logging;
 };
 
 // Unknown live controls stop at their first actual read. Partial callback
@@ -111,17 +134,24 @@ class InitialBootEventOwner {
 public:
     explicit InitialBootEventOwner(const InitialBootSourceConfig&,
                                    const InitialBootBranchBindings& = {});
+    static InitialBootEventOwner WithOwnedDtkLogging(const InitialBootSourceConfig&,
+        const InitialDtkLoggingSourceInputs&, const InitialBootBranchBindings& = {});
     InitialBootStop FirstAdvance(const InitialAdvanceAuthorization&);
     const InitialBootSnapshot& State() const { return state_; }
     const std::vector<InitialEventRecord>& Journal() const { return journal_; }
     InitialBootStop Stop() const { return stop_; }
 private:
+    InitialBootEventOwner(const InitialBootSourceConfig&, const InitialBootBranchBindings&,
+        const std::optional<InitialDtkLoggingSourceInputs>&, int);
+    bool PrepareDtkLogging();
+    bool ConsumeDtkLogging();
     void Record(const char*, const char*, std::array<std::uint64_t,8> = {});
     void ClockRecord(const char*, std::uint64_t = 0);
     void Schedule(InitialEventKind, std::int64_t, std::uint64_t = 0);
     bool Dispatch(const InitialBootEvent&, std::int64_t);
     InitialBootSourceConfig config_;
     InitialBootBranchBindings branches_;
+    std::optional<InitialDtkLoggingSourceInputs> dtk_logging_inputs_;
     InitialBootSnapshot state_;
     std::vector<InitialEventRecord> journal_;
     InitialBootStop stop_ = InitialBootStop::NotAdvanced;

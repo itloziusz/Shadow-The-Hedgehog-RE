@@ -47,6 +47,13 @@ const char* InitialBootStopName(InitialBootStop stop) {
     case InitialBootStop::AchievementDllRead: return "AchievementManager.cpp:343 live-dll";
     case InitialBootStop::AchievementDllBranch: return "AchievementManager.cpp:347 unsupported-active-achievements";
     case InitialBootStop::FirstAdvanceComplete: return "first-advance-complete";
+    case InitialBootStop::DtkMixerLifecycleRead: return "SoundStream.h:17 unknown-mixer-lifecycle";
+    case InitialBootStop::DtkConfigRead: return "AudioCommon.cpp:78 unknown-dump-configuration";
+    case InitialBootStop::DtkConfigIngressRead: return "Layer.h:148 unknown-dump-config-ingress";
+    case InitialBootStop::DtkMutableConfigAliasRead: return "Layer.cpp:113 unknown-mutable-dsp-alias";
+    case InitialBootStop::DtkMixerLifetimeIngressRead: return "Mixer.cpp:47 unknown-mixer-lifetime-ingress";
+    case InitialBootStop::DtkLogRequestIngressRead: return "Mixer.cpp:253 unknown-start-stop-ingress";
+    case InitialBootStop::DtkAudioDumpStartedRead: return "AudioCommon.cpp:78 unknown-audio-dump-started";
     }
     throw std::invalid_argument("unknown initial event stop");
 }
@@ -56,6 +63,17 @@ InitialBootSourceConfig FreshInitialBootSourceConfig42() {
     result.cpu_hz = 486000000u;
     result.scheduler_factor_bits = UnitFactorBits;
     result.vi_factor_bits = UnitFactorBits;
+    return result;
+}
+InitialDtkLoggingSourceInputs FreshInitialDtkLoggingSource42() {
+    using Inputs=InitialDtkLoggingSourceInputs;
+    Inputs result;
+    result.mixer_lifecycle=Inputs::MixerLifecycle::FreshSoundStream48000;
+    result.configuration=Inputs::Configuration::FreshAllDumpAudioAbsent;
+    result.changed_configuration=Inputs::Ingress::Excluded;
+    result.logging_requests=Inputs::Ingress::Excluded;
+    result.mutable_config_aliases=Inputs::Ingress::Excluded;
+    result.lifetime_changes=Inputs::Ingress::Excluded;
     return result;
 }
 void InitialBootEventOwner::Record(const char* kind, const char* name,
@@ -78,7 +96,16 @@ void InitialBootEventOwner::Schedule(InitialEventKind kind, std::int64_t relativ
 }
 InitialBootEventOwner::InitialBootEventOwner(const InitialBootSourceConfig& config,
                                            const InitialBootBranchBindings& branches)
-    : config_(config), branches_(branches) {
+    : InitialBootEventOwner(config,branches,std::nullopt,0) {}
+InitialBootEventOwner InitialBootEventOwner::WithOwnedDtkLogging(
+    const InitialBootSourceConfig& config, const InitialDtkLoggingSourceInputs& logging,
+    const InitialBootBranchBindings& branches) {
+    return InitialBootEventOwner(config,branches,logging,0);
+}
+InitialBootEventOwner::InitialBootEventOwner(const InitialBootSourceConfig& config,
+    const InitialBootBranchBindings& branches,
+    const std::optional<InitialDtkLoggingSourceInputs>& logging, int)
+    : config_(config), branches_(branches), dtk_logging_inputs_(logging) {
     Require(config.profile==InitialBootSourceConfig::Profile::FreshGcPalHle42,
             "unknown source initialization profile");
     Require(config.cpu_hz==486000000u && config.scheduler_factor_bits==UnitFactorBits &&
@@ -88,6 +115,29 @@ InitialBootEventOwner::InitialBootEventOwner(const InitialBootSourceConfig& conf
     Require(branches.movie_lifecycle==InitialBootBranchBindings::MovieLifecycle::Unknown ||
             branches.movie_lifecycle==InitialBootBranchBindings::MovieLifecycle::FreshInactive,
             "unknown movie lifecycle enum");
+    if (logging) {
+        using Inputs=InitialDtkLoggingSourceInputs;
+        Require(!branches.dtk_audio_logging,"owned lifecycle cannot consume a declared flag control");
+        Require(logging->mixer_lifecycle==Inputs::MixerLifecycle::Unknown ||
+                logging->mixer_lifecycle==Inputs::MixerLifecycle::FreshSoundStream48000,
+                "invalid owned Mixer lifecycle");
+        Require(logging->configuration==Inputs::Configuration::Unknown ||
+                logging->configuration==Inputs::Configuration::FreshAllDumpAudioAbsent ||
+                logging->configuration==Inputs::Configuration::InitialDumpAudioEnabled,
+                "invalid owned dump configuration");
+        for (auto ingress:{logging->changed_configuration,logging->logging_requests,
+                           logging->mutable_config_aliases,logging->lifetime_changes})
+            Require(ingress==Inputs::Ingress::Unknown || ingress==Inputs::Ingress::Excluded ||
+                    ingress==Inputs::Ingress::Present,"invalid owned DTK ingress");
+        if (logging->mixer_lifecycle==Inputs::MixerLifecycle::FreshSoundStream48000) {
+            // SoundStream.h17 creates Mixer(48000); Mixer.h194 initializes false.
+            // This is produced state, with no observed flag input.
+            state_.dtk_logging.constructor_owned=true;
+            state_.dtk_logging.backend_sample_rate=48000u;
+            state_.dtk_logging.enabled=false;
+            Record("dtk-owned-mixer-construct","-",{0u,48000u});
+        }
+    }
 
     // Fresh last factor=0 produces downcount0 before RefreshConfig.
     state_.slice_length=MaxSlice; state_.sane=true;
@@ -135,6 +185,44 @@ InitialBootEventOwner::InitialBootEventOwner(const InitialBootSourceConfig& conf
         2u*vi.active_lines+vi.even_psb;
     Schedule(InitialEventKind::Patch,std::int64_t(half_line)*even_half_lines);
 }
+bool InitialBootEventOwner::PrepareDtkLogging() {
+    if (!dtk_logging_inputs_) return true;
+    using Inputs=InitialDtkLoggingSourceInputs;
+    const auto& input=*dtk_logging_inputs_;
+    if (!state_.dtk_logging.constructor_owned) {stop_=InitialBootStop::DtkMixerLifecycleRead;return false;}
+    if (input.changed_configuration!=Inputs::Ingress::Excluded) {stop_=InitialBootStop::DtkConfigIngressRead;return false;}
+    if (input.mutable_config_aliases!=Inputs::Ingress::Excluded) {stop_=InitialBootStop::DtkMutableConfigAliasRead;return false;}
+    if (input.lifetime_changes!=Inputs::Ingress::Excluded) {stop_=InitialBootStop::DtkMixerLifetimeIngressRead;return false;}
+    if (input.configuration==Inputs::Configuration::Unknown) {stop_=InitialBootStop::DtkConfigRead;return false;}
+    if (input.configuration==Inputs::Configuration::InitialDumpAudioEnabled) {
+        // The true config next reads System::IsAudioDumpStarted at line78.
+        // This live state is unowned here; StartAudioDump's later host time,
+        // directory/WAV effects must not be skipped or claimed delivered.
+        Record("dtk-owned-dump-enabled","-",{1u});
+        stop_=InitialBootStop::DtkAudioDumpStartedRead;return false;
+    }
+    // Every relevant layer is absent: MainSettings.cpp312 supplies false.
+    // PostInitSoundStream.cpp78 cannot enter StartAudioDump.
+    state_.dtk_logging.configuration_owned=true;
+    Record("dtk-owned-dump-default","-",{0u});
+    return true;
+}
+bool InitialBootEventOwner::ConsumeDtkLogging() {
+    if (!dtk_logging_inputs_) {
+        if (!branches_.dtk_audio_logging) {stop_=InitialBootStop::DtkAudioLogRead;return false;}
+        if (*branches_.dtk_audio_logging) {stop_=InitialBootStop::DtkAudioLogBranch;return false;}
+        return true;
+    }
+    if (dtk_logging_inputs_->logging_requests!=InitialDtkLoggingSourceInputs::Ingress::Excluded) {
+        stop_=InitialBootStop::DtkLogRequestIngressRead;return false;
+    }
+    Require(state_.dtk_logging.constructor_owned && state_.dtk_logging.configuration_owned,
+            "DTK consumed without owned initialization");
+    state_.dtk_logging.flag_read=true;
+    Record("dtk-owned-log-read","-",{state_.dtk_logging.enabled ? 1u : 0u,0u});
+    if (state_.dtk_logging.enabled) {stop_=InitialBootStop::DtkAudioLogBranch;return false;}
+    return true;
+}
 bool InitialBootEventOwner::Dispatch(const InitialBootEvent& event, std::int64_t late) {
     switch (event.kind) {
     case InitialEventKind::Dtk: {
@@ -148,8 +236,7 @@ bool InitialBootEventOwner::Dispatch(const InitialBootEvent& event, std::int64_t
         Record("dtk-zero-sample-request","-", {dvd.pending_blocks,0u,dvd.pending_blocks*28u});
         // num_samples0 bypasses both outcomes of output-rate-valid without
         // PushSample/Enqueue; logging is a separate live read even at count0.
-        if (!branches_.dtk_audio_logging) { stop_=InitialBootStop::DtkAudioLogRead; return false; }
-        if (*branches_.dtk_audio_logging) { stop_=InitialBootStop::DtkAudioLogBranch; return false; }
+        if (!ConsumeDtkLogging()) return false;
         Record("dtk-no-wave-write","-",{0u});
         dvd.pending_blocks=6u;
         Record("dtk-pending-blocks","-",{dvd.pending_blocks});
@@ -244,6 +331,10 @@ InitialBootStop InitialBootEventOwner::FirstAdvance(const InitialAdvanceAuthoriz
     Require(authorization.foreign_queue_empty==true,"unknown/foreign scheduler ingress");
     Require(authorization.no_device_or_guest_writes==true,"unknown/device/guest writer ingress");
     attempted_=true;
+    if (!PrepareDtkLogging()) {
+        Record("stop",InitialBootStopName(stop_));
+        return stop_;
+    }
     stop_=InitialBootStop::Advancing;
     ClockRecord("advance-enter");
     const auto executed=state_.slice_length-state_.downcount;
