@@ -46,6 +46,100 @@ EXPORT = '''  else if (id >= 143 && id < 175)
 '''
 
 
+TIMING_EXPORT = '''  else if (id == 123)
+  {
+    wbe32hex(reply, ppc_state.Exceptions);
+  }
+  else if (id == 250)
+  {
+    wbe64hex(reply, system.GetCoreTiming().GetTicks());
+  }
+  else if (id == 251)
+  {
+    wbe64hex(reply, system.GetCoreTiming().GetFakeTBStartTicks());
+  }
+  else if (id == 252)
+  {
+    wbe64hex(reply, system.GetCoreTiming().GetFakeTBStartValue());
+  }
+  else if (id == 253)
+  {
+    wbe32hex(reply, system.GetSystemTimers().GetTicksPerSecond());
+  }
+  else if (id == 254)
+  {
+    wbe64hex(reply, static_cast<u64>(system.GetSystemTimers().GetLocalTimeRTCOffset()));
+  }
+  else if (id == 255)
+  {
+    wbe64hex(reply, (u64(ppc_state.spr[SPR_TU]) << 32) | ppc_state.spr[SPR_TL]);
+  }
+'''
+
+
+CLOCK_PERTURBATION_WRITER = '''  if (id >= 250 && id <= 252)
+  {
+    // Controlled clock-source falsification. This gate exists only in a
+    // separately labelled experiment oracle, before the first DOL instruction.
+    if (ppc_state.pc != 0x80003154 || s_cmd_len != 12 || s_cmd_bfr[3] != '=')
+      return SendReply("E00");
+    for (u32 i = 0; i < 8; ++i)
+    {
+      const u8 c = bufptr[i];
+      if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') ||
+            (c >= 'A' && c <= 'F')))
+        return SendReply("E00");
+    }
+    const u32 value = re32hex(bufptr);
+    auto& timing = system.GetCoreTiming();
+    if (id == 250)
+      timing.SetFakeTBStartValue((timing.GetFakeTBStartValue() & 0xffffffff00000000ULL) |
+                                u64(value));
+    else if (id == 251)
+      timing.SetFakeTBStartValue((u64(value) << 32) |
+                                (timing.GetFakeTBStartValue() & 0xffffffffULL));
+    else
+    {
+      if (value != 1)
+        return SendReply("E00");
+      timing.SetFakeTBStartTicks(timing.GetTicks());
+      system.GetPowerPC().WriteFullTimeBaseValue(timing.GetFakeTBStartValue());
+    }
+    return SendReply("OK");
+  }
+
+'''
+
+
+def instrument_source(text, timing=False, clock_perturbations=False):
+    if clock_perturbations and not timing:
+        raise ValueError("clock perturbations require timing exports")
+    read_start = text.index("static void ReadRegister()")
+    read_end = text.index("static void ReadRegisters()")
+    block = text[read_start:read_end]
+    anchor = "  else if (id >= 71 && id < 87)"
+    if block.count(anchor) != 1 or "id >= 143" in block:
+        raise ValueError("unexpected upstream GDB read-register map")
+    block = block.replace(anchor, EXPORT + (TIMING_EXPORT if timing else "") + anchor)
+    modified_text = text[:read_start] + block + text[read_end:]
+    if timing:
+        include = '#include "Core/Core.h"'
+        if modified_text.count(include) != 1:
+            raise ValueError("unexpected upstream core include")
+        modified_text = modified_text.replace(
+            include, include + '\n#include "Core/CoreTiming.h"\n#include "Core/HW/SystemTimers.h"')
+    if clock_perturbations:
+        write_start = modified_text.index("static void WriteRegister()")
+        write_end = modified_text.index("static void ReadMemory(", write_start)
+        block = modified_text[write_start:write_end]
+        anchor = "  if (id < 32)"
+        if block.count(anchor) != 1 or "id >= 250" in block:
+            raise ValueError("unexpected upstream GDB write-register map")
+        block = block.replace(anchor, CLOCK_PERTURBATION_WRITER + anchor)
+        modified_text = modified_text[:write_start] + block + modified_text[write_end:]
+    return modified_text
+
+
 def digest(path):
     h = hashlib.sha256()
     with path.open("rb") as source:
@@ -88,7 +182,9 @@ def response_run(tool, args, output, env, tool_bin):
         raise RuntimeError(f"{tool} failed; see {output / (tool + '.log')}")
 
 
-def build(source, original_build, output, msvc, sdk_root, sdk_version):
+def build(source, original_build, output, msvc, sdk_root, sdk_version, timing=False, clock_perturbations=False):
+    if clock_perturbations and not timing:
+        raise ValueError("clock perturbations require timing exports")
     build_root = Path(__file__).resolve().parents[3] / "build"
     output = output.resolve()
     if not output.is_relative_to(build_root.resolve()):
@@ -108,15 +204,10 @@ def build(source, original_build, output, msvc, sdk_root, sdk_version):
         [sdk_root / "Lib" / sdk_version / part / "x64" for part in ("ucrt", "um")])
     original = source / "Source/Core/Core/PowerPC/GDBStub.cpp"
     text = original.read_text(encoding="utf-8")
-    # No emulator instruction, store, branch, register writer or Reset changes.
-    read_start, read_end = text.index("static void ReadRegister()"), text.index("static void ReadRegisters()")
-    block = text[read_start:read_end]
-    anchor = "  else if (id >= 71 && id < 87)"
-    if block.count(anchor) != 1 or "id >= 143" in block:
-        raise ValueError("unexpected upstream GDB read-register map")
-    block = block.replace(anchor, EXPORT + anchor)
+    # Default export modes leave the original register writer unchanged.
     modified = output / "GDBStub.cpp"
-    modified.write_text(text[:read_start] + block + text[read_end:], encoding="utf-8")
+    modified_text = instrument_source(text, timing, clock_perturbations)
+    modified.write_text(modified_text, encoding="utf-8")
     compile_args = tlog_command(original_build /
         "Source/Core/Core/core.dir/Release/core.tlog/CL.command.1.tlog", "GDBSTUB.CPP")
     compile_args = [arg for arg in compile_args
@@ -179,8 +270,26 @@ def build(source, original_build, output, msvc, sdk_root, sdk_version):
             "216:248": "ICache PLRU bytes packed BE32", "248": "ICache disabled flag",
             "249": "architectural XER composed from live carry/SO/OV fields"},
         "link_input_sha256": {str(p): digest(p) for p in inputs}}
+    if timing:
+        manifest["register_map"].update({"123": "pending architectural exception flags (read only)", "250": "CoreTiming elapsed CPU-domain cycles (u64)",
+            "251": "TB producer epoch cycles (u64)", "252": "TB producer epoch value (u64)",
+            "253": "CPU-domain cycles per second (u32)", "254": "RTC local-time offset raw s64",
+            "255": "last architecturally sampled TU/TL pair, not a fresh clock read"})
+        manifest["timing_export"] = "pure getters only; no GetFakeTimeBase call or register writer"
+    if clock_perturbations:
+        manifest["purpose"] = "controlled pre-entry clock-source experiment oracle; no native dependency"
+        manifest["clock_perturbations"] = {
+            "enabled": True, "allowed_pc": "80003154", "exact_packet_value_width": 8,
+            "write_register_map": {
+                "250": "set TB epoch low u32, preserving high; Pfa=<8 hex>",
+                "251": "set TB epoch high u32, preserving low; Pfb=<8 hex>",
+                "252": "commit only value00000001: epochcycles=GetTicks; mirror cachedTU/TL; Pfc=00000001"},
+            "restrictions": "all controls decline outside PC80003154; no guest instruction or midchain patch",
+            "evidence_scope": "rollover/carry falsification only; cannot advance native frontier",
+            "default_timing_export_unchanged": True}
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-    print("read-only oracle", manifest["instrumented_executable_sha256"])
+    print("clock experiment oracle" if clock_perturbations else "read-only oracle",
+          manifest["instrumented_executable_sha256"])
 
 
 if __name__ == "__main__":
@@ -192,6 +301,11 @@ if __name__ == "__main__":
                         help="MSVC Tools/MSVC/<version> matching the original build")
     parser.add_argument("--sdk-root", required=True, type=Path)
     parser.add_argument("--sdk-version", required=True)
+    parser.add_argument("--timing", action="store_true", help="add pure TB-producer getter exports")
+    parser.add_argument("--clock-perturbations", action="store_true",
+                        help="controlled pre-entry TB epoch writes; requires --timing")
     args = parser.parse_args()
+    if args.clock_perturbations and not args.timing:
+        parser.error("--clock-perturbations requires --timing")
     build(args.source, args.original_build, args.output, args.msvc,
-          args.sdk_root, args.sdk_version)
+          args.sdk_root, args.sdk_version, args.timing, args.clock_perturbations)

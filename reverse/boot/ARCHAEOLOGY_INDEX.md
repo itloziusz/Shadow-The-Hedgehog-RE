@@ -22,9 +22,9 @@ state comparison for the modeled fields. A stage marked `partial` is not a
 completed proof. Full equivalence also requires downstream consumer, memory,
 hardware and pixel/runtime gates.
 
-`tools/verify_binary_note.py` is the executable raw-byte gate. Five PAL notes
-now check 663 DOL instruction rows, all 109 direct branch targets in those
-rows, and 36 SPR encodings. An independent 29-word paired-setup note overlaps
+`tools/verify_binary_note.py` is the executable raw-byte gate. Six PAL notes
+now check734 DOL instruction rows, all121 direct branch targets in those
+rows, and40 SPR encodings. An independent 29-word paired-setup note overlaps
 the entry note and has its own gate. Exact expected VA spans now reject
 omitted or substituted rows; the negative gate proves a valid-word swap fails.
 The checked regions are bounded; this is not complete boot coverage.
@@ -40,12 +40,14 @@ The checked regions are bounded; this is not complete boot coverage.
 | CRT entry/walker/fill leaf and descriptors — CRT/memory | yes, 111 instruction and41 descriptor words | exact identity descriptors, zero-group/remainder and carry | full three ranges, hostile seeds and boundary canaries | connected from entry through80003188 | `NATIVE_CRT_COMPLETION_39.md`:153 original new points,1473816 full byte comparisons,102 ordered stores. Repeated in all six checkpoint40 profiles. No blanket BSS zero. |
 | BI2/debug/relocation/metadata `80003188..3264` — CRT/metadata | yes, registered ledger | two fresh reads, all admitted branch/alias/CTR effects | six complete live-blob profiles; resolved context stop | connected ordinary/debug4 paths | `BINARY_BI2_OS_PREFIX_40.md`, `NATIVE_BI2_COMPLETION_40.md`, two independent audits. New191 points/22156 fields/1564672 BI2 bytes. Debug2/3 and null fallback stop before unknown effects. |
 | OS/clock prologues — OS/EE | yes, registered ledger plus static later clock record | produced guard, applied frames, EE disable | connected state and stack aliases | through80379628, before first TBU | `NATIVE_BI2_COMPLETION_40.md`, `OS_ENTRY_NEXT_BOUNDARY.md`. Live ticks/units/rollover, offset800030D8/DC, later OS/device responses remain UNKNOWN. Two sampler fingerprints are structural only. |
+| Clock sampler/offset/return/store and next frame — timing/OS | yes,71 words plus complete loaded-text inventory | exact TB halves, signed CR/SO, carry, MSR and aliases | four reference profiles with full64 and signed-high retry; continuous schedule falsifies step substitution | research projection only,182 CP; production remains80379628 | `CLOCK_RESEARCH_41.md` and three independent audits. Before80373AC4 in the research projection; native elapsed/event provider and800030F0 pointer still UNKNOWN. |
 | Constructor walker `0x803796AC..0x8037971C` and table — C++ runtime/game | partial | yes for walker and first 16 bodies; bounded structural scan of 16–281; exact global-copy graph for eight NPC MotionImpl bodies | no | bounded copy projection only | `ASM_CONSTRUCTORS.md`, `CONSTRUCTOR_NEXT_TARGETS.md`, `SEMANTIC_RECOGNIZER_33.md`, `MOTION_TABLE_CONSTRUCTORS_34.md`; 282 static table pointers checked. Live targets, source values, entry/return deltas and connected effects remain unresolved. |
 | RenderWare, GX, audio and game application transition — middleware/game | partial | partial | no | no | `research/CRT_TO_GAME.md` and other subsystem docs are navigation only until binary-first region records and connected tests exist. |
 
 The next connected immutable native work starts at `0x80379628`, before the
-first live time-base read. Read checkpoint40, its byte/independent records and
-the later clock/offset consumer proof before coding.
+first live time-base read. Read research41 and checkpoint40 together. Clock
+research does not promote this frontier: prove the native source-time/event
+contract before coding a connected continuation.
 The older request-only profile still stops at `0x80371730`; its HLE DCFI
 input cannot silently enter the new backend. Capture
 the first same-run state and RAM-write divergence, fix its producer, then run

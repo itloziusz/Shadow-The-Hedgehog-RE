@@ -3,6 +3,7 @@ add_library(shadow_boot_foundation STATIC src/BootFoundation.cpp src/Application
     src/NativeL2Prefix.cpp
     src/NativeCrtPrefix.cpp
     src/NativeBi2Prefix.cpp
+    src/TimeBaseSemantics.cpp
     src/ConstructorTableProjection.cpp)
 target_compile_features(shadow_boot_foundation PUBLIC cxx_std_17)
 target_include_directories(shadow_boot_foundation PUBLIC include)
@@ -31,6 +32,11 @@ add_executable(shadow_boot_native_bi2 tools/native_bi2_probe.cpp)
 target_link_libraries(shadow_boot_native_bi2 PRIVATE shadow_boot_foundation)
 add_executable(shadow_boot_native_bi2_tests tests/test_native_bi2.cpp)
 target_link_libraries(shadow_boot_native_bi2_tests PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_clock_research tools/clock_research_probe.cpp)
+target_link_libraries(shadow_boot_clock_research PRIVATE shadow_boot_foundation)
+add_executable(shadow_boot_time_base_tests tests/test_time_base.cpp)
+target_link_libraries(shadow_boot_time_base_tests PRIVATE shadow_boot_foundation)
+
 add_executable(shadow_boot_fpr_seed_tests tests/test_fpr_seed_projection.cpp)
 target_link_libraries(shadow_boot_fpr_seed_tests PRIVATE shadow_boot_foundation)
 
@@ -218,4 +224,17 @@ if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
             "-DPROGRAM=$<TARGET_FILE:shadow_boot_application_loop_tests>"
             -DMODE=loop
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verify_fixture.cmake")
+endif()
+
+if(EXISTS "${SHADOW_BOOT_DOL_PATH}")
+    add_test(NAME boot_pal_time_base_semantics COMMAND shadow_boot_time_base_tests "${SHADOW_BOOT_DOL_PATH}")
+endif()
+
+if(EXISTS "${SHADOW_BOOT_DOL_PATH}" AND Python3_Interpreter_FOUND)
+    add_test(NAME boot_pal_raw_clock_research COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tools/verify_binary_note.py" "${SHADOW_BOOT_DOL_PATH}" "${CMAKE_CURRENT_SOURCE_DIR}/research/BINARY_CLOCK_PREFIX_41.md" --expected-words 71 --expected-branches 12 --expected-sprs 4 --required-code-range 80379628:8037963C --required-code-range 80379648:803796A8 --required-code-range 8037611C:8037612C --required-code-range 80376144:80376164 --required-code-range 80370EA8:80370EB8 --required-code-range 80373AB4:80373AF0 --required-code-range 80376EBC:80376ECC)
+    add_test(NAME boot_pal_clock_independent_semantics COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tools/agent_clock_adversarial_semantics.py" "${SHADOW_BOOT_DOL_PATH}")
+endif()
+
+if(Python3_Interpreter_FOUND)
+    add_test(NAME boot_clock_tool_falsification COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_clock_tools.py")
 endif()

@@ -8,10 +8,10 @@ or source-code generator.
 Current immutable connected frontier: **80379628**, before a live time-base
 read (checkpoint40). The legacy request-only frontier remains80371730.
 `../tools/scan_boot_motifs.py` now scans all original text for bitfield-checked
-EE, eight-word fill and high/low/high clock motifs, storing UNKNOWN candidates.
-Two clock sampler and two fill matches do not imply shared callers or validated
+EE, eight-word fill, high/low/high clock and unsigned low-tick deadline motifs, storing UNKNOWN candidates.
+Two clock sampler, one low-tick deadline and two fill matches do not imply shared callers or validated
 clock state. Four new scoped solved seeds support later recognition; current
-raw/symbolic/proof tests33/33 pass. Stale evidence cannot survive changed raw
+raw/symbolic/proof tests35/35 pass. Stale evidence cannot survive changed raw
 bytes/binary/range; CTR, conditional-return, insert and XER.SO dependencies
 remain explicit. Shared shape and packed-register gates reject UNKNOWN data.
 
@@ -34,7 +34,7 @@ From the repository root, with Python 3.10+ and an existing Release build:
 
 ```powershell
 python -B reverse/boot/recognizer/cli.py `
-  --dol H:\ShadowTheHedgehogAssetLoaderRE\sys\main.dol `
+  --dol <read-only-PAL-main.dol> `
   --probe-exe build\reverse\boot\Release\shadow_boot_probe.exe `
   --observed-msr 00002032 --observed-hid2 E0000000 `
   --observed-hid0 0011C464 batch
@@ -111,10 +111,18 @@ match is promoted by this new connected profile. See
 Regression:
 
 ```powershell
-python -B reverse/boot/tests/test_recognizer.py H:\ShadowTheHedgehogAssetLoaderRE\sys\main.dol
+python -B reverse/boot/tests/test_recognizer.py <read-only-PAL-main.dol>
 ctest --test-dir build -C Release --output-on-failure
 ```
 
 The first command includes raw PAL bytes plus synthetic mutation and
 fail-closed tests. CMake registers it as `boot_pal_semantic_recognizer` when
 the PAL DOL fixture is configured.
+
+
+Clock research41 keeps distinct symbolic TB read events and rejects invalid
+TBR/Rc encodings. The new low-deadline detector preserves modulo32 subtraction,
+unsigned CR predicate, registers, threshold and retry target. Its one full-DOL
+match is structural only. `CLOCK_RESEARCH_41.md` documents182 research parity
+points and the unresolved native provider; research output never advances the
+frontier or becomes a VALIDATED semantic seed merely by matching a pattern.

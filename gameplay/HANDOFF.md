@@ -4,6 +4,23 @@
 
 ---
 
+## Checkpoint32 — 2026-10-01 (clock research; production boot remains checkpoint40)
+
+- Read boot `PROGRESS.md` research41 and `research/CLOCK_RESEARCH_41.md` first.
+  Connected native remains **before80379628**: live elapsed-time/event source
+  is genuinely unresolved. A separate executed research projection reaches
+  **before80373AC4**, with upstream source timing explicitly supplied.
+- Four full-entry profiles match182 new CP/21112 state fields/18928 known
+  stack bytes/1965088 current global bytes. Source-only controls before entry
+  exercise original full64 and signed-high rollover retries. No expected
+  ticks, branch results, midchain controls or host timing are admitted.
+- Full Release **60/60**, gameplay **27/27**, required Dark mission ->stage6.
+  Independent audit rejects128 reference and524 compiled mutations; original
+  sync/L2/CRT/BI2 source is untouched. Decoder/phase bugs have regressions.
+- Next prove ordinary clock/event ownership, not debugger cycle substitution;
+  then investigate800030F0. Preserve all declines and retail/runtime/pixel
+  requirements. Gameplay implementation and its unresolved hooks are unchanged.
+
 ## Checkpoint31 — 2026-10-01 (live BI2 and first OS/clock prologues)
 
 - Read boot `PROGRESS.md` checkpoint40, `NATIVE_BI2_COMPLETION_40.md` and

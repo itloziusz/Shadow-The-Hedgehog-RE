@@ -19,6 +19,16 @@ exit sequence at `0x800511E0..0x80051218` with explicit unresolved hooks.
 boot remain UNKNOWN or incomplete.** These fixture-backed components do not
 make a playable game.
 
+Checkpoint41 is **research**, not a connected frontier advance. The new
+`shadow_boot_clock_research` executes source-derived TB arithmetic and exact
+sampler/retry/offset/EE/return/store effects through before **80373AC4**. Four
+full-entry profiles compare182 CP/21112 fields/18928 known stack bytes, including
+original full64 and signed-high rollover retries. Final Release **60/60** and
+gameplay **27/27** plus the required route pass. Production checkpoint40 stays
+before **80379628** until native elapsed time and events are proven. Read
+`research/CLOCK_RESEARCH_41.md`, its raw ledger and independent audits first.
+No host clock, interpreter or per-read TB result was introduced.
+
 Checkpoint 40 adds `shadow_boot_native_bi2`: complete measured BI2 ownership,
 two fresh pointer reads, debug/relocation routes, coherent SDA metadata and
 first OS/clock frames. It stops before **`80379628`**, the first live time-base
@@ -108,6 +118,13 @@ operations may be replaced only after their producers and consumers are traced.
   `research/SEMANTIC_RECOGNIZER_32.md` and `SEMANTIC_RECOGNIZER_33.md` for
   the scans and recovered multiword effects. `MOTION_TABLE_CONSTRUCTORS_34.md`
   records the eight NPC MotionImpl copy graphs and their validation limits.
+- `research/CLOCK_RESEARCH_41.md`, `BINARY_CLOCK_PREFIX_41.md` and the three
+  `CLOCK_*_AUDIT_41.md` notes — source/units/phase/rollover/consumer evidence,
+  executed research parity and the unclosed native clock provider.
+- `include/shadow/boot/TimeBaseSemantics.hpp`, `src/TimeBaseSemantics.cpp` —
+  pure counter/carry/CR semantics and explicitly separate SingleStep projection.
+- `tools/capture_clock_state.py`, `validate_clock_research.py` — producer/phase,
+  ordered stores/current owners, control provenance and full-prefix regression.
 - `research/` — independent pre-entry, HID2/HID0, FPR-lane, L2, CRT-memory,
   constructor and application-loop audits with exact address evidence, including assembly CFG/data-flow and
   a synthetic Dolphin/HLE checkpoint study. The latter is not retail IPL proof.

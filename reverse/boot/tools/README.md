@@ -92,3 +92,46 @@ have a verified target; the CRT case also checks 41 descriptor words with
 `--expected-data-words 41`. This is a byte/ISA gate, not an execution-parity
 gate. `boot_pal_raw_coverage_negative` proves that replacing a required word
 with an unrelated valid DOL word fails despite identical row totals.
+
+
+## Clock producer and research parity (checkpoint41)
+
+`build_readonly_boot_oracle.py --timing` adds pure getters for pending exception
+flags, CPU-domain cycles, origin cycles/value, frequency, RTC offset and the
+cached TB pair. It does not invoke a fresh TB read or change the original
+writer. The separate optional `--clock-perturbations` (requires `--timing`)
+adds strictly gated low/high/commit source controls only at80003154. Its
+manifest identifies a controlled source experiment, never an ordinary oracle.
+`agent_clock_source_builder.py` compiles the exact guard/parser and rejects44
+malformed controls; inputs/build/toolchain paths are explicit CLI arguments.
+
+```text
+python -B reverse/boot/tools/capture_clock_state.py \
+  <build/timing-oracle/Dolphin.exe> <build/startup.iso> \
+  <build/fresh-profile> <build/clock.json> --port <free-port> \
+  --l2cr 00000000 --handler 00000000
+
+python -B reverse/boot/tools/validate_clock_research.py \
+  <read-only-main.dol> <read-only-bi2.bin> \
+  <build/reverse/boot/Release/shadow_boot_clock_research.exe> \
+  <build/reverse/boot/Release/shadow_boot_native_bi2.exe> \
+  <build/reverse/boot/Release/shadow_boot_native_crt.exe> \
+  <build/reverse/boot/Release/shadow_boot_native_l2.exe> \
+  <build/clock.json> <build/clock-validation>
+```
+
+`--clock-offset <16hex>` records ordered pre-entry offset writes/readbacks.
+Only the separate experiment oracle accepts `--timebase-epoch <16hex>`; three
+ordered source controls/readbacks must match the original entry and remain
+unchanged afterward. `--continuous-sampler` captures without intermediate TB
+breakpoints; it is intentionally rejected by the SingleStep parity validator.
+
+The research executable consumes epoch/cycle inputs, not TB/GPR outputs.
+Its final marker is `RESEARCH_STOP ... NO_NATIVE_CLOCK_PROVIDER`; it cannot be
+parsed as ordinary recognizer boot progress. Previous prefix validators run
+first, then complete state, source phase, memory validity, ordered stores and
+current global owners are compared. Raw/symbolic patterns remain UNKNOWN.
+`agent_clock_binary.py`, `agent_clock_source.py` and
+`agent_clock_adversarial_semantics.py` provide independent scans and checks;
+source/library paths are required for the source audit. Read
+`../research/CLOCK_RESEARCH_41.md` for pins, actual rollover and exact limits.

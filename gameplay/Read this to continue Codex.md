@@ -11,7 +11,23 @@ not an emulator). Written 2026-09-30 by the previous agent (Claude). Everything 
 
 ---
 
-## Current continuation (checkpoint31, 2026-10-01)
+## Current continuation (checkpoint32, 2026-10-01)
+
+Read boot `PROGRESS.md` research41 and `research/CLOCK_RESEARCH_41.md` first.
+Connected native remains **before80379628**, checkpoint40. Clock ISA/source,
+40.5MHz units, unsigned64 wrap, source phase, signed retry, carry and ordered
+stores are demonstrated in an executed **research** C++ projection reaching
+before80373AC4. Four complete-entry profiles match182 new CP/21112 fields;
+full64 and signed-high rollover naturally execute the original retry.
+Release **60/60**, standalone gameplay **27/27**, exact required route.
+
+The true blocker is native elapsed time/epoch/event ownership. Debugger steps
+and continuous execution measurably sample different ticks. Neither an
+observed frontier cycle count nor arbitrary host timing can advance production.
+Read the three CLOCK_*_AUDIT_41 notes and raw ledger. Preserve unchanged
+sync/L2/CRT/BI2 source, unknown pointer800030F0 and all retail/runtime/pixel gates.
+
+## Previous continuation (checkpoint31, 2026-10-01)
 
 Read boot `PROGRESS.md` checkpoint40 first. `shadow_boot_native_bi2` reaches
 **80379628**, before the first live time-base read, from80003154 through all

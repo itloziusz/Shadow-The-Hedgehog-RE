@@ -171,7 +171,11 @@ timing/device consumers. Static words prove retry until the high samples agree;
 they do not supply a clock. Another consumer at `80376EBC/C0` measures a low
 tick delta, so arbitrary host units or a copied sample would be unjustified.
 
-Next: capture original clock inputs and offsets, trace their producers and
+Research41 follow-up: `CLOCK_RESEARCH_41.md` records source/offset/units,
+actual rollover, carry and research parity through before80373AC4. Production
+still stops80379628; native elapsed-time/event ownership remains UNKNOWN.
+
+Historical next step: capture original clock inputs and offsets, trace their producers and
 downstream units, test retry/rollover and carry independently, then express
 the proven clock consequence in native code. `OS_ENTRY_NEXT_BOUNDARY.md`
 retains the exact subsequent addc/adde, restoration and low-before-high store

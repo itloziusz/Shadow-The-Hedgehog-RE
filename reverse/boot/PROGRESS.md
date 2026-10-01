@@ -5,6 +5,18 @@ research slices do not count as a new checkpoint until original-state and
 end-to-end execution comparisons pass. Original fixture:
 `main.dol` SHA-256 `fde4fa6f81a60313b710161c196dc51c2260be62251ee02775d5eee06f9d55af`.
 
+## 2026-10-01 — checkpoint41 research: clock provenance, real rollover; connected frontier stays40
+
+| Field | Result |
+|---|---|
+| Last fully validated connected checkpoint | Unchanged checkpoint40 native prefix still stops before **80379628: mftbu r3**. No live native elapsed-time/event provider is established. Research milestone41 is not a promoted connected checkpoint. |
+| New research state reached | Executed C++ SingleStep projection calls the unchanged prefix, derives TB from observed upstream epoch/cycles, reproduces sampler/retry, offset addc/adde, EE restoration, timestamp stores and next OS frame. Stops before **80373AC4**, unprovided pointer800030F0. No host clock, interpreter, copied tick result or forced branch. |
+| Evidence / perturbation | Four complete-entry profiles:182 new CP,21112 raw fields,18928 known stack bytes,16 ordered stores,1965088 current global bytes. Entry-only source rebases naturally exercise full64 wrap and signed high rollover; original retry executes. Independent replay rejects128 reference/provenance and524 compiled mutations. Source/pause/phase getters are pure; ordinary writer is unchanged. |
+| Producer and first divergence | Reference TB=origin+unsigned64(cycles-origin_cycles)/12;486MHz CPU domain gives40.5MHz. Separate RTC offset producer is not assumed identical. Sampling after the step increment was falsified and corrected/tested. Continuous block-retirement and debugger stepping produce different low ticks; a measured frontier cycle input cannot be promoted to native time. |
+| Tooling / learn | Independent loaded-DOL inventory11 reads/2 writes and every direct caller,71 raw gated words/12 branches/4 SPR encodings, strict producer/provenance/current-owner diffs. Invalid mftb selector/Rc now declines. Symbolic distinct TB events and unsigned low-deadline detector rescan1216776 words; all candidates remain UNKNOWN. |
+| Regression | Final complete Release **60/60 CTest**, standalone gameplay **27/27**, exact Dark mission route tostage6. Recognizer35/35, timing tools7/7; all previous prefix/decline gates preserved. No first-frame or pixel completion claim. |
+| Genuine block / next | Read `research/CLOCK_RESEARCH_41.md` and the three independent audits. Trace ordinary elapsed-cycle production, queued events and pre-entry phase; prove a native provider before advancing80379628. Then resolve800030F0/OS copy ownership. Retail physical gating, cache metadata, constructors, RenderWare/audio/GX and runtime/pixel requirements remain UNKNOWN. |
+
 ## 2026-10-01 — checkpoint40: complete live BI2, OS guard and clock frontier
 
 | Field | Result |

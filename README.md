@@ -42,6 +42,12 @@ not a playable port or a replacement for a legally obtained copy of the game.
   memory/ISA evidence. The bounded recurring event/exit loop at
   `0x800511E0..0x80051218` remains separate. Live clock/offset producers, later
   OS, constructors, retail hardware effects and first game frame remain unresolved.
+  Clock research41 adds an executed source-derived projection through before
+  `0x80373AC4`: four full-entry profiles match182 checkpoints, including actual
+  full64 and signed-boundary rollover retries. The reference counter is40.5MHz
+  with exact phase/wrap; debugger stepping differs from continuous execution.
+  Native elapsed-time/event ownership remains unknown, so production stays
+  before `0x80379628`. No host timer or fixed tick is substituted.
   The 74-word FPR projection also retains its six earlier standalone HLE
   experiments; it is now connected under the bounded native backend.
 - **Evidence and tools:** `gameplay/` contains the address-backed subsystem
@@ -51,8 +57,8 @@ not a playable port or a replacement for a legally obtained copy of the game.
   **LIKELY**, or **UNKNOWN**; recovered function names describe semantics,
   while original RTTI names are identified as such.
 
-The full public-tree MSVC Release gate passed **56/56 CTest suites** against
-read-only local game data (27 gameplay, one asset, one runtime, twenty-seven boot).
+The full public-tree MSVC Release gate passed **60/60 CTest suites** against
+read-only local game data (27 gameplay, one asset, one runtime, thirty-one boot).
 `reverse/boot/PROGRESS.md` records the last
 connected boot checkpoint and first fail-closed stop.
 Some suites require the read-only PAL fixture. The scripted stg0100 Dark
