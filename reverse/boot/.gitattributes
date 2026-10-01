@@ -1,0 +1,9 @@
+# These research sources are SHA-bound to archived captures/reports. Preserve
+# their original bytes on checkout; newline conversion changes provenance.
+tools/agent_*_42.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tools/build_timing_trace_oracle.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tools/capture_timing_prefix.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tools/validate_produced_clock.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+include/shadow/boot/InitialBootEvents.hpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+src/InitialBootEvents.cpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tests/test_initial_boot_events.cpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
